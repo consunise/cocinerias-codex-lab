@@ -37,6 +37,8 @@
 
   const elements = {
     directory: document.querySelector(".directory"),
+    directoryHeading: document.querySelector(".directory-heading"),
+    siteHeader: document.querySelector(".site-header"),
     searchForm: document.querySelector("#search-form"),
     searchInput: document.querySelector("#search-input"),
     searchClear: document.querySelector("#search-clear"),
@@ -182,9 +184,9 @@
 
   function foodIcon(category) {
     const iconPaths = {
-      "Comida chilena": '<rect class="flag-base" x="3" y="6" width="18" height="12" rx="1"></rect><path class="flag-red" d="M3 12h18v6H3z"></path><path class="flag-blue" d="M3 6h7v6H3z"></path><path class="flag-star" d="m6.5 7.4.45 1.05 1.15.1-.88.76.27 1.12-.99-.6-.99.6.27-1.12-.88-.76 1.15-.1Z"></path>',
+      "Comida chilena": '<rect class="icon-fillable flag-outline" x="3" y="6" width="18" height="12" rx="1"></rect><path class="flag-detail" d="M3 12h18M10 6v6"></path><path class="flag-detail flag-star" d="m6.5 7.4.45 1.05 1.15.1-.88.76.27 1.12-.99-.6-.99.6.27-1.12-.88-.76 1.15-.1Z"></path>',
       "Cocina casera": '<path class="icon-fillable" d="M5 10h14v7H5Z"></path><path d="M3.5 12H5M19 12h1.5M8 8h8M10 6h4"></path>',
-      Pescados: '<path class="icon-fillable" d="M4 12c3-4 7-5 11-2l3-3v10l-3-3c-4 3-8 2-11-2Z"></path><circle class="icon-fill" cx="12.5" cy="11" r=".8"></circle>',
+      Pescados: '<path class="icon-fillable" d="M4 12c3-4 7-5 11-2l3-3v10l-3-3c-4 3-8 2-11-2Z"></path><circle cx="12.5" cy="11" r=".8"></circle>',
       Mariscos: '<path class="icon-fillable" d="M4 18c.7-6.2 3.8-11 8-11s7.3 4.8 8 11H4Z"></path><path d="M12 7v11M8.5 8.5 10 18M15.5 8.5 14 18M5.8 13h12.4"></path>',
       "Cocina marina": '<path class="icon-fillable" d="M3 9c2 0 2-2 4-2s2 2 4 2 2-2 4-2 2 2 4 2 2-2 2-2v7c-2 0-2 2-4 2s-2-2-4-2-2 2-4 2-2-2-4-2-2 2-4 2V9Z"></path><path d="M3 13c2 0 2-2 4-2s2 2 4 2 2-2 4-2 2 2 4 2 2-2 2-2"></path>',
       Mapuche: '<circle class="icon-fillable" cx="12" cy="12" r="3.5"></circle><path d="M12 2v4M12 18v4M2 12h4M18 12h4M5 5l3 3M16 16l3 3M19 5l-3 3M8 16l-3 3"></path>',
@@ -457,6 +459,25 @@
     applyFilters();
   }
 
+  function scrollToDirectoryStart() {
+    requestAnimationFrame(() => {
+      const headerHeight = elements.siteHeader?.offsetHeight ?? 0;
+      const destination = elements.directoryHeading ?? elements.directory;
+      const destinationTop = destination.getBoundingClientRect().top + window.scrollY;
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      window.scrollTo({
+        top: Math.max(0, destinationTop - headerHeight - 16),
+        behavior: reducedMotion ? "auto" : "smooth",
+      });
+    });
+  }
+
+  function clearFiltersAndReturnToDirectory() {
+    resetFilterControls();
+    if (state.filtersOpen) closeFilters();
+    scrollToDirectoryStart();
+  }
+
   function toggleListExpansion() {
     const isCollapsing = state.visibleLimit >= state.visibleRestaurants.length;
     state.visibleLimit = isCollapsing
@@ -699,7 +720,7 @@
       const option = event.target.closest(".filter-option");
       if (option) handleFilterOption(option);
     });
-    elements.resetFilters.addEventListener("click", () => resetFilterControls());
+    elements.resetFilters.addEventListener("click", clearFiltersAndReturnToDirectory);
     elements.emptyReset.addEventListener("click", () => {
       resetFilterControls({ includeSearch: true });
       elements.searchInput.focus();

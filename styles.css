@@ -253,8 +253,7 @@ select:focus-visible {
 }
 
 .header-social .icon-fill,
-.footer-contact .icon-fill,
-.food-icon .icon-fill {
+.footer-contact .icon-fill {
   fill: currentColor;
   stroke: none;
 }
@@ -811,50 +810,56 @@ select:focus-visible {
   stroke-linecap: round;
   stroke-linejoin: round;
   stroke-width: 1.5;
-  transition: filter 140ms ease, stroke 140ms ease;
+  transition: stroke 140ms ease;
 }
 
 .food-icon .icon-fillable {
-  fill: transparent;
-  transition: fill 140ms ease;
+  fill: none;
+  transition: fill 140ms ease, stroke 140ms ease;
 }
 
 .food-type-item:hover .food-icon .icon-fillable,
 .restaurant-button:hover .food-icon .icon-fillable,
 .restaurant-button:focus-visible .food-icon .icon-fillable {
   fill: var(--terracotta);
+  stroke: transparent;
 }
 
 .food-type-item:hover .food-icon,
 .restaurant-button:hover .food-icon,
 .restaurant-button:focus-visible .food-icon {
-  stroke: var(--ink);
+  stroke: transparent;
 }
 
-.chile-flag .flag-base {
-  fill: var(--paper);
-  stroke: var(--ink);
+.chile-flag .flag-outline,
+.chile-flag .flag-detail {
+  fill: none;
+  stroke: currentColor;
 }
 
-.chile-flag .flag-red {
+.chile-flag .flag-detail {
+  transition: fill 140ms ease, stroke 140ms ease;
+}
+
+.food-type-item:hover .chile-flag .flag-outline,
+.restaurant-button:hover .chile-flag .flag-outline,
+.restaurant-button:focus-visible .chile-flag .flag-outline {
   fill: var(--terracotta);
-  stroke: none;
+  stroke: transparent;
 }
 
-.chile-flag .flag-blue {
-  fill: var(--sea);
-  stroke: none;
+.food-type-item:hover .chile-flag .flag-detail,
+.restaurant-button:hover .chile-flag .flag-detail,
+.restaurant-button:focus-visible .chile-flag .flag-detail {
+  fill: none;
+  stroke: var(--paper);
 }
 
-.chile-flag .flag-star {
-  fill: var(--white);
-  stroke: none;
-}
-
-.food-type-item:hover .chile-flag,
-.restaurant-button:hover .chile-flag,
-.restaurant-button:focus-visible .chile-flag {
-  filter: saturate(1.25) contrast(1.05);
+.food-type-item:hover .chile-flag .flag-star,
+.restaurant-button:hover .chile-flag .flag-star,
+.restaurant-button:focus-visible .chile-flag .flag-star {
+  fill: var(--paper);
+  stroke: transparent;
 }
 
 .restaurant-action {
@@ -946,19 +951,57 @@ select:focus-visible {
 }
 
 .about-data {
-  padding-top: clamp(4rem, 8vw, 7rem);
+  padding-top: 0;
   padding-bottom: clamp(4rem, 8vw, 7rem);
   border-top: 1px solid var(--ink);
+}
+
+.about-visual {
+  position: relative;
+  display: flex;
+  min-height: clamp(320px, 38vw, 520px);
+  align-items: flex-end;
+  background-color: var(--ink);
+  background-image: url("assets/images/about/empanadas-de-pino.jpg");
+  background-position: center 55%;
+  background-size: cover;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.about-visual::after {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 48%, rgba(15, 13, 10, 0.72) 100%);
+  content: "";
+  pointer-events: none;
+}
+
+.about-visual h2 {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  padding: clamp(1.5rem, 3vw, 3rem);
+  color: var(--white);
+  text-shadow: 0 1px 4px rgba(15, 13, 10, 0.62);
 }
 
 .about-grid {
   display: grid;
   grid-template-columns: minmax(300px, 0.9fr) minmax(320px, 0.7fr);
   gap: clamp(3rem, 9vw, 10rem);
+  margin-top: clamp(2.5rem, 5vw, 4.5rem);
+  padding-inline: clamp(1.5rem, 3vw, 3rem);
 }
 
-.about-data h2 {
+.about-lead {
+  margin: 0;
   color: var(--terracotta-dark);
+  font-family: var(--serif);
+  font-size: clamp(2rem, 3.3vw, 3.6rem);
+  letter-spacing: -0.045em;
+  line-height: 1;
 }
 
 .about-copy {
@@ -1068,11 +1111,14 @@ select:focus-visible {
   gap: 0.7rem;
   align-items: center;
   min-height: 44px;
+  font-weight: 400;
 }
 
-.footer-contact svg {
+.footer-contact svg,
+.footer-contact .social-icon--whatsapp {
   width: 24px;
   height: 24px;
+  stroke-width: 1.35;
 }
 
 .footer-contact a[data-placeholder="true"] {
@@ -1634,6 +1680,16 @@ select:focus-visible {
 
   .about-data h2 {
     font-size: 3rem;
+  }
+
+  .about-visual {
+    min-height: 290px;
+    background-position: 56% center;
+  }
+
+  .about-visual h2,
+  .about-grid {
+    padding-inline: 1.25rem;
   }
 
   .footer-inner {
