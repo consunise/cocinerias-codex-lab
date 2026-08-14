@@ -43,7 +43,7 @@ window.COCINERIAS = [
       "Mariscos"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/mata-rangi.jpg",
+    "imagePath": "assets/images/cocinerias/cl-ap-001.jpg",
     "imageKind": "direct",
     "imageLabel": "Fotografía de Mata Rangi"
   },
@@ -89,7 +89,7 @@ window.COCINERIAS = [
       "Cocina casera"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-tarapaca.jpg",
+    "imagePath": "assets/images/cocinerias/cl-ta-001.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Tarapacá; no corresponde necesariamente al establecimiento"
   },
@@ -135,7 +135,7 @@ window.COCINERIAS = [
       "Al paso"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-tarapaca.jpg",
+    "imagePath": "assets/images/cocinerias/cl-ta-002.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Tarapacá; no corresponde necesariamente al establecimiento"
   },
@@ -181,7 +181,7 @@ window.COCINERIAS = [
       "Sándwiches"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-tarapaca.jpg",
+    "imagePath": "assets/images/cocinerias/cl-ta-003.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Tarapacá; no corresponde necesariamente al establecimiento"
   },
@@ -226,7 +226,7 @@ window.COCINERIAS = [
       "Al paso"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-tarapaca.jpg",
+    "imagePath": "assets/images/cocinerias/cl-ta-004.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Tarapacá; no corresponde necesariamente al establecimiento"
   },
@@ -272,7 +272,7 @@ window.COCINERIAS = [
       "Al paso"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-tarapaca.jpg",
+    "imagePath": "assets/images/cocinerias/cl-ta-005.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Tarapacá; no corresponde necesariamente al establecimiento"
   },
@@ -317,7 +317,7 @@ window.COCINERIAS = [
       "Al paso"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-tarapaca.jpg",
+    "imagePath": "assets/images/cocinerias/cl-ta-006.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Tarapacá; no corresponde necesariamente al establecimiento"
   },
@@ -363,7 +363,7 @@ window.COCINERIAS = [
       "Cocina casera"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-antofagasta.jpg",
+    "imagePath": "assets/images/cocinerias/cl-an-001.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Antofagasta; no corresponde necesariamente al establecimiento"
   },
@@ -408,7 +408,7 @@ window.COCINERIAS = [
       "Cocina casera"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-antofagasta.jpg",
+    "imagePath": "assets/images/cocinerias/cl-an-002.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Antofagasta; no corresponde necesariamente al establecimiento"
   },
@@ -453,7 +453,7 @@ window.COCINERIAS = [
       "Cocina casera"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-antofagasta.jpg",
+    "imagePath": "assets/images/cocinerias/cl-an-003.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Antofagasta; no corresponde necesariamente al establecimiento"
   },
@@ -499,7 +499,7 @@ window.COCINERIAS = [
       "Cocina casera"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-antofagasta.jpg",
+    "imagePath": "assets/images/cocinerias/cl-an-004.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Antofagasta; no corresponde necesariamente al establecimiento"
   },
@@ -544,7 +544,7 @@ window.COCINERIAS = [
       "Sin clasificación culinaria"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-antofagasta.jpg",
+    "imagePath": "assets/images/cocinerias/cl-an-005.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Antofagasta; no corresponde necesariamente al establecimiento"
   },
@@ -589,7 +589,7 @@ window.COCINERIAS = [
       "Sin clasificación culinaria"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-antofagasta.jpg",
+    "imagePath": "assets/images/cocinerias/cl-an-006.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Antofagasta; no corresponde necesariamente al establecimiento"
   },
@@ -634,7 +634,7 @@ window.COCINERIAS = [
       "Cocina casera"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-antofagasta.jpg",
+    "imagePath": "assets/images/cocinerias/cl-an-007.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Antofagasta; no corresponde necesariamente al establecimiento"
   },
@@ -681,7 +681,7 @@ window.COCINERIAS = [
       "Opciones vegetales"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-atacama.jpg",
+    "imagePath": "assets/images/cocinerias/cl-at-001.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Atacama; no corresponde necesariamente al establecimiento"
   },
@@ -726,7 +726,7 @@ window.COCINERIAS = [
       "Sin clasificación culinaria"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-atacama.jpg",
+    "imagePath": "assets/images/cocinerias/cl-at-002.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Atacama; no corresponde necesariamente al establecimiento"
   },
@@ -772,7 +772,7 @@ window.COCINERIAS = [
       "Sándwiches"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-atacama.jpg",
+    "imagePath": "assets/images/cocinerias/cl-at-003.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Atacama; no corresponde necesariamente al establecimiento"
   },
@@ -819,7 +819,7 @@ window.COCINERIAS = [
       "Mariscos"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-atacama.jpg",
+    "imagePath": "assets/images/cocinerias/cl-at-004.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Atacama; no corresponde necesariamente al establecimiento"
   },
@@ -864,7 +864,7 @@ window.COCINERIAS = [
       "Sin clasificación culinaria"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-atacama.jpg",
+    "imagePath": "assets/images/cocinerias/cl-at-005.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Atacama; no corresponde necesariamente al establecimiento"
   },
@@ -909,7 +909,7 @@ window.COCINERIAS = [
       "Sin clasificación culinaria"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-coquimbo.jpg",
+    "imagePath": "assets/images/cocinerias/cl-co-001.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Coquimbo; no corresponde necesariamente al establecimiento"
   },
@@ -954,7 +954,7 @@ window.COCINERIAS = [
       "Cocina casera"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-coquimbo.jpg",
+    "imagePath": "assets/images/cocinerias/cl-co-002.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Coquimbo; no corresponde necesariamente al establecimiento"
   },
@@ -1000,7 +1000,7 @@ window.COCINERIAS = [
       "Cocina casera"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-coquimbo.jpg",
+    "imagePath": "assets/images/cocinerias/cl-co-003.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Coquimbo; no corresponde necesariamente al establecimiento"
   },
@@ -1045,7 +1045,7 @@ window.COCINERIAS = [
       "Sin clasificación culinaria"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-coquimbo.jpg",
+    "imagePath": "assets/images/cocinerias/cl-co-004.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Coquimbo; no corresponde necesariamente al establecimiento"
   },
@@ -1092,7 +1092,7 @@ window.COCINERIAS = [
       "Mariscos"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-valparaiso.jpg",
+    "imagePath": "assets/images/cocinerias/cl-va-001.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Valparaíso; no corresponde necesariamente al establecimiento"
   },
@@ -1138,7 +1138,7 @@ window.COCINERIAS = [
       "Pastas"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-valparaiso.jpg",
+    "imagePath": "assets/images/cocinerias/cl-va-002.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Valparaíso; no corresponde necesariamente al establecimiento"
   },
@@ -1186,7 +1186,7 @@ window.COCINERIAS = [
       "Pastas"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-valparaiso.jpg",
+    "imagePath": "assets/images/cocinerias/cl-va-003.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Valparaíso; no corresponde necesariamente al establecimiento"
   },
@@ -1231,7 +1231,7 @@ window.COCINERIAS = [
       "Cocina casera"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-valparaiso.jpg",
+    "imagePath": "assets/images/cocinerias/cl-va-004.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Valparaíso; no corresponde necesariamente al establecimiento"
   },
@@ -1277,7 +1277,7 @@ window.COCINERIAS = [
       "Cocina casera"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-metropolitana.jpg",
+    "imagePath": "assets/images/cocinerias/cl-rm-001.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Metropolitana de Santiago; no corresponde necesariamente al establecimiento"
   },
@@ -1324,7 +1324,7 @@ window.COCINERIAS = [
       "Mariscos"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-metropolitana.jpg",
+    "imagePath": "assets/images/cocinerias/cl-rm-002.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Metropolitana de Santiago; no corresponde necesariamente al establecimiento"
   },
@@ -1371,7 +1371,7 @@ window.COCINERIAS = [
       "Sándwiches"
     ],
     "priceCategory": "Precio medio",
-    "imagePath": "assets/images/cocinerias/region-metropolitana.jpg",
+    "imagePath": "assets/images/cocinerias/cl-rm-003.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Metropolitana de Santiago; no corresponde necesariamente al establecimiento"
   },
@@ -1418,7 +1418,7 @@ window.COCINERIAS = [
       "Pescados"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-metropolitana.jpg",
+    "imagePath": "assets/images/cocinerias/cl-rm-004.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Metropolitana de Santiago; no corresponde necesariamente al establecimiento"
   },
@@ -1463,7 +1463,7 @@ window.COCINERIAS = [
       "Sin clasificación culinaria"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-metropolitana.jpg",
+    "imagePath": "assets/images/cocinerias/cl-rm-005.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Metropolitana de Santiago; no corresponde necesariamente al establecimiento"
   },
@@ -1508,7 +1508,7 @@ window.COCINERIAS = [
       "Mapuche"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-metropolitana.jpg",
+    "imagePath": "assets/images/cocinerias/cl-rm-006.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Metropolitana de Santiago; no corresponde necesariamente al establecimiento"
   },
@@ -1555,7 +1555,7 @@ window.COCINERIAS = [
       "Mariscos"
     ],
     "priceCategory": "Precio medio",
-    "imagePath": "assets/images/cocinerias/region-ohiggins.jpg",
+    "imagePath": "assets/images/cocinerias/cl-li-001.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Libertador General Bernardo O'Higgins; no corresponde necesariamente al establecimiento"
   },
@@ -1600,7 +1600,7 @@ window.COCINERIAS = [
       "Cocina casera"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-ohiggins.jpg",
+    "imagePath": "assets/images/cocinerias/cl-li-002.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Libertador General Bernardo O'Higgins; no corresponde necesariamente al establecimiento"
   },
@@ -1646,7 +1646,7 @@ window.COCINERIAS = [
       "Campesina"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-ohiggins.jpg",
+    "imagePath": "assets/images/cocinerias/cl-li-003.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Libertador General Bernardo O'Higgins; no corresponde necesariamente al establecimiento"
   },
@@ -1692,7 +1692,7 @@ window.COCINERIAS = [
       "Cocina casera"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-maule.jpg",
+    "imagePath": "assets/images/cocinerias/cl-ml-001.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Maule; no corresponde necesariamente al establecimiento"
   },
@@ -1737,7 +1737,7 @@ window.COCINERIAS = [
       "Cocina casera"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-maule.jpg",
+    "imagePath": "assets/images/cocinerias/cl-ml-002.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Maule; no corresponde necesariamente al establecimiento"
   },
@@ -1782,7 +1782,7 @@ window.COCINERIAS = [
       "Cocina casera"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-maule.jpg",
+    "imagePath": "assets/images/cocinerias/cl-ml-003.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Maule; no corresponde necesariamente al establecimiento"
   },
@@ -1827,7 +1827,7 @@ window.COCINERIAS = [
       "Cocina casera"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-maule.jpg",
+    "imagePath": "assets/images/cocinerias/cl-ml-004.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Maule; no corresponde necesariamente al establecimiento"
   },
@@ -1873,7 +1873,7 @@ window.COCINERIAS = [
       "Cocina casera"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-maule.jpg",
+    "imagePath": "assets/images/cocinerias/cl-ml-005.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Maule; no corresponde necesariamente al establecimiento"
   },
@@ -1918,7 +1918,7 @@ window.COCINERIAS = [
       "Comida chilena"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-maule.jpg",
+    "imagePath": "assets/images/cocinerias/cl-ml-006.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Maule; no corresponde necesariamente al establecimiento"
   },
@@ -1963,7 +1963,7 @@ window.COCINERIAS = [
       "Cocina casera"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-maule.jpg",
+    "imagePath": "assets/images/cocinerias/cl-ml-007.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Maule; no corresponde necesariamente al establecimiento"
   },
@@ -2008,7 +2008,7 @@ window.COCINERIAS = [
       "Comida chilena"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-maule.jpg",
+    "imagePath": "assets/images/cocinerias/cl-ml-008.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Maule; no corresponde necesariamente al establecimiento"
   },
@@ -2054,7 +2054,7 @@ window.COCINERIAS = [
       "Cocina casera"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-nuble.jpg",
+    "imagePath": "assets/images/cocinerias/cl-nb-001.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Ñuble; no corresponde necesariamente al establecimiento"
   },
@@ -2099,7 +2099,7 @@ window.COCINERIAS = [
       "Comida chilena"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-nuble.jpg",
+    "imagePath": "assets/images/cocinerias/cl-nb-002.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Ñuble; no corresponde necesariamente al establecimiento"
   },
@@ -2148,7 +2148,7 @@ window.COCINERIAS = [
       "Pastas"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-nuble.jpg",
+    "imagePath": "assets/images/cocinerias/cl-nb-003.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Ñuble; no corresponde necesariamente al establecimiento"
   },
@@ -2194,7 +2194,7 @@ window.COCINERIAS = [
       "Cocina casera"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-nuble.jpg",
+    "imagePath": "assets/images/cocinerias/cl-nb-004.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Ñuble; no corresponde necesariamente al establecimiento"
   },
@@ -2239,7 +2239,7 @@ window.COCINERIAS = [
       "Comida chilena"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-nuble.jpg",
+    "imagePath": "assets/images/cocinerias/cl-nb-005.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Ñuble; no corresponde necesariamente al establecimiento"
   },
@@ -2284,7 +2284,7 @@ window.COCINERIAS = [
       "Comida chilena"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-nuble.jpg",
+    "imagePath": "assets/images/cocinerias/cl-nb-006.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Ñuble; no corresponde necesariamente al establecimiento"
   },
@@ -2329,7 +2329,7 @@ window.COCINERIAS = [
       "Comida chilena"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-nuble.jpg",
+    "imagePath": "assets/images/cocinerias/cl-nb-007.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Ñuble; no corresponde necesariamente al establecimiento"
   },
@@ -2374,7 +2374,7 @@ window.COCINERIAS = [
       "Cocina casera"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-biobio.jpg",
+    "imagePath": "assets/images/cocinerias/cl-bi-001.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Biobío; no corresponde necesariamente al establecimiento"
   },
@@ -2421,7 +2421,7 @@ window.COCINERIAS = [
       "Mariscos"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-biobio.jpg",
+    "imagePath": "assets/images/cocinerias/cl-bi-002.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Biobío; no corresponde necesariamente al establecimiento"
   },
@@ -2466,7 +2466,7 @@ window.COCINERIAS = [
       "Comida chilena"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-biobio.jpg",
+    "imagePath": "assets/images/cocinerias/cl-bi-003.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Biobío; no corresponde necesariamente al establecimiento"
   },
@@ -2511,7 +2511,7 @@ window.COCINERIAS = [
       "Comida chilena"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-biobio.jpg",
+    "imagePath": "assets/images/cocinerias/cl-bi-004.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Biobío; no corresponde necesariamente al establecimiento"
   },
@@ -2557,7 +2557,7 @@ window.COCINERIAS = [
       "Cocina marina"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-biobio.jpg",
+    "imagePath": "assets/images/cocinerias/cl-bi-005.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Biobío; no corresponde necesariamente al establecimiento"
   },
@@ -2603,7 +2603,7 @@ window.COCINERIAS = [
       "Cocina marina"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-biobio.jpg",
+    "imagePath": "assets/images/cocinerias/cl-bi-006.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Biobío; no corresponde necesariamente al establecimiento"
   },
@@ -2648,7 +2648,7 @@ window.COCINERIAS = [
       "Cocina casera"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-biobio.jpg",
+    "imagePath": "assets/images/cocinerias/cl-bi-007.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Biobío; no corresponde necesariamente al establecimiento"
   },
@@ -2694,7 +2694,7 @@ window.COCINERIAS = [
       "Cocina marina"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-biobio.jpg",
+    "imagePath": "assets/images/cocinerias/cl-bi-008.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Biobío; no corresponde necesariamente al establecimiento"
   },
@@ -2739,7 +2739,7 @@ window.COCINERIAS = [
       "Cocina casera"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-biobio.jpg",
+    "imagePath": "assets/images/cocinerias/cl-bi-009.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Biobío; no corresponde necesariamente al establecimiento"
   },
@@ -2784,7 +2784,7 @@ window.COCINERIAS = [
       "Comida chilena"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-biobio.jpg",
+    "imagePath": "assets/images/cocinerias/cl-bi-010.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Biobío; no corresponde necesariamente al establecimiento"
   },
@@ -2830,7 +2830,7 @@ window.COCINERIAS = [
       "Cocina marina"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-biobio.jpg",
+    "imagePath": "assets/images/cocinerias/cl-bi-011.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Biobío; no corresponde necesariamente al establecimiento"
   },
@@ -2876,7 +2876,7 @@ window.COCINERIAS = [
       "Cocina marina"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-biobio.jpg",
+    "imagePath": "assets/images/cocinerias/cl-bi-012.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Biobío; no corresponde necesariamente al establecimiento"
   },
@@ -2923,7 +2923,7 @@ window.COCINERIAS = [
       "Mariscos"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-araucania.jpg",
+    "imagePath": "assets/images/cocinerias/cl-ar-001.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de La Araucanía; no corresponde necesariamente al establecimiento"
   },
@@ -2970,7 +2970,7 @@ window.COCINERIAS = [
       "Pescados"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-araucania.jpg",
+    "imagePath": "assets/images/cocinerias/cl-ar-002.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de La Araucanía; no corresponde necesariamente al establecimiento"
   },
@@ -3016,7 +3016,7 @@ window.COCINERIAS = [
       "Cocina marina"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-araucania.jpg",
+    "imagePath": "assets/images/cocinerias/cl-ar-003.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de La Araucanía; no corresponde necesariamente al establecimiento"
   },
@@ -3062,7 +3062,7 @@ window.COCINERIAS = [
       "Mapuche"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-araucania.jpg",
+    "imagePath": "assets/images/cocinerias/cl-ar-004.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de La Araucanía; no corresponde necesariamente al establecimiento"
   },
@@ -3107,7 +3107,7 @@ window.COCINERIAS = [
       "Mapuche"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-araucania.jpg",
+    "imagePath": "assets/images/cocinerias/cl-ar-005.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de La Araucanía; no corresponde necesariamente al establecimiento"
   },
@@ -3152,7 +3152,7 @@ window.COCINERIAS = [
       "Mapuche"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-araucania.jpg",
+    "imagePath": "assets/images/cocinerias/cl-ar-006.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de La Araucanía; no corresponde necesariamente al establecimiento"
   },
@@ -3197,7 +3197,7 @@ window.COCINERIAS = [
       "Mapuche"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-araucania.jpg",
+    "imagePath": "assets/images/cocinerias/cl-ar-007.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de La Araucanía; no corresponde necesariamente al establecimiento"
   },
@@ -3242,7 +3242,7 @@ window.COCINERIAS = [
       "Mapuche"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-araucania.jpg",
+    "imagePath": "assets/images/cocinerias/cl-ar-008.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de La Araucanía; no corresponde necesariamente al establecimiento"
   },
@@ -3287,7 +3287,7 @@ window.COCINERIAS = [
       "Mapuche"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-araucania.jpg",
+    "imagePath": "assets/images/cocinerias/cl-ar-009.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de La Araucanía; no corresponde necesariamente al establecimiento"
   },
@@ -3332,7 +3332,7 @@ window.COCINERIAS = [
       "Mapuche"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-araucania.jpg",
+    "imagePath": "assets/images/cocinerias/cl-ar-010.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de La Araucanía; no corresponde necesariamente al establecimiento"
   },
@@ -3378,7 +3378,7 @@ window.COCINERIAS = [
       "Cocina marina"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-araucania.jpg",
+    "imagePath": "assets/images/cocinerias/cl-ar-011.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de La Araucanía; no corresponde necesariamente al establecimiento"
   },
@@ -3424,7 +3424,7 @@ window.COCINERIAS = [
       "Campesina"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-araucania.jpg",
+    "imagePath": "assets/images/cocinerias/cl-ar-012.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de La Araucanía; no corresponde necesariamente al establecimiento"
   },
@@ -3470,7 +3470,7 @@ window.COCINERIAS = [
       "Carnes"
     ],
     "priceCategory": "Precio medio",
-    "imagePath": "assets/images/cocinerias/region-los-rios.jpg",
+    "imagePath": "assets/images/cocinerias/cl-lr-001.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Los Ríos; no corresponde necesariamente al establecimiento"
   },
@@ -3515,7 +3515,7 @@ window.COCINERIAS = [
       "Cocina casera"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-los-rios.jpg",
+    "imagePath": "assets/images/cocinerias/cl-lr-002.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Los Ríos; no corresponde necesariamente al establecimiento"
   },
@@ -3561,7 +3561,7 @@ window.COCINERIAS = [
       "Cocina marina"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-los-rios.jpg",
+    "imagePath": "assets/images/cocinerias/cl-lr-003.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Los Ríos; no corresponde necesariamente al establecimiento"
   },
@@ -3606,7 +3606,7 @@ window.COCINERIAS = [
       "Cocina casera"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-los-rios.jpg",
+    "imagePath": "assets/images/cocinerias/cl-lr-004.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Los Ríos; no corresponde necesariamente al establecimiento"
   },
@@ -3652,7 +3652,7 @@ window.COCINERIAS = [
       "Cocina marina"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-los-rios.jpg",
+    "imagePath": "assets/images/cocinerias/cl-lr-005.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Los Ríos; no corresponde necesariamente al establecimiento"
   },
@@ -3698,7 +3698,7 @@ window.COCINERIAS = [
       "Al paso"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-los-rios.jpg",
+    "imagePath": "assets/images/cocinerias/cl-lr-006.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Los Ríos; no corresponde necesariamente al establecimiento"
   },
@@ -3743,7 +3743,7 @@ window.COCINERIAS = [
       "Sin clasificación culinaria"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-los-rios.jpg",
+    "imagePath": "assets/images/cocinerias/cl-lr-007.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Los Ríos; no corresponde necesariamente al establecimiento"
   },
@@ -3788,7 +3788,7 @@ window.COCINERIAS = [
       "Cocina casera"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-los-rios.jpg",
+    "imagePath": "assets/images/cocinerias/cl-lr-008.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Los Ríos; no corresponde necesariamente al establecimiento"
   },
@@ -3833,7 +3833,7 @@ window.COCINERIAS = [
       "Mapuche"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-los-rios.jpg",
+    "imagePath": "assets/images/cocinerias/cl-lr-009.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Los Ríos; no corresponde necesariamente al establecimiento"
   },
@@ -3880,7 +3880,7 @@ window.COCINERIAS = [
       "Chilota"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-los-lagos.jpg",
+    "imagePath": "assets/images/cocinerias/cl-ll-001.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Los Lagos; no corresponde necesariamente al establecimiento"
   },
@@ -3927,7 +3927,7 @@ window.COCINERIAS = [
       "Chilota"
     ],
     "priceCategory": "Precio medio",
-    "imagePath": "assets/images/cocinerias/region-los-lagos.jpg",
+    "imagePath": "assets/images/cocinerias/cl-ll-002.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Los Lagos; no corresponde necesariamente al establecimiento"
   },
@@ -3974,7 +3974,7 @@ window.COCINERIAS = [
       "Cocina marina"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-los-lagos.jpg",
+    "imagePath": "assets/images/cocinerias/cl-ll-003.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Los Lagos; no corresponde necesariamente al establecimiento"
   },
@@ -4020,7 +4020,7 @@ window.COCINERIAS = [
       "Chilota"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-los-lagos.jpg",
+    "imagePath": "assets/images/cocinerias/cl-ll-004.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Los Lagos; no corresponde necesariamente al establecimiento"
   },
@@ -4065,7 +4065,7 @@ window.COCINERIAS = [
       "Comida chilena"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-los-lagos.jpg",
+    "imagePath": "assets/images/cocinerias/cl-ll-005.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Los Lagos; no corresponde necesariamente al establecimiento"
   },
@@ -4113,7 +4113,7 @@ window.COCINERIAS = [
       "Chilota"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-los-lagos.jpg",
+    "imagePath": "assets/images/cocinerias/cl-ll-006.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Los Lagos; no corresponde necesariamente al establecimiento"
   },
@@ -4159,7 +4159,7 @@ window.COCINERIAS = [
       "Chilota"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-los-lagos.jpg",
+    "imagePath": "assets/images/cocinerias/cl-ll-007.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Los Lagos; no corresponde necesariamente al establecimiento"
   },
@@ -4204,7 +4204,7 @@ window.COCINERIAS = [
       "Chilota"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-los-lagos.jpg",
+    "imagePath": "assets/images/cocinerias/cl-ll-008.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Los Lagos; no corresponde necesariamente al establecimiento"
   },
@@ -4250,7 +4250,7 @@ window.COCINERIAS = [
       "Patagónica"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-los-lagos.jpg",
+    "imagePath": "assets/images/cocinerias/cl-ll-009.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Los Lagos; no corresponde necesariamente al establecimiento"
   },
@@ -4295,7 +4295,7 @@ window.COCINERIAS = [
       "Chilota"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-los-lagos.jpg",
+    "imagePath": "assets/images/cocinerias/cl-ll-010.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Los Lagos; no corresponde necesariamente al establecimiento"
   },
@@ -4342,7 +4342,7 @@ window.COCINERIAS = [
       "Patagónica"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-aysen.jpg",
+    "imagePath": "assets/images/cocinerias/cl-ai-001.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Aysén del General Carlos Ibáñez del Campo; no corresponde necesariamente al establecimiento"
   },
@@ -4387,7 +4387,7 @@ window.COCINERIAS = [
       "Mariscos"
     ],
     "priceCategory": "Precio medio",
-    "imagePath": "assets/images/cocinerias/region-aysen.jpg",
+    "imagePath": "assets/images/cocinerias/cl-ai-002.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Aysén del General Carlos Ibáñez del Campo; no corresponde necesariamente al establecimiento"
   },
@@ -4432,7 +4432,7 @@ window.COCINERIAS = [
       "Sin clasificación culinaria"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-aysen.jpg",
+    "imagePath": "assets/images/cocinerias/cl-ai-003.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Aysén del General Carlos Ibáñez del Campo; no corresponde necesariamente al establecimiento"
   },
@@ -4480,7 +4480,7 @@ window.COCINERIAS = [
       "Magallánica"
     ],
     "priceCategory": "No informado",
-    "imagePath": "assets/images/cocinerias/region-magallanes.jpg",
+    "imagePath": "assets/images/cocinerias/cl-mg-001.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Magallanes y de la Antártica Chilena; no corresponde necesariamente al establecimiento"
   },
@@ -4528,7 +4528,7 @@ window.COCINERIAS = [
       "Magallánica"
     ],
     "priceCategory": "Económico",
-    "imagePath": "assets/images/cocinerias/region-magallanes.jpg",
+    "imagePath": "assets/images/cocinerias/cl-mg-002.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Magallanes y de la Antártica Chilena; no corresponde necesariamente al establecimiento"
   },
@@ -4576,7 +4576,7 @@ window.COCINERIAS = [
       "Patagónica"
     ],
     "priceCategory": "Económico",
-    "imagePath": "assets/images/cocinerias/region-magallanes.jpg",
+    "imagePath": "assets/images/cocinerias/cl-mg-003.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Magallanes y de la Antártica Chilena; no corresponde necesariamente al establecimiento"
   },
@@ -4625,7 +4625,7 @@ window.COCINERIAS = [
       "Magallánica"
     ],
     "priceCategory": "Económico",
-    "imagePath": "assets/images/cocinerias/region-magallanes.jpg",
+    "imagePath": "assets/images/cocinerias/cl-mg-004.jpg",
     "imageKind": "regional-fallback",
     "imageLabel": "Imagen territorial de Magallanes y de la Antártica Chilena; no corresponde necesariamente al establecimiento"
   }

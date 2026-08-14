@@ -244,6 +244,11 @@ select:focus-visible {
   stroke-width: 1.6;
 }
 
+.header-social .social-icon--whatsapp,
+.footer-contact .social-icon--whatsapp {
+  stroke-width: 1.25;
+}
+
 .header-social .icon-fill,
 .footer-contact .icon-fill,
 .food-icon .icon-fill {
@@ -272,9 +277,8 @@ select:focus-visible {
   align-items: end;
   justify-content: space-between;
   gap: 1rem;
-  padding-top: 1.5rem;
+  padding-top: 0.35rem;
   padding-bottom: 1.75rem;
-  border-top: 4px solid var(--ink);
   border-bottom: 1px solid var(--ink);
 }
 
@@ -315,12 +319,19 @@ select:focus-visible {
 .directory-layout {
   display: grid;
   grid-template-columns: minmax(190px, 0.25fr) minmax(0, 1fr);
+  align-items: start;
   gap: clamp(2.5rem, 6vw, 6rem);
 }
 
 .filters {
+  position: sticky;
+  top: calc(88px + 1rem);
   align-self: start;
+  max-height: calc(100dvh - 88px - 2rem);
   padding-top: 2rem;
+  padding-right: 0.35rem;
+  overflow-y: auto;
+  scrollbar-gutter: stable;
 }
 
 .filters-mobile-heading,
@@ -467,23 +478,31 @@ select:focus-visible {
 }
 
 .results-count,
-.regions-count,
-.active-summary {
+.regions-count {
   margin: 0;
   color: var(--ink-soft);
-  font-size: 0.78rem;
+  font-size: 1rem;
+  line-height: 1.25;
 }
 
 .regions-count {
   padding-left: 1rem;
   border-left: 1px solid var(--line);
-  font-weight: 700;
+  font-weight: 400;
 }
 
-.results-count strong {
+.results-count strong,
+.regions-count strong {
   color: var(--ink);
-  font-size: 1rem;
+  font-size: inherit;
+  font-weight: 700;
   font-variant-numeric: tabular-nums;
+}
+
+.active-summary {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.78rem;
 }
 
 .active-summary {
@@ -497,7 +516,7 @@ select:focus-visible {
 
 .list-header {
   display: grid;
-  grid-template-columns: minmax(300px, 1.35fr) minmax(180px, 0.8fr) minmax(120px, 0.42fr) 42px;
+  grid-template-columns: minmax(320px, 1.6fr) minmax(150px, 0.55fr) minmax(120px, 0.4fr) 112px;
   gap: 0;
   padding: 0;
   border-top: 1px solid var(--ink);
@@ -527,7 +546,7 @@ select:focus-visible {
 
 .restaurant-button {
   display: grid;
-  grid-template-columns: minmax(300px, 1.35fr) minmax(180px, 0.8fr) minmax(120px, 0.42fr) 42px;
+  grid-template-columns: minmax(320px, 1.6fr) minmax(150px, 0.55fr) minmax(120px, 0.4fr) 112px;
   gap: 0;
   align-items: stretch;
   width: 100%;
@@ -555,7 +574,7 @@ select:focus-visible {
   display: flex;
   min-width: 0;
   min-height: 184px;
-  align-items: flex-end;
+  align-items: center;
   padding: clamp(1.2rem, 2.5vw, 2rem);
   background-color: var(--terracotta-dark);
   background-image: var(--restaurant-image);
@@ -571,8 +590,8 @@ select:focus-visible {
   z-index: -1;
   inset: 0;
   background:
-    linear-gradient(180deg, rgba(15, 13, 10, 0.08) 14%, rgba(15, 13, 10, 0.3) 52%, rgba(15, 13, 10, 0.88) 100%),
-    linear-gradient(90deg, rgba(15, 13, 10, 0.24), transparent 62%);
+    linear-gradient(90deg, rgba(15, 13, 10, 0.76), rgba(15, 13, 10, 0.5) 62%, rgba(15, 13, 10, 0.28)),
+    linear-gradient(180deg, rgba(15, 13, 10, 0.12), rgba(15, 13, 10, 0.46));
   content: "";
 }
 
@@ -650,9 +669,21 @@ select:focus-visible {
 }
 
 .restaurant-price {
-  align-items: flex-start;
+  align-items: center;
+  align-content: center;
+  flex-direction: column;
+  justify-content: center;
   color: var(--ink);
   font-weight: 700;
+}
+
+.restaurant-price small {
+  display: block;
+  margin-top: 0.3rem;
+  color: var(--ink-soft);
+  font-size: 0.64rem;
+  font-weight: 400;
+  line-height: 1.25;
 }
 
 .food-type-list {
@@ -682,17 +713,47 @@ select:focus-visible {
   stroke-width: 1.45;
 }
 
-.restaurant-arrow {
-  display: grid;
-  place-items: center;
+.restaurant-action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  padding: 1rem 0.85rem;
   border-left: 1px solid var(--line);
   color: var(--terracotta-dark);
+  font-size: 0.72rem;
+  font-weight: 700;
+  line-height: 1.15;
+  text-align: center;
+}
+
+.restaurant-action > span:last-child {
   font-size: 1.25rem;
   transition: transform 140ms ease;
 }
 
-.restaurant-button:hover .restaurant-arrow {
+.restaurant-button:hover .restaurant-action > span:last-child {
   transform: translateX(4px);
+}
+
+.load-more {
+  width: 100%;
+  min-height: 66px;
+  padding: 0.9rem 1.25rem;
+  border: 0;
+  border-bottom: 1px solid var(--ink);
+  background: transparent;
+  color: var(--terracotta-dark);
+  cursor: pointer;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  transition: background-color 140ms ease, color 140ms ease;
+}
+
+.load-more:hover {
+  background: var(--paper-deep);
+  color: var(--ink);
 }
 
 .empty-state {
@@ -1158,7 +1219,7 @@ select:focus-visible {
   }
 
   .restaurant-button {
-    grid-template-columns: minmax(0, 1fr) 26px;
+    grid-template-columns: minmax(0, 1fr) 96px;
     min-height: 0;
   }
 
@@ -1179,11 +1240,10 @@ select:focus-visible {
   }
 
   .restaurant-price {
-    align-self: start;
     margin-top: 0;
   }
 
-  .restaurant-arrow {
+  .restaurant-action {
     grid-column: 2;
     grid-row: 2 / span 2;
     border-top: 1px solid var(--line);
@@ -1339,7 +1399,7 @@ select:focus-visible {
   }
 
   .restaurant-button {
-    grid-template-columns: minmax(0, 1fr) 22px;
+    grid-template-columns: minmax(0, 1fr) 86px;
     gap: 0;
     min-height: 0;
     padding: 0;
@@ -1358,6 +1418,10 @@ select:focus-visible {
   .restaurant-price {
     margin-top: 0;
     padding: 1rem 1.25rem;
+  }
+
+  .restaurant-action {
+    padding-inline: 0.6rem;
   }
 
   .food-type-list {

@@ -35,7 +35,7 @@
             type="search"
             inputmode="search"
             autocomplete="off"
-              placeholder="Buscar por nombre de cocinería..."
+            placeholder="Buscar por nombre de cocinería..."
           />
           <button class="search-clear" id="search-clear" type="button" hidden>
             Limpiar
@@ -45,9 +45,10 @@
         <nav class="header-social" aria-label="Redes sociales">
           <!-- Enlaces placeholder: reemplazar en SOCIAL_LINKS dentro de script.js. -->
           <a href="#contacto" data-social="whatsapp" aria-label="WhatsApp de Cocinerías de Chile">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M20 11.7a8 8 0 0 1-11.9 7l-4.1 1.1 1.1-4A8 8 0 1 1 20 11.7Z"></path>
-              <path d="M8.2 7.7c.2-.4.4-.4.7-.4h.5l.8 2c.1.3.1.5-.1.7l-.6.8c.9 1.7 2.2 2.9 4 3.6l.7-.9c.2-.3.5-.3.8-.2l1.9.9c.3.1.4.3.4.6 0 1.1-.9 2.1-2 2.3-1.5.2-3.5-.5-5.4-2.1-2.3-1.9-3.6-4.4-3.3-5.9.2-.7.8-1.2 1.6-1.4Z"></path>
+            <svg class="social-icon social-icon--whatsapp" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M20.3 11.85a8.3 8.3 0 0 1-12.25 7.3L3.5 20.5l1.35-4.35a8.3 8.3 0 1 1 15.45-4.3Z"></path>
+              <path d="M8.2 7.7c.35 3.9 4.2 7.75 8.1 8.1"></path>
+              <path d="m8.2 7.7 1.55-.65L11 9.2l-1.1 1.15M16.3 15.8l.65-1.55L14.8 13l-1.15 1.1"></path>
             </svg>
           </a>
           <a href="#contacto" data-social="instagram" aria-label="Instagram de Cocinerías de Chile">
@@ -95,7 +96,7 @@
             </fieldset>
 
             <fieldset class="filter-group">
-              <legend>Precio</legend>
+              <legend>Rango de precio</legend>
               <div class="filter-options" id="price-filters"></div>
             </fieldset>
 
@@ -109,7 +110,7 @@
             <div class="results-toolbar">
               <div class="results-meta">
                 <p class="results-count" id="results-count" aria-live="polite"></p>
-                <p class="regions-count">16 regiones</p>
+                <p class="regions-count"><strong>16</strong> regiones</p>
               </div>
               <p class="active-summary" id="active-summary"></p>
             </div>
@@ -118,10 +119,21 @@
               <span>Establecimiento</span>
               <span>Tipo de comida</span>
               <span>Rango de precio</span>
-              <span></span>
+              <span>Detalle</span>
             </div>
 
             <div class="restaurant-list" id="restaurant-list"></div>
+
+            <button
+              class="load-more"
+              id="load-more"
+              type="button"
+              aria-controls="restaurant-list"
+              aria-expanded="false"
+              hidden
+            >
+              Ver más cocinerías
+            </button>
 
             <div class="empty-state" id="empty-state" hidden>
               <p class="empty-number">0</p>
@@ -146,8 +158,8 @@
             </p>
             <p>
               Cuando un dato no pudo verificarse, la ficha lo señala de forma
-              explícita. Los precios son referenciales y solo se clasifican cuando
-              la fuente entrega evidencia suficiente.
+              explícita. Los rangos de precio visibles en esta versión son datos
+              simulados para evaluar el prototipo; no provienen de la fuente del directorio.
             </p>
           </div>
         </div>
@@ -170,9 +182,10 @@
         <div class="footer-contact">
           <p class="footer-label">Contacto</p>
           <a href="#contacto" data-social="whatsapp">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M20 11.7a8 8 0 0 1-11.9 7l-4.1 1.1 1.1-4A8 8 0 1 1 20 11.7Z"></path>
-              <path d="M8.2 7.7c.2-.4.4-.4.7-.4h.5l.8 2c.1.3.1.5-.1.7l-.6.8c.9 1.7 2.2 2.9 4 3.6l.7-.9c.2-.3.5-.3.8-.2l1.9.9c.3.1.4.3.4.6 0 1.1-.9 2.1-2 2.3-1.5.2-3.5-.5-5.4-2.1-2.3-1.9-3.6-4.4-3.3-5.9.2-.7.8-1.2 1.6-1.4Z"></path>
+            <svg class="social-icon social-icon--whatsapp" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M20.3 11.85a8.3 8.3 0 0 1-12.25 7.3L3.5 20.5l1.35-4.35a8.3 8.3 0 1 1 15.45-4.3Z"></path>
+              <path d="M8.2 7.7c.35 3.9 4.2 7.75 8.1 8.1"></path>
+              <path d="m8.2 7.7 1.55-.65L11 9.2l-1.1 1.15M16.3 15.8l.65-1.55L14.8 13l-1.15 1.1"></path>
             </svg>
             <span>Contáctanos por WhatsApp</span>
           </a>

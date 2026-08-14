@@ -1,0 +1,717 @@
+{
+  "generatedAt": "2026-08-14T16:40:06.142Z",
+  "total": 101,
+  "uniquePaths": 101,
+  "uniqueSources": 101,
+  "uniqueHashes": 101,
+  "visualReviewCompleted": true,
+  "files": [
+    {
+      "restaurantId": "CL-AI-001",
+      "localPath": "assets/images/cocinerias/cl-ai-001.jpg",
+      "bytes": 155127,
+      "sha256": "4a75708158394ec592931ad4ad4ce8a163fc64b78b91d2c770f139a198521dd0",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-AI-002",
+      "localPath": "assets/images/cocinerias/cl-ai-002.jpg",
+      "bytes": 170198,
+      "sha256": "930788e21ecf2e3260b2eff3647bea29a650612416f908195e2585fa246296c5",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-AI-003",
+      "localPath": "assets/images/cocinerias/cl-ai-003.jpg",
+      "bytes": 147534,
+      "sha256": "011b0b245e54cadd65c10c2a7caed3470192a50006fb396666182b00da2b8242",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-AN-001",
+      "localPath": "assets/images/cocinerias/cl-an-001.jpg",
+      "bytes": 193255,
+      "sha256": "eb5c79f50b8f899c6cafba184782fa48e0ea6c349ca4ad0fd9116282b4f59110",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-AN-002",
+      "localPath": "assets/images/cocinerias/cl-an-002.jpg",
+      "bytes": 104418,
+      "sha256": "01cd58492beb47e493703c42a106e0d42d9f873a98a083cc79d0549535e125b9",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-AN-003",
+      "localPath": "assets/images/cocinerias/cl-an-003.jpg",
+      "bytes": 108699,
+      "sha256": "725af2933c66d9ad5afd4c8b0e08b618c931bf5eee3699773d0bedfc331d4890",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-AN-004",
+      "localPath": "assets/images/cocinerias/cl-an-004.jpg",
+      "bytes": 161292,
+      "sha256": "30cb9d1418c5563222dcf467dbb1b5b7bc5bdd909ce6ba77eb0d101b90e97095",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-AN-005",
+      "localPath": "assets/images/cocinerias/cl-an-005.jpg",
+      "bytes": 176185,
+      "sha256": "3ef9d3c07d93be0e6cb9e5e0803a2ab005d72475c201b4d8289a1d505812d3d4",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-AN-006",
+      "localPath": "assets/images/cocinerias/cl-an-006.jpg",
+      "bytes": 205478,
+      "sha256": "082fdb3623d75c222aaa0bc34abba15c50164ce6d18d2dc846f565c07c25f84d",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-AN-007",
+      "localPath": "assets/images/cocinerias/cl-an-007.jpg",
+      "bytes": 199282,
+      "sha256": "56178c3ac620286464005be18e359e5b8af4d27c9161dd7a02bc60bb151b35b6",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-AP-001",
+      "localPath": "assets/images/cocinerias/cl-ap-001.jpg",
+      "bytes": 896344,
+      "sha256": "b18fc98181943a1d63d2519c9ebf73da5a4b52bc0328692f6d5c02fa36970294",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-AR-001",
+      "localPath": "assets/images/cocinerias/cl-ar-001.jpg",
+      "bytes": 241782,
+      "sha256": "f9c64510216563fec6978a6af17dfa7f965602256dd01c9a7ffc63e494adbd55",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-AR-002",
+      "localPath": "assets/images/cocinerias/cl-ar-002.jpg",
+      "bytes": 283979,
+      "sha256": "be99a0be3d661d9a593d616cf0ce6dca292dbd057ecb517cde5752fe22a8fbc7",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-AR-003",
+      "localPath": "assets/images/cocinerias/cl-ar-003.jpg",
+      "bytes": 179473,
+      "sha256": "2fa70752ffedfc174fdc86066ba5d6e02000ace623bcf56e685bb0512a5102cf",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-AR-004",
+      "localPath": "assets/images/cocinerias/cl-ar-004.jpg",
+      "bytes": 259311,
+      "sha256": "627a009889e1e99d6159ea12a5a186e7ad4cd561833139f25ce18f62e4a78d61",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-AR-005",
+      "localPath": "assets/images/cocinerias/cl-ar-005.jpg",
+      "bytes": 284207,
+      "sha256": "b6e90d033addafc47d6db19dfcdf2a0a5b4f1e50d68f0634678d6bee3a92b82c",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-AR-006",
+      "localPath": "assets/images/cocinerias/cl-ar-006.jpg",
+      "bytes": 314732,
+      "sha256": "885f15c5f692f8e600bf11eb292d65fa526daafcf3d627d1f39e236b708233a3",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-AR-007",
+      "localPath": "assets/images/cocinerias/cl-ar-007.jpg",
+      "bytes": 297515,
+      "sha256": "fafe3f61b5f22ddf1f2a10e509448818d5959fa614501335e6e4b4df0d63ea5d",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-AR-008",
+      "localPath": "assets/images/cocinerias/cl-ar-008.jpg",
+      "bytes": 385896,
+      "sha256": "09e3b54754766ad7aca4a2d8c8eff6869afea1ae20465e9b09caea8a45301385",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-AR-009",
+      "localPath": "assets/images/cocinerias/cl-ar-009.jpg",
+      "bytes": 180927,
+      "sha256": "47e666b5261de6ebe7ab31db0e68904ca8f18e085f0a727634299b5821ca0e89",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-AR-010",
+      "localPath": "assets/images/cocinerias/cl-ar-010.jpg",
+      "bytes": 383701,
+      "sha256": "283a02f010967c2b27a8b14940fe7c09570dc555161b6689c8b7f2ed7a3b8463",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-AR-011",
+      "localPath": "assets/images/cocinerias/cl-ar-011.jpg",
+      "bytes": 239566,
+      "sha256": "50c4c82f62310a3abbea764152134dd61893ca26dfb88a878ce216309888e35b",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-AR-012",
+      "localPath": "assets/images/cocinerias/cl-ar-012.jpg",
+      "bytes": 158583,
+      "sha256": "ebb07762b49110dcc6fbf7130e76c5f8f8bfa7826abc47152e0ff02072099e65",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-AT-001",
+      "localPath": "assets/images/cocinerias/cl-at-001.jpg",
+      "bytes": 184136,
+      "sha256": "8ed88b491ef01927b415dce30422ff1f5f375a6e2118a1441f5d0c90a234cc51",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-AT-002",
+      "localPath": "assets/images/cocinerias/cl-at-002.jpg",
+      "bytes": 112230,
+      "sha256": "b98e98724a5be7f3b16a741763845bf9dd5ac7d223e932f29c7fab654a1750ac",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-AT-003",
+      "localPath": "assets/images/cocinerias/cl-at-003.jpg",
+      "bytes": 203002,
+      "sha256": "c0c73ea7beebc7ab0e76e32c29cd20bc6da4c57576f465738f9eb65e1e8db4d6",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-AT-004",
+      "localPath": "assets/images/cocinerias/cl-at-004.jpg",
+      "bytes": 96369,
+      "sha256": "73f7bee7ee7469355e04ac5bbb994d6f432f45b6cd3a9dfa532207d67ae43f26",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-AT-005",
+      "localPath": "assets/images/cocinerias/cl-at-005.jpg",
+      "bytes": 220587,
+      "sha256": "0b1d0118f72abda330863220f46e8605e96bb4ba7e435b298116eaefe236f7b9",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-BI-001",
+      "localPath": "assets/images/cocinerias/cl-bi-001.jpg",
+      "bytes": 142317,
+      "sha256": "db7e8dccf94c9cba95247d8a899876ecf5c364ecb55028329551e3d9be19a5b3",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-BI-002",
+      "localPath": "assets/images/cocinerias/cl-bi-002.jpg",
+      "bytes": 269696,
+      "sha256": "0e76507f5d6bc9101481200bdd3d1f2068ebbb56eb1c741475c2a6be19645af3",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-BI-003",
+      "localPath": "assets/images/cocinerias/cl-bi-003.jpg",
+      "bytes": 304234,
+      "sha256": "f7fd510d24bce071ccd602c837536f513426cf9e618193590768a30613272503",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-BI-004",
+      "localPath": "assets/images/cocinerias/cl-bi-004.jpg",
+      "bytes": 161808,
+      "sha256": "46bcfdab7ec2c0751edf0c209879003a5f0f725b2d895781a291d2bf3333d30d",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-BI-005",
+      "localPath": "assets/images/cocinerias/cl-bi-005.jpg",
+      "bytes": 166467,
+      "sha256": "70cf784ffbb23df2d506a7d8cf5e85313aaf735cbe61a3dd05aaa9f36d509d83",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-BI-006",
+      "localPath": "assets/images/cocinerias/cl-bi-006.jpg",
+      "bytes": 184806,
+      "sha256": "5a675193c9a21a4413b96faa7e00720f1cfabb7c758d74ea96f16bcab63513be",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-BI-007",
+      "localPath": "assets/images/cocinerias/cl-bi-007.jpg",
+      "bytes": 167243,
+      "sha256": "978379eef8dc5bc9c3fe4a85fd78e5bbcd6ca3e1e2d543ae58ebbafba6167cb3",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-BI-008",
+      "localPath": "assets/images/cocinerias/cl-bi-008.jpg",
+      "bytes": 252144,
+      "sha256": "fe4fb6a7d7b7376515721b8bf537d405cf25d49a647e8d9dffd59a443b8daa37",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-BI-009",
+      "localPath": "assets/images/cocinerias/cl-bi-009.jpg",
+      "bytes": 37993,
+      "sha256": "fe9a3b0c75adb47d48fa77be5030bbc0133ca24e1918a35cd86412a1104dc1b8",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-BI-010",
+      "localPath": "assets/images/cocinerias/cl-bi-010.jpg",
+      "bytes": 142363,
+      "sha256": "90b194bf1b2d5b6ffc07ea309e12a109b332b16ed46764741b39085f91578021",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-BI-011",
+      "localPath": "assets/images/cocinerias/cl-bi-011.jpg",
+      "bytes": 297189,
+      "sha256": "269da660b9096a5ca22dfb176a6c4f99209fff6423a9784cdb0cb9d9c35e33c4",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-BI-012",
+      "localPath": "assets/images/cocinerias/cl-bi-012.jpg",
+      "bytes": 75758,
+      "sha256": "d12a94799cd00ac36c6978512d85871737d70a3928073c6cca07a60bc4e48151",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-CO-001",
+      "localPath": "assets/images/cocinerias/cl-co-001.jpg",
+      "bytes": 170300,
+      "sha256": "1d40367ea8c6109a151ad0b7d64433ffb8b54070e012ba53db7979f23ce51d0d",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-CO-002",
+      "localPath": "assets/images/cocinerias/cl-co-002.jpg",
+      "bytes": 85628,
+      "sha256": "0a1ab0b67174721affab7e4e588ae17f2fa650d45637181c42d45858ac7c5069",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-CO-003",
+      "localPath": "assets/images/cocinerias/cl-co-003.jpg",
+      "bytes": 129034,
+      "sha256": "6f1b10388306609c26c08c32003e44d37d5abe544b9057befc43179bb039cf2a",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-CO-004",
+      "localPath": "assets/images/cocinerias/cl-co-004.jpg",
+      "bytes": 168640,
+      "sha256": "c5fe2b949203d0d0acfaa679af0a027dd1598faf243920b8c0b1c47dcc4cc7de",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-LI-001",
+      "localPath": "assets/images/cocinerias/cl-li-001.jpg",
+      "bytes": 176029,
+      "sha256": "cf07b7bf8b10a1cf2bff6040c1369b7b6cbf2de487c27b2c40af5f95bde7880f",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-LI-002",
+      "localPath": "assets/images/cocinerias/cl-li-002.jpg",
+      "bytes": 121958,
+      "sha256": "0d02d70c37e838c29108e84d467e47a2ab43a1c5282c0a513463c95fe55e2c17",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-LI-003",
+      "localPath": "assets/images/cocinerias/cl-li-003.jpg",
+      "bytes": 378367,
+      "sha256": "b6389d4d4dcdb60fd3a20ae85ad96f4770c03d02a5eda656f36096451fa10874",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-LL-001",
+      "localPath": "assets/images/cocinerias/cl-ll-001.jpg",
+      "bytes": 144782,
+      "sha256": "01f65b7e35c938b999d8e40df7605a2d2d7561f0938ab546086a7526488b9fa9",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-LL-002",
+      "localPath": "assets/images/cocinerias/cl-ll-002.jpg",
+      "bytes": 131940,
+      "sha256": "1d5a022eea1a655681a0664a11a69514a8c02a92b0a34d52adf869a6f6abb199",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-LL-003",
+      "localPath": "assets/images/cocinerias/cl-ll-003.jpg",
+      "bytes": 161998,
+      "sha256": "19482e5db0b9d5e5d0067a6f64229b6794677d75b7699d1f5f8bfe92d4ccdf62",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-LL-004",
+      "localPath": "assets/images/cocinerias/cl-ll-004.jpg",
+      "bytes": 187881,
+      "sha256": "4e381725e6ac4ef93bf9ab8d69435a1c32a4ecdb2148b9202297fff080d1cc9f",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-LL-005",
+      "localPath": "assets/images/cocinerias/cl-ll-005.jpg",
+      "bytes": 245318,
+      "sha256": "2d9d75d41a39d6dd51a0f8aa593c3500e8840f8d53a2bc2885d7f160c12830b0",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-LL-006",
+      "localPath": "assets/images/cocinerias/cl-ll-006.jpg",
+      "bytes": 149701,
+      "sha256": "a13b657cfe78f33fd61e7b72dc866b3b85a37969ecb19b9ed9360ae2dc7fa6ef",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-LL-007",
+      "localPath": "assets/images/cocinerias/cl-ll-007.jpg",
+      "bytes": 161844,
+      "sha256": "4e134077db96a513bae836e30835799a9c195df3bbb00b7c3a2f25681b42ed1d",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-LL-008",
+      "localPath": "assets/images/cocinerias/cl-ll-008.jpg",
+      "bytes": 95041,
+      "sha256": "af1419e5165fc0bb8504ba38647f72c3fe1641cb1c1f77239968c37167c48160",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-LL-009",
+      "localPath": "assets/images/cocinerias/cl-ll-009.jpg",
+      "bytes": 114929,
+      "sha256": "01b7d2b37537b93095c13f53f9cda30f21c6b4b5f89c71e7af4f3070400629f8",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-LL-010",
+      "localPath": "assets/images/cocinerias/cl-ll-010.jpg",
+      "bytes": 183804,
+      "sha256": "7d6f226fb35b45f5e771ddd44b8b045402dc6e2c755c9afd392a86a0d093e41a",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-LR-001",
+      "localPath": "assets/images/cocinerias/cl-lr-001.jpg",
+      "bytes": 202752,
+      "sha256": "3b14b258b5cd4c8b8c22a31fdcdf6817981d934a77273106a92f935ca4a60ecd",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-LR-002",
+      "localPath": "assets/images/cocinerias/cl-lr-002.jpg",
+      "bytes": 330292,
+      "sha256": "8072ef4e4793fb5acd57e0d94dd28074dcf9f7f24f28f8f90534ee8267df1ef5",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-LR-003",
+      "localPath": "assets/images/cocinerias/cl-lr-003.jpg",
+      "bytes": 392466,
+      "sha256": "0f4964d5aa2130be4459ebfff6f24e41b0fe72d8d0e4e64b32bb5353468305dd",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-LR-004",
+      "localPath": "assets/images/cocinerias/cl-lr-004.jpg",
+      "bytes": 338919,
+      "sha256": "764b2a64ae10099ba731063e955bfc7201dd9650645a3ba4b8a7ea86b8418659",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-LR-005",
+      "localPath": "assets/images/cocinerias/cl-lr-005.jpg",
+      "bytes": 356020,
+      "sha256": "e3bbabb188181527f3e5c2fe2d7388c5cbea4be0f5d26c47ff40642707bc8ce3",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-LR-006",
+      "localPath": "assets/images/cocinerias/cl-lr-006.jpg",
+      "bytes": 160497,
+      "sha256": "9aeb81108977bb2690a22e6be616f129fb145063e8940bbbc57a7e8a990d353c",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-LR-007",
+      "localPath": "assets/images/cocinerias/cl-lr-007.jpg",
+      "bytes": 265304,
+      "sha256": "fef37743723aff6c6184f035bcca632ec6165bee83a5ac10adbabf43ce30b382",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-LR-008",
+      "localPath": "assets/images/cocinerias/cl-lr-008.jpg",
+      "bytes": 195498,
+      "sha256": "7636a8c83f7cadd8150d49778029c6338e26782108a09b763fb94199b8e51748",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-LR-009",
+      "localPath": "assets/images/cocinerias/cl-lr-009.jpg",
+      "bytes": 205746,
+      "sha256": "c0f66c187f4a866a69dffa284b06cd932d8bc7ff5a33f34f2fafa0adfbaead9d",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-MG-001",
+      "localPath": "assets/images/cocinerias/cl-mg-001.jpg",
+      "bytes": 263334,
+      "sha256": "876fdfea6e7b044c55afb591fc7c353b96a5bda28b4379979e3a4e85dce808c7",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-MG-002",
+      "localPath": "assets/images/cocinerias/cl-mg-002.jpg",
+      "bytes": 295716,
+      "sha256": "04eb9b5bb1c6220ce0e20d4941b3f1a0094e3b8a2d04db7f9dea69b715171570",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-MG-003",
+      "localPath": "assets/images/cocinerias/cl-mg-003.jpg",
+      "bytes": 232628,
+      "sha256": "d944fbe9ca8b35cd6fc665b0e2ea29910182b2ca1f57333fb875ce7b10df4999",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-MG-004",
+      "localPath": "assets/images/cocinerias/cl-mg-004.jpg",
+      "bytes": 213279,
+      "sha256": "8c746f2fb2afb2140317915d305b30f2e5658f23030ed673b46d50a91722e257",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-ML-001",
+      "localPath": "assets/images/cocinerias/cl-ml-001.jpg",
+      "bytes": 252027,
+      "sha256": "f06fe977715473fe12e4633b3aa35e02e8287f1b08c9b70344193b1482972aa7",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-ML-002",
+      "localPath": "assets/images/cocinerias/cl-ml-002.jpg",
+      "bytes": 133103,
+      "sha256": "5bdc8ff25d78f919378d73098d048eb04492dd10a532a2f026526bff39f244da",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-ML-003",
+      "localPath": "assets/images/cocinerias/cl-ml-003.jpg",
+      "bytes": 113201,
+      "sha256": "be7bf164999a73307c3bb650ade086b993040f6036c7cb83f6ab435abf1c6cbf",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-ML-004",
+      "localPath": "assets/images/cocinerias/cl-ml-004.jpg",
+      "bytes": 150848,
+      "sha256": "bf9451bcafa76ad040d7aae889cb3cd52d7343e0e1f9073d67a7d85969c043d7",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-ML-005",
+      "localPath": "assets/images/cocinerias/cl-ml-005.jpg",
+      "bytes": 146581,
+      "sha256": "859c4baa65d432f83a3443793a0c1cc53fac51fd1bee681ac1ecc4cb45fbfada",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-ML-006",
+      "localPath": "assets/images/cocinerias/cl-ml-006.jpg",
+      "bytes": 196736,
+      "sha256": "89fe9ba35e5b0a387d1c958acf244459d94b10fbac819ced34f8add848a220d2",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-ML-007",
+      "localPath": "assets/images/cocinerias/cl-ml-007.jpg",
+      "bytes": 203380,
+      "sha256": "0bdaac0805429cab8761eeee980e901d70a87593d66417d3c2e48e7b40f72a1c",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-ML-008",
+      "localPath": "assets/images/cocinerias/cl-ml-008.jpg",
+      "bytes": 181285,
+      "sha256": "96dab0050aaefe84ac9d8ec631521c07191aefed79d61511477c85ba5849df43",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-NB-001",
+      "localPath": "assets/images/cocinerias/cl-nb-001.jpg",
+      "bytes": 260529,
+      "sha256": "3fb6e6d5ea9d30edc1840eb575a200b66c14d12fec87f77281e09536d70a33c5",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-NB-002",
+      "localPath": "assets/images/cocinerias/cl-nb-002.jpg",
+      "bytes": 315889,
+      "sha256": "95c9541493dd8fe964710b8066559c55b0f84dd3d66a93f0a9f0580dd3b83221",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-NB-003",
+      "localPath": "assets/images/cocinerias/cl-nb-003.jpg",
+      "bytes": 272264,
+      "sha256": "3a9f7b2f4ae29e22400fbe9d4ca2f025423fdf283d0c8e1958cfce4162bae647",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-NB-004",
+      "localPath": "assets/images/cocinerias/cl-nb-004.jpg",
+      "bytes": 245196,
+      "sha256": "bcc9f367a335ffe39c0fc59f92fb2ba098a9d88e7e5908bd480b8c9fe3e77839",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-NB-005",
+      "localPath": "assets/images/cocinerias/cl-nb-005.jpg",
+      "bytes": 242649,
+      "sha256": "fa05eb44b8b26f822ec99ff395cbfbe0e7003eb142d6805dfade0b18bb96625a",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-NB-006",
+      "localPath": "assets/images/cocinerias/cl-nb-006.jpg",
+      "bytes": 255296,
+      "sha256": "a1e4cd697883a176b47812057cd59a3f93fd4d6d61ecd2fd3da28f13323eebae",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-NB-007",
+      "localPath": "assets/images/cocinerias/cl-nb-007.jpg",
+      "bytes": 98214,
+      "sha256": "fba6cfedc739a8b1af59ad78c9f7fcfb40517351a57a04b785baa0c09d64287c",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-RM-001",
+      "localPath": "assets/images/cocinerias/cl-rm-001.jpg",
+      "bytes": 246090,
+      "sha256": "6366d7874ac6ed29833992fd393c645ffc0595574a8017c201f7e5400da4dcef",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-RM-002",
+      "localPath": "assets/images/cocinerias/cl-rm-002.jpg",
+      "bytes": 317286,
+      "sha256": "ded08c5ba2ea2b264e3bb3f606e08e3ad6e5e4d8a59cb9b36f8bad8b4339b514",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-RM-003",
+      "localPath": "assets/images/cocinerias/cl-rm-003.jpg",
+      "bytes": 254087,
+      "sha256": "aec5e85683666247b99719d33a571da9c0e1a9f5b16f54b07b6551b548e72ee0",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-RM-004",
+      "localPath": "assets/images/cocinerias/cl-rm-004.jpg",
+      "bytes": 215666,
+      "sha256": "0c3b9be4fc17b5be1214cf6d3906dbefab08f8e459755ea39f6e3a508d7df0b2",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-RM-005",
+      "localPath": "assets/images/cocinerias/cl-rm-005.jpg",
+      "bytes": 238602,
+      "sha256": "a4e4eae8c57ed2662b80955f4ad16718860852cf5dbc2b1f544852e2d10e6ca3",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-RM-006",
+      "localPath": "assets/images/cocinerias/cl-rm-006.jpg",
+      "bytes": 237141,
+      "sha256": "345a203f1c81e1964d4a384f9dc1a9edb1d002212809d3517af744ffe7a7e13b",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-TA-001",
+      "localPath": "assets/images/cocinerias/cl-ta-001.jpg",
+      "bytes": 89220,
+      "sha256": "f69a4972c1bd3681ac74cb6d1309f33bb78f3179b823ac89d189faf7f4aa281a",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-TA-002",
+      "localPath": "assets/images/cocinerias/cl-ta-002.jpg",
+      "bytes": 111564,
+      "sha256": "3537f0c6aec4223f94565b7dae8f7ba264dc17efe1bc10833ef93f778c4d295e",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-TA-003",
+      "localPath": "assets/images/cocinerias/cl-ta-003.jpg",
+      "bytes": 210930,
+      "sha256": "6fddbf19dd44c7c78aa7c43334d6d3a2353e6f693ea636840ee9f885d00c2c88",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-TA-004",
+      "localPath": "assets/images/cocinerias/cl-ta-004.jpg",
+      "bytes": 77567,
+      "sha256": "0c6482f79ef9bfe5e3b3616fb2f519a67e2a7741057c51fcfa420e73701fe63e",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-TA-005",
+      "localPath": "assets/images/cocinerias/cl-ta-005.jpg",
+      "bytes": 216352,
+      "sha256": "d4584209c2bd55e53c4af12f3b5274559489d1f98a9302df9c06ca65b6d77d01",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-TA-006",
+      "localPath": "assets/images/cocinerias/cl-ta-006.jpg",
+      "bytes": 110521,
+      "sha256": "3225ab167c75880aca47c3e621665cb3276ab4ecd8b9872ebf0aa356621942a9",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-VA-001",
+      "localPath": "assets/images/cocinerias/cl-va-001.jpg",
+      "bytes": 189065,
+      "sha256": "4114b4034d0a5b9f1e4fa8b1c0b2eca5a5403d4380bbb7cfbe33fc76bcb020d5",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-VA-002",
+      "localPath": "assets/images/cocinerias/cl-va-002.jpg",
+      "bytes": 138459,
+      "sha256": "35fe6978a27ed84765303b2ebad33d3a426a5a9ec865e57df3bfdd9524083a9b",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-VA-003",
+      "localPath": "assets/images/cocinerias/cl-va-003.jpg",
+      "bytes": 156782,
+      "sha256": "e864c686c28a9e11abde65b74000282762c59a4bf4b047239f3783843c30c735",
+      "visualReview": "revisión visual"
+    },
+    {
+      "restaurantId": "CL-VA-004",
+      "localPath": "assets/images/cocinerias/cl-va-004.jpg",
+      "bytes": 48420,
+      "sha256": "244105f5e36caecc10a561487899958d27fa078d511b1dd79d993f0d7c325bfb",
+      "visualReview": "revisión visual"
+    }
+  ]
+}

@@ -1,7 +1,23 @@
 (() => {
   "use strict";
 
-  const restaurants = Array.isArray(window.COCINERIAS) ? window.COCINERIAS : [];
+  const sourceRestaurants = Array.isArray(window.COCINERIAS) ? window.COCINERIAS : [];
+
+  // PROTOTIPO DE PRECIO: estos rangos son simulados y no provienen del Markdown.
+  // Para retirarlos, desactiva `enabled` o reemplaza `assignBand` por datos reales.
+  const PRICE_PROTOTYPE = Object.freeze({
+    enabled: true,
+    bands: ["Económico", "Moderado", "Alto"],
+    assignBand: (_restaurant, index) => ["Económico", "Moderado", "Alto"][index % 3],
+  });
+  const INITIAL_RESULT_LIMIT = 10;
+  const restaurants = sourceRestaurants.map((restaurant, index) => ({
+    ...restaurant,
+    displayPriceCategory: PRICE_PROTOTYPE.enabled
+      ? PRICE_PROTOTYPE.assignBand(restaurant, index)
+      : restaurant.priceCategory,
+    priceIsSimulated: PRICE_PROTOTYPE.enabled,
+  }));
 
   // PLACEHOLDERS DE REDES: reemplazar por las URLs reales cuando estén disponibles.
   const SOCIAL_LINKS = {
@@ -21,6 +37,7 @@
     resultsCount: document.querySelector("#results-count"),
     activeSummary: document.querySelector("#active-summary"),
     restaurantList: document.querySelector("#restaurant-list"),
+    loadMore: document.querySelector("#load-more"),
     emptyState: document.querySelector("#empty-state"),
     emptyReset: document.querySelector("#empty-reset"),
     filterToggle: document.querySelector("#filter-toggle"),
@@ -48,6 +65,7 @@
     modalId: null,
     lastFocused: null,
     filtersOpen: false,
+    listExpanded: false,
   };
 
   const foodOrder = [
@@ -69,7 +87,9 @@
     "Opciones vegetales",
     "Sin clasificación culinaria",
   ];
-  const priceOrder = ["Económico", "Precio medio", "No informado"];
+  const priceOrder = PRICE_PROTOTYPE.enabled
+    ? [...PRICE_PROTOTYPE.bands]
+    : ["Económico", "Precio medio", "No informado"];
 
   function escapeHTML(value) {
     return String(value ?? "")
@@ -109,12 +129,7 @@
   }
 
   function formatPrice(category) {
-    const labels = {
-      Económico: "$ · Económico",
-      "Precio medio": "$$ · Precio medio",
-      "No informado": "— · No informado",
-    };
-    return labels[category] ?? "— · No informado";
+    return category || "No informado";
   }
 
   function foodIcon(category) {
@@ -222,7 +237,7 @@
     renderFilterOptions(
       elements.priceFilters,
       priceOrder,
-      countBy(restaurants, (item) => item.priceCategory),
+      countBy(restaurants, (item) => item.displayPriceCategory),
       "prices",
     );
   }
@@ -235,7 +250,8 @@
     return Boolean(state.query || getActiveFilterCount());
   }
 
-  function applyFilters() {
+  function applyFilters({ resetExpansion = true } = {}) {
+    if (resetExpansion) state.listExpanded = false;
     const normalizedQuery = normalize(state.query);
 
     state.visibleRestaurants = restaurants.filter((restaurant) => {
@@ -245,7 +261,8 @@
       const matchesFood =
         !state.foods.size ||
         restaurant.foodCategories.some((category) => state.foods.has(category));
-      const matchesPrice = !state.prices.size || state.prices.has(restaurant.priceCategory);
+      const matchesPrice =
+        !state.prices.size || state.prices.has(restaurant.displayPriceCategory);
 
       return matchesName && matchesRegion && matchesFood && matchesPrice;
     });
@@ -280,8 +297,14 @@
             </span>
           </span>
           <span class="restaurant-cuisine">${foodCategoryList(restaurant.foodCategories)}</span>
-          <span class="restaurant-price">${escapeHTML(formatPrice(restaurant.priceCategory))}</span>
-          <span class="restaurant-arrow" aria-hidden="true">→</span>
+          <span class="restaurant-price">
+            <span>${escapeHTML(formatPrice(restaurant.displayPriceCategory))}</span>
+            ${restaurant.priceIsSimulated ? "<small>Dato simulado</small>" : ""}
+          </span>
+          <span class="restaurant-action" aria-hidden="true">
+            <span>Ver ficha</span>
+            <span>→</span>
+          </span>
         </button>
       </article>
     `;
@@ -292,10 +315,18 @@
     const activeFilterCount = getActiveFilterCount();
     const isFiltered = activeFilterCount > 0;
     const isSearching = Boolean(state.query);
+    const listedRestaurants = state.listExpanded
+      ? state.visibleRestaurants
+      : state.visibleRestaurants.slice(0, INITIAL_RESULT_LIMIT);
 
-    elements.restaurantList.innerHTML = state.visibleRestaurants.map(restaurantRow).join("");
+    elements.restaurantList.innerHTML = listedRestaurants.map(restaurantRow).join("");
     elements.restaurantList.hidden = visibleCount === 0;
     elements.emptyState.hidden = visibleCount !== 0;
+    elements.loadMore.hidden = visibleCount <= INITIAL_RESULT_LIMIT;
+    elements.loadMore.textContent = state.listExpanded
+      ? "Ver menos"
+      : "Ver más cocinerías";
+    elements.loadMore.setAttribute("aria-expanded", String(state.listExpanded));
 
     elements.resultsCount.innerHTML = hasAnyActiveState()
       ? `<strong>${visibleCount}</strong> de ${restaurants.length} cocinerías`
@@ -357,6 +388,25 @@
     applyFilters();
   }
 
+  function toggleListExpansion() {
+    const isCollapsing = state.listExpanded;
+    state.listExpanded = !state.listExpanded;
+    renderDirectory();
+
+    if (!isCollapsing) return;
+    requestAnimationFrame(() => {
+      elements.loadMore.focus({ preventScroll: true });
+      const headerHeight = document.querySelector(".site-header")?.offsetHeight ?? 0;
+      const toolbarTop =
+        document.querySelector(".results-toolbar").getBoundingClientRect().top + window.scrollY;
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      window.scrollTo({
+        top: Math.max(0, toolbarTop - headerHeight - 16),
+        behavior: reducedMotion ? "auto" : "smooth",
+      });
+    });
+  }
+
   function factBlock(label, content) {
     return `
       <div class="modal-fact">
@@ -394,9 +444,9 @@
     const map = safeUrl(restaurant.googleMaps);
     const addressParts = [restaurant.address, restaurant.venue].filter(Boolean);
     const socialDetails = [restaurant.instagram, restaurant.facebook, restaurant.otherNetworks].filter(Boolean);
-    const currentPrice = restaurant.priceRange
-      ? `${escapeHTML(restaurant.priceRange)}<br><small>${escapeHTML(restaurant.priceCategory)}</small>`
-      : "No informado";
+    const currentPrice = restaurant.priceIsSimulated
+      ? `${escapeHTML(restaurant.displayPriceCategory)}<br><small>Dato simulado para prototipo</small>`
+      : escapeHTML(restaurant.priceRange ?? restaurant.displayPriceCategory ?? "No informado");
     const statusClass = restaurant.status === "Activa" ? "" : "is-unconfirmed";
 
     return `
@@ -565,6 +615,7 @@
       const button = event.target.closest("[data-restaurant-id]");
       if (button) openModal(button.dataset.restaurantId, button);
     });
+    elements.loadMore.addEventListener("click", toggleListExpansion);
 
     elements.modalClose.addEventListener("click", closeModal);
     elements.modalPrev.addEventListener("click", () => navigateModal(-1));

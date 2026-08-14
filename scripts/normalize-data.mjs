@@ -5,6 +5,7 @@ import { fileURLToPath } from "node:url";
 const projectRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const sourcePath = resolve(projectRoot, "directorio_cocinerias_chile.md");
 const outputPath = resolve(projectRoot, "data.js");
+const imageSourcesPath = resolve(projectRoot, "assets/images/cocinerias/image-sources.json");
 
 const fields = [
   "id",
@@ -46,25 +47,6 @@ const fields = [
 ];
 
 const missingValues = new Set(["No encontrado", "No aplica", ""]);
-
-const regionalImages = {
-  "Arica y Parinacota": "assets/images/cocinerias/mata-rangi.jpg",
-  Tarapacá: "assets/images/cocinerias/region-tarapaca.jpg",
-  Antofagasta: "assets/images/cocinerias/region-antofagasta.jpg",
-  Atacama: "assets/images/cocinerias/region-atacama.jpg",
-  Coquimbo: "assets/images/cocinerias/region-coquimbo.jpg",
-  Valparaíso: "assets/images/cocinerias/region-valparaiso.jpg",
-  "Metropolitana de Santiago": "assets/images/cocinerias/region-metropolitana.jpg",
-  "Libertador General Bernardo O'Higgins": "assets/images/cocinerias/region-ohiggins.jpg",
-  Maule: "assets/images/cocinerias/region-maule.jpg",
-  Ñuble: "assets/images/cocinerias/region-nuble.jpg",
-  Biobío: "assets/images/cocinerias/region-biobio.jpg",
-  "La Araucanía": "assets/images/cocinerias/region-araucania.jpg",
-  "Los Ríos": "assets/images/cocinerias/region-los-rios.jpg",
-  "Los Lagos": "assets/images/cocinerias/region-los-lagos.jpg",
-  "Aysén del General Carlos Ibáñez del Campo": "assets/images/cocinerias/region-aysen.jpg",
-  "Magallanes y de la Antártica Chilena": "assets/images/cocinerias/region-magallanes.jpg",
-};
 
 function normaliseForMatching(value) {
   return value
@@ -131,10 +113,12 @@ function deriveFoodCategories(entry) {
   return categories.length ? categories : ["Sin clasificación culinaria"];
 }
 
-function deriveImage(entry) {
-  const isDirect = entry.id === "CL-AP-001";
+function deriveImage(entry, imageSourcesById) {
+  const image = imageSourcesById.get(entry.id);
+  if (!image) throw new Error(`No existe una imagen curada para ${entry.id}.`);
+  const isDirect = image.usage === "direct";
   return {
-    imagePath: regionalImages[entry.region],
+    imagePath: image.localPath,
     imageKind: isDirect ? "direct" : "regional-fallback",
     imageLabel: isDirect
       ? `Fotografía de ${entry.name}`
@@ -162,7 +146,13 @@ function cleanValue(value) {
   return missingValues.has(value) ? null : value;
 }
 
-const markdown = await readFile(sourcePath, "utf8");
+const [markdown, imageSources] = await Promise.all([
+  readFile(sourcePath, "utf8"),
+  readFile(imageSourcesPath, "utf8").then(JSON.parse),
+]);
+const imageSourcesById = new Map(
+  imageSources.map((image) => [image.restaurantId, image]),
+);
 const entries = markdown
   .split(/\r?\n/)
   .filter((line) => /^\| CL-[A-Z]{2}-\d{3} \|/.test(line))
@@ -188,7 +178,7 @@ const entries = markdown
       ),
       foodCategories: deriveFoodCategories(rawEntry),
       priceCategory: derivePriceCategory(rawEntry.priceRange),
-      ...deriveImage(rawEntry),
+      ...deriveImage(rawEntry, imageSourcesById),
     };
   });
 

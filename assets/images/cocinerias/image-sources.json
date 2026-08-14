@@ -1,229 +1,1820 @@
 [
   {
-    "key": "mata-rangi",
-    "filename": "mata-rangi.jpg",
-    "title": "File:Mata-Rangi restaurant (48338622606).jpg",
-    "subject": "Mata Rangi",
+    "restaurantId": "CL-AI-001",
+    "restaurantName": "Cocinería Estrella del Sur",
+    "region": "Aysén del General Carlos Ibáñez del Campo",
+    "usage": "regional-fallback",
+    "subject": "Aysén del General Carlos Ibáñez del Campo — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:ESC large ISS004 ISS004-E-7079.JPG",
+    "localPath": "assets/images/cocinerias/cl-ai-001.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:ESC_large_ISS004_ISS004-E-7079.JPG",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/6/65/ESC_large_ISS004_ISS004-E-7079.JPG",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/ESC_large_ISS004_ISS004-E-7079.JPG/960px-ESC_large_ISS004_ISS004-E-7079.JPG",
+    "author": "NASA",
+    "license": "Public domain",
+    "licenseUrl": null,
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-AI-002",
+    "restaurantName": "Cocinería Puerto Chacabuco",
+    "region": "Aysén del General Carlos Ibáñez del Campo",
+    "usage": "regional-fallback",
+    "subject": "Aysén del General Carlos Ibáñez del Campo — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Lago O'Higgins-San Martín (ISS010-E-5868).jpg",
+    "localPath": "assets/images/cocinerias/cl-ai-002.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Lago_O%27Higgins-San_Mart%C3%ADn_(ISS010-E-5868).jpg",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/7/7e/Lago_O%27Higgins-San_Mart%C3%ADn_%28ISS010-E-5868%29.jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Lago_O%27Higgins-San_Mart%C3%ADn_%28ISS010-E-5868%29.jpg/960px-Lago_O%27Higgins-San_Mart%C3%ADn_%28ISS010-E-5868%29.jpg",
+    "author": "NASA",
+    "license": "Public domain",
+    "licenseUrl": null,
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-AI-003",
+    "restaurantName": "La Cocina de Sole",
+    "region": "Aysén del General Carlos Ibáñez del Campo",
+    "usage": "regional-fallback",
+    "subject": "Aysén del General Carlos Ibáñez del Campo — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Campos de Lago Verde.JPG",
+    "localPath": "assets/images/cocinerias/cl-ai-003.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Campos_de_Lago_Verde.JPG",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/5/5e/Campos_de_Lago_Verde.JPG",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Campos_de_Lago_Verde.JPG/960px-Campos_de_Lago_Verde.JPG",
+    "author": "Lin linao",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-AN-001",
+    "restaurantName": "Cocinería Grey",
+    "region": "Antofagasta",
+    "usage": "regional-fallback",
+    "subject": "Antofagasta — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Mina de Chuquicamata, Calama, Chile, 2016-02-01, DD 110-112 PAN.JPG",
+    "localPath": "assets/images/cocinerias/cl-an-001.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Mina_de_Chuquicamata,_Calama,_Chile,_2016-02-01,_DD_110-112_PAN.JPG",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/b/b6/Mina_de_Chuquicamata%2C_Calama%2C_Chile%2C_2016-02-01%2C_DD_110-112_PAN.JPG",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Mina_de_Chuquicamata%2C_Calama%2C_Chile%2C_2016-02-01%2C_DD_110-112_PAN.JPG/960px-Mina_de_Chuquicamata%2C_Calama%2C_Chile%2C_2016-02-01%2C_DD_110-112_PAN.JPG",
+    "author": "Diego Delso",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-AN-002",
+    "restaurantName": "Cocinería 14",
+    "region": "Antofagasta",
+    "usage": "regional-fallback",
+    "subject": "Antofagasta — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Ferrocarril en el salar de Carcote, Chile, 2016-02-09, DD 70.JPG",
+    "localPath": "assets/images/cocinerias/cl-an-002.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Ferrocarril_en_el_salar_de_Carcote,_Chile,_2016-02-09,_DD_70.JPG",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/5/5d/Ferrocarril_en_el_salar_de_Carcote%2C_Chile%2C_2016-02-09%2C_DD_70.JPG",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Ferrocarril_en_el_salar_de_Carcote%2C_Chile%2C_2016-02-09%2C_DD_70.JPG/960px-Ferrocarril_en_el_salar_de_Carcote%2C_Chile%2C_2016-02-09%2C_DD_70.JPG",
+    "author": "Diego Delso",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-AN-003",
+    "restaurantName": "Cocinería Bartolomé",
+    "region": "Antofagasta",
+    "usage": "regional-fallback",
+    "subject": "Antofagasta — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Anfiteatro, Valle de la Luna, San Pedro de Atacama, Chile, 2016-02-01, DD 149.JPG",
+    "localPath": "assets/images/cocinerias/cl-an-003.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Anfiteatro,_Valle_de_la_Luna,_San_Pedro_de_Atacama,_Chile,_2016-02-01,_DD_149.JPG",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/1/1f/Anfiteatro%2C_Valle_de_la_Luna%2C_San_Pedro_de_Atacama%2C_Chile%2C_2016-02-01%2C_DD_149.JPG",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Anfiteatro%2C_Valle_de_la_Luna%2C_San_Pedro_de_Atacama%2C_Chile%2C_2016-02-01%2C_DD_149.JPG/960px-Anfiteatro%2C_Valle_de_la_Luna%2C_San_Pedro_de_Atacama%2C_Chile%2C_2016-02-01%2C_DD_149.JPG",
+    "author": "Diego Delso",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-AN-004",
+    "restaurantName": "Cocinería Da Agapita",
+    "region": "Antofagasta",
+    "usage": "regional-fallback",
+    "subject": "Antofagasta — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Catedrales de Tara, Chile, 2016-02-07, DD 57-60 PAN.JPG",
+    "localPath": "assets/images/cocinerias/cl-an-004.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Catedrales_de_Tara,_Chile,_2016-02-07,_DD_57-60_PAN.JPG",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/1/1c/Catedrales_de_Tara%2C_Chile%2C_2016-02-07%2C_DD_57-60_PAN.JPG",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Catedrales_de_Tara%2C_Chile%2C_2016-02-07%2C_DD_57-60_PAN.JPG/960px-Catedrales_de_Tara%2C_Chile%2C_2016-02-07%2C_DD_57-60_PAN.JPG",
+    "author": "Diego Delso",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-AN-005",
+    "restaurantName": "Restaurante Ckunza Tilar",
+    "region": "Antofagasta",
+    "usage": "regional-fallback",
+    "subject": "Antofagasta — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Catedrales de Tara, Chile, 2016-02-07, DD 62.JPG",
+    "localPath": "assets/images/cocinerias/cl-an-005.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Catedrales_de_Tara,_Chile,_2016-02-07,_DD_62.JPG",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/d/d3/Catedrales_de_Tara%2C_Chile%2C_2016-02-07%2C_DD_62.JPG",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Catedrales_de_Tara%2C_Chile%2C_2016-02-07%2C_DD_62.JPG/960px-Catedrales_de_Tara%2C_Chile%2C_2016-02-07%2C_DD_62.JPG",
+    "author": "Diego Delso",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-AN-006",
+    "restaurantName": "Cocinería Doña Martita",
+    "region": "Antofagasta",
+    "usage": "regional-fallback",
+    "subject": "Antofagasta — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Géiseres del Tatio, Atacama, Chile, 2016-02-01, DD 36-38 HDR.JPG",
+    "localPath": "assets/images/cocinerias/cl-an-006.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:G%C3%A9iseres_del_Tatio,_Atacama,_Chile,_2016-02-01,_DD_36-38_HDR.JPG",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/5/5a/G%C3%A9iseres_del_Tatio%2C_Atacama%2C_Chile%2C_2016-02-01%2C_DD_36-38_HDR.JPG",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/G%C3%A9iseres_del_Tatio%2C_Atacama%2C_Chile%2C_2016-02-01%2C_DD_36-38_HDR.JPG/960px-G%C3%A9iseres_del_Tatio%2C_Atacama%2C_Chile%2C_2016-02-01%2C_DD_36-38_HDR.JPG",
+    "author": "Diego Delso",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-AN-007",
+    "restaurantName": "Cocinería Valle del Encanto",
+    "region": "Antofagasta",
+    "usage": "regional-fallback",
+    "subject": "Antofagasta — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Paisaje cerca de Calama, Chile, 2016-02-01, DD 83.JPG",
+    "localPath": "assets/images/cocinerias/cl-an-007.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Paisaje_cerca_de_Calama,_Chile,_2016-02-01,_DD_83.JPG",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/5/5e/Paisaje_cerca_de_Calama%2C_Chile%2C_2016-02-01%2C_DD_83.JPG",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Paisaje_cerca_de_Calama%2C_Chile%2C_2016-02-01%2C_DD_83.JPG/960px-Paisaje_cerca_de_Calama%2C_Chile%2C_2016-02-01%2C_DD_83.JPG",
+    "author": "Diego Delso",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-AP-001",
+    "restaurantName": "Mata Rangi",
+    "region": "Arica y Parinacota",
     "usage": "direct",
-    "restaurantIds": [
-      "CL-AP-001"
-    ],
-    "localPath": "assets/images/cocinerias/mata-rangi.jpg",
+    "subject": "Mata Rangi",
+    "title": "File:Mata-Rangi restaurant (48338622606).jpg",
+    "localPath": "assets/images/cocinerias/cl-ap-001.jpg",
     "sourcePage": "https://commons.wikimedia.org/wiki/File:Mata-Rangi_restaurant_(48338622606).jpg",
     "originalFile": "https://upload.wikimedia.org/wikipedia/commons/8/86/Mata-Rangi_restaurant_%2848338622606%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/8/86/Mata-Rangi_restaurant_%2848338622606%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
     "author": "S. Rae from Scotland, UK",
     "license": "CC BY 2.0",
     "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
-    "description": "Arica, Chile"
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
   },
   {
-    "key": "tarapaca",
-    "filename": "region-tarapaca.jpg",
-    "title": "File:Oasis de Pica. I región..jpg",
-    "subject": "Región de Tarapacá — Oasis de Pica",
+    "restaurantId": "CL-AR-001",
+    "restaurantName": "Restaurante Pily",
+    "region": "La Araucanía",
     "usage": "regional-fallback",
-    "localPath": "assets/images/cocinerias/region-tarapaca.jpg",
-    "sourcePage": "https://commons.wikimedia.org/wiki/File:Oasis_de_Pica._I_regi%C3%B3n..jpg",
-    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/5/58/Oasis_de_Pica._I_regi%C3%B3n..jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-    "author": "Paodurang",
-    "license": "CC BY-SA 3.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
-    "description": "Cocha, Oasis de Pica a 147 km. De la ciudad de Iquique. I región."
-  },
-  {
-    "key": "antofagasta",
-    "filename": "region-antofagasta.jpg",
-    "title": "File:La Portada - Chile.jpg",
-    "subject": "Región de Antofagasta — La Portada",
-    "usage": "regional-fallback",
-    "localPath": "assets/images/cocinerias/region-antofagasta.jpg",
-    "sourcePage": "https://commons.wikimedia.org/wiki/File:La_Portada_-_Chile.jpg",
-    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/d/df/La_Portada_-_Chile.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-    "author": "Genesis Carolina Guerrero Garcia",
+    "subject": "La Araucanía — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Laima 5.jpg",
+    "localPath": "assets/images/cocinerias/cl-ar-001.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Laima_5.jpg",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/a/a1/Laima_5.jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Laima_5.jpg/960px-Laima_5.jpg",
+    "author": "LBM1948",
     "license": "CC BY-SA 4.0",
     "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
-    "description": "La portada de Antofagasta es un monumento natural, causado por la erosión del mar, tiene 43 metros de altura, 23 metros de ancho y 70 metros de largo, su estructura es en forma de arco de origen geológico."
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
   },
   {
-    "key": "atacama",
-    "filename": "region-atacama.jpg",
-    "title": "File:Caldera.JPG",
-    "subject": "Región de Atacama — Puerto de Caldera",
+    "restaurantId": "CL-AR-002",
+    "restaurantName": "Cocinería Mary",
+    "region": "La Araucanía",
     "usage": "regional-fallback",
-    "localPath": "assets/images/cocinerias/region-atacama.jpg",
-    "sourcePage": "https://commons.wikimedia.org/wiki/File:Caldera.JPG",
-    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/4/40/Caldera.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-    "author": "No machine-readable author provided. Dixjonny~commonswiki assumed (based on copyright claims).",
-    "license": "Public domain",
-    "licenseUrl": null,
-    "description": "Puerto de Caldera"
-  },
-  {
-    "key": "coquimbo",
-    "filename": "region-coquimbo.jpg",
-    "title": "File:Vista de la Ciudad y el Puerto de Coquimbo.jpg",
-    "subject": "Región de Coquimbo — ciudad y puerto",
-    "usage": "regional-fallback",
-    "localPath": "assets/images/cocinerias/region-coquimbo.jpg",
-    "sourcePage": "https://commons.wikimedia.org/wiki/File:Vista_de_la_Ciudad_y_el_Puerto_de_Coquimbo.jpg",
-    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/e/e9/Vista_de_la_Ciudad_y_el_Puerto_de_Coquimbo.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-    "author": "Rjcastillo",
+    "subject": "La Araucanía — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Lago Conguillío 01.jpg",
+    "localPath": "assets/images/cocinerias/cl-ar-002.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Lago_Conguill%C3%ADo_01.jpg",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/9/97/Lago_Conguill%C3%ADo_01.jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Lago_Conguill%C3%ADo_01.jpg/960px-Lago_Conguill%C3%ADo_01.jpg",
+    "author": "LBM1948",
     "license": "CC BY-SA 4.0",
     "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
-    "description": "View of the City and the Port of Coquimbo"
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
   },
   {
-    "key": "valparaiso",
-    "filename": "region-valparaiso.jpg",
-    "title": "File:Panorama of the city of Valparaíso.jpg",
-    "subject": "Región de Valparaíso — panorámica de la ciudad",
+    "restaurantId": "CL-AR-003",
+    "restaurantName": "Cocinería El Nativo",
+    "region": "La Araucanía",
     "usage": "regional-fallback",
-    "localPath": "assets/images/cocinerias/region-valparaiso.jpg",
-    "sourcePage": "https://commons.wikimedia.org/wiki/File:Panorama_of_the_city_of_Valpara%C3%ADso.jpg",
-    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/f/f6/Panorama_of_the_city_of_Valpara%C3%ADso.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-    "author": "Ernest Charton",
-    "license": "Public domain",
-    "licenseUrl": null,
-    "description": "Región de Valparaíso — panorámica de la ciudad"
-  },
-  {
-    "key": "metropolitana",
-    "filename": "region-metropolitana.jpg",
-    "title": "File:La Vega Central en Santiago.jpg",
-    "subject": "Región Metropolitana — La Vega Central",
-    "usage": "regional-fallback",
-    "localPath": "assets/images/cocinerias/region-metropolitana.jpg",
-    "sourcePage": "https://commons.wikimedia.org/wiki/File:La_Vega_Central_en_Santiago.jpg",
-    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/4/47/La_Vega_Central_en_Santiago.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-    "author": "Mx. Granger",
-    "license": "CC0",
-    "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
-    "description": "La Vega Central en Santiago de Chile."
-  },
-  {
-    "key": "ohiggins",
-    "filename": "region-ohiggins.jpg",
-    "title": "File:Pichilemu beach.jpg",
-    "subject": "Región de O’Higgins — costa de Pichilemu",
-    "usage": "regional-fallback",
-    "localPath": "assets/images/cocinerias/region-ohiggins.jpg",
-    "sourcePage": "https://commons.wikimedia.org/wiki/File:Pichilemu_beach.jpg",
-    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/b/b5/Pichilemu_beach.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-    "author": "Diego Grez",
-    "license": "CC BY-SA 3.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
-    "description": "A photo I've taken from Pichilemu's beach."
-  },
-  {
-    "key": "maule",
-    "filename": "region-maule.jpg",
-    "title": "File:Rocas constitución.JPG",
-    "subject": "Región del Maule — costa de Constitución",
-    "usage": "regional-fallback",
-    "localPath": "assets/images/cocinerias/region-maule.jpg",
-    "sourcePage": "https://commons.wikimedia.org/wiki/File:Rocas_constituci%C3%B3n.JPG",
-    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/8/82/Rocas_constituci%C3%B3n.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-    "author": "Marciruriro",
-    "license": "CC BY-SA 3.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
-    "description": "This is a photo of a national monument in Chile:"
-  },
-  {
-    "key": "nuble",
-    "filename": "region-nuble.jpg",
-    "title": "File:Chillán - 2009 - 14 - Mercado de Chillán.jpg",
-    "subject": "Región de Ñuble — Mercado de Chillán",
-    "usage": "regional-fallback",
-    "localPath": "assets/images/cocinerias/region-nuble.jpg",
-    "sourcePage": "https://commons.wikimedia.org/wiki/File:Chill%C3%A1n_-_2009_-_14_-_Mercado_de_Chill%C3%A1n.jpg",
-    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/9/99/Chill%C3%A1n_-_2009_-_14_-_Mercado_de_Chill%C3%A1n.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-    "author": "José Joaquín Cortes",
+    "subject": "La Araucanía — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Lago Conguillío.jpg",
+    "localPath": "assets/images/cocinerias/cl-ar-003.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Lago_Conguill%C3%ADo.jpg",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/b/bd/Lago_Conguill%C3%ADo.jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/Lago_Conguill%C3%ADo.jpg/960px-Lago_Conguill%C3%ADo.jpg",
+    "author": "LBM1948",
     "license": "CC BY-SA 4.0",
     "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
-    "description": "Interior del Mercado de Chillán, Chile, 2009"
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
   },
   {
-    "key": "biobio",
-    "filename": "region-biobio.jpg",
-    "title": "File:Caleta lenga.jpg",
-    "subject": "Región del Biobío — Caleta Lenga",
+    "restaurantId": "CL-AR-004",
+    "restaurantName": "Cocinería y Cabañas del Budi",
+    "region": "La Araucanía",
     "usage": "regional-fallback",
-    "localPath": "assets/images/cocinerias/region-biobio.jpg",
-    "sourcePage": "https://commons.wikimedia.org/wiki/File:Caleta_lenga.jpg",
-    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/b/b4/Caleta_lenga.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-    "author": "Farisori",
-    "license": "CC BY-SA 3.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
-    "description": "Costanera de Caleta Lenga, comuna de Hualpén Gran Concepción, VIII Región del Biobío, Chile Abril de 2008"
+    "subject": "La Araucanía — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Bosque primario 08.jpg",
+    "localPath": "assets/images/cocinerias/cl-ar-004.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Bosque_primario_08.jpg",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/9/9a/Bosque_primario_08.jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Bosque_primario_08.jpg/960px-Bosque_primario_08.jpg",
+    "author": "LBM1948",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
   },
   {
-    "key": "araucania",
-    "filename": "region-araucania.jpg",
+    "restaurantId": "CL-AR-005",
+    "restaurantName": "Cocina Mapuche de Anita Epulef",
+    "region": "La Araucanía",
+    "usage": "regional-fallback",
+    "subject": "La Araucanía — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Lago Caburgua 1.jpg",
+    "localPath": "assets/images/cocinerias/cl-ar-005.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Lago_Caburgua_1.jpg",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/f/f3/Lago_Caburgua_1.jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Lago_Caburgua_1.jpg/960px-Lago_Caburgua_1.jpg",
+    "author": "LBM1948",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-AR-006",
+    "restaurantName": "Mercado Matetún",
+    "region": "La Araucanía",
+    "usage": "regional-fallback",
+    "subject": "La Araucanía — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Lago Colico 01.jpg",
+    "localPath": "assets/images/cocinerias/cl-ar-006.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Lago_Colico_01.jpg",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/e/eb/Lago_Colico_01.jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Lago_Colico_01.jpg/960px-Lago_Colico_01.jpg",
+    "author": "LBM1948",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-AR-007",
+    "restaurantName": "Cocinería Ñaña Juanita",
+    "region": "La Araucanía",
+    "usage": "regional-fallback",
+    "subject": "La Araucanía — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Menetúe 1.jpg",
+    "localPath": "assets/images/cocinerias/cl-ar-007.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Menet%C3%BAe_1.jpg",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/a/af/Menet%C3%BAe_1.jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Menet%C3%BAe_1.jpg/960px-Menet%C3%BAe_1.jpg",
+    "author": "LBM1948",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-AR-008",
+    "restaurantName": "Ruka Weney",
+    "region": "La Araucanía",
+    "usage": "regional-fallback",
+    "subject": "La Araucanía — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Menetúe 2.jpg",
+    "localPath": "assets/images/cocinerias/cl-ar-008.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Menet%C3%BAe_2.jpg",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/4/48/Menet%C3%BAe_2.jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Menet%C3%BAe_2.jpg/960px-Menet%C3%BAe_2.jpg",
+    "author": "LBM1948",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-AR-009",
+    "restaurantName": "Ruka Trankurra",
+    "region": "La Araucanía",
+    "usage": "regional-fallback",
+    "subject": "La Araucanía — imagen territorial; no corresponde necesariamente al establecimiento",
     "title": "File:Camino a Curarrehue.jpg",
-    "subject": "Región de La Araucanía — camino a Curarrehue",
-    "usage": "regional-fallback",
-    "localPath": "assets/images/cocinerias/region-araucania.jpg",
+    "localPath": "assets/images/cocinerias/cl-ar-009.jpg",
     "sourcePage": "https://commons.wikimedia.org/wiki/File:Camino_a_Curarrehue.jpg",
-    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/0/0c/Camino_a_Curarrehue.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/0/0c/Camino_a_Curarrehue.jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Camino_a_Curarrehue.jpg/960px-Camino_a_Curarrehue.jpg",
     "author": "Azhagthott",
     "license": "CC BY-SA 3.0",
     "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
-    "description": "Atardecer, foto tomada en el camino entre Pucón y Curarrehue, paisaje"
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
   },
   {
-    "key": "los-rios",
-    "filename": "region-los-rios.jpg",
-    "title": "File:Feria Fluvial de Valdivia 2024.jpg",
-    "subject": "Región de Los Ríos — Feria Fluvial de Valdivia",
+    "restaurantId": "CL-AR-010",
+    "restaurantName": "Cocinería Mapu Iyagl",
+    "region": "La Araucanía",
     "usage": "regional-fallback",
-    "localPath": "assets/images/cocinerias/region-los-rios.jpg",
-    "sourcePage": "https://commons.wikimedia.org/wiki/File:Feria_Fluvial_de_Valdivia_2024.jpg",
-    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/6/6e/Feria_Fluvial_de_Valdivia_2024.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-    "author": "TomasVial",
+    "subject": "La Araucanía — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Bosque en Añihuarraque comuna Curarrehue.JPG",
+    "localPath": "assets/images/cocinerias/cl-ar-010.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Bosque_en_A%C3%B1ihuarraque_comuna_Curarrehue.JPG",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/1/14/Bosque_en_A%C3%B1ihuarraque_comuna_Curarrehue.JPG",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Bosque_en_A%C3%B1ihuarraque_comuna_Curarrehue.JPG/960px-Bosque_en_A%C3%B1ihuarraque_comuna_Curarrehue.JPG",
+    "author": "Marco Antonio Correa Flores",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-AR-011",
+    "restaurantName": "Cocinería Brigitt",
+    "region": "La Araucanía",
+    "usage": "regional-fallback",
+    "subject": "La Araucanía — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Cerro Peineta, Curarrehue - Flickr - Pato Novoa.jpg",
+    "localPath": "assets/images/cocinerias/cl-ar-011.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Cerro_Peineta,_Curarrehue_-_Flickr_-_Pato_Novoa.jpg",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/e/e5/Cerro_Peineta%2C_Curarrehue_-_Flickr_-_Pato_Novoa.jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Cerro_Peineta%2C_Curarrehue_-_Flickr_-_Pato_Novoa.jpg/960px-Cerro_Peineta%2C_Curarrehue_-_Flickr_-_Pato_Novoa.jpg",
+    "author": "Pato Novoa from Valparaíso, Chile",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-AR-012",
+    "restaurantName": "Cocinería El Corralero",
+    "region": "La Araucanía",
+    "usage": "regional-fallback",
+    "subject": "La Araucanía — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Volcan Lanín desde Curarrehue - Flickr - Pato Novoa.jpg",
+    "localPath": "assets/images/cocinerias/cl-ar-012.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Volcan_Lan%C3%ADn_desde_Curarrehue_-_Flickr_-_Pato_Novoa.jpg",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/7/71/Volcan_Lan%C3%ADn_desde_Curarrehue_-_Flickr_-_Pato_Novoa.jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Volcan_Lan%C3%ADn_desde_Curarrehue_-_Flickr_-_Pato_Novoa.jpg/960px-Volcan_Lan%C3%ADn_desde_Curarrehue_-_Flickr_-_Pato_Novoa.jpg",
+    "author": "Pato Novoa from Valparaíso, Chile",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-AT-001",
+    "restaurantName": "La Trocha",
+    "region": "Atacama",
+    "usage": "regional-fallback",
+    "subject": "Atacama — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Aeródromo Chamonate - panoramio.jpg",
+    "localPath": "assets/images/cocinerias/cl-at-001.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Aer%C3%B3dromo_Chamonate_-_panoramio.jpg",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/e/e0/Aer%C3%B3dromo_Chamonate_-_panoramio.jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Aer%C3%B3dromo_Chamonate_-_panoramio.jpg/960px-Aer%C3%B3dromo_Chamonate_-_panoramio.jpg",
+    "author": "Seba Flores",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-AT-002",
+    "restaurantName": "Centro de Eventos Tierra Nuestra",
+    "region": "Atacama",
+    "usage": "regional-fallback",
+    "subject": "Atacama — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Atacama region, Chile.jpg",
+    "localPath": "assets/images/cocinerias/cl-at-002.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Atacama_region,_Chile.jpg",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/3/38/Atacama_region%2C_Chile.jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Atacama_region%2C_Chile.jpg/960px-Atacama_region%2C_Chile.jpg",
+    "author": "Tetraigofotos",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-AT-003",
+    "restaurantName": "Cocinería Habitacional, Colación y Sanguchería Bruno Dorador Alcota",
+    "region": "Atacama",
+    "usage": "regional-fallback",
+    "subject": "Atacama — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Chorrillo beach, Atacama region, Chile.jpg",
+    "localPath": "assets/images/cocinerias/cl-at-003.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Chorrillo_beach,_Atacama_region,_Chile.jpg",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/d/dd/Chorrillo_beach%2C_Atacama_region%2C_Chile.jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Chorrillo_beach%2C_Atacama_region%2C_Chile.jpg/960px-Chorrillo_beach%2C_Atacama_region%2C_Chile.jpg",
+    "author": "Tetraigofotos",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-AT-004",
+    "restaurantName": "Changuito",
+    "region": "Atacama",
+    "usage": "regional-fallback",
+    "subject": "Atacama — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Cabaña Playa La Virgen.jpg",
+    "localPath": "assets/images/cocinerias/cl-at-004.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Caba%C3%B1a_Playa_La_Virgen.jpg",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/1/1e/Caba%C3%B1a_Playa_La_Virgen.jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/1/1e/Caba%C3%B1a_Playa_La_Virgen.jpg",
+    "author": "Danutts",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-AT-005",
+    "restaurantName": "Restaurante y Cafetería Nicolás",
+    "region": "Atacama",
+    "usage": "regional-fallback",
+    "subject": "Atacama — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Atacama coast productivity - Flickr - Dick Culbert.jpg",
+    "localPath": "assets/images/cocinerias/cl-at-005.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Atacama_coast_productivity_-_Flickr_-_Dick_Culbert.jpg",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/d/d3/Atacama_coast_productivity_-_Flickr_-_Dick_Culbert.jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/d/d3/Atacama_coast_productivity_-_Flickr_-_Dick_Culbert.jpg",
+    "author": "Dick Culbert from Gibsons, B.C., Canada",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-BI-001",
+    "restaurantName": "Cocinería El Yugo",
+    "region": "Biobío",
+    "usage": "regional-fallback",
+    "subject": "Biobío — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Cerro.jpg",
+    "localPath": "assets/images/cocinerias/cl-bi-001.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Cerro.jpg",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/7/7e/Cerro.jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Cerro.jpg/960px-Cerro.jpg",
+    "author": "Natii S.",
+    "license": "CC BY-SA 2.5",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.5",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-BI-002",
+    "restaurantName": "Cocinería Miramar",
+    "region": "Biobío",
+    "usage": "regional-fallback",
+    "subject": "Biobío — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Chenqueco.JPG",
+    "localPath": "assets/images/cocinerias/cl-bi-002.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Chenqueco.JPG",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/c/c1/Chenqueco.JPG",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Chenqueco.JPG/960px-Chenqueco.JPG",
+    "author": "Albinfo",
     "license": "CC0",
     "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
-    "description": "Valdivia River Market in Valdivia, Chile"
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
   },
   {
-    "key": "los-lagos",
-    "filename": "region-los-lagos.jpg",
-    "title": "File:Angelmó, Puerto Montt.jpg",
-    "subject": "Región de Los Lagos — Angelmó",
+    "restaurantId": "CL-BI-003",
+    "restaurantName": "Cocinería Isabel",
+    "region": "Biobío",
     "usage": "regional-fallback",
-    "localPath": "assets/images/cocinerias/region-los-lagos.jpg",
-    "sourcePage": "https://commons.wikimedia.org/wiki/File:Angelm%C3%B3,_Puerto_Montt.jpg",
-    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/b/b1/Angelm%C3%B3%2C_Puerto_Montt.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-    "author": "Antonio Jeria",
+    "subject": "Biobío — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:El bio bio (408501923).jpg",
+    "localPath": "assets/images/cocinerias/cl-bi-003.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:El_bio_bio_(408501923).jpg",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/a/ad/El_bio_bio_%28408501923%29.jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/El_bio_bio_%28408501923%29.jpg/960px-El_bio_bio_%28408501923%29.jpg",
+    "author": "Eneas De Troya from Mexico City, México",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-BI-004",
+    "restaurantName": "Cocinería ITA",
+    "region": "Biobío",
+    "usage": "regional-fallback",
+    "subject": "Biobío — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Colmuyao - panoramio - CARLOS SALGADO MELLA (3).jpg",
+    "localPath": "assets/images/cocinerias/cl-bi-004.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Colmuyao_-_panoramio_-_CARLOS_SALGADO_MELLA_(3).jpg",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/9/94/Colmuyao_-_panoramio_-_CARLOS_SALGADO_MELLA_%283%29.jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Colmuyao_-_panoramio_-_CARLOS_SALGADO_MELLA_%283%29.jpg/960px-Colmuyao_-_panoramio_-_CARLOS_SALGADO_MELLA_%283%29.jpg",
+    "author": "CARLOS SALGADO MELLA",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-BI-005",
+    "restaurantName": "Cocinería Cuchy's",
+    "region": "Biobío",
+    "usage": "regional-fallback",
+    "subject": "Biobío — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Colmuyao - panoramio - CARLOS SALGADO MELLA (4).jpg",
+    "localPath": "assets/images/cocinerias/cl-bi-005.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Colmuyao_-_panoramio_-_CARLOS_SALGADO_MELLA_(4).jpg",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/8/8d/Colmuyao_-_panoramio_-_CARLOS_SALGADO_MELLA_%284%29.jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Colmuyao_-_panoramio_-_CARLOS_SALGADO_MELLA_%284%29.jpg/960px-Colmuyao_-_panoramio_-_CARLOS_SALGADO_MELLA_%284%29.jpg",
+    "author": "CARLOS SALGADO MELLA",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-BI-006",
+    "restaurantName": "Cocinería Don Chano",
+    "region": "Biobío",
+    "usage": "regional-fallback",
+    "subject": "Biobío — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Colmuyao - panoramio - CARLOS SALGADO MELLA (5).jpg",
+    "localPath": "assets/images/cocinerias/cl-bi-006.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Colmuyao_-_panoramio_-_CARLOS_SALGADO_MELLA_(5).jpg",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/0/0c/Colmuyao_-_panoramio_-_CARLOS_SALGADO_MELLA_%285%29.jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Colmuyao_-_panoramio_-_CARLOS_SALGADO_MELLA_%285%29.jpg/960px-Colmuyao_-_panoramio_-_CARLOS_SALGADO_MELLA_%285%29.jpg",
+    "author": "CARLOS SALGADO MELLA",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-BI-007",
+    "restaurantName": "Cocinería Don Elías",
+    "region": "Biobío",
+    "usage": "regional-fallback",
+    "subject": "Biobío — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Colmuyao - panoramio - CARLOS SALGADO MELLA (6).jpg",
+    "localPath": "assets/images/cocinerias/cl-bi-007.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Colmuyao_-_panoramio_-_CARLOS_SALGADO_MELLA_(6).jpg",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/3/3b/Colmuyao_-_panoramio_-_CARLOS_SALGADO_MELLA_%286%29.jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Colmuyao_-_panoramio_-_CARLOS_SALGADO_MELLA_%286%29.jpg/960px-Colmuyao_-_panoramio_-_CARLOS_SALGADO_MELLA_%286%29.jpg",
+    "author": "CARLOS SALGADO MELLA",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-BI-008",
+    "restaurantName": "Cocinería Doña María",
+    "region": "Biobío",
+    "usage": "regional-fallback",
+    "subject": "Biobío — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Bosque nativo quemado en chiguayante abril 2017.jpg",
+    "localPath": "assets/images/cocinerias/cl-bi-008.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Bosque_nativo_quemado_en_chiguayante_abril_2017.jpg",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/4/4c/Bosque_nativo_quemado_en_chiguayante_abril_2017.jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Bosque_nativo_quemado_en_chiguayante_abril_2017.jpg/960px-Bosque_nativo_quemado_en_chiguayante_abril_2017.jpg",
+    "author": "Tadeoska",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-BI-009",
+    "restaurantName": "Cocinería El Canelo",
+    "region": "Biobío",
+    "usage": "regional-fallback",
+    "subject": "Biobío — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Cerro mankimawida.jpg",
+    "localPath": "assets/images/cocinerias/cl-bi-009.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Cerro_mankimawida.jpg",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/d/db/Cerro_mankimawida.jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Cerro_mankimawida.jpg/960px-Cerro_mankimawida.jpg",
+    "author": "Tadeoska",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-BI-010",
+    "restaurantName": "Cocinería El Huaso Campos",
+    "region": "Biobío",
+    "usage": "regional-fallback",
+    "subject": "Biobío — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Cerro Pirquinco.jpg",
+    "localPath": "assets/images/cocinerias/cl-bi-010.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Cerro_Pirquinco.jpg",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/5/5b/Cerro_Pirquinco.jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Cerro_Pirquinco.jpg/960px-Cerro_Pirquinco.jpg",
+    "author": "Maxsiegmundf",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-BI-011",
+    "restaurantName": "Cocinería La Esperanza",
+    "region": "Biobío",
+    "usage": "regional-fallback",
+    "subject": "Biobío — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Estero Nonguén en el Parque Nacional Nonguén.jpg",
+    "localPath": "assets/images/cocinerias/cl-bi-011.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Estero_Nongu%C3%A9n_en_el_Parque_Nacional_Nongu%C3%A9n.jpg",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/4/4e/Estero_Nongu%C3%A9n_en_el_Parque_Nacional_Nongu%C3%A9n.jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Estero_Nongu%C3%A9n_en_el_Parque_Nacional_Nongu%C3%A9n.jpg/960px-Estero_Nongu%C3%A9n_en_el_Parque_Nacional_Nongu%C3%A9n.jpg",
+    "author": "Tadeoska",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-BI-012",
+    "restaurantName": "Cocinería Génesis",
+    "region": "Biobío",
+    "usage": "regional-fallback",
+    "subject": "Biobío — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Colmuyao - panoramio.jpg",
+    "localPath": "assets/images/cocinerias/cl-bi-012.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Colmuyao_-_panoramio.jpg",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/4/4d/Colmuyao_-_panoramio.jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Colmuyao_-_panoramio.jpg/960px-Colmuyao_-_panoramio.jpg",
+    "author": "CARLOS SALGADO MELLA",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-CO-001",
+    "restaurantName": "Sabor a Canela",
+    "region": "Coquimbo",
+    "usage": "regional-fallback",
+    "subject": "Coquimbo — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:US Navy 020703-N-6067M-503 UNITAS exercise held in the waters near South America.jpg",
+    "localPath": "assets/images/cocinerias/cl-co-001.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:US_Navy_020703-N-6067M-503_UNITAS_exercise_held_in_the_waters_near_South_America.jpg",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/8/8f/US_Navy_020703-N-6067M-503_UNITAS_exercise_held_in_the_waters_near_South_America.jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/US_Navy_020703-N-6067M-503_UNITAS_exercise_held_in_the_waters_near_South_America.jpg/960px-US_Navy_020703-N-6067M-503_UNITAS_exercise_held_in_the_waters_near_South_America.jpg",
+    "author": "U.S. Navy photo by Photographer’s Mate 1st Class Shane T. McCoy.",
+    "license": "Public domain",
+    "licenseUrl": null,
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-CO-002",
+    "restaurantName": "Doña Paula Cocinería & Banquetería",
+    "region": "Coquimbo",
+    "usage": "regional-fallback",
+    "subject": "Coquimbo — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Vista panoramica Chungungo.jpg",
+    "localPath": "assets/images/cocinerias/cl-co-002.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Vista_panoramica_Chungungo.jpg",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/7/75/Vista_panoramica_Chungungo.jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Vista_panoramica_Chungungo.jpg/960px-Vista_panoramica_Chungungo.jpg",
+    "author": "Marco Lagos",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-CO-003",
+    "restaurantName": "Cocinería Olivia",
+    "region": "Coquimbo",
+    "usage": "regional-fallback",
+    "subject": "Coquimbo — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:A Traves De Lasa Parras (110394405).jpeg",
+    "localPath": "assets/images/cocinerias/cl-co-003.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:A_Traves_De_Lasa_Parras_(110394405).jpeg",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/a/a4/A_Traves_De_Lasa_Parras_%28110394405%29.jpeg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/A_Traves_De_Lasa_Parras_%28110394405%29.jpeg/960px-A_Traves_De_Lasa_Parras_%28110394405%29.jpeg",
+    "author": "Rosario Nieto Chadwick",
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-CO-004",
+    "restaurantName": "Cocinería Gran Sabor",
+    "region": "Coquimbo",
+    "usage": "regional-fallback",
+    "subject": "Coquimbo — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Valle del Choapa, Región de Coquimbo, Chile - panoramio.jpg",
+    "localPath": "assets/images/cocinerias/cl-co-004.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Valle_del_Choapa,_Regi%C3%B3n_de_Coquimbo,_Chile_-_panoramio.jpg",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/0/01/Valle_del_Choapa%2C_Regi%C3%B3n_de_Coquimbo%2C_Chile_-_panoramio.jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Valle_del_Choapa%2C_Regi%C3%B3n_de_Coquimbo%2C_Chile_-_panoramio.jpg/960px-Valle_del_Choapa%2C_Regi%C3%B3n_de_Coquimbo%2C_Chile_-_panoramio.jpg",
+    "author": "Nelson Pérez",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-LI-001",
+    "restaurantName": "Cocinería y Marisquería Oña Clara",
+    "region": "Libertador General Bernardo O'Higgins",
+    "usage": "regional-fallback",
+    "subject": "Libertador General Bernardo O'Higgins — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Delegado realiza visita técnica a Playas La Lancha y La Sirena con el fin de definir vías de acceso 2.jpg",
+    "localPath": "assets/images/cocinerias/cl-li-001.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Delegado_realiza_visita_t%C3%A9cnica_a_Playas_La_Lancha_y_La_Sirena_con_el_fin_de_definir_v%C3%ADas_de_acceso_2.jpg",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/9/95/Delegado_realiza_visita_t%C3%A9cnica_a_Playas_La_Lancha_y_La_Sirena_con_el_fin_de_definir_v%C3%ADas_de_acceso_2.jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Delegado_realiza_visita_t%C3%A9cnica_a_Playas_La_Lancha_y_La_Sirena_con_el_fin_de_definir_v%C3%ADas_de_acceso_2.jpg/960px-Delegado_realiza_visita_t%C3%A9cnica_a_Playas_La_Lancha_y_La_Sirena_con_el_fin_de_definir_v%C3%ADas_de_acceso_2.jpg",
+    "author": "Delegación Presidencial Provincial de Cardenal Caro",
+    "license": "CC BY 3.0 cl",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0/cl/deed.en",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-LI-002",
+    "restaurantName": "Cocinería Isabel",
+    "region": "Libertador General Bernardo O'Higgins",
+    "usage": "regional-fallback",
+    "subject": "Libertador General Bernardo O'Higgins — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Paredones.jpg",
+    "localPath": "assets/images/cocinerias/cl-li-002.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Paredones.jpg",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/a/a0/Paredones.jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Paredones.jpg/960px-Paredones.jpg",
+    "author": "Yerko Montenegro",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-LI-003",
+    "restaurantName": "Mi Rancho Cocinería",
+    "region": "Libertador General Bernardo O'Higgins",
+    "usage": "regional-fallback",
+    "subject": "Libertador General Bernardo O'Higgins — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Alameda (5670929729).jpg",
+    "localPath": "assets/images/cocinerias/cl-li-003.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Alameda_(5670929729).jpg",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/c/cd/Alameda_%285670929729%29.jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Alameda_%285670929729%29.jpg/960px-Alameda_%285670929729%29.jpg",
+    "author": "► Cristofer",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-LL-001",
+    "restaurantName": "Cocinería Don Lalo y Sra. Jeanette",
+    "region": "Los Lagos",
+    "usage": "regional-fallback",
+    "subject": "Los Lagos — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Volcancasablanca.jpg",
+    "localPath": "assets/images/cocinerias/cl-ll-001.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Volcancasablanca.jpg",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/3/38/Volcancasablanca.jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Volcancasablanca.jpg/960px-Volcancasablanca.jpg",
+    "author": "payayita",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-LL-002",
+    "restaurantName": "Cocinería Aurora e Hijos",
+    "region": "Los Lagos",
+    "usage": "regional-fallback",
+    "subject": "Los Lagos — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Canal de Chacao, desde un avión. Región de Los Lagos. Chile.jpg",
+    "localPath": "assets/images/cocinerias/cl-ll-002.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Canal_de_Chacao,_desde_un_avi%C3%B3n._Regi%C3%B3n_de_Los_Lagos._Chile.jpg",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/7/72/Canal_de_Chacao%2C_desde_un_avi%C3%B3n._Regi%C3%B3n_de_Los_Lagos._Chile.jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Canal_de_Chacao%2C_desde_un_avi%C3%B3n._Regi%C3%B3n_de_Los_Lagos._Chile.jpg/960px-Canal_de_Chacao%2C_desde_un_avi%C3%B3n._Regi%C3%B3n_de_Los_Lagos._Chile.jpg",
+    "author": "CARLOS TEIXIDOR CADENAS",
     "license": "CC BY 4.0",
     "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
-    "description": "Localidad de alto interés turístico de la Región de Los agos"
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
   },
   {
-    "key": "aysen",
-    "filename": "region-aysen.jpg",
-    "title": "File:Carretera Austral - Cerro Castillo.jpg",
-    "subject": "Región de Aysén — Cerro Castillo y Carretera Austral",
+    "restaurantId": "CL-LL-003",
+    "restaurantName": "Cocinería El Tarro",
+    "region": "Los Lagos",
     "usage": "regional-fallback",
-    "localPath": "assets/images/cocinerias/region-aysen.jpg",
-    "sourcePage": "https://commons.wikimedia.org/wiki/File:Carretera_Austral_-_Cerro_Castillo.jpg",
-    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/5/56/Carretera_Austral_-_Cerro_Castillo.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-    "author": "Rodolfo Castro Reyes",
-    "license": "CC BY-SA 4.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
-    "description": "Reserva nacional Cerro Castillo"
+    "subject": "Los Lagos — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Rio rahue 2009.jpg",
+    "localPath": "assets/images/cocinerias/cl-ll-003.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Rio_rahue_2009.jpg",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/e/e5/Rio_rahue_2009.jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Rio_rahue_2009.jpg/960px-Rio_rahue_2009.jpg",
+    "author": "Lalitoish",
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
   },
   {
-    "key": "magallanes",
-    "filename": "region-magallanes.jpg",
-    "title": "File:00ß 2930. Punta Arenas - Chile.jpg",
-    "subject": "Región de Magallanes — mercado en Punta Arenas",
+    "restaurantId": "CL-LL-004",
+    "restaurantName": "Estrella de Angelmó",
+    "region": "Los Lagos",
     "usage": "regional-fallback",
-    "localPath": "assets/images/cocinerias/region-magallanes.jpg",
-    "sourcePage": "https://commons.wikimedia.org/wiki/File:00%C3%9F_2930._Punta_Arenas_-_Chile.jpg",
-    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/b/b8/00%C3%9F_2930._Punta_Arenas_-_Chile.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-    "author": "W. Bulach",
+    "subject": "Los Lagos — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Ruta 7 Chile 100km sign.jpg",
+    "localPath": "assets/images/cocinerias/cl-ll-004.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Ruta_7_Chile_100km_sign.jpg",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/9/9f/Ruta_7_Chile_100km_sign.jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Ruta_7_Chile_100km_sign.jpg/960px-Ruta_7_Chile_100km_sign.jpg",
+    "author": "Jason Quinn",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-LL-005",
+    "restaurantName": "Cocinería Chelita",
+    "region": "Los Lagos",
+    "usage": "regional-fallback",
+    "subject": "Los Lagos — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Las vertientes.jpg",
+    "localPath": "assets/images/cocinerias/cl-ll-005.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Las_vertientes.jpg",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/7/74/Las_vertientes.jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Las_vertientes.jpg/960px-Las_vertientes.jpg",
+    "author": "Aldo Pizarro",
     "license": "CC BY-SA 4.0",
     "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
-    "description": "Market at Plaza Munoz Gamero in Punta Arenas, capital of the Chilean Region de Magallanes y de la Antártica Chilena. The city in Chilean southern Patagonia is located on the Strait of Magellan, which separates the mainland from the Tierra del Fuego archipelago. The HERNANDO DE MAGALLANES monument can be seen in the center of the picture."
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-LL-006",
+    "restaurantName": "Cocinería Queltehue",
+    "region": "Los Lagos",
+    "usage": "regional-fallback",
+    "subject": "Los Lagos — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Ba8.jpg",
+    "localPath": "assets/images/cocinerias/cl-ll-006.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Ba8.jpg",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/d/d4/Ba8.jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Ba8.jpg/960px-Ba8.jpg",
+    "author": "Randolphzarate",
+    "license": "CC0",
+    "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-LL-007",
+    "restaurantName": "Cocinería Camila",
+    "region": "Los Lagos",
+    "usage": "regional-fallback",
+    "subject": "Los Lagos — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:082 - Estuario del Reloncavi.jpg",
+    "localPath": "assets/images/cocinerias/cl-ll-007.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:082_-_Estuario_del_Reloncavi.jpg",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/b/b8/082_-_Estuario_del_Reloncavi.jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/082_-_Estuario_del_Reloncavi.jpg/960px-082_-_Estuario_del_Reloncavi.jpg",
+    "author": "Pablo Rodríguez",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-LL-008",
+    "restaurantName": "Cocinería Doña María",
+    "region": "Los Lagos",
+    "usage": "regional-fallback",
+    "subject": "Los Lagos — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Erupción Volcán Calbuco (17062565578).jpg",
+    "localPath": "assets/images/cocinerias/cl-ll-008.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Erupci%C3%B3n_Volc%C3%A1n_Calbuco_(17062565578).jpg",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/9/91/Erupci%C3%B3n_Volc%C3%A1n_Calbuco_%2817062565578%29.jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Erupci%C3%B3n_Volc%C3%A1n_Calbuco_%2817062565578%29.jpg/960px-Erupci%C3%B3n_Volc%C3%A1n_Calbuco_%2817062565578%29.jpg",
+    "author": "Carolina Barría Kemp",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-LL-009",
+    "restaurantName": "Cocinería Raíz Nativa",
+    "region": "Los Lagos",
+    "usage": "regional-fallback",
+    "subject": "Los Lagos — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Lago Blanco - panoramio.jpg",
+    "localPath": "assets/images/cocinerias/cl-ll-009.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Lago_Blanco_-_panoramio.jpg",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Lago_Blanco_-_panoramio.jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Lago_Blanco_-_panoramio.jpg/960px-Lago_Blanco_-_panoramio.jpg",
+    "author": "Sam Beebe/Ecotrust",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-LL-010",
+    "restaurantName": "Restaurant Tradiciones Cocinería Morelia",
+    "region": "Los Lagos",
+    "usage": "regional-fallback",
+    "subject": "Los Lagos — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Ba San Pedro - San Antonio - panoramio.jpg",
+    "localPath": "assets/images/cocinerias/cl-ll-010.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Ba_San_Pedro_-_San_Antonio_-_panoramio.jpg",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/1/10/Ba_San_Pedro_-_San_Antonio_-_panoramio.jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Ba_San_Pedro_-_San_Antonio_-_panoramio.jpg/960px-Ba_San_Pedro_-_San_Antonio_-_panoramio.jpg",
+    "author": "---=XEON=---",
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-LR-001",
+    "restaurantName": "La Cocinería Buffet",
+    "region": "Los Ríos",
+    "usage": "regional-fallback",
+    "subject": "Los Ríos — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Bosquederucatayo.jpg",
+    "localPath": "assets/images/cocinerias/cl-lr-001.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Bosquederucatayo.jpg",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/9/97/Bosquederucatayo.jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Bosquederucatayo.jpg/960px-Bosquederucatayo.jpg",
+    "author": "Cesar J. Mora",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-LR-002",
+    "restaurantName": "Cocinería Don George",
+    "region": "Los Ríos",
+    "usage": "regional-fallback",
+    "subject": "Los Ríos — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Arayyan y rio copia.jpg",
+    "localPath": "assets/images/cocinerias/cl-lr-002.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Arayyan_y_rio_copia.jpg",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/6/66/Arayyan_y_rio_copia.jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Arayyan_y_rio_copia.jpg/960px-Arayyan_y_rio_copia.jpg",
+    "author": "Cesar J. Mora",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-LR-003",
+    "restaurantName": "Cocinería y Cabañas Kenita",
+    "region": "Los Ríos",
+    "usage": "regional-fallback",
+    "subject": "Los Ríos — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Bosques de Quiman Alto.JPG",
+    "localPath": "assets/images/cocinerias/cl-lr-003.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Bosques_de_Quiman_Alto.JPG",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/d/d7/Bosques_de_Quiman_Alto.JPG",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Bosques_de_Quiman_Alto.JPG/960px-Bosques_de_Quiman_Alto.JPG",
+    "author": "Claudiagonzalezs",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-LR-004",
+    "restaurantName": "Cocinería Leoman",
+    "region": "Los Ríos",
+    "usage": "regional-fallback",
+    "subject": "Los Ríos — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Bosque virgen de cerros de Quiman.JPG",
+    "localPath": "assets/images/cocinerias/cl-lr-004.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Bosque_virgen_de_cerros_de_Quiman.JPG",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/d/d6/Bosque_virgen_de_cerros_de_Quiman.JPG",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Bosque_virgen_de_cerros_de_Quiman.JPG/960px-Bosque_virgen_de_cerros_de_Quiman.JPG",
+    "author": "Claudiagonzalezs",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-LR-005",
+    "restaurantName": "Cocinería Flor Marina",
+    "region": "Los Ríos",
+    "usage": "regional-fallback",
+    "subject": "Los Ríos — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Camino viejo a corral 02.jpg",
+    "localPath": "assets/images/cocinerias/cl-lr-005.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Camino_viejo_a_corral_02.jpg",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/d/d3/Camino_viejo_a_corral_02.jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Camino_viejo_a_corral_02.jpg/960px-Camino_viejo_a_corral_02.jpg",
+    "author": "Charlie danvers",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-LR-006",
+    "restaurantName": "Cocinería La Elvira",
+    "region": "Los Ríos",
+    "usage": "regional-fallback",
+    "subject": "Los Ríos — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Camino viejo a corral 03.jpg",
+    "localPath": "assets/images/cocinerias/cl-lr-006.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Camino_viejo_a_corral_03.jpg",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/9/9d/Camino_viejo_a_corral_03.jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Camino_viejo_a_corral_03.jpg/960px-Camino_viejo_a_corral_03.jpg",
+    "author": "Charlie danvers",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-LR-007",
+    "restaurantName": "Cocinería y Restaurant Millacaman",
+    "region": "Los Ríos",
+    "usage": "regional-fallback",
+    "subject": "Los Ríos — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Camino viejo a corral 01.jpg",
+    "localPath": "assets/images/cocinerias/cl-lr-007.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Camino_viejo_a_corral_01.jpg",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/5/5e/Camino_viejo_a_corral_01.jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Camino_viejo_a_corral_01.jpg/960px-Camino_viejo_a_corral_01.jpg",
+    "author": "Charlie danvers",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-LR-008",
+    "restaurantName": "Cocinería Choshuenco",
+    "region": "Los Ríos",
+    "usage": "regional-fallback",
+    "subject": "Los Ríos — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Camino viejo a corral 05.jpg",
+    "localPath": "assets/images/cocinerias/cl-lr-008.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Camino_viejo_a_corral_05.jpg",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/2/2e/Camino_viejo_a_corral_05.jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Camino_viejo_a_corral_05.jpg/960px-Camino_viejo_a_corral_05.jpg",
+    "author": "Charlie danvers",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-LR-009",
+    "restaurantName": "Cocinería Küme Yeal",
+    "region": "Los Ríos",
+    "usage": "regional-fallback",
+    "subject": "Los Ríos — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Camino viejo a corral 06.jpg",
+    "localPath": "assets/images/cocinerias/cl-lr-009.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Camino_viejo_a_corral_06.jpg",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/b/b4/Camino_viejo_a_corral_06.jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Camino_viejo_a_corral_06.jpg/960px-Camino_viejo_a_corral_06.jpg",
+    "author": "Charlie danvers",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-MG-001",
+    "restaurantName": "Cocinería Puelpún",
+    "region": "Magallanes y de la Antártica Chilena",
+    "usage": "regional-fallback",
+    "subject": "Magallanes y de la Antártica Chilena — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:South America Mar 2013 3953 (8873622824).jpg",
+    "localPath": "assets/images/cocinerias/cl-mg-001.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:South_America_Mar_2013_3953_(8873622824).jpg",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/9/99/South_America_Mar_2013_3953_%288873622824%29.jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/South_America_Mar_2013_3953_%288873622824%29.jpg/960px-South_America_Mar_2013_3953_%288873622824%29.jpg",
+    "author": "Lynda",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-MG-002",
+    "restaurantName": "Cocinería Anita",
+    "region": "Magallanes y de la Antártica Chilena",
+    "usage": "regional-fallback",
+    "subject": "Magallanes y de la Antártica Chilena — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:South America Mar 2013 3999 (8873612668).jpg",
+    "localPath": "assets/images/cocinerias/cl-mg-002.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:South_America_Mar_2013_3999_(8873612668).jpg",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/6/67/South_America_Mar_2013_3999_%288873612668%29.jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/South_America_Mar_2013_3999_%288873612668%29.jpg/960px-South_America_Mar_2013_3999_%288873612668%29.jpg",
+    "author": "Lynda",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-MG-003",
+    "restaurantName": "El Mercadito",
+    "region": "Magallanes y de la Antártica Chilena",
+    "usage": "regional-fallback",
+    "subject": "Magallanes y de la Antártica Chilena — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Iglesia Parroquial del Sagrado Corazón y monumento María Auxiliadora - Punta Arenas.jpg",
+    "localPath": "assets/images/cocinerias/cl-mg-003.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Iglesia_Parroquial_del_Sagrado_Coraz%C3%B3n_y_monumento_Mar%C3%ADa_Auxiliadora_-_Punta_Arenas.jpg",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/4/41/Iglesia_Parroquial_del_Sagrado_Coraz%C3%B3n_y_monumento_Mar%C3%ADa_Auxiliadora_-_Punta_Arenas.jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Iglesia_Parroquial_del_Sagrado_Coraz%C3%B3n_y_monumento_Mar%C3%ADa_Auxiliadora_-_Punta_Arenas.jpg/960px-Iglesia_Parroquial_del_Sagrado_Coraz%C3%B3n_y_monumento_Mar%C3%ADa_Auxiliadora_-_Punta_Arenas.jpg",
+    "author": "Unknown author Unknown author",
+    "license": "Public domain",
+    "licenseUrl": null,
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-MG-004",
+    "restaurantName": "Cocinería Doña Zuny",
+    "region": "Magallanes y de la Antártica Chilena",
+    "usage": "regional-fallback",
+    "subject": "Magallanes y de la Antártica Chilena — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Museo territorial salesiano - Punta Arenas.jpg",
+    "localPath": "assets/images/cocinerias/cl-mg-004.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Museo_territorial_salesiano_-_Punta_Arenas.jpg",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/b/bd/Museo_territorial_salesiano_-_Punta_Arenas.jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/Museo_territorial_salesiano_-_Punta_Arenas.jpg/960px-Museo_territorial_salesiano_-_Punta_Arenas.jpg",
+    "author": "Unknown author Unknown author",
+    "license": "Public domain",
+    "licenseUrl": null,
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-ML-001",
+    "restaurantName": "Cocinería El Quillay",
+    "region": "Maule",
+    "usage": "regional-fallback",
+    "subject": "Maule — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Atrio de espera altopangue.JPG",
+    "localPath": "assets/images/cocinerias/cl-ml-001.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Atrio_de_espera_altopangue.JPG",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/5/59/Atrio_de_espera_altopangue.JPG",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Atrio_de_espera_altopangue.JPG/960px-Atrio_de_espera_altopangue.JPG",
+    "author": "No informado",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-ML-002",
+    "restaurantName": "Come Rico",
+    "region": "Maule",
+    "usage": "regional-fallback",
+    "subject": "Maule — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Nevados del longavi.JPG",
+    "localPath": "assets/images/cocinerias/cl-ml-002.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Nevados_del_longavi.JPG",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/7/73/Nevados_del_longavi.JPG",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Nevados_del_longavi.JPG/960px-Nevados_del_longavi.JPG",
+    "author": "Dentren",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-ML-003",
+    "restaurantName": "Cocinería Tía Lucy",
+    "region": "Maule",
+    "usage": "regional-fallback",
+    "subject": "Maule — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Cancha de Los Cristales - panoramio.jpg",
+    "localPath": "assets/images/cocinerias/cl-ml-003.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Cancha_de_Los_Cristales_-_panoramio.jpg",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/3/34/Cancha_de_Los_Cristales_-_panoramio.jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Cancha_de_Los_Cristales_-_panoramio.jpg/960px-Cancha_de_Los_Cristales_-_panoramio.jpg",
+    "author": "PIERO (to)",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-ML-004",
+    "restaurantName": "El Gustto Cocinería",
+    "region": "Maule",
+    "usage": "regional-fallback",
+    "subject": "Maule — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Los Cristales - panoramio (1).jpg",
+    "localPath": "assets/images/cocinerias/cl-ml-004.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Los_Cristales_-_panoramio_(1).jpg",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/3/35/Los_Cristales_-_panoramio_%281%29.jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Los_Cristales_-_panoramio_%281%29.jpg/960px-Los_Cristales_-_panoramio_%281%29.jpg",
+    "author": "PIERO (to)",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-ML-005",
+    "restaurantName": "Cocinería Rincón Maulino",
+    "region": "Maule",
+    "usage": "regional-fallback",
+    "subject": "Maule — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Pichingal, Región Del Maule, Chile - panoramio.jpg",
+    "localPath": "assets/images/cocinerias/cl-ml-005.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Pichingal,_Regi%C3%B3n_Del_Maule,_Chile_-_panoramio.jpg",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/0/0e/Pichingal%2C_Regi%C3%B3n_Del_Maule%2C_Chile_-_panoramio.jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Pichingal%2C_Regi%C3%B3n_Del_Maule%2C_Chile_-_panoramio.jpg/960px-Pichingal%2C_Regi%C3%B3n_Del_Maule%2C_Chile_-_panoramio.jpg",
+    "author": "Nelson Pérez",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-ML-006",
+    "restaurantName": "Cocinería El Ranchito",
+    "region": "Maule",
+    "usage": "regional-fallback",
+    "subject": "Maule — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Pichingal, Región Del Maule, Chile - panoramio (3).jpg",
+    "localPath": "assets/images/cocinerias/cl-ml-006.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Pichingal,_Regi%C3%B3n_Del_Maule,_Chile_-_panoramio_(3).jpg",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/2/26/Pichingal%2C_Regi%C3%B3n_Del_Maule%2C_Chile_-_panoramio_%283%29.jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Pichingal%2C_Regi%C3%B3n_Del_Maule%2C_Chile_-_panoramio_%283%29.jpg/960px-Pichingal%2C_Regi%C3%B3n_Del_Maule%2C_Chile_-_panoramio_%283%29.jpg",
+    "author": "Nelson Pérez",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-ML-007",
+    "restaurantName": "Cocinería San Felipe",
+    "region": "Maule",
+    "usage": "regional-fallback",
+    "subject": "Maule — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Pichingal, Región Del Maule, Chile - panoramio (5).jpg",
+    "localPath": "assets/images/cocinerias/cl-ml-007.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Pichingal,_Regi%C3%B3n_Del_Maule,_Chile_-_panoramio_(5).jpg",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/f/ff/Pichingal%2C_Regi%C3%B3n_Del_Maule%2C_Chile_-_panoramio_%285%29.jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Pichingal%2C_Regi%C3%B3n_Del_Maule%2C_Chile_-_panoramio_%285%29.jpg/960px-Pichingal%2C_Regi%C3%B3n_Del_Maule%2C_Chile_-_panoramio_%285%29.jpg",
+    "author": "Nelson Pérez",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-ML-008",
+    "restaurantName": "Cocinería Tía Mary",
+    "region": "Maule",
+    "usage": "regional-fallback",
+    "subject": "Maule — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Pichingal, Región Del Maule, Chile - panoramio (6).jpg",
+    "localPath": "assets/images/cocinerias/cl-ml-008.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Pichingal,_Regi%C3%B3n_Del_Maule,_Chile_-_panoramio_(6).jpg",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/e/e9/Pichingal%2C_Regi%C3%B3n_Del_Maule%2C_Chile_-_panoramio_%286%29.jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Pichingal%2C_Regi%C3%B3n_Del_Maule%2C_Chile_-_panoramio_%286%29.jpg/960px-Pichingal%2C_Regi%C3%B3n_Del_Maule%2C_Chile_-_panoramio_%286%29.jpg",
+    "author": "Nelson Pérez",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-NB-001",
+    "restaurantName": "Cocinería Emely González",
+    "region": "Ñuble",
+    "usage": "regional-fallback",
+    "subject": "Ñuble — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Granja Museo Doña Rita – Maquinaria Agricola.jpg",
+    "localPath": "assets/images/cocinerias/cl-nb-001.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Granja_Museo_Do%C3%B1a_Rita_%E2%80%93_Maquinaria_Agricola.jpg",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/1/1f/Granja_Museo_Do%C3%B1a_Rita_%E2%80%93_Maquinaria_Agricola.jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Granja_Museo_Do%C3%B1a_Rita_%E2%80%93_Maquinaria_Agricola.jpg/960px-Granja_Museo_Do%C3%B1a_Rita_%E2%80%93_Maquinaria_Agricola.jpg",
+    "author": "Etorreshormazabal",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-NB-002",
+    "restaurantName": "Cocinería Erna",
+    "region": "Ñuble",
+    "usage": "regional-fallback",
+    "subject": "Ñuble — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Granja Museo Doña Rita – Locomovil.jpg",
+    "localPath": "assets/images/cocinerias/cl-nb-002.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Granja_Museo_Do%C3%B1a_Rita_%E2%80%93_Locomovil.jpg",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/f/fd/Granja_Museo_Do%C3%B1a_Rita_%E2%80%93_Locomovil.jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Granja_Museo_Do%C3%B1a_Rita_%E2%80%93_Locomovil.jpg/960px-Granja_Museo_Do%C3%B1a_Rita_%E2%80%93_Locomovil.jpg",
+    "author": "Etorreshormazabal",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-NB-003",
+    "restaurantName": "La Favorita",
+    "region": "Ñuble",
+    "usage": "regional-fallback",
+    "subject": "Ñuble — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Granja Museo Doña Rita – Colección de Tractores.jpg",
+    "localPath": "assets/images/cocinerias/cl-nb-003.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Granja_Museo_Do%C3%B1a_Rita_%E2%80%93_Colecci%C3%B3n_de_Tractores.jpg",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/6/6e/Granja_Museo_Do%C3%B1a_Rita_%E2%80%93_Colecci%C3%B3n_de_Tractores.jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Granja_Museo_Do%C3%B1a_Rita_%E2%80%93_Colecci%C3%B3n_de_Tractores.jpg/960px-Granja_Museo_Do%C3%B1a_Rita_%E2%80%93_Colecci%C3%B3n_de_Tractores.jpg",
+    "author": "Etorreshormazabal",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-NB-004",
+    "restaurantName": "Cocinería La Sirenita",
+    "region": "Ñuble",
+    "usage": "regional-fallback",
+    "subject": "Ñuble — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Granja Museo Doña Rita – Colección de Trilladoras.jpg",
+    "localPath": "assets/images/cocinerias/cl-nb-004.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Granja_Museo_Do%C3%B1a_Rita_%E2%80%93_Colecci%C3%B3n_de_Trilladoras.jpg",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/5/5b/Granja_Museo_Do%C3%B1a_Rita_%E2%80%93_Colecci%C3%B3n_de_Trilladoras.jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Granja_Museo_Do%C3%B1a_Rita_%E2%80%93_Colecci%C3%B3n_de_Trilladoras.jpg/960px-Granja_Museo_Do%C3%B1a_Rita_%E2%80%93_Colecci%C3%B3n_de_Trilladoras.jpg",
+    "author": "Etorreshormazabal",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-NB-005",
+    "restaurantName": "Cocinería Margarita",
+    "region": "Ñuble",
+    "usage": "regional-fallback",
+    "subject": "Ñuble — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Granja Museo Doña Rita – Tractor.jpg",
+    "localPath": "assets/images/cocinerias/cl-nb-005.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Granja_Museo_Do%C3%B1a_Rita_%E2%80%93_Tractor.jpg",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/5/58/Granja_Museo_Do%C3%B1a_Rita_%E2%80%93_Tractor.jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Granja_Museo_Do%C3%B1a_Rita_%E2%80%93_Tractor.jpg/960px-Granja_Museo_Do%C3%B1a_Rita_%E2%80%93_Tractor.jpg",
+    "author": "Etorreshormazabal",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-NB-006",
+    "restaurantName": "Cocinería Amanda",
+    "region": "Ñuble",
+    "usage": "regional-fallback",
+    "subject": "Ñuble — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Granja Museo Doña Rita – Jeep.jpg",
+    "localPath": "assets/images/cocinerias/cl-nb-006.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Granja_Museo_Do%C3%B1a_Rita_%E2%80%93_Jeep.jpg",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/2/20/Granja_Museo_Do%C3%B1a_Rita_%E2%80%93_Jeep.jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Granja_Museo_Do%C3%B1a_Rita_%E2%80%93_Jeep.jpg/960px-Granja_Museo_Do%C3%B1a_Rita_%E2%80%93_Jeep.jpg",
+    "author": "Etorreshormazabal",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-NB-007",
+    "restaurantName": "Cocinería Ranchito",
+    "region": "Ñuble",
+    "usage": "regional-fallback",
+    "subject": "Ñuble — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Granja Museo Doña Rita – Llama.jpg",
+    "localPath": "assets/images/cocinerias/cl-nb-007.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Granja_Museo_Do%C3%B1a_Rita_%E2%80%93_Llama.jpg",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/c/c7/Granja_Museo_Do%C3%B1a_Rita_%E2%80%93_Llama.jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Granja_Museo_Do%C3%B1a_Rita_%E2%80%93_Llama.jpg/960px-Granja_Museo_Do%C3%B1a_Rita_%E2%80%93_Llama.jpg",
+    "author": "Etorreshormazabal",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-RM-001",
+    "restaurantName": "Na Que Ver Cocinería Chilena",
+    "region": "Metropolitana de Santiago",
+    "usage": "regional-fallback",
+    "subject": "Metropolitana de Santiago — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Acaena ovalifolia (3435169449).jpg",
+    "localPath": "assets/images/cocinerias/cl-rm-001.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Acaena_ovalifolia_(3435169449).jpg",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/f/f7/Acaena_ovalifolia_%283435169449%29.jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Acaena_ovalifolia_%283435169449%29.jpg/960px-Acaena_ovalifolia_%283435169449%29.jpg",
+    "author": "Jason Hollinger",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-RM-002",
+    "restaurantName": "La Olla Cocinería",
+    "region": "Metropolitana de Santiago",
+    "usage": "regional-fallback",
+    "subject": "Metropolitana de Santiago — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Ruta Baños Morales, San Jose de Maipo, Chile - panoramio.jpg",
+    "localPath": "assets/images/cocinerias/cl-rm-002.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Ruta_Ba%C3%B1os_Morales,_San_Jose_de_Maipo,_Chile_-_panoramio.jpg",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/4/46/Ruta_Ba%C3%B1os_Morales%2C_San_Jose_de_Maipo%2C_Chile_-_panoramio.jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Ruta_Ba%C3%B1os_Morales%2C_San_Jose_de_Maipo%2C_Chile_-_panoramio.jpg/960px-Ruta_Ba%C3%B1os_Morales%2C_San_Jose_de_Maipo%2C_Chile_-_panoramio.jpg",
+    "author": "Nelson Pérez",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-RM-003",
+    "restaurantName": "Cocinería Donde Yoyo's",
+    "region": "Metropolitana de Santiago",
+    "usage": "regional-fallback",
+    "subject": "Metropolitana de Santiago — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Ruta Baños Morales, San Jose de Maipo, Chile - panoramio (1).jpg",
+    "localPath": "assets/images/cocinerias/cl-rm-003.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Ruta_Ba%C3%B1os_Morales,_San_Jose_de_Maipo,_Chile_-_panoramio_(1).jpg",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/5/50/Ruta_Ba%C3%B1os_Morales%2C_San_Jose_de_Maipo%2C_Chile_-_panoramio_%281%29.jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Ruta_Ba%C3%B1os_Morales%2C_San_Jose_de_Maipo%2C_Chile_-_panoramio_%281%29.jpg/960px-Ruta_Ba%C3%B1os_Morales%2C_San_Jose_de_Maipo%2C_Chile_-_panoramio_%281%29.jpg",
+    "author": "Nelson Pérez",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-RM-004",
+    "restaurantName": "Donde Kery",
+    "region": "Metropolitana de Santiago",
+    "usage": "regional-fallback",
+    "subject": "Metropolitana de Santiago — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Ruta Baños Morales, San Jose de Maipo, Chile - panoramio (2).jpg",
+    "localPath": "assets/images/cocinerias/cl-rm-004.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Ruta_Ba%C3%B1os_Morales,_San_Jose_de_Maipo,_Chile_-_panoramio_(2).jpg",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/6/65/Ruta_Ba%C3%B1os_Morales%2C_San_Jose_de_Maipo%2C_Chile_-_panoramio_%282%29.jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Ruta_Ba%C3%B1os_Morales%2C_San_Jose_de_Maipo%2C_Chile_-_panoramio_%282%29.jpg/960px-Ruta_Ba%C3%B1os_Morales%2C_San_Jose_de_Maipo%2C_Chile_-_panoramio_%282%29.jpg",
+    "author": "Nelson Pérez",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-RM-005",
+    "restaurantName": "El Franchute del Barrio",
+    "region": "Metropolitana de Santiago",
+    "usage": "regional-fallback",
+    "subject": "Metropolitana de Santiago — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Ruta Baños Morales, San Jose de Maipo, Chile - panoramio (3).jpg",
+    "localPath": "assets/images/cocinerias/cl-rm-005.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Ruta_Ba%C3%B1os_Morales,_San_Jose_de_Maipo,_Chile_-_panoramio_(3).jpg",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/a/aa/Ruta_Ba%C3%B1os_Morales%2C_San_Jose_de_Maipo%2C_Chile_-_panoramio_%283%29.jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Ruta_Ba%C3%B1os_Morales%2C_San_Jose_de_Maipo%2C_Chile_-_panoramio_%283%29.jpg/960px-Ruta_Ba%C3%B1os_Morales%2C_San_Jose_de_Maipo%2C_Chile_-_panoramio_%283%29.jpg",
+    "author": "Nelson Pérez",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-RM-006",
+    "restaurantName": "Willimapu",
+    "region": "Metropolitana de Santiago",
+    "usage": "regional-fallback",
+    "subject": "Metropolitana de Santiago — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Ruta Baños Morales, San José de Maipo, Chile - panoramio.jpg",
+    "localPath": "assets/images/cocinerias/cl-rm-006.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Ruta_Ba%C3%B1os_Morales,_San_Jos%C3%A9_de_Maipo,_Chile_-_panoramio.jpg",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/9/9e/Ruta_Ba%C3%B1os_Morales%2C_San_Jos%C3%A9_de_Maipo%2C_Chile_-_panoramio.jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Ruta_Ba%C3%B1os_Morales%2C_San_Jos%C3%A9_de_Maipo%2C_Chile_-_panoramio.jpg/960px-Ruta_Ba%C3%B1os_Morales%2C_San_Jos%C3%A9_de_Maipo%2C_Chile_-_panoramio.jpg",
+    "author": "Nelson Pérez",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-TA-001",
+    "restaurantName": "Cocinería Elcira",
+    "region": "Tarapacá",
+    "usage": "regional-fallback",
+    "subject": "Tarapacá — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Casa Velero - panoramio.jpg",
+    "localPath": "assets/images/cocinerias/cl-ta-001.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Casa_Velero_-_panoramio.jpg",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/c/cc/Casa_Velero_-_panoramio.jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Casa_Velero_-_panoramio.jpg/960px-Casa_Velero_-_panoramio.jpg",
+    "author": "Yerko Ascui",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-TA-002",
+    "restaurantName": "Jugos Naturales",
+    "region": "Tarapacá",
+    "usage": "regional-fallback",
+    "subject": "Tarapacá — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Desde el aire, sector de Playa Brava. Iquique. I región..jpg",
+    "localPath": "assets/images/cocinerias/cl-ta-002.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Desde_el_aire,_sector_de_Playa_Brava._Iquique._I_regi%C3%B3n..jpg",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/0/0e/Desde_el_aire%2C_sector_de_Playa_Brava._Iquique._I_regi%C3%B3n..jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Desde_el_aire%2C_sector_de_Playa_Brava._Iquique._I_regi%C3%B3n..jpg/960px-Desde_el_aire%2C_sector_de_Playa_Brava._Iquique._I_regi%C3%B3n..jpg",
+    "author": "Paodurang",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-TA-003",
+    "restaurantName": "Rangó",
+    "region": "Tarapacá",
+    "usage": "regional-fallback",
+    "subject": "Tarapacá — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:- panoramio - Jorge Manriquez P. (2).jpg",
+    "localPath": "assets/images/cocinerias/cl-ta-003.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:-_panoramio_-_Jorge_Manriquez_P._(2).jpg",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/c/c8/-_panoramio_-_Jorge_Manriquez_P._%282%29.jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/-_panoramio_-_Jorge_Manriquez_P._%282%29.jpg/960px--_panoramio_-_Jorge_Manriquez_P._%282%29.jpg",
+    "author": "Jorge Manriquez P.",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-TA-004",
+    "restaurantName": "La Cruceñita",
+    "region": "Tarapacá",
+    "usage": "regional-fallback",
+    "subject": "Tarapacá — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Atardecer en iquique - panoramio.jpg",
+    "localPath": "assets/images/cocinerias/cl-ta-004.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Atardecer_en_iquique_-_panoramio.jpg",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/5/5e/Atardecer_en_iquique_-_panoramio.jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Atardecer_en_iquique_-_panoramio.jpg/960px-Atardecer_en_iquique_-_panoramio.jpg",
+    "author": "meschmarco",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-TA-005",
+    "restaurantName": "Juguería La Viña Vieja",
+    "region": "Tarapacá",
+    "usage": "regional-fallback",
+    "subject": "Tarapacá — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Casa barco - panoramio.jpg",
+    "localPath": "assets/images/cocinerias/cl-ta-005.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Casa_barco_-_panoramio.jpg",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/c/ca/Casa_barco_-_panoramio.jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Casa_barco_-_panoramio.jpg/960px-Casa_barco_-_panoramio.jpg",
+    "author": "Yerko Ascui",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-TA-006",
+    "restaurantName": "La Picá de Mario",
+    "region": "Tarapacá",
+    "usage": "regional-fallback",
+    "subject": "Tarapacá — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Costa de Iquique - Playa brava 2.jpg",
+    "localPath": "assets/images/cocinerias/cl-ta-006.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Costa_de_Iquique_-_Playa_brava_2.jpg",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/6/68/Costa_de_Iquique_-_Playa_brava_2.jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Costa_de_Iquique_-_Playa_brava_2.jpg/960px-Costa_de_Iquique_-_Playa_brava_2.jpg",
+    "author": "Corsario CL",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-VA-001",
+    "restaurantName": "Cocinería Nacional",
+    "region": "Valparaíso",
+    "usage": "regional-fallback",
+    "subject": "Valparaíso — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Building In Valparaiso City - panoramio.jpg",
+    "localPath": "assets/images/cocinerias/cl-va-001.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Building_In_Valparaiso_City_-_panoramio.jpg",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/f/f8/Building_In_Valparaiso_City_-_panoramio.jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Building_In_Valparaiso_City_-_panoramio.jpg/960px-Building_In_Valparaiso_City_-_panoramio.jpg",
+    "author": "---=XEON=---",
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-VA-002",
+    "restaurantName": "Cocinería Bellavista",
+    "region": "Valparaíso",
+    "usage": "regional-fallback",
+    "subject": "Valparaíso — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Acercamiento Edificio Diario El Mercurio.JPG",
+    "localPath": "assets/images/cocinerias/cl-va-002.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Acercamiento_Edificio_Diario_El_Mercurio.JPG",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/3/31/Acercamiento_Edificio_Diario_El_Mercurio.JPG",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Acercamiento_Edificio_Diario_El_Mercurio.JPG/960px-Acercamiento_Edificio_Diario_El_Mercurio.JPG",
+    "author": "Hemorag",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-VA-003",
+    "restaurantName": "La Cocinería de Illescas",
+    "region": "Valparaíso",
+    "usage": "regional-fallback",
+    "subject": "Valparaíso — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Night Valparaiso Port - panoramio.jpg",
+    "localPath": "assets/images/cocinerias/cl-va-003.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Night_Valparaiso_Port_-_panoramio.jpg",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/4/4a/Night_Valparaiso_Port_-_panoramio.jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Night_Valparaiso_Port_-_panoramio.jpg/960px-Night_Valparaiso_Port_-_panoramio.jpg",
+    "author": "---=XEON=---",
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
+  },
+  {
+    "restaurantId": "CL-VA-004",
+    "restaurantName": "Cocinería Familia Cartagena",
+    "region": "Valparaíso",
+    "usage": "regional-fallback",
+    "subject": "Valparaíso — imagen territorial; no corresponde necesariamente al establecimiento",
+    "title": "File:Night Valparaiso - panoramio (1).jpg",
+    "localPath": "assets/images/cocinerias/cl-va-004.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Night_Valparaiso_-_panoramio_(1).jpg",
+    "originalFile": "https://upload.wikimedia.org/wikipedia/commons/6/68/Night_Valparaiso_-_panoramio_%281%29.jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Night_Valparaiso_-_panoramio_%281%29.jpg/960px-Night_Valparaiso_-_panoramio_%281%29.jpg",
+    "author": "---=XEON=---",
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+    "peopleAudit": {
+      "method": "revisión visual"
+    }
   }
 ]
