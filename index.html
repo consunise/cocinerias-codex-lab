@@ -80,6 +80,13 @@
               <button class="filters-close" id="filters-close" type="button" aria-label="Cerrar filtros">×</button>
             </div>
 
+            <div class="filters-toolbar">
+              <p class="filters-toolbar-label">Filtros</p>
+              <button class="reset-filters" id="reset-filters" type="button" disabled>
+                Limpiar filtros
+              </button>
+            </div>
+
             <div class="filter-group">
               <label for="region-filter">Región</label>
               <div class="select-wrap">
@@ -89,19 +96,42 @@
               </div>
             </div>
 
-            <fieldset class="filter-group">
-              <legend>Tipo de comida</legend>
-              <div class="filter-options" id="food-filters"></div>
-            </fieldset>
+            <section class="filter-group filter-group--collapsible" aria-labelledby="food-filter-toggle">
+              <h3 class="filter-group-heading">
+                <button
+                  class="filter-disclosure"
+                  id="food-filter-toggle"
+                  type="button"
+                  aria-expanded="false"
+                  aria-controls="food-filters"
+                >
+                  <span>Tipo de comida <span class="filter-selection-count" id="food-filter-count" hidden></span></span>
+                  <svg class="filter-chevron" viewBox="0 0 20 20" aria-hidden="true">
+                    <path d="m5 7.5 5 5 5-5"></path>
+                  </svg>
+                </button>
+              </h3>
+              <div class="filter-options" id="food-filters" role="group" hidden></div>
+            </section>
 
-            <fieldset class="filter-group">
-              <legend>Rango de precio</legend>
-              <div class="filter-options" id="price-filters"></div>
-            </fieldset>
+            <section class="filter-group filter-group--collapsible" aria-labelledby="price-filter-toggle">
+              <h3 class="filter-group-heading">
+                <button
+                  class="filter-disclosure"
+                  id="price-filter-toggle"
+                  type="button"
+                  aria-expanded="false"
+                  aria-controls="price-filters"
+                >
+                  <span>Rango de precio <span class="filter-selection-count" id="price-filter-count" hidden></span></span>
+                  <svg class="filter-chevron" viewBox="0 0 20 20" aria-hidden="true">
+                    <path d="m5 7.5 5 5 5-5"></path>
+                  </svg>
+                </button>
+              </h3>
+              <div class="filter-options" id="price-filters" role="group" hidden></div>
+            </section>
 
-            <button class="reset-filters" id="reset-filters" type="button" disabled>
-              Limpiar filtros
-            </button>
             <button class="filters-apply" id="filters-apply" type="button">Ver resultados</button>
           </aside>
 

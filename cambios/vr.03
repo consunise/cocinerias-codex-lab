@@ -1,0 +1,12 @@
+Quiero los siguientes ajustes que se ejecutaran dentro de la misma sesión que realizó el oneshot prompt en codex, con el modelo sol en esfuerzo max, indicame como debería entregarselos:
+
+1. En el filtro el boton de "limpiar filtro"  debe estar más arriba.
+2. la barra de busqueda debe quedar siempre alineada con "results-area"
+3. los iconos de tipo de comida deben ser más grandes, el de mariscos parece un piojo cambialo por una concha, el icono de comida al paso no parece una bolsa, evalua si hacer la bolsa más ancha o poner una huella.
+4. Quiero agregar nuevas categorias como, cuenta con estacionamientos, pet-frendly, accesos accesibles para personas con mobilidad reducida. evalua si vale la pena ponerlo en el preview o dentro de la misma ficha. 
+5. cuando se haga on hover los iconos de tipo de comida deberían rellenarse.
+6. Quita el "dato simulado"
+7. agregar horario al preview de las fechas , debajo del titulo, sino tienes la info del horario porn algo como "no informa horario"
+8. en el filtro, reduce el margen que hay entrer el titulo de "filter-group" y las cet4egorias, haz lo mismo con grango de precio 
+9. en el filtro oculta la lista y agrega un arrow al "tipo de comida" para que sea deplgable, haz los mimos con "rango de precio"
+10. el icnono de comida chilena cambialo por una bandera chilena.

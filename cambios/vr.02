@@ -1,0 +1,17 @@
+Quiero los siguientes ajustes que se ejecutaran dentro de la misma sesión que realizó el oneshot prompt en codex, con el modelo sol en esfuerzo max, indicame como debería entregarselos:
+
+1. hacer una efecto hover sobre las imagenes para notar mejor que se está encima de esa fila
+2. quitar el punto concinería de chile en el footer.
+3. los iconos de wsp tanto en el footer como en el navbar, debe estar mejor definido.
+4. Las cc del logo debe ser más grandes.
+5. los textos del footer deberían más grandes
+6. el boton de ver fica debiese subrayarse al hacer hover o invertir los colores background terracota y letras crema
+7. agregar horario al preview de las fechas , debajo del titulo.
+8. la barra de scroll del selector del filtros no debe verse siempre, debe verse cuando se haga on hover en el lsitado de filtros, además debería tener más margen hacía la izquierda, para separarse mejor de los números, que el color de la barrar de scroll debiese ser parte de la paleta de colores de la pagina, no gris.
+9. Quitar la opacidad del navbar.
+10. el contenido debe desplegarse poco a poco para que el scroll no aumente tanto, por ejemplo de 10 en 10 cocinerías.
+11. quitar el id-label y el status-label.
+12. la ftografía no deben estar oscuras.
+13. los texto del footer debiesen estar alineados con el contenido de arriba, o sea el icono y nombre la página deben estar
+14. el horario debe estar al lado de restaurant-location
+15. Quita la linea que terracota que está a la derecha inferior de restaurant-main.

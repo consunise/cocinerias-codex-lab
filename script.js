@@ -12,12 +12,21 @@
   });
   const INITIAL_RESULT_LIMIT = 10;
   const RESULT_BATCH_SIZE = 10;
+
+  // CARACTERÍSTICAS DE VISITA: estructura preparada para datos reales futuros.
+  // Solo la accesibilidad se marca como informada cuando la fuente lo declara explícitamente.
+  const VISIT_FEATURES = Object.freeze([
+    { key: "parking", label: "Estacionamiento" },
+    { key: "petFriendly", label: "Pet-friendly" },
+    { key: "reducedMobility", label: "Acceso para movilidad reducida" },
+  ]);
   const restaurants = sourceRestaurants.map((restaurant, index) => ({
     ...restaurant,
     displayPriceCategory: PRICE_PROTOTYPE.enabled
       ? PRICE_PROTOTYPE.assignBand(restaurant, index)
       : restaurant.priceCategory,
     priceIsSimulated: PRICE_PROTOTYPE.enabled,
+    visitFeatures: deriveVisitFeatures(restaurant),
   }));
 
   // PLACEHOLDERS DE REDES: reemplazar por las URLs reales cuando estén disponibles.
@@ -34,6 +43,10 @@
     regionFilter: document.querySelector("#region-filter"),
     foodFilters: document.querySelector("#food-filters"),
     priceFilters: document.querySelector("#price-filters"),
+    foodFilterToggle: document.querySelector("#food-filter-toggle"),
+    priceFilterToggle: document.querySelector("#price-filter-toggle"),
+    foodFilterCount: document.querySelector("#food-filter-count"),
+    priceFilterCount: document.querySelector("#price-filter-count"),
     resetFilters: document.querySelector("#reset-filters"),
     resultsCount: document.querySelector("#results-count"),
     activeSummary: document.querySelector("#active-summary"),
@@ -109,6 +122,40 @@
       .trim();
   }
 
+  function deriveVisitFeatures(restaurant) {
+    const accessibilityEvidence = normalize(restaurant.accessibility);
+    const hasAccessibilityNote = /acces|silla|movilidad/.test(accessibilityEvidence);
+    const hasReducedMobilityAccess =
+      /acceso para silla de ruedas/.test(accessibilityEvidence) &&
+      !/no confirmad/.test(accessibilityEvidence);
+    const futureValues = {
+      parking: restaurant.parking ?? null,
+      petFriendly: restaurant.petFriendly ?? null,
+      reducedMobility: hasReducedMobilityAccess ? restaurant.accessibility : null,
+    };
+
+    return VISIT_FEATURES.map((feature) => {
+      const value = futureValues[feature.key];
+      const informed = value !== null && value !== undefined && value !== "";
+      const booleanStatus =
+        typeof value === "boolean"
+          ? value
+            ? "Sí, informado por la fuente"
+            : "No, informado por la fuente"
+          : null;
+      return {
+        ...feature,
+        informed,
+        status: booleanStatus ?? (informed ? "Informado por la fuente" : "No informado"),
+        detail:
+          (typeof value === "string" ? value : null) ||
+          (feature.key === "reducedMobility" && hasAccessibilityNote
+            ? restaurant.accessibility
+            : null),
+      };
+    });
+  }
+
   function safeUrl(value) {
     if (!value) return null;
     try {
@@ -135,25 +182,26 @@
 
   function foodIcon(category) {
     const iconPaths = {
-      "Comida chilena": '<path d="M5 10h14v2a7 7 0 0 1-14 0v-2Z"></path><path d="M8 7.5c0-1 1-1.4 1-2.5M12 7.5c0-1 1-1.4 1-2.5M16 7.5c0-1 1-1.4 1-2.5"></path>',
-      "Cocina casera": '<path d="M5 10h14v7H5zM3.5 12h1.5M19 12h1.5M8 8h8M10 6h4"></path>',
-      Pescados: '<path d="M4 12c3-4 7-5 11-2l3-3v10l-3-3c-4 3-8 2-11-2Z"></path><circle class="icon-fill" cx="12.5" cy="11" r=".8"></circle>',
-      Mariscos: '<path d="M8 11c-2-2-3-1-4 0M16 11c2-2 3-1 4 0M8 15c-2 2-3 2-4 1M16 15c2 2 3 2 4 1M9 9c0-2 1-3 3-3s3 1 3 3v6c0 2-1 3-3 3s-3-1-3-3V9Z"></path><path d="M9 12h6M10 6 8 4M14 6l2-2"></path>',
-      "Cocina marina": '<path d="M3 10c2 0 2-2 4-2s2 2 4 2 2-2 4-2 2 2 4 2 2-2 2-2M3 15c2 0 2-2 4-2s2 2 4 2 2-2 4-2 2 2 4 2 2-2 2-2"></path>',
-      Mapuche: '<circle cx="12" cy="12" r="3.5"></circle><path d="M12 2v4M12 18v4M2 12h4M18 12h4M5 5l3 3M16 16l3 3M19 5l-3 3M8 16l-3 3"></path>',
-      Carnes: '<path d="M7 6c4-3 10 0 11 4 1 4-3 8-8 8-4 0-6-3-5-6 .4-1.3 1.5-2 2-3 .4-.8-.4-1.8 0-3Z"></path><circle cx="10" cy="12" r="2"></circle>',
-      Jugos: '<path d="M7 8h10l-1 12H8L7 8ZM9 4h7l-3 4"></path>',
-      Sándwiches: '<path d="M5 10c0-3 3-5 7-5s7 2 7 5H5ZM5 14h14v3H5zM6 10l2 4 4-4 4 4 2-4"></path>',
-      "Al paso": '<path d="M6 7h12l-1 14H7L6 7ZM9 7V5a3 3 0 0 1 6 0v2"></path>',
-      Chilota: '<path d="M4 15c4-1 4-6 8-6s4 5 8 6M6 18h12M9 9V5h6v4"></path>',
-      Patagónica: '<path d="m3 19 6-10 3 5 3-8 6 13H3Z"></path>',
-      Magallánica: '<path d="m3 19 6-10 3 5 3-8 6 13H3Z"></path><path d="M5 5h4M7 3v4"></path>',
-      Campesina: '<path d="M4 19h16M5 16c4-4 10-4 14 0M12 16V5M12 8c-3 0-4-1-5-3 3 0 4 1 5 3ZM12 11c3 0 4-1 5-3-3 0-4 1-5 3Z"></path>',
-      Pastas: '<path d="M4 12h16a8 8 0 0 1-16 0ZM8 9c0-2 1-2 1-4M12 9c0-2 1-2 1-4M16 9c0-2 1-2 1-4"></path>',
-      "Opciones vegetales": '<path d="M19 4C11 4 6 8 6 14c0 3 2 5 5 5 6 0 8-7 8-15Z"></path><path d="M5 20c2-5 5-8 10-11"></path>',
-      "Sin clasificación culinaria": '<circle cx="12" cy="12" r="7"></circle><path d="M8.5 12h7"></path>',
+      "Comida chilena": '<rect class="flag-base" x="3" y="6" width="18" height="12" rx="1"></rect><path class="flag-red" d="M3 12h18v6H3z"></path><path class="flag-blue" d="M3 6h7v6H3z"></path><path class="flag-star" d="m6.5 7.4.45 1.05 1.15.1-.88.76.27 1.12-.99-.6-.99.6.27-1.12-.88-.76 1.15-.1Z"></path>',
+      "Cocina casera": '<path class="icon-fillable" d="M5 10h14v7H5Z"></path><path d="M3.5 12H5M19 12h1.5M8 8h8M10 6h4"></path>',
+      Pescados: '<path class="icon-fillable" d="M4 12c3-4 7-5 11-2l3-3v10l-3-3c-4 3-8 2-11-2Z"></path><circle class="icon-fill" cx="12.5" cy="11" r=".8"></circle>',
+      Mariscos: '<path class="icon-fillable" d="M4 18c.7-6.2 3.8-11 8-11s7.3 4.8 8 11H4Z"></path><path d="M12 7v11M8.5 8.5 10 18M15.5 8.5 14 18M5.8 13h12.4"></path>',
+      "Cocina marina": '<path class="icon-fillable" d="M3 9c2 0 2-2 4-2s2 2 4 2 2-2 4-2 2 2 4 2 2-2 2-2v7c-2 0-2 2-4 2s-2-2-4-2-2 2-4 2-2-2-4-2-2 2-4 2V9Z"></path><path d="M3 13c2 0 2-2 4-2s2 2 4 2 2-2 4-2 2 2 4 2 2-2 2-2"></path>',
+      Mapuche: '<circle class="icon-fillable" cx="12" cy="12" r="3.5"></circle><path d="M12 2v4M12 18v4M2 12h4M18 12h4M5 5l3 3M16 16l3 3M19 5l-3 3M8 16l-3 3"></path>',
+      Carnes: '<path class="icon-fillable" d="M7 6c4-3 10 0 11 4 1 4-3 8-8 8-4 0-6-3-5-6 .4-1.3 1.5-2 2-3 .4-.8-.4-1.8 0-3Z"></path><circle cx="10" cy="12" r="2"></circle>',
+      Jugos: '<path class="icon-fillable" d="M7 8h10l-1 12H8L7 8Z"></path><path d="M9 4h7l-3 4"></path>',
+      Sándwiches: '<path class="icon-fillable" d="M5 10c0-3 3-5 7-5s7 2 7 5H5ZM5 14h14v3H5Z"></path><path d="m6 10 2 4 4-4 4 4 2-4"></path>',
+      "Al paso": '<path class="icon-fillable" d="M4.5 8h15L18 21H6L4.5 8Z"></path><path d="M8.5 8V6.5a3.5 3.5 0 0 1 7 0V8M8 12h8"></path>',
+      Chilota: '<path class="icon-fillable" d="m5 11 7-6 7 6v8H5Z"></path><path d="M9 19v-5h6v5M8 9V6h3"></path>',
+      Patagónica: '<path class="icon-fillable" d="m3 19 6-10 3 5 3-8 6 13H3Z"></path>',
+      Magallánica: '<path class="icon-fillable" d="m3 19 6-10 3 5 3-8 6 13H3Z"></path><path d="M5 5h4M7 3v4"></path>',
+      Campesina: '<path class="icon-fillable" d="M12 18C6 18 5 12 5 6c6 0 12 1 12 7 0 3-2 5-5 5Z"></path><path d="M5 20c3-5 6-8 10-10"></path>',
+      Pastas: '<path class="icon-fillable" d="M4 12h16a8 8 0 0 1-16 0Z"></path><path d="M8 9c0-2 1-2 1-4M12 9c0-2 1-2 1-4M16 9c0-2 1-2 1-4"></path>',
+      "Opciones vegetales": '<path class="icon-fillable" d="M19 4C11 4 6 8 6 14c0 3 2 5 5 5 6 0 8-7 8-15Z"></path><path d="M5 20c2-5 5-8 10-11"></path>',
+      "Sin clasificación culinaria": '<circle class="icon-fillable" cx="12" cy="12" r="7"></circle><path d="M8.5 12h7"></path>',
     };
-    return `<svg class="food-icon" viewBox="0 0 24 24" aria-hidden="true">${iconPaths[category] ?? iconPaths["Sin clasificación culinaria"]}</svg>`;
+    const flagClass = category === "Comida chilena" ? " chile-flag" : "";
+    return `<svg class="food-icon${flagClass}" viewBox="0 0 24 24" aria-hidden="true">${iconPaths[category] ?? iconPaths["Sin clasificación culinaria"]}</svg>`;
   }
 
   function foodCategoryList(categories) {
@@ -247,6 +295,23 @@
     return (state.region ? 1 : 0) + state.foods.size + state.prices.size;
   }
 
+  function updateFilterDisclosureState() {
+    [
+      [elements.foodFilterToggle, elements.foodFilterCount, state.foods.size],
+      [elements.priceFilterToggle, elements.priceFilterCount, state.prices.size],
+    ].forEach(([toggle, countElement, count]) => {
+      countElement.hidden = count === 0;
+      countElement.textContent = count ? `· ${count}` : "";
+      toggle.classList.toggle("has-active-filters", count > 0);
+    });
+  }
+
+  function toggleFilterSection(toggle, panel) {
+    const willExpand = toggle.getAttribute("aria-expanded") !== "true";
+    toggle.setAttribute("aria-expanded", String(willExpand));
+    panel.hidden = !willExpand;
+  }
+
   function hasAnyActiveState() {
     return Boolean(state.query || getActiveFilterCount());
   }
@@ -272,9 +337,8 @@
   }
 
   function restaurantRow(restaurant) {
-    const hours = restaurant.hours
-      ? `<span class="restaurant-hours"><span class="sr-only">Horario: </span>${escapeHTML(restaurant.hours)}</span>`
-      : "";
+    const hours = restaurant.hours ?? "No informa horario";
+    const hoursClass = restaurant.hours ? "" : " is-uninformed";
 
     return `
       <article class="restaurant-row">
@@ -292,16 +356,13 @@
           >
             <span class="restaurant-main-content">
               <span class="restaurant-name">${escapeHTML(restaurant.name)}</span>
-              <span class="restaurant-preview-meta">
-                <span class="restaurant-location">${escapeHTML(formatLocation(restaurant, true))}</span>
-                ${hours}
-              </span>
+              <span class="restaurant-hours${hoursClass}">${escapeHTML(hours)}</span>
+              <span class="restaurant-location">${escapeHTML(formatLocation(restaurant, true))}</span>
             </span>
           </span>
           <span class="restaurant-cuisine">${foodCategoryList(restaurant.foodCategories)}</span>
           <span class="restaurant-price">
             <span>${escapeHTML(formatPrice(restaurant.displayPriceCategory))}</span>
-            ${restaurant.priceIsSimulated ? "<small>Dato simulado</small>" : ""}
           </span>
           <span class="restaurant-action" aria-hidden="true">
             <span>Ver ficha</span>
@@ -350,6 +411,7 @@
     elements.searchClear.hidden = !isSearching;
     elements.resetFilters.disabled = !isFiltered;
     elements.filterToggleCount.textContent = activeFilterCount ? String(activeFilterCount) : "";
+    updateFilterDisclosureState();
     elements.directory.dataset.state = visibleCount
       ? isSearching
         ? "searching"
@@ -447,6 +509,16 @@
     return details.length ? details.join("<br>") : "No informado";
   }
 
+  function visitFeatureBlock(feature) {
+    return `
+      <div class="visit-feature ${feature.informed ? "is-informed" : ""}">
+        <span class="fact-label">${escapeHTML(feature.label)}</span>
+        <strong>${escapeHTML(feature.status)}</strong>
+        ${feature.detail ? `<p>${escapeHTML(feature.detail)}</p>` : ""}
+      </div>
+    `;
+  }
+
   function buildModalContent(restaurant) {
     const primarySource = safeUrl(restaurant.primarySource);
     const website = safeUrl(restaurant.website);
@@ -454,7 +526,7 @@
     const addressParts = [restaurant.address, restaurant.venue].filter(Boolean);
     const socialDetails = [restaurant.instagram, restaurant.facebook, restaurant.otherNetworks].filter(Boolean);
     const currentPrice = restaurant.priceIsSimulated
-      ? `${escapeHTML(restaurant.displayPriceCategory)}<br><small>Dato simulado para prototipo</small>`
+      ? escapeHTML(restaurant.displayPriceCategory)
       : escapeHTML(restaurant.priceRange ?? restaurant.displayPriceCategory ?? "No informado");
     const statusClass = restaurant.status === "Activa" ? "" : "is-unconfirmed";
 
@@ -491,12 +563,18 @@
           ${factBlock("Servicios", escapeHTML(restaurant.services ?? "No informado"))}
           ${factBlock("Contacto", contactContent(restaurant))}
           ${factBlock("Métodos de pago", escapeHTML(restaurant.paymentMethods ?? "No informado"))}
-          ${factBlock("Accesibilidad", escapeHTML(restaurant.accessibility ?? "No informado"))}
           ${website ? factBlock("Sitio web", `<a href="${escapeHTML(website)}" target="_blank" rel="noopener noreferrer">Visitar sitio ↗</a>`) : ""}
           ${map ? factBlock("Mapa", `<a href="${escapeHTML(map)}" target="_blank" rel="noopener noreferrer">Ver ubicación ↗</a>`) : ""}
           ${restaurant.founded ? factBlock("Año de fundación", escapeHTML(restaurant.founded)) : ""}
           ${restaurant.owner ? factBlock("Responsable", escapeHTML(restaurant.owner)) : ""}
           ${socialDetails.length ? factBlock("Redes", escapeHTML(socialDetails.join(" · "))) : ""}
+        </div>
+      </section>
+
+      <section class="modal-section" aria-labelledby="modal-visit-title">
+        <h3 id="modal-visit-title">Antes de ir</h3>
+        <div class="visit-features">
+          ${restaurant.visitFeatures.map(visitFeatureBlock).join("")}
         </div>
       </section>
 
@@ -610,6 +688,12 @@
     elements.regionFilter.addEventListener("change", (event) => {
       state.region = event.target.value;
       applyFilters();
+    });
+    elements.foodFilterToggle.addEventListener("click", () => {
+      toggleFilterSection(elements.foodFilterToggle, elements.foodFilters);
+    });
+    elements.priceFilterToggle.addEventListener("click", () => {
+      toggleFilterSection(elements.priceFilterToggle, elements.priceFilters);
     });
     elements.filtersPanel.addEventListener("click", (event) => {
       const option = event.target.closest(".filter-option");
