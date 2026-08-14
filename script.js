@@ -11,6 +11,7 @@
     assignBand: (_restaurant, index) => ["Económico", "Moderado", "Alto"][index % 3],
   });
   const INITIAL_RESULT_LIMIT = 10;
+  const RESULT_BATCH_SIZE = 10;
   const restaurants = sourceRestaurants.map((restaurant, index) => ({
     ...restaurant,
     displayPriceCategory: PRICE_PROTOTYPE.enabled
@@ -65,7 +66,7 @@
     modalId: null,
     lastFocused: null,
     filtersOpen: false,
-    listExpanded: false,
+    visibleLimit: INITIAL_RESULT_LIMIT,
   };
 
   const foodOrder = [
@@ -250,8 +251,8 @@
     return Boolean(state.query || getActiveFilterCount());
   }
 
-  function applyFilters({ resetExpansion = true } = {}) {
-    if (resetExpansion) state.listExpanded = false;
+  function applyFilters({ resetPagination = true } = {}) {
+    if (resetPagination) state.visibleLimit = INITIAL_RESULT_LIMIT;
     const normalizedQuery = normalize(state.query);
 
     state.visibleRestaurants = restaurants.filter((restaurant) => {
@@ -271,7 +272,9 @@
   }
 
   function restaurantRow(restaurant) {
-    const isActive = restaurant.status === "Activa";
+    const hours = restaurant.hours
+      ? `<span class="restaurant-hours"><span class="sr-only">Horario: </span>${escapeHTML(restaurant.hours)}</span>`
+      : "";
 
     return `
       <article class="restaurant-row">
@@ -289,10 +292,9 @@
           >
             <span class="restaurant-main-content">
               <span class="restaurant-name">${escapeHTML(restaurant.name)}</span>
-              <span class="restaurant-location">${escapeHTML(formatLocation(restaurant, true))}</span>
-              <span class="restaurant-meta">
-                <span class="status-label ${isActive ? "is-active" : ""}">${escapeHTML(restaurant.status)}</span>
-                <span class="id-label">${escapeHTML(restaurant.id)}</span>
+              <span class="restaurant-preview-meta">
+                <span class="restaurant-location">${escapeHTML(formatLocation(restaurant, true))}</span>
+                ${hours}
               </span>
             </span>
           </span>
@@ -315,18 +317,23 @@
     const activeFilterCount = getActiveFilterCount();
     const isFiltered = activeFilterCount > 0;
     const isSearching = Boolean(state.query);
-    const listedRestaurants = state.listExpanded
-      ? state.visibleRestaurants
-      : state.visibleRestaurants.slice(0, INITIAL_RESULT_LIMIT);
+    const renderedCount = Math.min(state.visibleLimit, visibleCount);
+    const listedRestaurants = state.visibleRestaurants.slice(0, renderedCount);
+    const hasMore = renderedCount < visibleCount;
+    const canCollapse = renderedCount > INITIAL_RESULT_LIMIT;
 
     elements.restaurantList.innerHTML = listedRestaurants.map(restaurantRow).join("");
     elements.restaurantList.hidden = visibleCount === 0;
     elements.emptyState.hidden = visibleCount !== 0;
     elements.loadMore.hidden = visibleCount <= INITIAL_RESULT_LIMIT;
-    elements.loadMore.textContent = state.listExpanded
-      ? "Ver menos"
-      : "Ver más cocinerías";
-    elements.loadMore.setAttribute("aria-expanded", String(state.listExpanded));
+    elements.loadMore.textContent = hasMore ? "Ver más cocinerías" : "Ver menos";
+    elements.loadMore.setAttribute("aria-expanded", String(canCollapse));
+    elements.loadMore.setAttribute(
+      "aria-label",
+      hasMore
+        ? `Mostrar hasta ${Math.min(RESULT_BATCH_SIZE, visibleCount - renderedCount)} cocinerías más; ${renderedCount} de ${visibleCount} visibles`
+        : `Volver a mostrar ${INITIAL_RESULT_LIMIT} cocinerías`,
+    );
 
     elements.resultsCount.innerHTML = hasAnyActiveState()
       ? `<strong>${visibleCount}</strong> de ${restaurants.length} cocinerías`
@@ -389,8 +396,10 @@
   }
 
   function toggleListExpansion() {
-    const isCollapsing = state.listExpanded;
-    state.listExpanded = !state.listExpanded;
+    const isCollapsing = state.visibleLimit >= state.visibleRestaurants.length;
+    state.visibleLimit = isCollapsing
+      ? INITIAL_RESULT_LIMIT
+      : Math.min(state.visibleLimit + RESULT_BATCH_SIZE, state.visibleRestaurants.length);
     renderDirectory();
 
     if (!isCollapsing) return;

@@ -11,6 +11,7 @@
   --white: #fffdf8;
   --focus: #146c80;
   --max-width: 1440px;
+  --filter-column: 245px;
   --side-pad: clamp(1.1rem, 4vw, 4.5rem);
   --serif: Georgia, "Times New Roman", serif;
   --sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -104,7 +105,7 @@ select:focus-visible {
   top: 0;
   border-top: 4px solid var(--terracotta);
   border-bottom: 1px solid var(--ink);
-  background: rgba(244, 239, 229, 0.97);
+  background: var(--paper);
 }
 
 .header-inner {
@@ -135,8 +136,9 @@ select:focus-visible {
   background: var(--terracotta);
   color: var(--white);
   font-family: var(--serif);
-  font-size: 0.9rem;
+  font-size: 1.12rem;
   letter-spacing: -0.06em;
+  line-height: 1;
 }
 
 .brand-text {
@@ -246,7 +248,7 @@ select:focus-visible {
 
 .header-social .social-icon--whatsapp,
 .footer-contact .social-icon--whatsapp {
-  stroke-width: 1.25;
+  stroke-width: 1.45;
 }
 
 .header-social .icon-fill,
@@ -318,7 +320,7 @@ select:focus-visible {
 
 .directory-layout {
   display: grid;
-  grid-template-columns: minmax(190px, 0.25fr) minmax(0, 1fr);
+  grid-template-columns: minmax(var(--filter-column), 0.25fr) minmax(0, 1fr);
   align-items: start;
   gap: clamp(2.5rem, 6vw, 6rem);
 }
@@ -329,9 +331,42 @@ select:focus-visible {
   align-self: start;
   max-height: calc(100dvh - 88px - 2rem);
   padding-top: 2rem;
-  padding-right: 0.35rem;
+  padding-right: 0.9rem;
   overflow-y: auto;
   scrollbar-gutter: stable;
+  scrollbar-color: transparent transparent;
+  scrollbar-width: thin;
+}
+
+.filters:hover,
+.filters:focus-within {
+  scrollbar-color: var(--terracotta) var(--paper-deep);
+}
+
+.filters::-webkit-scrollbar {
+  width: 10px;
+}
+
+.filters::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.filters::-webkit-scrollbar-thumb {
+  border: 2px solid transparent;
+  border-radius: 10px;
+  background: transparent;
+  background-clip: padding-box;
+}
+
+.filters:hover::-webkit-scrollbar-track,
+.filters:focus-within::-webkit-scrollbar-track {
+  background: var(--paper-deep);
+}
+
+.filters:hover::-webkit-scrollbar-thumb,
+.filters:focus-within::-webkit-scrollbar-thumb {
+  background: var(--terracotta);
+  background-clip: padding-box;
 }
 
 .filters-mobile-heading,
@@ -577,9 +612,6 @@ select:focus-visible {
   align-items: center;
   padding: clamp(1.2rem, 2.5vw, 2rem);
   background-color: var(--terracotta-dark);
-  background-image: var(--restaurant-image);
-  background-position: center;
-  background-size: cover;
   color: var(--white);
   isolation: isolate;
   overflow: hidden;
@@ -587,27 +619,40 @@ select:focus-visible {
 
 .restaurant-main::before {
   position: absolute;
-  z-index: -1;
+  z-index: 0;
   inset: 0;
-  background:
-    linear-gradient(90deg, rgba(15, 13, 10, 0.76), rgba(15, 13, 10, 0.5) 62%, rgba(15, 13, 10, 0.28)),
-    linear-gradient(180deg, rgba(15, 13, 10, 0.12), rgba(15, 13, 10, 0.46));
+  background-image: var(--restaurant-image);
+  background-position: center;
+  background-size: cover;
   content: "";
+  transform: scale(1.001);
+  transition: filter 180ms ease, transform 180ms ease;
 }
 
 .restaurant-main::after {
   position: absolute;
-  right: 0;
-  bottom: 0;
-  width: 3px;
-  height: 30%;
-  background: var(--terracotta);
+  z-index: 1;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(15, 13, 10, 0.52), rgba(15, 13, 10, 0.26) 62%, rgba(15, 13, 10, 0.06)),
+    linear-gradient(180deg, transparent 42%, rgba(15, 13, 10, 0.2));
   content: "";
+  pointer-events: none;
 }
 
 .restaurant-main-content {
+  position: relative;
+  z-index: 2;
   display: block;
   min-width: 0;
+  max-width: 100%;
+  text-shadow: 0 1px 3px rgba(15, 13, 10, 0.82), 0 0 14px rgba(15, 13, 10, 0.32);
+}
+
+.restaurant-button:hover .restaurant-main::before,
+.restaurant-button:focus-visible .restaurant-main::before {
+  filter: brightness(1.07) saturate(1.06) contrast(1.02);
+  transform: scale(1.035);
 }
 
 .restaurant-name {
@@ -618,42 +663,26 @@ select:focus-visible {
   line-height: 1.05;
 }
 
-.restaurant-location {
-  display: block;
+.restaurant-preview-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 0;
+  align-items: baseline;
   margin-top: 0.55rem;
   color: rgba(255, 253, 248, 0.86);
   font-size: 0.78rem;
+  line-height: 1.4;
 }
 
-.restaurant-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem 0.9rem;
-  margin-top: 0.65rem;
+.restaurant-location,
+.restaurant-hours {
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
-.status-label,
-.id-label {
-  color: rgba(255, 253, 248, 0.86);
-  font-size: 0.65rem;
-  font-weight: 700;
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
-}
-
-.status-label::before {
-  display: inline-block;
-  width: 6px;
-  height: 6px;
-  margin-right: 0.35rem;
-  border-radius: 50%;
-  background: rgba(255, 253, 248, 0.72);
-  content: "";
-  vertical-align: 1px;
-}
-
-.status-label.is-active::before {
-  background: #9ec0b8;
+.restaurant-hours::before {
+  margin: 0 0.45rem;
+  content: "·";
 }
 
 .restaurant-cuisine,
@@ -725,6 +754,7 @@ select:focus-visible {
   font-weight: 700;
   line-height: 1.15;
   text-align: center;
+  transition: background-color 140ms ease, color 140ms ease;
 }
 
 .restaurant-action > span:last-child {
@@ -734,6 +764,12 @@ select:focus-visible {
 
 .restaurant-button:hover .restaurant-action > span:last-child {
   transform: translateX(4px);
+}
+
+.restaurant-button:hover .restaurant-action,
+.restaurant-button:focus-visible .restaurant-action {
+  background: var(--terracotta);
+  color: var(--paper);
 }
 
 .load-more {
@@ -828,8 +864,8 @@ select:focus-visible {
 
 .footer-inner {
   display: grid;
-  grid-template-columns: minmax(210px, 1fr) minmax(180px, 0.7fr) minmax(280px, 1fr);
-  gap: clamp(2.5rem, 7vw, 8rem);
+  grid-template-columns: minmax(var(--filter-column), 0.25fr) minmax(180px, 0.35fr) minmax(280px, 0.65fr);
+  gap: clamp(2.5rem, 6vw, 6rem);
   max-width: var(--max-width);
   min-height: 260px;
   margin: 0 auto;
@@ -853,14 +889,15 @@ select:focus-visible {
   border: 1px solid currentColor;
   background: var(--terracotta-dark);
   font-family: var(--serif);
-  font-size: 1rem;
+  font-size: 1.35rem;
   letter-spacing: -0.06em;
+  line-height: 1;
 }
 
 .footer-brand-text {
   padding-top: 0.15rem;
   font-family: var(--serif);
-  font-size: 1.45rem;
+  font-size: 1.58rem;
   font-weight: 700;
   line-height: 0.98;
 }
@@ -874,7 +911,7 @@ select:focus-visible {
   display: grid;
   align-content: start;
   gap: 0.8rem;
-  font-size: 0.85rem;
+  font-size: 0.98rem;
 }
 
 .footer-information p,
@@ -885,7 +922,7 @@ select:focus-visible {
 .footer-label {
   margin-bottom: 0.35rem !important;
   color: rgba(255, 253, 248, 0.72);
-  font-size: 0.65rem;
+  font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.13em;
   text-transform: uppercase;
@@ -907,7 +944,7 @@ select:focus-visible {
 
 .footer-information > p:last-child {
   color: rgba(255, 253, 248, 0.76);
-  font-size: 0.75rem;
+  font-size: 0.84rem;
 }
 
 .footer-contact > a {
@@ -916,6 +953,11 @@ select:focus-visible {
   gap: 0.7rem;
   align-items: center;
   min-height: 44px;
+}
+
+.footer-contact svg {
+  width: 24px;
+  height: 24px;
 }
 
 .footer-contact a[data-placeholder="true"] {
@@ -1209,6 +1251,11 @@ select:focus-visible {
     grid-template-columns: 1fr;
   }
 
+  .footer-inner {
+    grid-template-columns: minmax(180px, 0.4fr) minmax(0, 0.45fr) minmax(0, 0.65fr);
+    gap: 2.25rem;
+  }
+
   .directory-layout {
     grid-template-columns: 180px minmax(0, 1fr);
     gap: 2.25rem;
@@ -1284,7 +1331,7 @@ select:focus-visible {
   .brand-mark {
     width: 30px;
     height: 30px;
-    font-size: 0.75rem;
+    font-size: 0.9rem;
   }
 
   .brand-text {
@@ -1332,6 +1379,7 @@ select:focus-visible {
     padding: 0 1.25rem 1rem;
     background: var(--paper);
     overflow-y: auto;
+    scrollbar-color: var(--terracotta) var(--paper-deep);
     transform: translateX(105%);
     transition: transform 180ms ease;
   }
@@ -1426,10 +1474,6 @@ select:focus-visible {
 
   .food-type-list {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .restaurant-meta {
-    margin-top: 0.75rem;
   }
 
   .about-data h2 {
@@ -1527,5 +1571,10 @@ select:focus-visible {
   *::after {
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
+  }
+
+  .restaurant-button:hover .restaurant-main::before,
+  .restaurant-button:focus-visible .restaurant-main::before {
+    transform: none;
   }
 }
