@@ -11,6 +11,7 @@
   --white: #fffdf8;
   --focus: #146c80;
   --max-width: 1440px;
+  --header-height: 93px;
   --filter-column: 245px;
   --content-gap: clamp(2.5rem, 6vw, 6rem);
   --side-pad: clamp(1.1rem, 4vw, 4.5rem);
@@ -328,9 +329,9 @@ select:focus-visible {
 
 .filters {
   position: sticky;
-  top: calc(88px + 1rem);
+  top: calc(var(--header-height) + 1rem);
   align-self: start;
-  max-height: calc(100dvh - 88px - 2rem);
+  max-height: calc(100dvh - var(--header-height) - 2rem);
   padding-top: 2rem;
   padding-right: 0.9rem;
   overflow-y: auto;
@@ -489,10 +490,34 @@ select:focus-visible {
   border: 1px solid var(--line-dark);
   border-radius: 0;
   appearance: none;
-  background: transparent;
+  background: var(--paper);
   color: var(--ink);
   cursor: pointer;
   font-size: 0.85rem;
+  transition: background-color 140ms ease, border-color 140ms ease, box-shadow 140ms ease;
+}
+
+.filter-group select.is-default {
+  border-color: var(--terracotta-dark);
+  background: var(--paper-deep);
+  box-shadow: inset 3px 0 0 var(--terracotta);
+}
+
+.filter-group select:hover {
+  border-color: var(--terracotta);
+  background: var(--paper-deep);
+}
+
+.filter-group select:focus-visible {
+  border-color: var(--terracotta-dark);
+  background: var(--paper-deep);
+  outline: 3px solid var(--terracotta);
+  outline-offset: 2px;
+}
+
+.filter-group select option {
+  background: var(--paper);
+  color: var(--ink);
 }
 
 .filter-options {
@@ -622,12 +647,16 @@ select:focus-visible {
 }
 
 .list-header {
+  position: sticky;
+  z-index: 8;
+  top: var(--header-height);
   display: grid;
   grid-template-columns: minmax(320px, 1.6fr) minmax(150px, 0.55fr) minmax(120px, 0.4fr) 112px;
   gap: 0;
   padding: 0;
   border-top: 1px solid var(--ink);
   border-bottom: 1px solid var(--ink);
+  background: var(--paper);
   color: var(--ink-soft);
   font-size: 0.64rem;
   font-weight: 700;
@@ -781,7 +810,7 @@ select:focus-visible {
   flex-direction: column;
   justify-content: center;
   color: var(--ink);
-  font-weight: 700;
+  font-weight: 400;
 }
 
 .food-type-list {
@@ -813,15 +842,20 @@ select:focus-visible {
   transition: stroke 140ms ease;
 }
 
-.food-icon .icon-fillable {
+.food-icon .icon-fillable,
+.food-icon .icon-detail {
   fill: none;
   transition: fill 140ms ease, stroke 140ms ease;
+}
+
+.food-icon .icon-detail {
+  stroke: currentColor;
 }
 
 .food-type-item:hover .food-icon .icon-fillable,
 .restaurant-button:hover .food-icon .icon-fillable,
 .restaurant-button:focus-visible .food-icon .icon-fillable {
-  fill: var(--terracotta);
+  fill: color-mix(in srgb, var(--terracotta) 30%, var(--paper));
   stroke: transparent;
 }
 
@@ -831,35 +865,11 @@ select:focus-visible {
   stroke: transparent;
 }
 
-.chile-flag .flag-outline,
-.chile-flag .flag-detail {
+.food-type-item:hover .food-icon .icon-detail,
+.restaurant-button:hover .food-icon .icon-detail,
+.restaurant-button:focus-visible .food-icon .icon-detail {
   fill: none;
-  stroke: currentColor;
-}
-
-.chile-flag .flag-detail {
-  transition: fill 140ms ease, stroke 140ms ease;
-}
-
-.food-type-item:hover .chile-flag .flag-outline,
-.restaurant-button:hover .chile-flag .flag-outline,
-.restaurant-button:focus-visible .chile-flag .flag-outline {
-  fill: var(--terracotta);
-  stroke: transparent;
-}
-
-.food-type-item:hover .chile-flag .flag-detail,
-.restaurant-button:hover .chile-flag .flag-detail,
-.restaurant-button:focus-visible .chile-flag .flag-detail {
-  fill: none;
-  stroke: var(--paper);
-}
-
-.food-type-item:hover .chile-flag .flag-star,
-.restaurant-button:hover .chile-flag .flag-star,
-.restaurant-button:focus-visible .chile-flag .flag-star {
-  fill: var(--paper);
-  stroke: transparent;
+  stroke: var(--terracotta);
 }
 
 .restaurant-action {
@@ -951,15 +961,22 @@ select:focus-visible {
 }
 
 .about-data {
-  padding-top: 0;
+  padding-top: clamp(4rem, 8vw, 7rem);
   padding-bottom: clamp(4rem, 8vw, 7rem);
   border-top: 1px solid var(--ink);
 }
 
-.about-visual {
+.about-grid {
+  display: grid;
+  grid-template-columns: minmax(300px, 0.9fr) minmax(320px, 0.7fr);
+  gap: clamp(3rem, 9vw, 10rem);
+  padding-inline: clamp(1.5rem, 3vw, 3rem);
+}
+
+.about-lead {
   position: relative;
   display: flex;
-  min-height: clamp(320px, 38vw, 520px);
+  min-height: clamp(360px, 34vw, 500px);
   align-items: flex-end;
   background-color: var(--ink);
   background-image: url("assets/images/about/empanadas-de-pino.jpg");
@@ -969,7 +986,7 @@ select:focus-visible {
   overflow: hidden;
 }
 
-.about-visual::after {
+.about-lead::after {
   position: absolute;
   z-index: 0;
   inset: 0;
@@ -978,30 +995,14 @@ select:focus-visible {
   pointer-events: none;
 }
 
-.about-visual h2 {
+.about-lead h2 {
   position: relative;
   z-index: 1;
   width: 100%;
+  margin: 0;
   padding: clamp(1.5rem, 3vw, 3rem);
   color: var(--white);
   text-shadow: 0 1px 4px rgba(15, 13, 10, 0.62);
-}
-
-.about-grid {
-  display: grid;
-  grid-template-columns: minmax(300px, 0.9fr) minmax(320px, 0.7fr);
-  gap: clamp(3rem, 9vw, 10rem);
-  margin-top: clamp(2.5rem, 5vw, 4.5rem);
-  padding-inline: clamp(1.5rem, 3vw, 3rem);
-}
-
-.about-lead {
-  margin: 0;
-  color: var(--terracotta-dark);
-  font-family: var(--serif);
-  font-size: clamp(2rem, 3.3vw, 3.6rem);
-  letter-spacing: -0.045em;
-  line-height: 1;
 }
 
 .about-copy {
@@ -1016,7 +1017,6 @@ select:focus-visible {
 
 .site-footer {
   background-color: var(--terracotta);
-  border-top: 4px solid var(--ink);
   color: var(--white);
 }
 
@@ -1682,12 +1682,12 @@ select:focus-visible {
     font-size: 3rem;
   }
 
-  .about-visual {
+  .about-lead {
     min-height: 290px;
     background-position: 56% center;
   }
 
-  .about-visual h2,
+  .about-lead h2,
   .about-grid {
     padding-inline: 1.25rem;
   }
