@@ -675,6 +675,10 @@ select:focus-visible {
   border-left: 1px solid var(--line);
 }
 
+.list-header > span:nth-child(3) {
+  font-weight: 400;
+}
+
 .restaurant-row {
   margin: 0;
   border-bottom: 1px solid var(--line);
