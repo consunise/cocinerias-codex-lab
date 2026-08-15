@@ -45,17 +45,10 @@
         <nav class="header-social" aria-label="Redes sociales">
           <!-- Enlaces placeholder: reemplazar en SOCIAL_LINKS dentro de script.js. -->
           <a href="#contacto" data-social="whatsapp" aria-label="WhatsApp de Cocinerías de Chile">
-            <svg class="social-icon social-icon--whatsapp" viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M20.5 11.7a8.5 8.5 0 0 1-12.65 7.42L3.5 20.5l1.4-4.2a8.5 8.5 0 1 1 15.6-4.6Z"></path>
-              <path d="M8.1 7.55c.35-.35.85-.25 1.08.16l1.22 2.16c.16.29.11.65-.13.88l-1.02.98a7.9 7.9 0 0 0 3.05 3.03l.98-1.02c.23-.24.59-.29.88-.13l2.16 1.22c.41.23.5.73.16 1.08l-.7.7c-.55.55-1.37.78-2.12.56-3.18-.92-5.88-3.62-6.8-6.8-.22-.75.01-1.57.56-2.12l.68-.7Z"></path>
-            </svg>
+            <span class="social-icon social-icon--whatsapp" aria-hidden="true"></span>
           </a>
           <a href="#contacto" data-social="instagram" aria-label="Instagram de Cocinerías de Chile">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <rect x="4" y="4" width="16" height="16" rx="4"></rect>
-              <circle cx="12" cy="12" r="3.5"></circle>
-              <circle class="icon-fill" cx="17.4" cy="6.8" r="1"></circle>
-            </svg>
+            <span class="social-icon social-icon--instagram" aria-hidden="true"></span>
           </a>
         </nav>
       </div>
@@ -87,14 +80,23 @@
               </button>
             </div>
 
-            <div class="filter-group">
-              <label for="region-filter">Región</label>
-              <div class="select-wrap">
-                <select id="region-filter" name="region">
-                  <option value="">Todas las regiones</option>
-                </select>
-              </div>
-            </div>
+            <section class="filter-group filter-group--collapsible" aria-labelledby="region-filter-toggle">
+              <h3 class="filter-group-heading">
+                <button
+                  class="filter-disclosure"
+                  id="region-filter-toggle"
+                  type="button"
+                  aria-expanded="false"
+                  aria-controls="region-filters"
+                >
+                  <span>Región <span class="filter-selection-count" id="region-filter-count" hidden></span></span>
+                  <svg class="filter-chevron" viewBox="0 0 20 20" aria-hidden="true">
+                    <path d="m5 7.5 5 5 5-5"></path>
+                  </svg>
+                </button>
+              </h3>
+              <div class="filter-options" id="region-filters" role="group" hidden></div>
+            </section>
 
             <section class="filter-group filter-group--collapsible" aria-labelledby="food-filter-toggle">
               <h3 class="filter-group-heading">
@@ -138,7 +140,7 @@
           <div class="results-area">
             <div class="results-toolbar">
               <div class="results-meta">
-                <p class="results-count" id="results-count" aria-live="polite"></p>
+                <p class="results-count" id="results-count" tabindex="-1" aria-live="polite"></p>
                 <p class="regions-count"><strong>16</strong> regiones</p>
               </div>
               <p class="active-summary" id="active-summary"></p>
@@ -153,16 +155,16 @@
 
             <div class="restaurant-list" id="restaurant-list"></div>
 
-            <button
-              class="load-more"
-              id="load-more"
-              type="button"
-              aria-controls="restaurant-list"
-              aria-expanded="false"
-              hidden
-            >
-              Ver más cocinerías
-            </button>
+            <nav class="pagination" id="pagination" aria-label="Páginas del directorio" hidden>
+              <button class="pagination-arrow" id="pagination-prev" type="button" aria-controls="restaurant-list">
+                <span aria-hidden="true">←</span> Anterior
+              </button>
+              <div class="pagination-pages" id="pagination-pages"></div>
+              <button class="pagination-arrow" id="pagination-next" type="button" aria-controls="restaurant-list">
+                Siguiente <span aria-hidden="true">→</span>
+              </button>
+              <p class="pagination-status" id="pagination-status" aria-live="polite"></p>
+            </nav>
 
             <div class="empty-state" id="empty-state" hidden>
               <p class="empty-number">0</p>
@@ -177,7 +179,41 @@
       <section class="about-data" id="sobre-los-datos" aria-labelledby="data-title">
         <div class="about-grid">
           <div class="about-lead">
-            <h2 id="data-title">Acerca de esta guía</h2>
+            <div
+              class="about-carousel"
+              id="about-carousel"
+              role="region"
+              aria-roledescription="carrusel"
+              aria-label="Comidas y paisajes de Chile"
+              tabindex="0"
+            >
+              <div class="about-carousel-track" id="about-carousel-track">
+                <figure class="about-slide is-active" aria-hidden="false">
+                  <img src="assets/images/about/empanadas-de-pino.jpg" alt="Empanadas de pino, preparación tradicional chilena" />
+                </figure>
+                <figure class="about-slide" aria-hidden="true">
+                  <img src="assets/images/cocinerias/cl-ap-001.jpg" alt="Fachada de la cocinería Mata Rangi en Arica" />
+                </figure>
+                <figure class="about-slide" aria-hidden="true">
+                  <img src="assets/images/cocinerias/cl-an-003.jpg" alt="Formaciones del paisaje desértico de Atacama" />
+                </figure>
+                <figure class="about-slide" aria-hidden="true">
+                  <img src="assets/images/cocinerias/cl-ar-012.jpg" alt="Paisaje cordillerano y volcánico de La Araucanía" />
+                </figure>
+              </div>
+              <h2 id="data-title">Acerca de esta guía</h2>
+              <div class="about-carousel-controls" aria-label="Controles del carrusel">
+                <button class="about-carousel-arrow" id="about-carousel-prev" type="button" aria-label="Fotografía anterior" aria-controls="about-carousel-track">←</button>
+                <div class="about-carousel-indicators" id="about-carousel-indicators" aria-label="Elegir fotografía">
+                  <button type="button" data-carousel-index="0" aria-label="Ver fotografía 1 de 4" aria-current="true"></button>
+                  <button type="button" data-carousel-index="1" aria-label="Ver fotografía 2 de 4"></button>
+                  <button type="button" data-carousel-index="2" aria-label="Ver fotografía 3 de 4"></button>
+                  <button type="button" data-carousel-index="3" aria-label="Ver fotografía 4 de 4"></button>
+                </div>
+                <button class="about-carousel-arrow" id="about-carousel-next" type="button" aria-label="Fotografía siguiente" aria-controls="about-carousel-track">→</button>
+              </div>
+              <p class="sr-only" id="about-carousel-status" aria-live="polite">Fotografía 1 de 4</p>
+            </div>
           </div>
           <div class="about-copy">
             <p>
@@ -206,24 +242,24 @@
         <div class="footer-information">
           <p class="footer-label">Información</p>
           <a href="#sobre-los-datos">Acerca de esta guía</a>
-          <p>Datos verificados el 12.08.2026</p>
+          <p class="footer-date">Datos verificados el 12.08.2026</p>
+          <p class="footer-attribution">
+            Iconos sociales diseñados por
+            <a href="https://www.flaticon.com/free-icon/whatsapp_3884530" target="_blank" rel="noopener noreferrer">Magnific</a>
+            y
+            <a href="https://www.flaticon.com/free-icon/instagram_8025149" target="_blank" rel="noopener noreferrer">Bharat Icons</a>
+            desde <a href="https://www.flaticon.com/" target="_blank" rel="noopener noreferrer">Flaticon</a>.
+          </p>
         </div>
 
         <div class="footer-contact">
           <p class="footer-label">Contacto</p>
           <a href="#contacto" data-social="whatsapp">
-            <svg class="social-icon social-icon--whatsapp" viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M20.5 11.7a8.5 8.5 0 0 1-12.65 7.42L3.5 20.5l1.4-4.2a8.5 8.5 0 1 1 15.6-4.6Z"></path>
-              <path d="M8.1 7.55c.35-.35.85-.25 1.08.16l1.22 2.16c.16.29.11.65-.13.88l-1.02.98a7.9 7.9 0 0 0 3.05 3.03l.98-1.02c.23-.24.59-.29.88-.13l2.16 1.22c.41.23.5.73.16 1.08l-.7.7c-.55.55-1.37.78-2.12.56-3.18-.92-5.88-3.62-6.8-6.8-.22-.75.01-1.57.56-2.12l.68-.7Z"></path>
-            </svg>
+            <span class="social-icon social-icon--whatsapp" aria-hidden="true"></span>
             <span>Contáctanos por WhatsApp</span>
           </a>
           <a href="#contacto" data-social="instagram">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <rect x="4" y="4" width="16" height="16" rx="4"></rect>
-              <circle cx="12" cy="12" r="3.5"></circle>
-              <circle class="icon-fill" cx="17.4" cy="6.8" r="1"></circle>
-            </svg>
+            <span class="social-icon social-icon--instagram" aria-hidden="true"></span>
             <span>Síguenos en nuestras redes sociales</span>
           </a>
         </div>

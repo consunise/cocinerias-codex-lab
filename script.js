@@ -10,8 +10,7 @@
     bands: ["Económico", "Moderado", "Alto"],
     assignBand: (_restaurant, index) => ["Económico", "Moderado", "Alto"][index % 3],
   });
-  const INITIAL_RESULT_LIMIT = 10;
-  const RESULT_BATCH_SIZE = 10;
+  const PAGE_SIZE = 10;
 
   // CARACTERÍSTICAS DE VISITA: estructura preparada para datos reales futuros.
   // Solo la accesibilidad se marca como informada cuando la fuente lo declara explícitamente.
@@ -39,10 +38,14 @@
     directory: document.querySelector(".directory"),
     directoryHeading: document.querySelector(".directory-heading"),
     siteHeader: document.querySelector(".site-header"),
+    resultsArea: document.querySelector(".results-area"),
+    listHeader: document.querySelector(".list-header"),
     searchForm: document.querySelector("#search-form"),
     searchInput: document.querySelector("#search-input"),
     searchClear: document.querySelector("#search-clear"),
-    regionFilter: document.querySelector("#region-filter"),
+    regionFilters: document.querySelector("#region-filters"),
+    regionFilterToggle: document.querySelector("#region-filter-toggle"),
+    regionFilterCount: document.querySelector("#region-filter-count"),
     foodFilters: document.querySelector("#food-filters"),
     priceFilters: document.querySelector("#price-filters"),
     foodFilterToggle: document.querySelector("#food-filter-toggle"),
@@ -51,9 +54,14 @@
     priceFilterCount: document.querySelector("#price-filter-count"),
     resetFilters: document.querySelector("#reset-filters"),
     resultsCount: document.querySelector("#results-count"),
+    resultsToolbar: document.querySelector(".results-toolbar"),
     activeSummary: document.querySelector("#active-summary"),
     restaurantList: document.querySelector("#restaurant-list"),
-    loadMore: document.querySelector("#load-more"),
+    pagination: document.querySelector("#pagination"),
+    paginationPages: document.querySelector("#pagination-pages"),
+    paginationPrev: document.querySelector("#pagination-prev"),
+    paginationNext: document.querySelector("#pagination-next"),
+    paginationStatus: document.querySelector("#pagination-status"),
     emptyState: document.querySelector("#empty-state"),
     emptyReset: document.querySelector("#empty-reset"),
     filterToggle: document.querySelector("#filter-toggle"),
@@ -70,6 +78,12 @@
     modalNext: document.querySelector("#modal-next"),
     modalPrevName: document.querySelector("#modal-prev-name"),
     modalNextName: document.querySelector("#modal-next-name"),
+    aboutCarousel: document.querySelector("#about-carousel"),
+    aboutSlides: [...document.querySelectorAll(".about-slide")],
+    aboutCarouselPrev: document.querySelector("#about-carousel-prev"),
+    aboutCarouselNext: document.querySelector("#about-carousel-next"),
+    aboutCarouselIndicators: document.querySelector("#about-carousel-indicators"),
+    aboutCarouselStatus: document.querySelector("#about-carousel-status"),
   };
 
   const state = {
@@ -81,7 +95,8 @@
     modalId: null,
     lastFocused: null,
     filtersOpen: false,
-    visibleLimit: INITIAL_RESULT_LIMIT,
+    currentPage: 1,
+    carouselIndex: 0,
   };
 
   const foodOrder = [
@@ -184,7 +199,7 @@
 
   function foodIcon(category) {
     const iconPaths = {
-      "Comida chilena": '<rect class="icon-fillable flag-outline" x="3" y="6" width="18" height="12" rx="1"></rect><path class="icon-detail flag-detail" d="M3 12h18M10 6v6"></path><path class="icon-detail flag-detail flag-star" d="m6.5 7.4.45 1.05 1.15.1-.88.76.27 1.12-.99-.6-.99.6.27-1.12-.88-.76 1.15-.1Z"></path>',
+      "Comida chilena": '<path class="flag-lower" d="M3 12h18v6H3Z"></path><rect class="flag-outline" x="3" y="6" width="18" height="12" rx="1"></rect><path class="flag-divider" d="M3 12h18M10 6v6"></path><path class="flag-star" d="m6.5 6.9.5 1.29 1.4.08-1.09.88.34 1.4-1.15-.78-1.15.78.34-1.4-1.09-.88 1.4-.08Z"></path>',
       "Cocina casera": '<path class="icon-fillable" d="M5 10h14v7H5Z"></path><path class="icon-detail" d="M3.5 12H5M19 12h1.5M8 8h8M10 6h4"></path>',
       Pescados: '<path class="icon-fillable" d="M4 12c3-4 7-5 11-2l3-3v10l-3-3c-4 3-8 2-11-2Z"></path><circle class="icon-detail" cx="12.5" cy="11" r=".8"></circle>',
       Mariscos: '<path class="icon-fillable" d="M4 18c.7-6.2 3.8-11 8-11s7.3 4.8 8 11H4Z"></path><path class="icon-detail" d="M12 7v11M8.5 8.5 10 18M15.5 8.5 14 18M5.8 13h12.4"></path>',
@@ -272,12 +287,35 @@
     const regions = [...new Set(restaurants.map((item) => item.region).filter(Boolean))].sort(
       (a, b) => a.localeCompare(b, "es"),
     );
-    elements.regionFilter.insertAdjacentHTML(
-      "beforeend",
-      regions
-        .map((region) => `<option value="${escapeHTML(region)}">${escapeHTML(region)}</option>`)
-        .join(""),
-    );
+    const regionCounts = countBy(restaurants, (item) => [item.region]);
+    elements.regionFilters.innerHTML = `
+      <button
+        class="filter-option"
+        type="button"
+        data-filter-group="region"
+        data-filter-value=""
+        aria-pressed="true"
+      >
+        <span class="option-label">Todas las regiones</span>
+        <span class="option-count">${restaurants.length}</span>
+      </button>
+      ${regions
+        .map(
+          (region) => `
+            <button
+              class="filter-option"
+              type="button"
+              data-filter-group="region"
+              data-filter-value="${escapeHTML(region)}"
+              aria-pressed="false"
+            >
+              <span class="option-label">${escapeHTML(region)}</span>
+              <span class="option-count">${regionCounts.get(region) ?? 0}</span>
+            </button>
+          `,
+        )
+        .join("")}
+    `;
 
     renderFilterOptions(
       elements.foodFilters,
@@ -299,6 +337,7 @@
 
   function updateFilterDisclosureState() {
     [
+      [elements.regionFilterToggle, elements.regionFilterCount, state.region ? 1 : 0],
       [elements.foodFilterToggle, elements.foodFilterCount, state.foods.size],
       [elements.priceFilterToggle, elements.priceFilterCount, state.prices.size],
     ].forEach(([toggle, countElement, count]) => {
@@ -319,7 +358,7 @@
   }
 
   function applyFilters({ resetPagination = true } = {}) {
-    if (resetPagination) state.visibleLimit = INITIAL_RESULT_LIMIT;
+    if (resetPagination) state.currentPage = 1;
     const normalizedQuery = normalize(state.query);
 
     state.visibleRestaurants = restaurants.filter((restaurant) => {
@@ -336,6 +375,67 @@
     });
 
     renderDirectory();
+  }
+
+  function paginationItems(currentPage, totalPages) {
+    if (totalPages <= 7) return Array.from({ length: totalPages }, (_, index) => index + 1);
+
+    const pages = new Set([1, totalPages, currentPage - 1, currentPage, currentPage + 1]);
+    if (currentPage <= 3) [2, 3, 4].forEach((page) => pages.add(page));
+    if (currentPage >= totalPages - 2) {
+      [totalPages - 3, totalPages - 2, totalPages - 1].forEach((page) => pages.add(page));
+    }
+
+    const orderedPages = [...pages]
+      .filter((page) => page >= 1 && page <= totalPages)
+      .sort((a, b) => a - b);
+    const items = [];
+    orderedPages.forEach((page, index) => {
+      if (index && page - orderedPages[index - 1] > 1) items.push("ellipsis");
+      items.push(page);
+    });
+    return items;
+  }
+
+  function renderPagination(totalPages, visibleCount) {
+    const shouldShow = totalPages > 1;
+    elements.pagination.hidden = !shouldShow;
+    if (!shouldShow) {
+      elements.paginationPages.innerHTML = "";
+      elements.paginationStatus.textContent = "";
+      return;
+    }
+
+    elements.paginationPrev.disabled = state.currentPage === 1;
+    elements.paginationNext.disabled = state.currentPage === totalPages;
+    elements.paginationPrev.setAttribute(
+      "aria-label",
+      state.currentPage === 1 ? "No hay una página anterior" : `Ir a la página ${state.currentPage - 1}`,
+    );
+    elements.paginationNext.setAttribute(
+      "aria-label",
+      state.currentPage === totalPages
+        ? "No hay una página siguiente"
+        : `Ir a la página ${state.currentPage + 1}`,
+    );
+    elements.paginationPages.innerHTML = paginationItems(state.currentPage, totalPages)
+      .map((item) => {
+        if (item === "ellipsis") return '<span class="pagination-ellipsis" aria-hidden="true">…</span>';
+        const current = item === state.currentPage;
+        return `
+          <button
+            class="pagination-page"
+            type="button"
+            data-page="${item}"
+            aria-label="Ir a la página ${item}"
+            ${current ? 'aria-current="page"' : ""}
+          >${item}</button>
+        `;
+      })
+      .join("");
+    const firstResult = (state.currentPage - 1) * PAGE_SIZE + 1;
+    const lastResult = Math.min(state.currentPage * PAGE_SIZE, visibleCount);
+    elements.paginationStatus.textContent = `Página ${state.currentPage} de ${totalPages} · resultados ${firstResult}–${lastResult}`;
   }
 
   function restaurantRow(restaurant) {
@@ -380,23 +480,15 @@
     const activeFilterCount = getActiveFilterCount();
     const isFiltered = activeFilterCount > 0;
     const isSearching = Boolean(state.query);
-    const renderedCount = Math.min(state.visibleLimit, visibleCount);
-    const listedRestaurants = state.visibleRestaurants.slice(0, renderedCount);
-    const hasMore = renderedCount < visibleCount;
-    const canCollapse = renderedCount > INITIAL_RESULT_LIMIT;
+    const totalPages = visibleCount ? Math.ceil(visibleCount / PAGE_SIZE) : 0;
+    state.currentPage = totalPages ? Math.min(state.currentPage, totalPages) : 1;
+    const pageStart = (state.currentPage - 1) * PAGE_SIZE;
+    const listedRestaurants = state.visibleRestaurants.slice(pageStart, pageStart + PAGE_SIZE);
 
     elements.restaurantList.innerHTML = listedRestaurants.map(restaurantRow).join("");
     elements.restaurantList.hidden = visibleCount === 0;
     elements.emptyState.hidden = visibleCount !== 0;
-    elements.loadMore.hidden = visibleCount <= INITIAL_RESULT_LIMIT;
-    elements.loadMore.textContent = hasMore ? "Ver más cocinerías" : "Ver menos";
-    elements.loadMore.setAttribute("aria-expanded", String(canCollapse));
-    elements.loadMore.setAttribute(
-      "aria-label",
-      hasMore
-        ? `Mostrar hasta ${Math.min(RESULT_BATCH_SIZE, visibleCount - renderedCount)} cocinerías más; ${renderedCount} de ${visibleCount} visibles`
-        : `Volver a mostrar ${INITIAL_RESULT_LIMIT} cocinerías`,
-    );
+    renderPagination(totalPages, visibleCount);
 
     elements.resultsCount.innerHTML = hasAnyActiveState()
       ? `<strong>${visibleCount}</strong> de ${restaurants.length} cocinerías`
@@ -412,7 +504,6 @@
 
     elements.searchClear.hidden = !isSearching;
     elements.resetFilters.disabled = !isFiltered;
-    elements.regionFilter.classList.toggle("is-default", !state.region);
     elements.filterToggleCount.textContent = activeFilterCount ? String(activeFilterCount) : "";
     updateFilterDisclosureState();
     elements.directory.dataset.state = visibleCount
@@ -422,6 +513,7 @@
           ? "filtered"
           : "default"
       : "empty";
+    requestListHeaderStickyUpdate();
   }
 
   function setPressedState(button, isPressed) {
@@ -431,6 +523,15 @@
   function handleFilterOption(button) {
     const group = button.dataset.filterGroup;
     const value = button.dataset.filterValue;
+    if (group === "region") {
+      state.region = value;
+      elements.regionFilters.querySelectorAll(".filter-option").forEach((regionButton) => {
+        setPressedState(regionButton, regionButton === button);
+      });
+      applyFilters();
+      return;
+    }
+
     const selectedValues = state[group];
     if (!(selectedValues instanceof Set)) return;
 
@@ -448,10 +549,11 @@
     state.region = "";
     state.foods.clear();
     state.prices.clear();
-    elements.regionFilter.value = "";
     document.querySelectorAll(".filter-option[aria-pressed='true']").forEach((button) => {
       setPressedState(button, false);
     });
+    const allRegionsButton = elements.regionFilters.querySelector('[data-filter-value=""]');
+    if (allRegionsButton) setPressedState(allRegionsButton, true);
 
     if (includeSearch) {
       state.query = "";
@@ -473,9 +575,34 @@
     });
   }
 
+  let listHeaderFrame = 0;
+
+  function updateListHeaderStickyState() {
+    listHeaderFrame = 0;
+    if (!elements.listHeader || !elements.resultsArea) return;
+
+    const headerHeight = elements.siteHeader?.offsetHeight ?? 0;
+    const listHeaderRect = elements.listHeader.getBoundingClientRect();
+    const resultsRect = elements.resultsArea.getBoundingClientRect();
+    const isVisible = window.getComputedStyle(elements.listHeader).display !== "none";
+    const isStuck =
+      isVisible &&
+      listHeaderRect.top <= headerHeight + 0.5 &&
+      listHeaderRect.bottom > headerHeight &&
+      resultsRect.bottom > listHeaderRect.bottom;
+
+    elements.listHeader.classList.toggle("is-stuck", isStuck);
+  }
+
+  function requestListHeaderStickyUpdate() {
+    if (listHeaderFrame) return;
+    listHeaderFrame = window.requestAnimationFrame(updateListHeaderStickyState);
+  }
+
   function updateStickyOffsets() {
     const headerHeight = elements.siteHeader?.offsetHeight ?? 0;
     document.documentElement.style.setProperty("--header-height", `${headerHeight}px`);
+    requestListHeaderStickyUpdate();
   }
 
   function clearFiltersAndReturnToDirectory() {
@@ -484,24 +611,27 @@
     scrollToDirectoryStart();
   }
 
-  function toggleListExpansion() {
-    const isCollapsing = state.visibleLimit >= state.visibleRestaurants.length;
-    state.visibleLimit = isCollapsing
-      ? INITIAL_RESULT_LIMIT
-      : Math.min(state.visibleLimit + RESULT_BATCH_SIZE, state.visibleRestaurants.length);
-    renderDirectory();
-
-    if (!isCollapsing) return;
+  function scrollToResultsStart() {
     requestAnimationFrame(() => {
-      elements.loadMore.focus({ preventScroll: true });
-      const headerHeight = document.querySelector(".site-header")?.offsetHeight ?? 0;
-      const toolbarTop =
-        document.querySelector(".results-toolbar").getBoundingClientRect().top + window.scrollY;
+      const headerHeight = elements.siteHeader?.offsetHeight ?? 0;
+      const destinationTop = elements.resultsToolbar.getBoundingClientRect().top + window.scrollY;
       const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       window.scrollTo({
-        top: Math.max(0, toolbarTop - headerHeight - 16),
+        top: Math.max(0, destinationTop - headerHeight - 16),
         behavior: reducedMotion ? "auto" : "smooth",
       });
+    });
+  }
+
+  function goToPage(page) {
+    const totalPages = Math.ceil(state.visibleRestaurants.length / PAGE_SIZE);
+    const nextPage = Math.min(Math.max(page, 1), totalPages);
+    if (!totalPages || nextPage === state.currentPage) return;
+    state.currentPage = nextPage;
+    renderDirectory();
+    requestAnimationFrame(() => {
+      elements.resultsCount.focus({ preventScroll: true });
+      scrollToResultsStart();
     });
   }
 
@@ -682,6 +812,29 @@
     elements.modalClose.focus();
   }
 
+  function setCarouselSlide(index, { announce = true } = {}) {
+    const total = elements.aboutSlides.length;
+    if (!total) return;
+    state.carouselIndex = (index + total) % total;
+    elements.aboutSlides.forEach((slide, slideIndex) => {
+      const isActive = slideIndex === state.carouselIndex;
+      slide.classList.toggle("is-active", isActive);
+      slide.setAttribute("aria-hidden", String(!isActive));
+    });
+    elements.aboutCarouselIndicators.querySelectorAll("[data-carousel-index]").forEach((indicator) => {
+      const isActive = Number(indicator.dataset.carouselIndex) === state.carouselIndex;
+      if (isActive) indicator.setAttribute("aria-current", "true");
+      else indicator.removeAttribute("aria-current");
+    });
+    if (announce) {
+      elements.aboutCarouselStatus.textContent = `Fotografía ${state.carouselIndex + 1} de ${total}`;
+    }
+  }
+
+  function navigateCarousel(direction) {
+    setCarouselSlide(state.carouselIndex + direction);
+  }
+
   function openFilters() {
     if (state.filtersOpen) return;
     state.filtersOpen = true;
@@ -712,9 +865,8 @@
       applyFilters();
       elements.searchInput.focus();
     });
-    elements.regionFilter.addEventListener("change", (event) => {
-      state.region = event.target.value;
-      applyFilters();
+    elements.regionFilterToggle.addEventListener("click", () => {
+      toggleFilterSection(elements.regionFilterToggle, elements.regionFilters);
     });
     elements.foodFilterToggle.addEventListener("click", () => {
       toggleFilterSection(elements.foodFilterToggle, elements.foodFilters);
@@ -735,7 +887,33 @@
       const button = event.target.closest("[data-restaurant-id]");
       if (button) openModal(button.dataset.restaurantId, button);
     });
-    elements.loadMore.addEventListener("click", toggleListExpansion);
+    elements.pagination.addEventListener("click", (event) => {
+      const pageButton = event.target.closest("[data-page]");
+      if (pageButton) {
+        goToPage(Number(pageButton.dataset.page));
+        return;
+      }
+      if (event.target.closest("#pagination-prev")) goToPage(state.currentPage - 1);
+      if (event.target.closest("#pagination-next")) goToPage(state.currentPage + 1);
+    });
+
+    elements.aboutCarouselPrev.addEventListener("click", () => navigateCarousel(-1));
+    elements.aboutCarouselNext.addEventListener("click", () => navigateCarousel(1));
+    elements.aboutCarouselIndicators.addEventListener("click", (event) => {
+      const indicator = event.target.closest("[data-carousel-index]");
+      if (indicator) setCarouselSlide(Number(indicator.dataset.carouselIndex));
+    });
+    elements.aboutCarousel.addEventListener("keydown", (event) => {
+      if (event.altKey || event.ctrlKey || event.metaKey) return;
+      if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        navigateCarousel(-1);
+      }
+      if (event.key === "ArrowRight") {
+        event.preventDefault();
+        navigateCarousel(1);
+      }
+    });
 
     elements.modalClose.addEventListener("click", closeModal);
     elements.modalPrev.addEventListener("click", () => navigateModal(-1));
@@ -776,6 +954,7 @@
       updateStickyOffsets();
       if (window.innerWidth > 720 && state.filtersOpen) closeFilters({ returnFocus: false });
     });
+    window.addEventListener("scroll", requestListHeaderStickyUpdate, { passive: true });
   }
 
   function initialise() {
@@ -789,6 +968,7 @@
     initialiseFilters();
     bindEvents();
     applyFilters();
+    setCarouselSlide(0, { announce: false });
   }
 
   initialise();

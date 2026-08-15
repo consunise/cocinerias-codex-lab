@@ -237,26 +237,27 @@ select:focus-visible {
   color: var(--terracotta-dark);
 }
 
-.header-social svg,
-.footer-contact svg {
+.social-icon {
+  display: block;
   width: 22px;
   height: 22px;
-  fill: none;
-  stroke: currentColor;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-width: 1.6;
+  background-color: currentColor;
+  -webkit-mask-position: center;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-size: contain;
+  mask-position: center;
+  mask-repeat: no-repeat;
+  mask-size: contain;
 }
 
-.header-social .social-icon--whatsapp,
-.footer-contact .social-icon--whatsapp {
-  stroke-width: 1.45;
+.social-icon--whatsapp {
+  -webkit-mask-image: url("assets/icons/social/whatsapp-flaticon-magnific.png");
+  mask-image: url("assets/icons/social/whatsapp-flaticon-magnific.png");
 }
 
-.header-social .icon-fill,
-.footer-contact .icon-fill {
-  fill: currentColor;
-  stroke: none;
+.social-icon--instagram {
+  -webkit-mask-image: url("assets/icons/social/instagram-flaticon-bharat-icons.png");
+  mask-image: url("assets/icons/social/instagram-flaticon-bharat-icons.png");
 }
 
 .header-social a[data-placeholder="true"] {
@@ -407,17 +408,6 @@ select:focus-visible {
   border-top: 1px solid var(--line);
 }
 
-.filter-group label {
-  display: block;
-  width: 100%;
-  margin-bottom: 0.55rem;
-  padding: 0;
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.11em;
-  text-transform: uppercase;
-}
-
 .filter-group-heading {
   margin: 0;
 }
@@ -466,60 +456,6 @@ select:focus-visible {
   transform: rotate(180deg);
 }
 
-.select-wrap {
-  position: relative;
-}
-
-.select-wrap::after {
-  position: absolute;
-  top: 50%;
-  right: 0.8rem;
-  width: 0.45rem;
-  height: 0.45rem;
-  border-right: 1.5px solid var(--ink);
-  border-bottom: 1.5px solid var(--ink);
-  content: "";
-  pointer-events: none;
-  transform: translateY(-65%) rotate(45deg);
-}
-
-.filter-group select {
-  width: 100%;
-  min-height: 44px;
-  padding: 0.55rem 2.1rem 0.55rem 0.65rem;
-  border: 1px solid var(--line-dark);
-  border-radius: 0;
-  appearance: none;
-  background: var(--paper);
-  color: var(--ink);
-  cursor: pointer;
-  font-size: 0.85rem;
-  transition: background-color 140ms ease, border-color 140ms ease, box-shadow 140ms ease;
-}
-
-.filter-group select.is-default {
-  border-color: var(--terracotta-dark);
-  background: var(--paper-deep);
-  box-shadow: inset 3px 0 0 var(--terracotta);
-}
-
-.filter-group select:hover {
-  border-color: var(--terracotta);
-  background: var(--paper-deep);
-}
-
-.filter-group select:focus-visible {
-  border-color: var(--terracotta-dark);
-  background: var(--paper-deep);
-  outline: 3px solid var(--terracotta);
-  outline-offset: 2px;
-}
-
-.filter-group select option {
-  background: var(--paper);
-  color: var(--ink);
-}
-
 .filter-options {
   display: grid;
   gap: 0.12rem;
@@ -564,6 +500,11 @@ select:focus-visible {
   box-shadow: inset 0 0 0 3px var(--paper);
 }
 
+.filter-option:hover {
+  background: var(--paper-deep);
+  color: var(--ink);
+}
+
 .filter-option .option-label {
   font-size: 0.88rem;
 }
@@ -593,6 +534,7 @@ select:focus-visible {
 
 .results-area {
   min-width: 0;
+  --restaurant-columns: minmax(290px, 1.45fr) minmax(140px, 0.48fr) minmax(155px, 0.5fr) 112px;
 }
 
 .results-toolbar {
@@ -651,7 +593,7 @@ select:focus-visible {
   z-index: 8;
   top: var(--header-height);
   display: grid;
-  grid-template-columns: minmax(320px, 1.6fr) minmax(150px, 0.55fr) minmax(120px, 0.4fr) 112px;
+  grid-template-columns: var(--restaurant-columns);
   gap: 0;
   padding: 0;
   border-top: 1px solid var(--ink);
@@ -662,6 +604,10 @@ select:focus-visible {
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
+}
+
+.list-header.is-stuck {
+  border-top-color: transparent;
 }
 
 .list-header > span {
@@ -675,10 +621,6 @@ select:focus-visible {
   border-left: 1px solid var(--line);
 }
 
-.list-header > span:nth-child(3) {
-  font-weight: 400;
-}
-
 .restaurant-row {
   margin: 0;
   border-bottom: 1px solid var(--line);
@@ -686,7 +628,7 @@ select:focus-visible {
 
 .restaurant-button {
   display: grid;
-  grid-template-columns: minmax(320px, 1.6fr) minmax(150px, 0.55fr) minmax(120px, 0.4fr) 112px;
+  grid-template-columns: var(--restaurant-columns);
   gap: 0;
   align-items: stretch;
   width: 100%;
@@ -715,7 +657,7 @@ select:focus-visible {
   min-width: 0;
   min-height: 184px;
   align-items: center;
-  padding: clamp(1.2rem, 2.5vw, 2rem);
+  padding: clamp(1rem, 1.8vw, 1.5rem);
   background-color: var(--terracotta-dark);
   color: var(--white);
   isolation: isolate;
@@ -856,6 +798,46 @@ select:focus-visible {
   stroke: currentColor;
 }
 
+.chile-flag .flag-lower {
+  fill: none;
+  stroke: none;
+}
+
+.chile-flag .flag-outline,
+.chile-flag .flag-divider {
+  fill: none;
+  stroke: var(--terracotta);
+}
+
+.chile-flag .flag-star {
+  fill: var(--terracotta);
+  stroke: none;
+}
+
+.restaurant-button:hover .chile-flag .flag-lower,
+.restaurant-button:focus-visible .chile-flag .flag-lower,
+.food-type-item:hover .chile-flag .flag-lower {
+  fill: var(--terracotta);
+  stroke: none;
+}
+
+.restaurant-button:hover .chile-flag .flag-outline,
+.restaurant-button:focus-visible .chile-flag .flag-outline,
+.food-type-item:hover .chile-flag .flag-outline,
+.restaurant-button:hover .chile-flag .flag-divider,
+.restaurant-button:focus-visible .chile-flag .flag-divider,
+.food-type-item:hover .chile-flag .flag-divider {
+  fill: none;
+  stroke: var(--terracotta);
+}
+
+.restaurant-button:hover .chile-flag .flag-star,
+.restaurant-button:focus-visible .chile-flag .flag-star,
+.food-type-item:hover .chile-flag .flag-star {
+  fill: var(--terracotta);
+  stroke: none;
+}
+
 .food-type-item:hover .food-icon .icon-fillable,
 .restaurant-button:hover .food-icon .icon-fillable,
 .restaurant-button:focus-visible .food-icon .icon-fillable {
@@ -906,29 +888,75 @@ select:focus-visible {
   color: var(--paper);
 }
 
-.load-more {
-  width: 100%;
-  min-height: 66px;
-  padding: 0.9rem 1.25rem;
+.pagination {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+}
+
+.pagination[hidden] {
+  display: none;
+}
+
+.pagination button {
+  min-width: 44px;
+  min-height: 48px;
   border: 0;
-  border-bottom: 1px solid var(--ink);
   background: transparent;
   color: var(--terracotta-dark);
   cursor: pointer;
-  font-size: 0.82rem;
+  font-size: 0.78rem;
   font-weight: 700;
-  letter-spacing: 0.02em;
   transition: background-color 140ms ease, color 140ms ease;
 }
 
-.load-more:hover {
+.pagination button:hover:not(:disabled) {
   background: var(--paper-deep);
   color: var(--ink);
 }
 
+.pagination button:disabled {
+  color: var(--line-dark);
+  cursor: default;
+}
+
+.pagination-arrow {
+  padding-inline: 1rem;
+}
+
+.pagination-pages {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.15rem;
+  padding: 0.55rem;
+}
+
+.pagination-page[aria-current="page"] {
+  background: var(--terracotta);
+  color: var(--paper);
+}
+
+.pagination-ellipsis {
+  display: grid;
+  min-width: 32px;
+  min-height: 44px;
+  place-items: center;
+  color: var(--ink-soft);
+}
+
+.pagination-status {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding: 0.7rem 1rem;
+  border-top: 1px solid var(--line);
+  color: var(--ink-soft);
+  font-size: 0.74rem;
+  text-align: center;
+}
+
 .empty-state {
   padding: clamp(3rem, 8vw, 7rem) 1rem;
-  border-bottom: 1px solid var(--ink);
   text-align: center;
 }
 
@@ -979,29 +1007,58 @@ select:focus-visible {
 
 .about-lead {
   position: relative;
-  display: flex;
   min-height: clamp(360px, 34vw, 500px);
-  align-items: flex-end;
   background-color: var(--ink);
-  background-image: url("assets/images/about/empanadas-de-pino.jpg");
-  background-position: center 55%;
-  background-size: cover;
   isolation: isolate;
   overflow: hidden;
 }
 
-.about-lead::after {
+.about-carousel,
+.about-carousel-track,
+.about-slide {
   position: absolute;
-  z-index: 0;
+  inset: 0;
+}
+
+.about-carousel {
+  outline-offset: -4px;
+}
+
+.about-carousel:focus-visible {
+  outline-color: var(--white);
+}
+
+.about-carousel::after {
+  position: absolute;
+  z-index: 1;
   inset: 0;
   background: linear-gradient(180deg, transparent 48%, rgba(15, 13, 10, 0.72) 100%);
   content: "";
   pointer-events: none;
 }
 
+.about-slide {
+  margin: 0;
+  opacity: 0;
+  transition: opacity 240ms ease;
+}
+
+.about-slide.is-active {
+  opacity: 1;
+}
+
+.about-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .about-lead h2 {
-  position: relative;
-  z-index: 1;
+  position: absolute;
+  z-index: 2;
+  bottom: 0;
+  left: 0;
   width: 100%;
   margin: 0;
   padding: clamp(1.5rem, 3vw, 3rem);
@@ -1009,7 +1066,64 @@ select:focus-visible {
   text-shadow: 0 1px 4px rgba(15, 13, 10, 0.62);
 }
 
+.about-carousel-controls {
+  position: absolute;
+  z-index: 3;
+  top: clamp(0.75rem, 2vw, 1.25rem);
+  right: clamp(0.75rem, 2vw, 1.25rem);
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.3rem;
+  background: rgba(29, 28, 25, 0.72);
+}
+
+.about-carousel-arrow,
+.about-carousel-indicators button {
+  display: grid;
+  width: 40px;
+  height: 40px;
+  place-items: center;
+  border: 1px solid rgba(255, 253, 248, 0.72);
+  background: transparent;
+  color: var(--white);
+  cursor: pointer;
+}
+
+.about-carousel-arrow:hover,
+.about-carousel-indicators button:hover {
+  border-color: var(--white);
+  background: var(--white);
+  color: var(--terracotta-dark);
+}
+
+.about-carousel-indicators {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.about-carousel-indicators button {
+  width: 16px;
+  height: 40px;
+  border: 0;
+  background: transparent;
+}
+
+.about-carousel-indicators button::before {
+  width: 6px;
+  height: 6px;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  content: "";
+}
+
+.about-carousel-indicators button[aria-current="true"]::before {
+  color: var(--white);
+  background: currentColor;
+}
+
 .about-copy {
+  align-self: end;
   font-family: var(--serif);
   font-size: clamp(1.05rem, 1.5vw, 1.25rem);
   line-height: 1.5;
@@ -1104,9 +1218,25 @@ select:focus-visible {
   color: var(--paper-deep);
 }
 
-.footer-information > p:last-child {
+.footer-date {
   color: rgba(255, 253, 248, 0.76);
   font-size: 0.84rem;
+}
+
+.footer-attribution {
+  max-width: 30rem;
+  color: rgba(255, 253, 248, 0.72);
+  font-size: 0.72rem;
+  line-height: 1.45;
+}
+
+.footer-attribution a {
+  color: inherit;
+  text-underline-offset: 0.2rem;
+}
+
+.footer-attribution a:hover {
+  color: var(--white);
 }
 
 .footer-contact > a {
@@ -1118,11 +1248,9 @@ select:focus-visible {
   font-weight: 400;
 }
 
-.footer-contact svg,
-.footer-contact .social-icon--whatsapp {
+.footer-contact .social-icon {
   width: 24px;
   height: 24px;
-  stroke-width: 1.35;
 }
 
 .footer-contact a[data-placeholder="true"] {
@@ -1661,7 +1789,7 @@ select:focus-visible {
 
   .restaurant-main {
     min-height: 190px;
-    padding: 1.25rem;
+    padding: 1rem;
   }
 
   .restaurant-name {
@@ -1678,6 +1806,30 @@ select:focus-visible {
     padding-inline: 0.6rem;
   }
 
+  .pagination {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .pagination-pages {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    padding-inline: 0;
+  }
+
+  .pagination-arrow:first-of-type {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .pagination-arrow:nth-of-type(2) {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  .pagination-status {
+    grid-row: 3;
+  }
+
   .food-type-list {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -1688,7 +1840,11 @@ select:focus-visible {
 
   .about-lead {
     min-height: 290px;
-    background-position: 56% center;
+  }
+
+  .about-carousel-controls {
+    top: 0.65rem;
+    right: 0.65rem;
   }
 
   .about-lead h2,
