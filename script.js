@@ -11,6 +11,25 @@
     assignBand: (_restaurant, index) => ["Económico", "Moderado", "Alto"][index % 3],
   });
   const PAGE_SIZE = 10;
+  const CAROUSEL_AUTOPLAY_DELAY = 6000;
+  const HOURS_PLACEHOLDER_VALUES = Object.freeze([
+    "Lun–vie 12:00–16:30",
+    "Mar–dom 12:30–18:00",
+    "Lun–sáb 11:30–17:00",
+    "Mié–dom 12:00–19:00",
+    "Diario 12:00–18:00",
+    "Sáb–dom 11:00–17:30",
+  ]);
+
+  // HORARIOS PLACEHOLDER PARA MAQUETA: no provienen de la fuente y deben
+  // reemplazarse por horarios reales antes de publicar una versión de producción.
+  const HOURS_PLACEHOLDER_PROTOTYPE = Object.freeze({
+    enabled: true,
+    source: "placeholder-visual-only",
+    schedules: HOURS_PLACEHOLDER_VALUES,
+    assignHours: (_restaurant, index) =>
+      HOURS_PLACEHOLDER_VALUES[index % HOURS_PLACEHOLDER_VALUES.length],
+  });
 
   // CARACTERÍSTICAS DE VISITA: estructura preparada para datos reales futuros.
   // Solo la accesibilidad se marca como informada cuando la fuente lo declara explícitamente.
@@ -19,14 +38,26 @@
     { key: "petFriendly", label: "Pet-friendly" },
     { key: "reducedMobility", label: "Acceso para movilidad reducida" },
   ]);
-  const restaurants = sourceRestaurants.map((restaurant, index) => ({
-    ...restaurant,
-    displayPriceCategory: PRICE_PROTOTYPE.enabled
-      ? PRICE_PROTOTYPE.assignBand(restaurant, index)
-      : restaurant.priceCategory,
-    priceIsSimulated: PRICE_PROTOTYPE.enabled,
-    visitFeatures: deriveVisitFeatures(restaurant),
-  }));
+  const restaurants = sourceRestaurants.map((restaurant, index) => {
+    const usesPlaceholderHours = HOURS_PLACEHOLDER_PROTOTYPE.enabled && !restaurant.hours;
+    return {
+      ...restaurant,
+      displayHours: usesPlaceholderHours
+        ? HOURS_PLACEHOLDER_PROTOTYPE.assignHours(restaurant, index)
+        : restaurant.hours,
+      hoursIsPlaceholder: usesPlaceholderHours,
+      hoursSource: usesPlaceholderHours
+        ? HOURS_PLACEHOLDER_PROTOTYPE.source
+        : restaurant.hours
+          ? "directorio-source"
+          : null,
+      displayPriceCategory: PRICE_PROTOTYPE.enabled
+        ? PRICE_PROTOTYPE.assignBand(restaurant, index)
+        : restaurant.priceCategory,
+      priceIsSimulated: PRICE_PROTOTYPE.enabled,
+      visitFeatures: deriveVisitFeatures(restaurant),
+    };
+  });
 
   // PLACEHOLDERS DE REDES: reemplazar por las URLs reales cuando estén disponibles.
   const SOCIAL_LINKS = {
@@ -98,6 +129,8 @@
     currentPage: 1,
     carouselIndex: 0,
   };
+  const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+  let carouselAutoplayTimer = 0;
 
   const foodOrder = [
     "Comida chilena",
@@ -217,8 +250,12 @@
       "Opciones vegetales": '<path class="icon-fillable" d="M19 4C11 4 6 8 6 14c0 3 2 5 5 5 6 0 8-7 8-15Z"></path><path class="icon-detail" d="M5 20c2-5 5-8 10-11"></path>',
       "Sin clasificación culinaria": '<circle class="icon-fillable" cx="12" cy="12" r="7"></circle><path class="icon-detail" d="M8.5 12h7"></path>',
     };
-    const flagClass = category === "Comida chilena" ? " chile-flag" : "";
-    return `<svg class="food-icon${flagClass}" viewBox="0 0 24 24" aria-hidden="true">${iconPaths[category] ?? iconPaths["Sin clasificación culinaria"]}</svg>`;
+    const iconClasses = ["food-icon"];
+    if (category === "Comida chilena") iconClasses.push("chile-flag");
+    if (["Pescados", "Mariscos", "Opciones vegetales"].includes(category)) {
+      iconClasses.push("preserve-hover-outline");
+    }
+    return `<svg class="${iconClasses.join(" ")}" viewBox="0 0 24 24" aria-hidden="true">${iconPaths[category] ?? iconPaths["Sin clasificación culinaria"]}</svg>`;
   }
 
   function foodCategoryList(categories) {
@@ -296,8 +333,8 @@
         data-filter-value=""
         aria-pressed="true"
       >
-        <span class="option-label">Todas las regiones</span>
-        <span class="option-count">${restaurants.length}</span>
+        <span class="option-label">Todo Chile</span>
+        <span class="option-count" aria-label="${restaurants.length} cocinerías">${restaurants.length}</span>
       </button>
       ${regions
         .map(
@@ -439,8 +476,12 @@
   }
 
   function restaurantRow(restaurant) {
-    const hours = restaurant.hours ?? "No informa horario";
-    const hoursClass = restaurant.hours ? "" : " is-uninformed";
+    const hours = restaurant.displayHours ?? "No informa horario";
+    const hoursClass = restaurant.hoursIsPlaceholder
+      ? " is-placeholder"
+      : restaurant.displayHours
+        ? ""
+        : " is-uninformed";
 
     return `
       <article class="restaurant-row">
@@ -458,8 +499,10 @@
           >
             <span class="restaurant-main-content">
               <span class="restaurant-name">${escapeHTML(restaurant.name)}</span>
-              <span class="restaurant-hours${hoursClass}">${escapeHTML(hours)}</span>
-              <span class="restaurant-location">${escapeHTML(formatLocation(restaurant, true))}</span>
+              <span class="restaurant-meta">
+                <span class="restaurant-hours${hoursClass}" data-hours-source="${escapeHTML(restaurant.hoursSource ?? "unavailable")}">${escapeHTML(hours)}</span>
+                <span class="restaurant-location">${escapeHTML(formatLocation(restaurant, true))}</span>
+              </span>
             </span>
           </span>
           <span class="restaurant-cuisine">${foodCategoryList(restaurant.foodCategories)}</span>
@@ -686,6 +729,9 @@
       ? escapeHTML(restaurant.displayPriceCategory)
       : escapeHTML(restaurant.priceRange ?? restaurant.displayPriceCategory ?? "No informado");
     const statusClass = restaurant.status === "Activa" ? "" : "is-unconfirmed";
+    const hoursContent = restaurant.displayHours
+      ? `${escapeHTML(restaurant.displayHours)}${restaurant.hoursIsPlaceholder ? '<span class="placeholder-data-note">Horario referencial de maqueta</span>' : ""}`
+      : "No informado";
 
     return `
       <div class="modal-topline">
@@ -715,7 +761,7 @@
       <section class="modal-section" aria-labelledby="modal-practical-title">
         <h3 id="modal-practical-title">Información práctica</h3>
         <div class="modal-facts">
-          ${factBlock("Horario", escapeHTML(restaurant.hours ?? "No informado"))}
+          ${factBlock("Horario", hoursContent)}
           ${factBlock("Precio", currentPrice)}
           ${factBlock("Servicios", escapeHTML(restaurant.services ?? "No informado"))}
           ${factBlock("Contacto", contactContent(restaurant))}
@@ -831,8 +877,46 @@
     }
   }
 
-  function navigateCarousel(direction) {
-    setCarouselSlide(state.carouselIndex + direction);
+  function navigateCarousel(direction, { announce = true } = {}) {
+    setCarouselSlide(state.carouselIndex + direction, { announce });
+  }
+
+  function stopCarouselAutoplay() {
+    if (!carouselAutoplayTimer) return;
+    window.clearTimeout(carouselAutoplayTimer);
+    carouselAutoplayTimer = 0;
+  }
+
+  function canAutoplayCarousel() {
+    return (
+      elements.aboutSlides.length > 1 &&
+      !reducedMotionQuery.matches &&
+      document.visibilityState === "visible" &&
+      !elements.aboutCarousel.matches(":hover") &&
+      !elements.aboutCarousel.contains(document.activeElement)
+    );
+  }
+
+  function scheduleCarouselAutoplay() {
+    stopCarouselAutoplay();
+    if (!canAutoplayCarousel()) return;
+    carouselAutoplayTimer = window.setTimeout(() => {
+      carouselAutoplayTimer = 0;
+      navigateCarousel(1, { announce: false });
+      scheduleCarouselAutoplay();
+    }, CAROUSEL_AUTOPLAY_DELAY);
+  }
+
+  function navigateCarouselManually(direction) {
+    stopCarouselAutoplay();
+    navigateCarousel(direction);
+    scheduleCarouselAutoplay();
+  }
+
+  function selectCarouselSlideManually(index) {
+    stopCarouselAutoplay();
+    setCarouselSlide(index);
+    scheduleCarouselAutoplay();
   }
 
   function openFilters() {
@@ -897,22 +981,36 @@
       if (event.target.closest("#pagination-next")) goToPage(state.currentPage + 1);
     });
 
-    elements.aboutCarouselPrev.addEventListener("click", () => navigateCarousel(-1));
-    elements.aboutCarouselNext.addEventListener("click", () => navigateCarousel(1));
+    elements.aboutCarouselPrev.addEventListener("click", () => navigateCarouselManually(-1));
+    elements.aboutCarouselNext.addEventListener("click", () => navigateCarouselManually(1));
     elements.aboutCarouselIndicators.addEventListener("click", (event) => {
       const indicator = event.target.closest("[data-carousel-index]");
-      if (indicator) setCarouselSlide(Number(indicator.dataset.carouselIndex));
+      if (indicator) selectCarouselSlideManually(Number(indicator.dataset.carouselIndex));
+    });
+    elements.aboutCarousel.addEventListener("mouseenter", stopCarouselAutoplay);
+    elements.aboutCarousel.addEventListener("mouseleave", scheduleCarouselAutoplay);
+    elements.aboutCarousel.addEventListener("focusin", stopCarouselAutoplay);
+    elements.aboutCarousel.addEventListener("focusout", () => {
+      window.requestAnimationFrame(scheduleCarouselAutoplay);
     });
     elements.aboutCarousel.addEventListener("keydown", (event) => {
       if (event.altKey || event.ctrlKey || event.metaKey) return;
       if (event.key === "ArrowLeft") {
         event.preventDefault();
-        navigateCarousel(-1);
+        navigateCarouselManually(-1);
       }
       if (event.key === "ArrowRight") {
         event.preventDefault();
-        navigateCarousel(1);
+        navigateCarouselManually(1);
       }
+    });
+    document.addEventListener("visibilitychange", () => {
+      if (document.visibilityState === "visible") scheduleCarouselAutoplay();
+      else stopCarouselAutoplay();
+    });
+    reducedMotionQuery.addEventListener("change", () => {
+      if (reducedMotionQuery.matches) stopCarouselAutoplay();
+      else scheduleCarouselAutoplay();
     });
 
     elements.modalClose.addEventListener("click", closeModal);
@@ -969,6 +1067,7 @@
     bindEvents();
     applyFilters();
     setCarouselSlide(0, { announce: false });
+    scheduleCarouselAutoplay();
   }
 
   initialise();
