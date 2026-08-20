@@ -42,15 +42,21 @@
           </button>
         </form>
 
-        <nav class="header-social" aria-label="Redes sociales">
-          <!-- Enlaces placeholder: reemplazar en SOCIAL_LINKS dentro de script.js. -->
-          <a href="#contacto" data-social="whatsapp" aria-label="WhatsApp de Cocinerías de Chile">
-            <span class="social-icon social-icon--whatsapp" aria-hidden="true"></span>
+        <div class="header-actions">
+          <!-- CTA temporal: reemplazar #contacto cuando exista un flujo de incorporación. -->
+          <a class="header-guide-cta" href="#contacto" data-placeholder="true">
+            ¿Quieres aparecer en la guía?
           </a>
-          <a href="#contacto" data-social="instagram" aria-label="Instagram de Cocinerías de Chile">
-            <span class="social-icon social-icon--instagram" aria-hidden="true"></span>
-          </a>
-        </nav>
+          <nav class="header-social" aria-label="Redes sociales">
+            <!-- Enlaces placeholder: reemplazar en SOCIAL_LINKS dentro de script.js. -->
+            <a href="#contacto" data-social="whatsapp" aria-label="WhatsApp de Cocinerías de Chile">
+              <span class="social-icon social-icon--whatsapp" aria-hidden="true"></span>
+            </a>
+            <a href="#contacto" data-social="instagram" aria-label="Instagram de Cocinerías de Chile">
+              <span class="social-icon social-icon--instagram" aria-hidden="true"></span>
+            </a>
+          </nav>
+        </div>
       </div>
     </header>
 
@@ -141,7 +147,8 @@
             <div class="results-toolbar">
               <div class="results-meta">
                 <p class="results-count" id="results-count" tabindex="-1" aria-live="polite"></p>
-                <p class="regions-count"><strong>16</strong> regiones <span>en todo Chile</span></p>
+                <p class="regions-count"><strong>16</strong> regiones</p>
+                <p class="coverage-count">A lo largo y ancho de Chile</p>
               </div>
               <p class="active-summary" id="active-summary"></p>
             </div>
@@ -240,6 +247,18 @@
           <span class="footer-brand-text">Cocinerías<span>de Chile</span></span>
         </div>
 
+        <div class="footer-contact">
+          <p class="footer-label">Contacto</p>
+          <a href="#contacto" data-social="whatsapp">
+            <span class="social-icon social-icon--whatsapp" aria-hidden="true"></span>
+            <span>Contáctanos por WhatsApp</span>
+          </a>
+          <a href="#contacto" data-social="instagram">
+            <span class="social-icon social-icon--instagram" aria-hidden="true"></span>
+            <span>Síguenos en nuestras redes sociales</span>
+          </a>
+        </div>
+
         <div class="footer-information">
           <p class="footer-label">Información</p>
           <a href="#sobre-los-datos">Acerca de esta guía</a>
@@ -251,18 +270,6 @@
             <a href="https://www.flaticon.com/free-icon/instagram_8025149" target="_blank" rel="noopener noreferrer">Bharat Icons</a>
             desde <a href="https://www.flaticon.com/" target="_blank" rel="noopener noreferrer">Flaticon</a>.
           </p>
-        </div>
-
-        <div class="footer-contact">
-          <p class="footer-label">Contacto</p>
-          <a href="#contacto" data-social="whatsapp">
-            <span class="social-icon social-icon--whatsapp" aria-hidden="true"></span>
-            <span>Contáctanos por WhatsApp</span>
-          </a>
-          <a href="#contacto" data-social="instagram">
-            <span class="social-icon social-icon--instagram" aria-hidden="true"></span>
-            <span>Síguenos en nuestras redes sociales</span>
-          </a>
         </div>
       </div>
     </footer>

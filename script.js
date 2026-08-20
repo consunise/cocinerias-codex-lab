@@ -154,6 +154,26 @@
   const priceOrder = PRICE_PROTOTYPE.enabled
     ? [...PRICE_PROTOTYPE.bands]
     : ["Económico", "Precio medio", "No informado"];
+  // Orden geográfico norte-sur y códigos regionales oficiales (INE).
+  // `value` conserva exactamente el dato interno para no alterar la lógica de filtrado.
+  const REGION_FILTER_ORDER = Object.freeze([
+    { code: "15", value: "Arica y Parinacota" },
+    { code: "1", value: "Tarapacá" },
+    { code: "2", value: "Antofagasta" },
+    { code: "3", value: "Atacama" },
+    { code: "4", value: "Coquimbo" },
+    { code: "5", value: "Valparaíso" },
+    { code: "13", value: "Metropolitana de Santiago" },
+    { code: "6", value: "Libertador General Bernardo O'Higgins" },
+    { code: "7", value: "Maule" },
+    { code: "16", value: "Ñuble" },
+    { code: "8", value: "Biobío" },
+    { code: "9", value: "La Araucanía" },
+    { code: "14", value: "Los Ríos" },
+    { code: "10", value: "Los Lagos" },
+    { code: "11", value: "Aysén del General Carlos Ibáñez del Campo" },
+    { code: "12", value: "Magallanes y de la Antártica Chilena" },
+  ]);
 
   function escapeHTML(value) {
     return String(value ?? "")
@@ -301,6 +321,7 @@
   }
 
   function renderFilterOptions(container, values, counts, group) {
+    const includeFoodIcon = group === "foods";
     container.innerHTML = values
       .filter((value) => counts.has(value))
       .map(
@@ -312,7 +333,10 @@
             data-filter-value="${escapeHTML(value)}"
             aria-pressed="false"
           >
-            <span class="option-label">${escapeHTML(value)}</span>
+            <span class="option-label${includeFoodIcon ? " option-label--food" : ""}">
+              ${includeFoodIcon ? foodIcon(value) : ""}
+              <span>${escapeHTML(value)}</span>
+            </span>
             <span class="option-count">${counts.get(value)}</span>
           </button>
         `,
@@ -321,10 +345,14 @@
   }
 
   function initialiseFilters() {
-    const regions = [...new Set(restaurants.map((item) => item.region).filter(Boolean))].sort(
-      (a, b) => a.localeCompare(b, "es"),
-    );
     const regionCounts = countBy(restaurants, (item) => [item.region]);
+    const orderedRegions = REGION_FILTER_ORDER.filter(({ value }) => regionCounts.has(value));
+    const configuredRegionNames = new Set(REGION_FILTER_ORDER.map(({ value }) => value));
+    const unconfiguredRegions = [...regionCounts.keys()]
+      .filter((region) => !configuredRegionNames.has(region))
+      .sort((a, b) => a.localeCompare(b, "es"))
+      .map((value) => ({ code: "—", value }));
+    const regions = [...orderedRegions, ...unconfiguredRegions];
     elements.regionFilters.innerHTML = `
       <button
         class="filter-option"
@@ -338,16 +366,16 @@
       </button>
       ${regions
         .map(
-          (region) => `
+          ({ code, value }) => `
             <button
               class="filter-option"
               type="button"
               data-filter-group="region"
-              data-filter-value="${escapeHTML(region)}"
+              data-filter-value="${escapeHTML(value)}"
               aria-pressed="false"
             >
-              <span class="option-label">${escapeHTML(region)}</span>
-              <span class="option-count">${regionCounts.get(region) ?? 0}</span>
+              <span class="option-label"><span class="region-code">${escapeHTML(code)} ·</span> ${escapeHTML(value)}</span>
+              <span class="option-count">${regionCounts.get(value) ?? 0}</span>
             </button>
           `,
         )
@@ -384,10 +412,29 @@
     });
   }
 
+  function filterSections() {
+    return [
+      [elements.regionFilterToggle, elements.regionFilters],
+      [elements.foodFilterToggle, elements.foodFilters],
+      [elements.priceFilterToggle, elements.priceFilters],
+    ];
+  }
+
+  function setFilterSectionExpanded(toggle, panel, isExpanded) {
+    toggle.setAttribute("aria-expanded", String(isExpanded));
+    panel.hidden = !isExpanded;
+  }
+
+  function closeFilterSections(exceptToggle = null) {
+    filterSections().forEach(([toggle, panel]) => {
+      if (toggle !== exceptToggle) setFilterSectionExpanded(toggle, panel, false);
+    });
+  }
+
   function toggleFilterSection(toggle, panel) {
     const willExpand = toggle.getAttribute("aria-expanded") !== "true";
-    toggle.setAttribute("aria-expanded", String(willExpand));
-    panel.hidden = !willExpand;
+    closeFilterSections(willExpand ? toggle : null);
+    setFilterSectionExpanded(toggle, panel, willExpand);
   }
 
   function hasAnyActiveState() {
@@ -597,6 +644,7 @@
     });
     const allRegionsButton = elements.regionFilters.querySelector('[data-filter-value=""]');
     if (allRegionsButton) setPressedState(allRegionsButton, true);
+    closeFilterSections();
 
     if (includeSearch) {
       state.query = "";
