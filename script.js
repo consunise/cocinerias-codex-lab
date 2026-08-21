@@ -154,25 +154,25 @@
   const priceOrder = PRICE_PROTOTYPE.enabled
     ? [...PRICE_PROTOTYPE.bands]
     : ["Económico", "Precio medio", "No informado"];
-  // Orden geográfico norte-sur y códigos regionales oficiales (INE).
+  // Orden geográfico norte-sur con la nomenclatura romana tradicional de las regiones.
   // `value` conserva exactamente el dato interno para no alterar la lógica de filtrado.
   const REGION_FILTER_ORDER = Object.freeze([
-    { code: "15", value: "Arica y Parinacota" },
-    { code: "1", value: "Tarapacá" },
-    { code: "2", value: "Antofagasta" },
-    { code: "3", value: "Atacama" },
-    { code: "4", value: "Coquimbo" },
-    { code: "5", value: "Valparaíso" },
-    { code: "13", value: "Metropolitana de Santiago" },
-    { code: "6", value: "Libertador General Bernardo O'Higgins" },
-    { code: "7", value: "Maule" },
-    { code: "16", value: "Ñuble" },
-    { code: "8", value: "Biobío" },
-    { code: "9", value: "La Araucanía" },
-    { code: "14", value: "Los Ríos" },
-    { code: "10", value: "Los Lagos" },
-    { code: "11", value: "Aysén del General Carlos Ibáñez del Campo" },
-    { code: "12", value: "Magallanes y de la Antártica Chilena" },
+    { code: "XV", value: "Arica y Parinacota" },
+    { code: "I", value: "Tarapacá" },
+    { code: "II", value: "Antofagasta" },
+    { code: "III", value: "Atacama" },
+    { code: "IV", value: "Coquimbo" },
+    { code: "V", value: "Valparaíso" },
+    { code: "XIII", value: "Metropolitana de Santiago" },
+    { code: "VI", value: "Libertador General Bernardo O'Higgins" },
+    { code: "VII", value: "Maule" },
+    { code: "XVI", value: "Ñuble" },
+    { code: "VIII", value: "Biobío" },
+    { code: "IX", value: "La Araucanía" },
+    { code: "XIV", value: "Los Ríos" },
+    { code: "X", value: "Los Lagos" },
+    { code: "XI", value: "Aysén del General Carlos Ibáñez del Campo" },
+    { code: "XII", value: "Magallanes y de la Antártica Chilena" },
   ]);
 
   function escapeHTML(value) {
@@ -374,7 +374,7 @@
               data-filter-value="${escapeHTML(value)}"
               aria-pressed="false"
             >
-              <span class="option-label"><span class="region-code">${escapeHTML(code)} ·</span> ${escapeHTML(value)}</span>
+              <span class="option-label"><span class="region-code">${escapeHTML(code)} —</span> ${escapeHTML(value)}</span>
               <span class="option-count">${regionCounts.get(value) ?? 0}</span>
             </button>
           `,

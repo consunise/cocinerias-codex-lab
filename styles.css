@@ -14,6 +14,8 @@
   --header-height: 93px;
   --filter-column: 245px;
   --hover-line-width: 2px;
+  --restaurant-hover-line-width: 4px;
+  --editorial-image-ratio: 8 / 3;
   --content-gap: clamp(2.5rem, 6vw, 6rem);
   --side-pad: clamp(1.1rem, 4vw, 4.5rem);
   --serif: Georgia, "Times New Roman", serif;
@@ -256,12 +258,18 @@ select:focus-visible {
   height: 44px;
   place-items: center;
   border: 1px solid transparent;
-  color: var(--ink);
+  color: var(--terracotta);
   text-decoration: none;
   transition: border-color 140ms ease, color 140ms ease, background-color 140ms ease;
 }
 
 .header-social a:hover {
+  border-color: var(--terracotta);
+  background: var(--paper-deep);
+  color: var(--terracotta-dark);
+}
+
+.header-social a:focus-visible {
   border-color: var(--terracotta);
   background: var(--paper-deep);
   color: var(--terracotta-dark);
@@ -616,6 +624,10 @@ select:focus-visible {
   align-content: center;
   gap: 0.4rem;
   padding-block: 0.75rem;
+  font-family: var(--sans);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.25;
 }
 
 .results-meta {
@@ -630,8 +642,7 @@ select:focus-visible {
 .coverage-count {
   margin: 0;
   color: var(--ink-soft);
-  font-size: 1rem;
-  line-height: 1.25;
+  font: inherit;
 }
 
 .regions-count,
@@ -653,7 +664,7 @@ select:focus-visible {
 .active-summary {
   margin: 0;
   color: var(--ink-soft);
-  font-size: 0.78rem;
+  font: inherit;
 }
 
 .active-summary {
@@ -764,7 +775,7 @@ select:focus-visible {
   background:
     linear-gradient(90deg, rgba(15, 13, 10, 0.52), rgba(15, 13, 10, 0.26) 62%, rgba(15, 13, 10, 0.06)),
     linear-gradient(180deg, transparent 42%, rgba(15, 13, 10, 0.2));
-  box-shadow: inset var(--hover-line-width) 0 0 transparent;
+  box-shadow: inset var(--restaurant-hover-line-width) 0 0 transparent;
   content: "";
   pointer-events: none;
   transition: box-shadow 140ms ease;
@@ -787,7 +798,7 @@ select:focus-visible {
 
 .restaurant-button:hover .restaurant-main::after,
 .restaurant-button:focus-visible .restaurant-main::after {
-  box-shadow: inset var(--hover-line-width) 0 0 var(--terracotta);
+  box-shadow: inset var(--restaurant-hover-line-width) 0 0 var(--terracotta);
 }
 
 .restaurant-name {
@@ -801,10 +812,24 @@ select:focus-visible {
 .restaurant-meta {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.18rem 0.7rem;
+  gap: 0.18rem 0;
   align-items: baseline;
   max-width: 100%;
   margin-top: 0.55rem;
+}
+
+.restaurant-meta > * {
+  display: inline-flex;
+  align-items: center;
+}
+
+.restaurant-meta > * + *::before {
+  width: 1px;
+  height: 0.72em;
+  margin: 0 0.65rem;
+  background: rgba(255, 253, 248, 0.5);
+  content: "";
+  flex: 0 0 1px;
 }
 
 .restaurant-hours,
@@ -1188,7 +1213,10 @@ select:focus-visible {
 
 .about-lead {
   position: relative;
-  min-height: clamp(360px, 34vw, 500px);
+  width: 100%;
+  min-height: 0;
+  aspect-ratio: var(--editorial-image-ratio);
+  align-self: end;
   background-color: var(--ink);
   isolation: isolate;
   overflow: hidden;
@@ -1235,15 +1263,40 @@ select:focus-visible {
   object-fit: cover;
 }
 
-.about-lead h2 {
+.about-slide-caption {
+  position: absolute;
+  z-index: 2;
+  top: clamp(0.75rem, 2vw, 1.25rem);
+  left: clamp(0.75rem, 2vw, 1.25rem);
+  max-width: min(44%, 18rem);
+  margin: 0;
+  padding: 0.45rem 0.65rem;
+  background: rgba(29, 28, 25, 0.74);
+  color: var(--white);
+  font-family: var(--sans);
+  font-size: 0.74rem;
+  line-height: 1.3;
+}
+
+.about-title-block {
   position: absolute;
   z-index: 2;
   bottom: 0;
   left: 0;
   width: 100%;
+  padding: 1rem clamp(1.5rem, 3vw, 3rem) clamp(1.25rem, 2.4vw, 2rem);
+}
+
+.about-title-block .eyebrow {
+  margin-bottom: 0.55rem;
+  color: rgba(255, 253, 248, 0.84);
+}
+
+.about-title-block h2 {
   margin: 0;
-  padding: clamp(1.5rem, 3vw, 3rem);
   color: var(--white);
+  font-size: clamp(2.3rem, 3.8vw, 3.5rem);
+  line-height: 0.92;
   text-shadow: 0 1px 4px rgba(15, 13, 10, 0.62);
 }
 
@@ -1375,7 +1428,7 @@ select:focus-visible {
 
 .footer-contact {
   width: 100%;
-  grid-template-columns: 26px minmax(0, 1fr);
+  grid-template-columns: 32px minmax(0, 1fr);
   column-gap: 0.7rem;
   row-gap: 0.8rem;
 }
@@ -1438,7 +1491,8 @@ select:focus-visible {
   grid-column: 1 / -1;
   display: grid;
   width: 100%;
-  grid-template-columns: 26px minmax(0, 1fr);
+  position: relative;
+  grid-template-columns: 32px minmax(0, 1fr);
   gap: 0.7rem;
   align-items: center;
   justify-self: start;
@@ -1447,9 +1501,28 @@ select:focus-visible {
   text-align: left;
 }
 
+.footer-contact > a::before {
+  grid-column: 1;
+  grid-row: 1;
+  width: 32px;
+  height: 32px;
+  background: var(--paper);
+  content: "";
+}
+
 .footer-contact .social-icon {
-  width: 24px;
-  height: 24px;
+  z-index: 1;
+  grid-column: 1;
+  grid-row: 1;
+  justify-self: center;
+  width: 22px;
+  height: 22px;
+  background-color: var(--terracotta);
+}
+
+.footer-contact > a > span:last-child {
+  grid-column: 2;
+  grid-row: 1;
 }
 
 .footer-contact a[data-placeholder="true"] {
@@ -2064,7 +2137,8 @@ select:focus-visible {
   }
 
   .about-lead {
-    min-height: 290px;
+    min-height: 0;
+    aspect-ratio: 16 / 9;
   }
 
   .about-carousel-controls {
@@ -2072,9 +2146,27 @@ select:focus-visible {
     right: 0.65rem;
   }
 
-  .about-lead h2,
+  .about-carousel-indicators {
+    display: none;
+  }
+
+  .about-title-block,
   .about-grid {
     padding-inline: 1.25rem;
+  }
+
+  .about-title-block {
+    padding-bottom: 1rem;
+  }
+
+  .about-title-block .eyebrow {
+    margin-bottom: 0.3rem;
+    font-size: 0.56rem;
+  }
+
+  .about-title-block h2 {
+    font-size: 2rem;
+    line-height: 0.94;
   }
 
   .footer-inner {
@@ -2159,7 +2251,6 @@ select:focus-visible {
     flex-basis: 100%;
     padding-left: 0;
     border-left: 0;
-    font-size: 0.86rem;
   }
 
   .header-guide-cta {

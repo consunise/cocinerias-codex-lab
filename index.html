@@ -43,10 +43,6 @@
         </form>
 
         <div class="header-actions">
-          <!-- CTA temporal: reemplazar #contacto cuando exista un flujo de incorporación. -->
-          <a class="header-guide-cta" href="#contacto" data-placeholder="true">
-            ¿Quieres aparecer en la guía?
-          </a>
           <nav class="header-social" aria-label="Redes sociales">
             <!-- Enlaces placeholder: reemplazar en SOCIAL_LINKS dentro de script.js. -->
             <a href="#contacto" data-social="whatsapp" aria-label="WhatsApp de Cocinerías de Chile">
@@ -56,6 +52,10 @@
               <span class="social-icon social-icon--instagram" aria-hidden="true"></span>
             </a>
           </nav>
+          <!-- CTA temporal: reemplazar #contacto cuando exista un flujo de incorporación. -->
+          <a class="header-guide-cta" href="#contacto" data-placeholder="true">
+            ¿Quieres aparecer en la guía?
+          </a>
         </div>
       </div>
     </header>
@@ -199,18 +199,25 @@
               <div class="about-carousel-track" id="about-carousel-track">
                 <figure class="about-slide is-active" aria-hidden="false">
                   <img src="assets/images/about/empanadas-de-pino.jpg" alt="Empanadas de pino, preparación tradicional chilena" />
+                  <figcaption class="about-slide-caption">Empanadas de pino</figcaption>
                 </figure>
                 <figure class="about-slide" aria-hidden="true">
                   <img src="assets/images/cocinerias/cl-ap-001.jpg" alt="Fachada de la cocinería Mata Rangi en Arica" />
+                  <figcaption class="about-slide-caption">Cocinería Mata Rangi, Arica</figcaption>
                 </figure>
                 <figure class="about-slide" aria-hidden="true">
-                  <img src="assets/images/cocinerias/cl-an-003.jpg" alt="Formaciones del paisaje desértico de Atacama" />
+                  <img src="assets/images/cocinerias/cl-an-003.jpg" alt="Paisaje del Valle de la Luna, San Pedro de Atacama" />
+                  <figcaption class="about-slide-caption">Valle de la Luna, San Pedro de Atacama</figcaption>
                 </figure>
                 <figure class="about-slide" aria-hidden="true">
-                  <img src="assets/images/cocinerias/cl-ar-012.jpg" alt="Paisaje cordillerano y volcánico de La Araucanía" />
+                  <img src="assets/images/cocinerias/cl-ar-012.jpg" alt="Vista del volcán Lanín desde Curarrehue, La Araucanía" />
+                  <figcaption class="about-slide-caption">Volcán Lanín desde Curarrehue</figcaption>
                 </figure>
               </div>
-              <h2 id="data-title">Acerca de esta guía</h2>
+              <div class="about-title-block">
+                <p class="eyebrow">Sobre el directorio</p>
+                <h2 id="data-title">Acerca de esta guía</h2>
+              </div>
               <div class="about-carousel-controls" aria-label="Controles del carrusel">
                 <button class="about-carousel-arrow" id="about-carousel-prev" type="button" aria-label="Fotografía anterior" aria-controls="about-carousel-track">←</button>
                 <div class="about-carousel-indicators" id="about-carousel-indicators" aria-label="Elegir fotografía">
