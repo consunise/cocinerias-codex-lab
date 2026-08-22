@@ -9,9 +9,9 @@
     />
     <meta name="theme-color" content="#f4efe5" />
     <title>Cocinerías de Chile — Directorio</title>
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="styles.css?v=20260821-4" />
     <script src="data.js" defer></script>
-    <script src="script.js" defer></script>
+    <script src="script.js?v=20260821-4" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#directorio">Saltar al directorio</a>
@@ -46,15 +46,22 @@
           <nav class="header-social" aria-label="Redes sociales">
             <!-- Enlaces placeholder: reemplazar en SOCIAL_LINKS dentro de script.js. -->
             <a href="#contacto" data-social="whatsapp" aria-label="WhatsApp de Cocinerías de Chile">
-              <span class="social-icon social-icon--whatsapp" aria-hidden="true"></span>
+              <svg class="social-icon social-icon--whatsapp" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M20.2 11.7a8.2 8.2 0 0 1-12.1 7.2L3.8 20l1.1-4.1a8.2 8.2 0 1 1 15.3-4.2Z"></path>
+                <path d="M8.3 7.8c.2-.4.5-.4.8-.4h.4c.2 0 .4.1.5.4l.8 2c.1.3 0 .5-.2.7l-.7.8c-.2.2-.1.4 0 .6.8 1.4 1.9 2.4 3.3 3.1.3.1.5.1.7-.1l.9-1.1c.2-.2.4-.3.7-.2l1.9.9c.3.1.4.3.4.6 0 .6-.3 1.5-.8 1.9-.5.5-1.3.8-2.2.8-1.1 0-2.7-.5-4.5-1.9-1.5-1.2-2.7-2.7-3.4-4.4-.7-1.7-.2-3 .3-3.7Z"></path>
+              </svg>
             </a>
             <a href="#contacto" data-social="instagram" aria-label="Instagram de Cocinerías de Chile">
-              <span class="social-icon social-icon--instagram" aria-hidden="true"></span>
+              <svg class="social-icon social-icon--instagram" viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="3.5" y="3.5" width="17" height="17" rx="5"></rect>
+                <circle cx="12" cy="12" r="4"></circle>
+                <circle class="social-icon-dot" cx="17.5" cy="6.7" r="1"></circle>
+              </svg>
             </a>
           </nav>
           <!-- CTA temporal: reemplazar #contacto cuando exista un flujo de incorporación. -->
           <a class="header-guide-cta" href="#contacto" data-placeholder="true">
-            ¿Quieres aparecer en la guía?
+            Agrega tu cocinería
           </a>
         </div>
       </div>
@@ -140,6 +147,25 @@
               <div class="filter-options" id="price-filters" role="group" hidden></div>
             </section>
 
+            <section class="filter-group filter-group--collapsible" aria-labelledby="amenity-filter-toggle">
+              <h3 class="filter-group-heading">
+                <button
+                  class="filter-disclosure"
+                  id="amenity-filter-toggle"
+                  type="button"
+                  aria-expanded="false"
+                  aria-controls="amenity-filters"
+                >
+                  <span>Comodidades <span class="filter-selection-count" id="amenity-filter-count" hidden></span></span>
+                  <svg class="filter-chevron" viewBox="0 0 20 20" aria-hidden="true">
+                    <path d="m5 7.5 5 5 5-5"></path>
+                  </svg>
+                </button>
+              </h3>
+              <div class="filter-options" id="amenity-filters" role="group" aria-describedby="amenity-filter-note" hidden></div>
+              <p class="filter-data-note" id="amenity-filter-note">Datos de demostración; no verificados.</p>
+            </section>
+
             <button class="filters-apply" id="filters-apply" type="button">Ver resultados</button>
           </aside>
 
@@ -185,7 +211,7 @@
         </div>
       </section>
 
-      <section class="about-data" id="sobre-los-datos" aria-labelledby="data-title">
+      <section class="about-data" id="sobre-los-datos" aria-label="Acerca de esta guía">
         <div class="about-grid">
           <div class="about-lead">
             <div
@@ -193,55 +219,122 @@
               id="about-carousel"
               role="region"
               aria-roledescription="carrusel"
-              aria-label="Comidas y paisajes de Chile"
+              aria-label="Recorrido por territorios y cocinas de Chile"
               tabindex="0"
             >
               <div class="about-carousel-track" id="about-carousel-track">
                 <figure class="about-slide is-active" aria-hidden="false">
                   <img src="assets/images/about/empanadas-de-pino.jpg" alt="Empanadas de pino, preparación tradicional chilena" />
-                  <figcaption class="about-slide-caption">Empanadas de pino</figcaption>
+                  <figcaption class="about-slide-caption">
+                    <span>Empanadas de pino</span>
+                    <small>Valeta · CC BY-SA 3.0</small>
+                  </figcaption>
+                  <div class="about-slide-content">
+                    <p class="eyebrow">Sobre el directorio</p>
+                    <h2>Acerca de esta guía</h2>
+                    <div class="about-copy">
+                      <p>
+                        Esta guía ayuda a descubrir lugares donde conocer y probar comida chilena
+                        auténtica: cocinerías, mercados, caletas y otros espacios cotidianos en
+                        los que se prepara cocina local.
+                      </p>
+                      <p>
+                        Cada ficha reúne información práctica para comparar alternativas y
+                        acercarse a preparaciones caseras y sabores del territorio. Los datos
+                        provisionales se identifican para distinguirlos de la información documentada.
+                      </p>
+                    </div>
+                  </div>
                 </figure>
                 <figure class="about-slide" aria-hidden="true">
-                  <img src="assets/images/cocinerias/cl-ap-001.jpg" alt="Fachada de la cocinería Mata Rangi en Arica" />
-                  <figcaption class="about-slide-caption">Cocinería Mata Rangi, Arica</figcaption>
+                  <img src="assets/images/cocinerias/cl-ar-001.jpg" alt="Paisaje de La Araucanía usado como referencia territorial para Restaurante Pily" />
+                  <figcaption class="about-slide-caption">
+                    <span>La Araucanía · imagen territorial</span>
+                    <small>LBM1948 · CC BY-SA 4.0</small>
+                  </figcaption>
+                  <div class="about-slide-content about-slide-content--featured">
+                    <div class="about-copy about-copy--featured">
+                      <p class="eyebrow about-rank">Top 1 · selección editorial</p>
+                      <h2>Restaurante Pily</h2>
+                      <p class="about-feature-location">Puerto Saavedra · Región de La Araucanía</p>
+                      <p>
+                        Restaurante familiar del sector Caleta El Huilque, asociado en las fuentes
+                        del directorio a cocina chilena y marina. Encabeza esta selección por su
+                        escala familiar y su vínculo con la costa de Saavedra.
+                      </p>
+                      <p class="about-feature-dishes">
+                        <strong>Destacan</strong><span>Caldillo de choros</span><span>Congrio a la plancha</span>
+                      </p>
+                      <ul class="about-feature-tags" aria-label="Atributos editoriales">
+                        <li>Cocina marina</li><li>Escala familiar</li><li>Identidad costera</li>
+                      </ul>
+                      <a class="about-feature-source" href="https://www.tripadvisor.com.mx/Restaurant_Review-g2710785-d17528038-Reviews-Pily_Restaurant-Puerto_Saavedra_Araucania_Region.html" target="_blank" rel="noopener noreferrer">Consultar referencia pública ↗</a>
+                    </div>
+                  </div>
                 </figure>
                 <figure class="about-slide" aria-hidden="true">
-                  <img src="assets/images/cocinerias/cl-an-003.jpg" alt="Paisaje del Valle de la Luna, San Pedro de Atacama" />
-                  <figcaption class="about-slide-caption">Valle de la Luna, San Pedro de Atacama</figcaption>
+                  <img src="assets/images/cocinerias/cl-ap-001.jpg" alt="Fachada de Mata Rangi en el terminal pesquero de Arica" />
+                  <figcaption class="about-slide-caption">
+                    <span>Mata Rangi, Arica</span>
+                    <small>S. Rae · CC BY 2.0</small>
+                  </figcaption>
+                  <div class="about-slide-content about-slide-content--featured">
+                    <div class="about-copy about-copy--featured">
+                      <p class="eyebrow about-rank">Top 2 · selección editorial</p>
+                      <h2>Mata Rangi</h2>
+                      <p class="about-feature-location">Terminal Pesquero · Arica</p>
+                      <p>
+                        SERNATUR lo registra como cocinería en el borde pesquero de Arica. Su ubicación
+                        y una carta centrada en productos del mar hacen visible la relación entre el
+                        terminal, la pesca y la cocina nortina cotidiana.
+                      </p>
+                      <p class="about-feature-dishes">
+                        <strong>Destacan</strong><span>Paila marina</span><span>Congrio</span>
+                      </p>
+                      <ul class="about-feature-tags" aria-label="Atributos editoriales">
+                        <li>Cocina marina</li><li>Entorno pesquero</li><li>Identidad nortina</li>
+                      </ul>
+                      <a class="about-feature-source" href="https://serviciosturisticos.sernatur.cl/27638-mata-rangi" target="_blank" rel="noopener noreferrer">Consultar registro público ↗</a>
+                    </div>
+                  </div>
                 </figure>
                 <figure class="about-slide" aria-hidden="true">
-                  <img src="assets/images/cocinerias/cl-ar-012.jpg" alt="Vista del volcán Lanín desde Curarrehue, La Araucanía" />
-                  <figcaption class="about-slide-caption">Volcán Lanín desde Curarrehue</figcaption>
+                  <img src="assets/images/cocinerias/cl-va-002.jpg" alt="Bahía de Valparaíso usada como referencia territorial para Cocinería Bellavista" />
+                  <figcaption class="about-slide-caption">
+                    <span>Valparaíso · imagen territorial</span>
+                    <small>Hemorag · CC BY-SA 3.0</small>
+                  </figcaption>
+                  <div class="about-slide-content about-slide-content--featured">
+                    <div class="about-copy about-copy--featured">
+                      <p class="eyebrow about-rank">Top 3 · selección editorial</p>
+                      <h2>Cocinería Bellavista</h2>
+                      <p class="about-feature-location">Cerro Bellavista · Valparaíso</p>
+                      <p>
+                        Proyecto barrial dedicado a la cocina de caleta y a las pastas hechas a mano.
+                        La cobertura consultada documenta su abastecimiento desde Caleta Portales y una
+                        propuesta porteña directa, sostenida por producto marino y oficio artesanal.
+                      </p>
+                      <p class="about-feature-dishes">
+                        <strong>Destacan</strong><span>Piures gratinados</span><span>Ravioles de relleno marino</span>
+                      </p>
+                      <ul class="about-feature-tags" aria-label="Atributos editoriales">
+                        <li>Pastas artesanales</li><li>Producto de caleta</li><li>Espíritu barrial</li>
+                      </ul>
+                      <a class="about-feature-source" href="https://www.elmostrador.cl/revista-jengibre/gastronomia/2025/06/02/cocineria-bellavista-cocina-de-caleta-y-pastas-artesanales-en-el-corazon-del-cerro-bellavista/" target="_blank" rel="noopener noreferrer">Consultar referencia pública ↗</a>
+                    </div>
+                  </div>
                 </figure>
               </div>
-              <div class="about-title-block">
-                <p class="eyebrow">Sobre el directorio</p>
-                <h2 id="data-title">Acerca de esta guía</h2>
-              </div>
-              <div class="about-carousel-controls" aria-label="Controles del carrusel">
-                <button class="about-carousel-arrow" id="about-carousel-prev" type="button" aria-label="Fotografía anterior" aria-controls="about-carousel-track">←</button>
+              <div class="about-carousel-controls" aria-label="Posición del carrusel">
                 <div class="about-carousel-indicators" id="about-carousel-indicators" aria-label="Elegir fotografía">
-                  <button type="button" data-carousel-index="0" aria-label="Ver fotografía 1 de 4" aria-current="true"></button>
-                  <button type="button" data-carousel-index="1" aria-label="Ver fotografía 2 de 4"></button>
-                  <button type="button" data-carousel-index="2" aria-label="Ver fotografía 3 de 4"></button>
-                  <button type="button" data-carousel-index="3" aria-label="Ver fotografía 4 de 4"></button>
+                  <button type="button" data-carousel-index="0" aria-label="Ver contenido 1 de 4" aria-current="true"></button>
+                  <button type="button" data-carousel-index="1" aria-label="Ver contenido 2 de 4"></button>
+                  <button type="button" data-carousel-index="2" aria-label="Ver contenido 3 de 4"></button>
+                  <button type="button" data-carousel-index="3" aria-label="Ver contenido 4 de 4"></button>
                 </div>
-                <button class="about-carousel-arrow" id="about-carousel-next" type="button" aria-label="Fotografía siguiente" aria-controls="about-carousel-track">→</button>
               </div>
-              <p class="sr-only" id="about-carousel-status" aria-live="polite">Fotografía 1 de 4</p>
+              <p class="sr-only" id="about-carousel-status" aria-live="polite">Contenido 1 de 4</p>
             </div>
-          </div>
-          <div class="about-copy">
-            <p>
-              Esta guía ayuda a descubrir lugares donde conocer y probar comida chilena
-              auténtica: cocinerías, mercados, caletas y otros espacios cotidianos en
-              los que se prepara cocina local.
-            </p>
-            <p>
-              Cada ficha reúne información práctica para comparar alternativas y
-              acercarse a preparaciones caseras y sabores del territorio. Los datos
-              provisionales se identifican para distinguirlos de la información documentada.
-            </p>
           </div>
         </div>
       </section>
@@ -257,11 +350,18 @@
         <div class="footer-contact">
           <p class="footer-label">Contacto</p>
           <a href="#contacto" data-social="whatsapp">
-            <span class="social-icon social-icon--whatsapp" aria-hidden="true"></span>
+            <svg class="social-icon social-icon--whatsapp" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M20.2 11.7a8.2 8.2 0 0 1-12.1 7.2L3.8 20l1.1-4.1a8.2 8.2 0 1 1 15.3-4.2Z"></path>
+              <path d="M8.3 7.8c.2-.4.5-.4.8-.4h.4c.2 0 .4.1.5.4l.8 2c.1.3 0 .5-.2.7l-.7.8c-.2.2-.1.4 0 .6.8 1.4 1.9 2.4 3.3 3.1.3.1.5.1.7-.1l.9-1.1c.2-.2.4-.3.7-.2l1.9.9c.3.1.4.3.4.6 0 .6-.3 1.5-.8 1.9-.5.5-1.3.8-2.2.8-1.1 0-2.7-.5-4.5-1.9-1.5-1.2-2.7-2.7-3.4-4.4-.7-1.7-.2-3 .3-3.7Z"></path>
+            </svg>
             <span>Contáctanos por WhatsApp</span>
           </a>
           <a href="#contacto" data-social="instagram">
-            <span class="social-icon social-icon--instagram" aria-hidden="true"></span>
+            <svg class="social-icon social-icon--instagram" viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="3.5" y="3.5" width="17" height="17" rx="5"></rect>
+              <circle cx="12" cy="12" r="4"></circle>
+              <circle class="social-icon-dot" cx="17.5" cy="6.7" r="1"></circle>
+            </svg>
             <span>Síguenos en nuestras redes sociales</span>
           </a>
         </div>
@@ -270,13 +370,6 @@
           <p class="footer-label">Información</p>
           <a href="#sobre-los-datos">Acerca de esta guía</a>
           <p class="footer-date">Datos verificados el 12.08.2026</p>
-          <p class="footer-attribution">
-            Iconos sociales diseñados por
-            <a href="https://www.flaticon.com/free-icon/whatsapp_3884530" target="_blank" rel="noopener noreferrer">Magnific</a>
-            y
-            <a href="https://www.flaticon.com/free-icon/instagram_8025149" target="_blank" rel="noopener noreferrer">Bharat Icons</a>
-            desde <a href="https://www.flaticon.com/" target="_blank" rel="noopener noreferrer">Flaticon</a>.
-          </p>
         </div>
       </div>
     </footer>

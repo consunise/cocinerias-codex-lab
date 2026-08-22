@@ -38,8 +38,42 @@
     { key: "petFriendly", label: "Pet-friendly" },
     { key: "reducedMobility", label: "Acceso para movilidad reducida" },
   ]);
+
+  // COMODIDADES DE DEMOSTRACIÓN: ninguna de estas asignaciones proviene del
+  // Markdown ni constituye información verificada del establecimiento. El bloque
+  // está centralizado para retirarlo o reemplazarlo antes de producción.
+  const AMENITY_DEMO_PROTOTYPE = Object.freeze({
+    enabled: true,
+    source: "placeholder-visual-only",
+    options: Object.freeze([
+      { key: "petFriendly", label: "Pet friendly" },
+      { key: "parking", label: "Estacionamiento" },
+      { key: "accessibility", label: "Accesibilidad" },
+      { key: "vegan", label: "Vegano" },
+      { key: "vegetarian", label: "Vegetariano" },
+      { key: "celiac", label: "Celíaco" },
+      { key: "allergyAdaptation", label: "Alergias friendly" },
+    ]),
+    patterns: Object.freeze([
+      Object.freeze(["parking", "accessibility"]),
+      Object.freeze(["petFriendly", "vegetarian"]),
+      Object.freeze(["vegan", "vegetarian", "allergyAdaptation"]),
+      Object.freeze(["celiac", "allergyAdaptation"]),
+      Object.freeze(["parking", "petFriendly"]),
+      Object.freeze(["accessibility", "celiac"]),
+      Object.freeze(["vegetarian", "allergyAdaptation"]),
+    ]),
+    assignAmenities(_restaurant, index) {
+      const keys = this.patterns[index % this.patterns.length];
+      return this.options.filter((option) => keys.includes(option.key));
+    },
+  });
+
   const restaurants = sourceRestaurants.map((restaurant, index) => {
     const usesPlaceholderHours = HOURS_PLACEHOLDER_PROTOTYPE.enabled && !restaurant.hours;
+    const displayAmenities = AMENITY_DEMO_PROTOTYPE.enabled
+      ? AMENITY_DEMO_PROTOTYPE.assignAmenities(restaurant, index)
+      : [];
     return {
       ...restaurant,
       displayHours: usesPlaceholderHours
@@ -55,6 +89,11 @@
         ? PRICE_PROTOTYPE.assignBand(restaurant, index)
         : restaurant.priceCategory,
       priceIsSimulated: PRICE_PROTOTYPE.enabled,
+      displayAmenities,
+      amenitiesAreSimulated: AMENITY_DEMO_PROTOTYPE.enabled,
+      amenitiesSource: AMENITY_DEMO_PROTOTYPE.enabled
+        ? AMENITY_DEMO_PROTOTYPE.source
+        : null,
       visitFeatures: deriveVisitFeatures(restaurant),
     };
   });
@@ -79,10 +118,13 @@
     regionFilterCount: document.querySelector("#region-filter-count"),
     foodFilters: document.querySelector("#food-filters"),
     priceFilters: document.querySelector("#price-filters"),
+    amenityFilters: document.querySelector("#amenity-filters"),
     foodFilterToggle: document.querySelector("#food-filter-toggle"),
     priceFilterToggle: document.querySelector("#price-filter-toggle"),
+    amenityFilterToggle: document.querySelector("#amenity-filter-toggle"),
     foodFilterCount: document.querySelector("#food-filter-count"),
     priceFilterCount: document.querySelector("#price-filter-count"),
+    amenityFilterCount: document.querySelector("#amenity-filter-count"),
     resetFilters: document.querySelector("#reset-filters"),
     resultsCount: document.querySelector("#results-count"),
     resultsToolbar: document.querySelector(".results-toolbar"),
@@ -111,8 +153,6 @@
     modalNextName: document.querySelector("#modal-next-name"),
     aboutCarousel: document.querySelector("#about-carousel"),
     aboutSlides: [...document.querySelectorAll(".about-slide")],
-    aboutCarouselPrev: document.querySelector("#about-carousel-prev"),
-    aboutCarouselNext: document.querySelector("#about-carousel-next"),
     aboutCarouselIndicators: document.querySelector("#about-carousel-indicators"),
     aboutCarouselStatus: document.querySelector("#about-carousel-status"),
   };
@@ -122,6 +162,7 @@
     region: "",
     foods: new Set(),
     prices: new Set(),
+    amenities: new Set(),
     visibleRestaurants: [...restaurants],
     modalId: null,
     lastFocused: null,
@@ -154,6 +195,7 @@
   const priceOrder = PRICE_PROTOTYPE.enabled
     ? [...PRICE_PROTOTYPE.bands]
     : ["Económico", "Precio medio", "No informado"];
+  const amenityOrder = AMENITY_DEMO_PROTOTYPE.options.map(({ label }) => label);
   // Orden geográfico norte-sur con la nomenclatura romana tradicional de las regiones.
   // `value` conserva exactamente el dato interno para no alterar la lógica de filtrado.
   const REGION_FILTER_ORDER = Object.freeze([
@@ -174,7 +216,6 @@
     { code: "XI", value: "Aysén del General Carlos Ibáñez del Campo" },
     { code: "XII", value: "Magallanes y de la Antártica Chilena" },
   ]);
-
   function escapeHTML(value) {
     return String(value ?? "")
       .replaceAll("&", "&amp;")
@@ -278,6 +319,19 @@
     return `<svg class="${iconClasses.join(" ")}" viewBox="0 0 24 24" aria-hidden="true">${iconPaths[category] ?? iconPaths["Sin clasificación culinaria"]}</svg>`;
   }
 
+  function amenityIcon(label) {
+    const iconPaths = {
+      "Pet friendly": '<path class="icon-fillable" d="M12 12.5c-2.6 0-5.3 2.2-5.3 4.7 0 1.8 1.4 2.8 3 2.8.8 0 1.5-.4 2.3-.4s1.5.4 2.3.4c1.6 0 3-1 3-2.8 0-2.5-2.7-4.7-5.3-4.7Z"></path><circle class="icon-detail" cx="6.4" cy="9.6" r="1.6"></circle><circle class="icon-detail" cx="10" cy="6.3" r="1.6"></circle><circle class="icon-detail" cx="14" cy="6.3" r="1.6"></circle><circle class="icon-detail" cx="17.6" cy="9.6" r="1.6"></circle>',
+      Estacionamiento: '<rect class="icon-fillable" x="4" y="3" width="16" height="18" rx="2"></rect><path class="icon-detail" d="M9 17V7h4.2a3 3 0 0 1 0 6H9m0 0h4.2"></path>',
+      Accesibilidad: '<circle class="icon-detail" cx="10" cy="4.5" r="1.7"></circle><path class="icon-fillable" d="M9 8h4l1 4h3"></path><path class="icon-detail" d="m10 8-1 6 4 1 2.5 4M8.5 12A5 5 0 1 0 14 18"></path>',
+      Vegano: '<path class="icon-fillable" d="M18.8 4.3C11 4.6 6.5 8.6 6.5 14c0 3.2 2 5.3 5.2 5.3 5.1 0 7.1-6.8 7.1-15Z"></path><path class="icon-detail" d="M5.2 20.3c2.3-5 5.7-8.3 10.3-10.7"></path>',
+      Vegetariano: '<path class="icon-fillable" d="M13 8c3-3 6-2 7-5 1 4-.5 7-4 8"></path><path class="icon-fillable" d="M11 9c4 0 6 3 6 6.5S14.6 21 11 21s-6-2-6-5.5S7 9 11 9Z"></path><path class="icon-detail" d="M12 9c0-2-1-3.5-3-4"></path>',
+      Celíaco: '<path class="icon-fillable" d="M12 21V6"></path><path class="icon-detail" d="M12 10C8 10 7 7 7 5c3 0 5 1.5 5 5Zm0 4c-4 0-5-3-5-5 3 0 5 1.5 5 5Zm0 4c-4 0-5-3-5-5 3 0 5 1.5 5 5Zm0-8c4 0 5-3 5-5-3 0-5 1.5-5 5Zm0 4c4 0 5-3 5-5-3 0-5 1.5-5 5Zm0 4c4 0 5-3 5-5-3 0-5 1.5-5 5ZM4 4l16 16"></path>',
+      "Alergias friendly": '<path class="icon-fillable" d="M12 3 20 6v5c0 5-3.2 8.3-8 10-4.8-1.7-8-5-8-10V6l8-3Z"></path><path class="icon-detail" d="M12 7v6m0 3h.01"></path>',
+    };
+    return `<svg class="food-icon amenity-icon" viewBox="0 0 24 24" aria-hidden="true">${iconPaths[label] ?? ""}</svg>`;
+  }
+
   function foodCategoryList(categories) {
     return `
       <ul class="food-type-list" aria-label="Tipos de comida">
@@ -292,6 +346,29 @@
           )
           .join("")}
       </ul>
+    `;
+  }
+
+  function amenityList(restaurant) {
+    if (!restaurant.displayAmenities.length) return "";
+    return `
+      <span
+        class="restaurant-amenities"
+        data-amenities-source="${escapeHTML(restaurant.amenitiesSource)}"
+        aria-label="Comodidades referenciales de maqueta; no verificadas"
+      >
+        ${restaurant.displayAmenities
+          .map(
+            ({ label }) => `
+              <span class="amenity-item" title="${escapeHTML(label)} · dato de demostración">
+                ${amenityIcon(label)}
+                <span>${escapeHTML(label)}</span>
+              </span>
+            `,
+          )
+          .join("")}
+        <span class="amenity-demo-note">Referencial</span>
+      </span>
     `;
   }
 
@@ -322,6 +399,8 @@
 
   function renderFilterOptions(container, values, counts, group) {
     const includeFoodIcon = group === "foods";
+    const includeAmenityIcon = group === "amenities";
+    const includeIcon = includeFoodIcon || includeAmenityIcon;
     container.innerHTML = values
       .filter((value) => counts.has(value))
       .map(
@@ -333,8 +412,8 @@
             data-filter-value="${escapeHTML(value)}"
             aria-pressed="false"
           >
-            <span class="option-label${includeFoodIcon ? " option-label--food" : ""}">
-              ${includeFoodIcon ? foodIcon(value) : ""}
+            <span class="option-label${includeIcon ? " option-label--icon" : ""}">
+              ${includeFoodIcon ? foodIcon(value) : includeAmenityIcon ? amenityIcon(value) : ""}
               <span>${escapeHTML(value)}</span>
             </span>
             <span class="option-count">${counts.get(value)}</span>
@@ -394,10 +473,16 @@
       countBy(restaurants, (item) => item.displayPriceCategory),
       "prices",
     );
+    renderFilterOptions(
+      elements.amenityFilters,
+      amenityOrder,
+      countBy(restaurants, (item) => item.displayAmenities.map(({ label }) => label)),
+      "amenities",
+    );
   }
 
   function getActiveFilterCount() {
-    return (state.region ? 1 : 0) + state.foods.size + state.prices.size;
+    return (state.region ? 1 : 0) + state.foods.size + state.prices.size + state.amenities.size;
   }
 
   function updateFilterDisclosureState() {
@@ -405,6 +490,7 @@
       [elements.regionFilterToggle, elements.regionFilterCount, state.region ? 1 : 0],
       [elements.foodFilterToggle, elements.foodFilterCount, state.foods.size],
       [elements.priceFilterToggle, elements.priceFilterCount, state.prices.size],
+      [elements.amenityFilterToggle, elements.amenityFilterCount, state.amenities.size],
     ].forEach(([toggle, countElement, count]) => {
       countElement.hidden = count === 0;
       countElement.textContent = count ? `· ${count}` : "";
@@ -417,6 +503,7 @@
       [elements.regionFilterToggle, elements.regionFilters],
       [elements.foodFilterToggle, elements.foodFilters],
       [elements.priceFilterToggle, elements.priceFilters],
+      [elements.amenityFilterToggle, elements.amenityFilters],
     ];
   }
 
@@ -454,8 +541,11 @@
         restaurant.foodCategories.some((category) => state.foods.has(category));
       const matchesPrice =
         !state.prices.size || state.prices.has(restaurant.displayPriceCategory);
+      const matchesAmenity =
+        !state.amenities.size ||
+        restaurant.displayAmenities.some(({ label }) => state.amenities.has(label));
 
-      return matchesName && matchesRegion && matchesFood && matchesPrice;
+      return matchesName && matchesRegion && matchesFood && matchesPrice && matchesAmenity;
     });
 
     renderDirectory();
@@ -550,6 +640,7 @@
                 <span class="restaurant-hours${hoursClass}" data-hours-source="${escapeHTML(restaurant.hoursSource ?? "unavailable")}">${escapeHTML(hours)}</span>
                 <span class="restaurant-location">${escapeHTML(formatLocation(restaurant, true))}</span>
               </span>
+              ${amenityList(restaurant)}
             </span>
           </span>
           <span class="restaurant-cuisine">${foodCategoryList(restaurant.foodCategories)}</span>
@@ -589,6 +680,7 @@
     if (state.region) summary.push(state.region);
     if (state.foods.size) summary.push([...state.foods].join(", "));
     if (state.prices.size) summary.push([...state.prices].join(", "));
+    if (state.amenities.size) summary.push([...state.amenities].join(", "));
     elements.activeSummary.textContent = summary.join(" · ");
     elements.activeSummary.hidden = summary.length === 0;
 
@@ -610,15 +702,24 @@
     button.setAttribute("aria-pressed", String(isPressed));
   }
 
+  function syncRegionFilterButtons() {
+    elements.regionFilters.querySelectorAll(".filter-option").forEach((regionButton) => {
+      const value = regionButton.dataset.filterValue;
+      const isPressed = value ? state.region === value : !state.region;
+      setPressedState(regionButton, isPressed);
+    });
+  }
+
   function handleFilterOption(button) {
     const group = button.dataset.filterGroup;
     const value = button.dataset.filterValue;
     if (group === "region") {
-      state.region = value;
-      elements.regionFilters.querySelectorAll(".filter-option").forEach((regionButton) => {
-        setPressedState(regionButton, regionButton === button);
-      });
+      const deselectSelectedRegion = Boolean(value) && state.region === value;
+      state.region = deselectSelectedRegion ? "" : value;
+      syncRegionFilterButtons();
       applyFilters();
+      if (state.filtersOpen) closeFilters({ returnFocus: false });
+      scrollToResultsStart();
       return;
     }
 
@@ -639,11 +740,11 @@
     state.region = "";
     state.foods.clear();
     state.prices.clear();
+    state.amenities.clear();
     document.querySelectorAll(".filter-option[aria-pressed='true']").forEach((button) => {
       setPressedState(button, false);
     });
-    const allRegionsButton = elements.regionFilters.querySelector('[data-filter-value=""]');
-    if (allRegionsButton) setPressedState(allRegionsButton, true);
+    syncRegionFilterButtons();
     closeFilterSections();
 
     if (includeSearch) {
@@ -921,7 +1022,7 @@
       else indicator.removeAttribute("aria-current");
     });
     if (announce) {
-      elements.aboutCarouselStatus.textContent = `Fotografía ${state.carouselIndex + 1} de ${total}`;
+      elements.aboutCarouselStatus.textContent = `Contenido ${state.carouselIndex + 1} de ${total}`;
     }
   }
 
@@ -1006,6 +1107,9 @@
     elements.priceFilterToggle.addEventListener("click", () => {
       toggleFilterSection(elements.priceFilterToggle, elements.priceFilters);
     });
+    elements.amenityFilterToggle.addEventListener("click", () => {
+      toggleFilterSection(elements.amenityFilterToggle, elements.amenityFilters);
+    });
     elements.filtersPanel.addEventListener("click", (event) => {
       const option = event.target.closest(".filter-option");
       if (option) handleFilterOption(option);
@@ -1029,8 +1133,6 @@
       if (event.target.closest("#pagination-next")) goToPage(state.currentPage + 1);
     });
 
-    elements.aboutCarouselPrev.addEventListener("click", () => navigateCarouselManually(-1));
-    elements.aboutCarouselNext.addEventListener("click", () => navigateCarouselManually(1));
     elements.aboutCarouselIndicators.addEventListener("click", (event) => {
       const indicator = event.target.closest("[data-carousel-index]");
       if (indicator) selectCarouselSlideManually(Number(indicator.dataset.carouselIndex));
