@@ -169,17 +169,17 @@ El estado actual selecciona Mata Rangi y Cocinería Bellavista como Top 2 y Top 
 
 ## Footer
 
-Decisión explícita más reciente del hand-off:
+Decisión vigente confirmada el 24 de agosto de 2026:
 
-- fondo terracota, no `--paper`;
+- fondo `--terracotta`, reemplazando `--paper`;
 - sin línea superior;
 - contacto alineado a la izquierda;
 - contacto e información alineados horizontalmente en desktop y apilados en mobile;
-- iconos sociales visibles, actualmente preferidos en negro;
+- texto y enlaces claros con contraste suficiente sobre terracota;
+- iconos sociales en `--terracotta-dark` sobre recuadros `--white`;
+- hover en `--paper-deep` y foco visible en `--white`;
 - `footer-brand-text` con menor protagonismo;
 - reducir el vacío entre directorio y `Acerca de esta guía`.
-
-El commit 0.9.2 implementa deliberadamente fondo `--paper`. Por seguridad, esta discrepancia es `POR VALIDAR`: no cambiar el footer automáticamente sin una tarea explícita. Ver DEC-010.
 
 ## Contenido, datos e imágenes
 

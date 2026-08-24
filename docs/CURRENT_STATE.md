@@ -7,6 +7,8 @@ Mensaje: `correcciones version 0.9.2`
 
 Este documento describe el estado comprobado del repositorio en ese commit. No convierte automáticamente lo implementado en una decisión de producto.
 
+Actualización posterior: el 24 de agosto de 2026 se implementó la decisión confirmada de usar fondo terracota en el footer; el resto del documento conserva el baseline auditado.
+
 ## Resumen técnico
 
 | Aspecto | Estado comprobado |
@@ -85,9 +87,9 @@ Este documento describe el estado comprobado del repositorio en ese commit. No c
 
 ### Footer
 
-- Fondo actual `--paper`, texto oscuro y sin línea superior.
+- Fondo `--terracotta`, texto claro y sin línea superior.
 - Columnas de marca, contacto e información; se apilan en mobile.
-- Iconos sociales inline SVG y enlaces todavía provisionales.
+- Iconos sociales inline SVG con tratamiento de alto contraste y enlaces todavía provisionales.
 - La fecha visible dice `Datos verificados el 12.08.2026`.
 
 ## Estado de datos y assets
@@ -116,7 +118,6 @@ No se realizó una ronda visual interactiva completa en múltiples viewports dur
 
 | Tema | Intención documentada | Implementación actual | Clasificación |
 |---|---|---|---|
-| Footer | Fondo terracota según la última decisión explícita del hand-off | El commit 0.9.2 cambió el footer de terracota a `--paper` | `POR VALIDAR`; ver DEC-010 |
 | Ver ficha | Flecha debajo del texto y orientada hacia abajo | Texto y símbolo apilados, pero usa `→` | `APROBADO PERO NO IMPLEMENTADO` |
 | Fuente de datos | `directorio_cocinerias_chile.md` es fuente principal | Está ignorado y no existe en el repositorio público | `PENDIENTE` crítico para regeneración |
 | Iconos sociales | SVG propios permitidos; iconos visibles | PNG de Flaticon permanecen, pero la interfaz usa SVG inline | Documentación/asset histórico parcialmente obsoleto |
@@ -132,4 +133,3 @@ No se realizó una ronda visual interactiva completa en múltiples viewports dur
 - No hay pruebas automatizadas, linter ni validación HTML/CSS configurada.
 - No consta una metodología formal para el Top 3.
 - No hay evidencia de una revisión responsive/manual posterior al commit 0.9.2.
-

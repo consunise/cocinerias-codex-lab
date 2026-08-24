@@ -4,7 +4,12 @@ Este archivo registra cambios implementados relevantes. No contiene solicitudes 
 
 ## Sin publicar
 
-- Sin cambios de código registrados por esta configuración.
+### 2026-08-24 — Footer terracota
+
+- Implementado: fondo `--terracotta` sin línea superior, con texto, enlaces, iconos y estados interactivos ajustados para mantener contraste.
+- Archivos: `styles.css` y documentación canónica asociada.
+- Decisión relacionada: DEC-010.
+- Validación ejecutada: sintaxis JavaScript, `git diff --check`, contraste calculado y revisión responsive del footer.
 
 ## Baseline documental — 2026-08-21
 
@@ -24,4 +29,3 @@ Este archivo registra cambios implementados relevantes. No contiene solicitudes 
 - Validación ejecutada: [comandos/revisión real].
 - Pendientes: [solo si quedaron].
 ```
-

@@ -76,13 +76,13 @@ Observación: Top 2 y Top 3 actuales son Mata Rangi y Cocinería Bellavista; las
 
 ### DEC-010 — Fondo del footer
 
-Estado: `POR VALIDAR` / discrepancia material
+Estado: `VIGENTE` / `IMPLEMENTADO`
 
-Última intención explícita del hand-off: fondo terracota, reemplazando `--paper`.
+Decisión: usar `--terracotta` como fondo del footer, sin línea divisoria superior, conservando su estructura y comportamiento responsive.
 
-Estado del código: el commit `045dd1f` cambió deliberadamente el footer desde terracota a `--paper`.
+Contraste: texto y enlaces claros sobre terracota; iconos sociales en `--terracotta-dark` sobre recuadros `--white`; hover en `--paper-deep` y foco visible en `--white`.
 
-Regla operativa: no presentar ambas opciones como vigentes ni cambiar el código automáticamente. Solicitar o recibir una decisión explícita en la próxima tarea que afecte el footer. Si la usuaria confirma terracota, registrar la confirmación aquí e implementar después; si confirma `--paper`, marcar la instrucción del hand-off como reemplazada.
+Confirmación: decisión aprobada explícitamente el 24 de agosto de 2026. Reemplaza la implementación con fondo `--paper` del commit `045dd1f`.
 
 ### DEC-011 — Acción “Ver ficha” con flecha inferior
 
@@ -152,4 +152,3 @@ Revisar solo si una subcarpeta adquiere un flujo, equipo o reglas realmente dife
 4. Enlazar el pendiente o fuente relevante.
 5. Si reemplaza otra, mover la anterior a la tabla histórica o marcarla explícitamente.
 6. Actualizar la especificación afectada y `CURRENT_STATE.md` solo después de implementar.
-

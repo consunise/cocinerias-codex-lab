@@ -50,14 +50,6 @@ Criterio de cierre: reemplazar gradualmente con imágenes directas autorizadas o
 
 ## P1 — Próxima consolidación de producto
 
-### UX-001 — Resolver el fondo del footer
-
-Estado: `POR VALIDAR`
-
-Dependencia: DEC-010.
-
-Criterio de cierre: confirmación explícita entre terracota y `--paper`, actualización de decisión, implementación y validación de contraste.
-
 ### UX-002 — Corregir la flecha de “Ver ficha”
 
 Estado: `APROBADO PERO NO IMPLEMENTADO`
@@ -138,4 +130,3 @@ Dependencias:
 
 Criterio de cierre:
 ```
-
