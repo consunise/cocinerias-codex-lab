@@ -1,6 +1,6 @@
 # Backlog consolidado
 
-Última revisión: 26 de agosto de 2026.
+Última revisión: 27 de agosto de 2026.
 
 Este backlog registra pendientes, no autoriza su implementación. Las prioridades reflejan riesgo para continuidad o publicación.
 
@@ -100,6 +100,22 @@ Dependencias:
 - definir actualización, almacenamiento permitido, privacidad y estado de error.
 
 Criterio de cierre: mostrar como máximo 2–3 reseñas legítimas por ficha, con atribución completa y enlace `Ver más reseñas en Google Maps`; conservar el estado pendiente cuando el establecimiento no tenga datos autorizados.
+
+### DATA-005 — Incorporar menús verificables
+
+Estado: `PENDIENTE DE DATOS`
+
+Problema: ninguno de los 101 registros contiene un campo estructurado de menú, carta, precios, URL o PDF. La ficha omite la sección Menú para no inferir contenido desde categorías, descripción o especialidades.
+
+Criterio de cierre: definir campos y procedencia por establecimiento en la fuente canónica; incorporar solo contenido o enlaces verificables; regenerar `data.js` mediante el normalizador y mostrar la sección únicamente cuando el registro tenga información respaldada.
+
+### PRIVACY-001 — Definir criterio para publicar responsables
+
+Estado: `PENDIENTE DE DECISIÓN Y TRAZABILIDAD`
+
+Problema: 10 registros contienen `owner`, pero el esquema no distingue procedencia específica, pertinencia pública ni razón editorial para exponer un nombre personal. La ficha omite el campo de forma conservadora.
+
+Criterio de cierre: definir finalidad pública y base editorial, registrar fuente por campo, revisar caso a caso y publicar únicamente responsables pertinentes y documentados; no trasladar nombres incidentales desde una fuente.
 
 ### QA-001 — Ronda visual y accesible del baseline
 

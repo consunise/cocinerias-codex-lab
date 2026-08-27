@@ -4,6 +4,16 @@ Este archivo registra cambios implementados relevantes. No contiene solicitudes 
 
 ## Sin publicar
 
+### 2026-08-27 — Navbar contextual y ficha práctica editorial
+
+- Implementado: navbar y buscador translúcidos únicamente sobre `about-lead`; un `IntersectionObserver` aplica `var(--paper)` opaco y elimina el blur después del header, con restauración al volver arriba.
+- Implementado: estado sin comodidades centrado; etiquetas existentes compactadas a `padding: 0.08rem 0.25rem` y `gap: 0.45rem`, manteniendo exactamente la tipografía e iconografía de Tipo de comida.
+- Implementado: el `dialog` vigente conserva su comportamiento y adopta hero con ubicación sobre nombre, introducción editorial, retícula práctica de Ubicación frente a Horario/Comodidades/Precio, reseñas pendientes compactas, Información y contacto y Sobre los datos.
+- Implementado: preview OpenStreetMap solo para coordenadas válidas; Menú se omite por ausencia total de campos respaldados; contactos se limitan a campos existentes y URLs sanitizadas; `owner` no se expone sin criterio público estructurado.
+- Archivos: `index.html`, `styles.css`, `script.js` y documentación canónica asociada. `data.js`, assets y dependencias no fueron modificados.
+- Decisiones relacionadas: DEC-017 y DEC-019.
+- Validación ejecutada: sintaxis JavaScript, `git diff --check`, servidor estático, navbar en los cuatro slides y después del header, filas con/sin comodidades, fichas Top 1/2/3, mapas con/sin coordenadas, platos con/sin datos, contactos, reviews pendientes, navegación, Escape, foco y revisión en 1440, 980, 720, 420 y 320 px sin overflow ni errores de consola.
+
 ### 2026-08-25 — Taxonomía alimentaria y autocomplete por nombre
 
 - Implementado: todo el contenido de `restaurant-main` comparte alineación izquierda, incluida la jerarquía ubicación → nombre, sin cambiar la retícula de columnas.

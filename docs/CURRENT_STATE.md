@@ -7,7 +7,7 @@ Mensaje: `correcciones version 0.9.2`
 
 Este documento describe el estado comprobado del repositorio en ese commit. No convierte automáticamente lo implementado en una decisión de producto.
 
-Actualizaciones posteriores, consolidadas al 26 de agosto de 2026: footer terracota; filtros AND y reordenados; Rapa Nui como territorio especial; header editorial antes del directorio; navbar translúcido con CTA invitacional; nueva jerarquía de filas; taxonomía alimentaria separada de comodidades; autocomplete por nombre; ficha editorial sobre el `dialog` vigente. El resto del documento conserva el baseline auditado.
+Actualizaciones posteriores, consolidadas al 27 de agosto de 2026: footer terracota; filtros AND y reordenados; Rapa Nui como territorio especial; header editorial antes del directorio; navbar contextual con CTA invitacional; nueva jerarquía de filas; taxonomía alimentaria separada de comodidades; autocomplete por nombre; ficha editorial sobre el `dialog` vigente. El resto del documento conserva el baseline auditado.
 
 ## Resumen técnico
 
@@ -36,7 +36,8 @@ Actualizaciones posteriores, consolidadas al 26 de agosto de 2026: footer terrac
 - Iconos inline SVG de WhatsApp e Instagram.
 - CTA principal `Sé parte de la guía` enlazado temporalmente a `#contacto`.
 - Enlaces sociales sin URL real; `script.js` los marca como placeholders.
-- Navbar sticky superpuesto al header, con mezcla parcialmente transparente de `--paper`, blur ligero y bordes definidos.
+- Navbar sticky superpuesto al header, con mezcla parcialmente transparente de `--paper`, blur ligero y bordes definidos mientras permanece sobre `about-lead`.
+- Un `IntersectionObserver` aplica `is-past-about` cuando el navbar supera el header; en ese estado navbar y buscador usan `var(--paper)` completamente opaco y sin blur. El estado revierte al volver arriba.
 
 ### Directorio y filtros
 
@@ -68,22 +69,27 @@ Actualizaciones posteriores, consolidadas al 26 de agosto de 2026: footer terrac
 - Divisores verticales en `restaurant-meta`.
 - Tipos de comida con SVG y tratamientos hover.
 - Rango de precio con peso regular.
-- Comodidades referenciales bajo la metadata, con fondo `--paper`, sin borde y con tipografía/color equivalentes a Tipo de comida.
+- Comodidades referenciales bajo la metadata, con fondo `--paper`, sin borde y con tipografía, color, iconos de 24 px, stroke de 1.5 px y hover equivalentes a Tipo de comida. Usan `padding: 0.08rem 0.25rem`, `gap: 0.45rem` y no fuerzan altura mínima.
+- En las cuatro filas de la primera página sin comodidades, el estado `No informado` ocupa el ancho del área y queda centrado; las etiquetas presentes conservan alineación izquierda.
 - Acción `Ver ficha` apilada verticalmente, pero el símbolo actual es `→`, no flecha hacia abajo.
 
 ### Modal
 
 - `dialog` nativo con cierre, fondo, scroll interno y navegación circular anterior/siguiente.
 - La navegación usa el conjunto actualmente filtrado.
-- Hero de ancho completo con imagen local, overlay, nombre, territorio y nombre alternativo; 100 imágenes `regional-fallback` muestran `Imagen de referencia territorial` y Mata Rangi, única imagen `direct`, no muestra esa advertencia.
+- Hero de ancho completo con imagen local y overlay. La copia sigue el orden insignia Top N, cuando corresponde; localidad y región; nombre; nombre alternativo. Las 100 imágenes `regional-fallback` muestran `Imagen de referencia territorial` y Mata Rangi, única imagen `direct`, no muestra esa advertencia.
 - El Top 1/2/3 de las fichas se deriva de `data-restaurant-id` y `data-editorial-rank` en los tres slides destacados del carrusel.
-- Secciones vigentes: Sobre esta cocinería, Platos destacados, Tipo de comida, Comodidades, Información práctica, Ubicación, Reseñas en Google e Información del registro.
+- Inmediatamente bajo el hero, una retícula editorial reúne Sobre esta cocinería, Platos destacados y Tipo de comida.
+- La información práctica usa dos columnas en desktop: Ubicación y mapa a la izquierda; Horario, Comodidades y Rango de precio a la derecha. A 720 px o menos se apila con Ubicación primero.
+- Después aparecen Reseñas en Google, Información y contacto y Sobre los datos. Menú se omite porque ninguno de los 101 registros contiene un campo estructurado de menú, carta, URL o PDF.
 - Las 101 descripciones proceden del campo `description`; 53 registros con `specialties` muestran sus valores exactos y los otros 48 muestran `No informado`.
 - Preferencias alimentarias, comodidades, horarios y precios demo se identifican como información referencial dentro de la ficha.
 - Dos registros tienen coordenadas válidas (`Cocinería El Yugo` y `Cocinería Flor Marina`) y generan un preview OpenStreetMap diferido con atribución. Los 99 restantes muestran que la vista previa no está disponible.
 - Tres registros conservan enlaces cartográficos almacenados: dos a Waze y uno a OpenStreetMap; el label refleja el proveedor real aunque el campo fuente se llame `googleMaps`.
 - No existe integración autorizada de Google Places ni contenido de reseñas en el dataset. La sección de reseñas muestra el bloqueo explícito y no renderiza reseñas ficticias.
-- Estado, confianza, ID, clasificación, notas, fecha, fuente principal y fuentes adicionales quedan agrupados al final.
+- Información y contacto renderiza solo campos existentes y URLs válidas: teléfono, WhatsApp, email, Instagram, Facebook y web; servicios, pagos, año de fundación y otras redes se agrupan solo cuando existen.
+- Aunque 10 registros tienen `owner`, la ficha no publica responsables: el esquema no expresa de forma estructurada pertinencia pública ni trazabilidad específica suficiente para justificar su exposición.
+- Estado, confianza, ID, clasificación, notas, fecha, fuente principal y fuentes adicionales quedan agrupados al final bajo Sobre los datos.
 - Abrir o navegar a otra ficha reinicia el scroll interno; cierre visible, Escape y devolución de foco se conservan.
 
 ### Carrusel editorial
@@ -147,6 +153,14 @@ Actualización del 25 de agosto de 2026:
 - Autocomplete comprobado con mayúsculas, tildes, límite de siete, estado sin coincidencias, clic exterior, selección con mouse y ArrowDown/Enter/Escape; la selección exacta actualizó resultados y cerró el listbox.
 - Verificados los cuatro temas del carrusel, sincronización de imagen/texto/tema, autoplay al retirar foco, foco visible de los dots, nombre largo, modal con retorno de foco, retícula del footer y consola sin errores.
 - Contrastes calculados: `--terracotta`/texto claro `5.89:1`, `--paper`/`--ink` `14.87:1` y `--paper`/`--terracotta-dark` `7.87:1`.
+
+Actualización del 27 de agosto de 2026:
+
+- Revisión interactiva con servidor estático en 1440 × 1000, 980 × 900, 720 × 900, 420 × 844 y 320 × 700 px, sin overflow horizontal en página, diálogo, mapa ni navegación inferior.
+- Comprobados navbar translúcido sobre los cuatro slides, cambio reversible a `rgb(244, 239, 229)` opaco y sin blur tras `about-lead`, y el mismo comportamiento en mobile.
+- Comprobadas filas con y sin comodidades: tipografía, color, icono de 24 px, stroke de 1.5 px y `gap` coinciden con Tipo de comida; el estado vacío obtuvo desviación horizontal medida de 0 px.
+- Comprobadas fichas Top 1, Top 2 y Top 3; imagen territorial y directa; platos presentes y ausentes; mapa diferido con coordenadas y estado sin mapa; horarios, comodidades y precios referenciales; contacto, reviews pendientes, navegación filtrada, reinicio de scroll, Escape, foco visible y devolución de foco.
+- El dataset tiene 101 descripciones, por lo que el fallback de descripción ausente quedó revisado en código pero no pudo ejercitarse con un registro real. La activación de una fila mediante Enter/Espacio queda pendiente de una revisión manual fuera del controlador de navegador; el control continúa siendo un `button` nativo habilitado.
 
 ## Discrepancias relevantes
 

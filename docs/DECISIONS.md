@@ -146,7 +146,7 @@ Revisar solo si una subcarpeta adquiere un flujo, equipo o reglas realmente dife
 
 Estado: `VIGENTE` / `IMPLEMENTADO`
 
-Decisión: mantener el navbar sticky como una superficie de `--paper` parcialmente transparente con desenfoque ligero, superpuesta al header editorial para que la fotografía se perciba sutilmente detrás. Debe conservar contraste al pasar sobre fotografías y sobre contenido claro u oscuro.
+Decisión: mantener el navbar sticky como una superficie de `--paper` parcialmente transparente con desenfoque ligero únicamente mientras se superpone al header editorial. Una vez que supera completamente `about-lead`, el navbar y el buscador pasan a `var(--paper)` opaco y sin desenfoque; al volver al header se restaura la superficie translúcida. El cambio se activa mediante observación del límite del header, no mediante polling continuo.
 
 CTA: el texto principal es `Sé parte de la guía`, con mayor jerarquía que los iconos sociales y estados hover, focus-visible y active. El destino continúa provisional hasta resolver COMMS-001.
 
@@ -164,13 +164,15 @@ Accesibilidad: usar patrón combobox/listbox con `aria-expanded`, opción activa
 
 Estado: `VIGENTE` / `IMPLEMENTADO CON DATOS PARCIALES`
 
-Decisión: evolucionar el modal nativo actual, sin crear páginas ni perder cierre, Escape, foco devuelto o navegación sobre el conjunto filtrado. La ficha se organiza como hero fotográfico, presentación, platos, Tipo de comida, Comodidades, información práctica, ubicación, reseñas externas, trazabilidad y navegación.
+Decisión: evolucionar el modal nativo actual, sin crear páginas ni perder cierre, Escape, foco devuelto o navegación sobre el conjunto filtrado. El hero conserva el orden insignia editorial, cuando corresponde; localidad y región; nombre. Debajo se organizan una introducción editorial con descripción, platos y Tipo de comida; una retícula práctica con Ubicación a la izquierda y Horario, Comodidades y Precio a la derecha; Menú solo si hay un dato respaldado; Reseñas externas; Información y contacto; Sobre los datos; y navegación.
 
-Trazabilidad: una imagen cuyo `imageKind` no sea `direct` se identifica visiblemente como referencia territorial. Descripciones y platos proceden solo de `description` y `specialties`; los prototipos conservan marcas referenciales. La insignia Top N se deriva de los atributos de los slides vigentes del carrusel, no de una segunda lista manual.
+Trazabilidad: una imagen cuyo `imageKind` no sea `direct` se identifica visiblemente como referencia territorial. La presentación prioriza `description` y solo admite un fallback factual desde ubicación y cocina; los platos proceden exclusivamente de `specialties`. Los prototipos conservan marcas referenciales. La insignia Top N se deriva de los atributos de los slides vigentes del carrusel, no de una segunda lista manual.
 
 Mapas: solo se genera preview OpenStreetMap, diferido y atribuido, cuando el registro contiene coordenadas válidas. Sin coordenadas se muestra una indisponibilidad explícita; si existe un enlace cartográfico almacenado se conserva como salida externa.
 
 Reseñas: no copiar, inventar ni scrapear Google Maps. Hasta disponer de Google Maps Platform u otra fuente autorizada con sus atribuciones, la sección se mantiene como pendiente visible y sin contenido de usuarios.
+
+Datos faltantes y privacidad: una descripción ausente solo puede sustituirse por una frase factual derivada de campos existentes o `No informado`. No se infieren platos ni menús. El campo `owner` no se publica sin procedencia específica, pertinencia para el directorio y una razón pública documentada; los datos actuales no satisfacen ese criterio de forma estructurada.
 
 ## Decisiones reemplazadas
 
@@ -189,7 +191,7 @@ Reseñas: no copiar, inventar ni scrapear Google Maps. Hasta disponer de Google 
 | Vegano, Vegetariano, Celíaco y alergias dentro de Comodidades | `REEMPLAZADO` | DEC-012, taxonomía separada y alergias eliminadas |
 | Línea inferior de `results-area` | `REEMPLAZADO` | Sin línea inferior |
 | Línea superior visible del footer | `REEMPLAZADO` | Sin línea superior |
-| Navbar completamente opaco y CTA `Agrega tu cocinería` | `REEMPLAZADO` | DEC-017 |
+| Navbar completamente opaco durante todo el recorrido y CTA `Agrega tu cocinería` | `REEMPLAZADO` | DEC-017, superficie contextual |
 
 ## Cómo registrar una nueva decisión
 

@@ -1,6 +1,6 @@
 # Especificación vigente de producto y UX/UI
 
-Última consolidación: 26 de agosto de 2026.
+Última consolidación: 27 de agosto de 2026.
 Esta especificación deriva del hand-off y se contrasta con el repositorio auditado. Los conflictos se enlazan a [DECISIONS.md](DECISIONS.md).
 
 ## Dirección de producto
@@ -28,8 +28,9 @@ Evitar:
 
 ## Navbar
 
-- Debe ser sticky, parcialmente transparente y coherente con la cuadrícula del directorio.
-- Sobre el header, una superficie controlada de `--paper` con desenfoque ligero permite percibir la fotografía sin perder contraste; al recorrer contenido claro u oscuro debe conservar legibilidad.
+- Debe ser sticky y coherente con la cuadrícula del directorio.
+- Mientras se superpone a `about-lead`, una superficie controlada de `--paper` parcialmente transparente y con desenfoque ligero permite percibir la fotografía sin perder contraste.
+- Cuando el navbar supera completamente `about-lead`, tanto su superficie como el buscador pasan a `var(--paper)` opaco, sin desenfoque. El cambio usa una transición breve y debe revertirse al volver al header.
 - El buscador usa `Buscar por nombre de cocinería...` y se alinea con `results-area`.
 - Al escribir, despliega hasta siete sugerencias basadas exclusivamente en el nombre principal o alternativo: matching parcial sin distinción de mayúsculas ni tildes, primero coincidencias al inicio y después coincidencias contenidas.
 - El autocomplete usa semántica combobox/listbox, se actualiza progresivamente, se cierra al vaciar, seleccionar, pulsar Escape o hacer clic fuera y permite ArrowDown, ArrowUp y Enter. Elegir una opción aplica el registro exacto y lleva al inicio de resultados; escribir sin elegir conserva el filtro parcial.
@@ -104,7 +105,9 @@ Los datos actuales son de demostración. No deben presentarse como atributos rea
 
 `Vegano`, `Vegetariano` y `Celíaco` no se duplican aquí: pertenecen a Tipo de comida. `Alergias friendly` o adaptación frente a alergias no forma parte de la interfaz vigente.
 
-En `restaurant-main`, las etiquetas informativas usan fondo `--paper`, sin borde ni marco. Texto e iconos comparten exactamente con Tipo de comida familia, tamaño, peso, line-height, color, geometría de 24 px, stroke de 1.5 px, alineación, separación y tratamiento hover. Conservan la marca visible `Referencial`.
+En `restaurant-main`, las etiquetas informativas usan fondo `--paper`, sin borde ni marco. Texto e iconos comparten exactamente con Tipo de comida familia, tamaño, peso, line-height, color, geometría de 24 px, stroke de 1.5 px, alineación, separación y tratamiento hover. El contenedor es informativo y compacto: `padding-block: 0.08rem`, `padding-inline: 0.25rem`, sin `min-height` y con `gap: 0.45rem`. Conservan la marca visible `Referencial`.
+
+Cuando una fila no tiene comodidades, `No informado` ocupa el ancho del área y se centra horizontalmente. Las filas con comodidades conservan su alineación normal a la izquierda.
 
 ## Listado y previews
 
@@ -155,15 +158,18 @@ En `restaurant-main`, las etiquetas informativas usan fondo `--paper`, sin borde
 - Permite cerrar y navegar anterior/siguiente dentro del conjunto filtrado.
 - Debe devolver el foco al disparador cuando se cierra.
 - Mantiene un único `dialog` con scroll interno; abrir una ficha o navegar a otra reinicia el scroll al comienzo.
-- La cabecera es un hero fotográfico de ancho completo con overlay, nombre, territorio y nombre alternativo cuando existe. Si `imageKind` no es `direct`, muestra `Imagen de referencia territorial`; el `alt` reutiliza `imageLabel`.
+- La cabecera es un hero fotográfico de ancho completo con overlay. Su orden es insignia Top N, cuando corresponde; ciudad o localidad con región; nombre protagonista; nombre alternativo, cuando existe. Si `imageKind` no es `direct`, muestra `Imagen de referencia territorial`; el `alt` reutiliza `imageLabel`.
 - Las fichas Top 1, Top 2 y Top 3 muestran `Selección de la guía · Top N`, derivada de la misma configuración DOM del carrusel y no de una segunda lista de nombres.
-- Jerarquía de contenido: Sobre esta cocinería; Platos destacados; Tipo de comida; Comodidades; Información práctica; Ubicación; Reseñas en Google; Información del registro; navegación.
-- `Sobre esta cocinería` reutiliza exclusivamente `description`; si falta, muestra `No informado`.
+- Debajo del hero, un bloque editorial compacto reúne `Sobre esta cocinería`, `Platos destacados` y `Tipo de comida`.
+- La sección práctica usa dos columnas en desktop: `Ubicación` a la izquierda y, a la derecha, `Horario`, `Comodidades` y `Rango de precio`, en ese orden. En 720 px o menos se apila con el mapa primero.
+- Después se presenta `Menú` solo cuando exista un dato estructurado y respaldado; no se infiere desde `specialties`, `cuisine` o `description`. A continuación aparecen Reseñas en Google, Información y contacto, Sobre los datos y navegación.
+- `Sobre esta cocinería` reutiliza `description`. Si falta, puede construir una frase factual únicamente con ubicación y tipo de comida disponibles; si tampoco bastan, muestra `No informado`.
 - `Platos destacados` reproduce únicamente `specialties`, separando entradas explícitas por coma o punto y coma; no infiere platos desde categorías amplias. Si falta, muestra `No informado`.
 - Tipo de comida y Comodidades reutilizan los SVG y el sistema visual del listado. Preferencias y comodidades demo conservan la marca `Información referencial`.
 - La ubicación usa coordenadas validadas del registro. Con coordenadas, crea al abrir la ficha un iframe OpenStreetMap `loading="lazy"`, con `title` y atribución ODbL; sin coordenadas, muestra una indisponibilidad explícita. Un enlace cartográfico ya almacenado tiene prioridad para abrir la fuente externa.
 - Reseñas en Google solo pueden mostrarse mediante una integración o fuente autorizada, con atribución y enlaces exigibles. Mientras no exista, la sección declara `PENDIENTE — requiere integración o fuente autorizada` y no incluye autores, puntuaciones ni textos ficticios.
-- Presenta estado, confianza, ID, clasificación, notas, fecha y enlaces de fuentes disponibles.
+- `Información y contacto` muestra únicamente teléfono, WhatsApp, email, perfiles sociales y sitio web que pasen la validación de URL, además de servicios, pagos, año de fundación u otras redes cuando existan. No publica `owner` sin una decisión de pertinencia pública y trazabilidad por campo.
+- `Sobre los datos` presenta estado, confianza, ID, clasificación, notas, fecha y enlaces de fuentes disponibles.
 - Los datos no disponibles se muestran como `No informado`; los prototipos se señalan como referenciales.
 
 ## Acerca de esta guía / carrusel
