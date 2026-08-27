@@ -12,6 +12,7 @@
   });
   const PAGE_SIZE = 10;
   const CAROUSEL_AUTOPLAY_DELAY = 6000;
+  const SEARCH_SUGGESTION_LIMIT = 7;
   const HOURS_PLACEHOLDER_VALUES = Object.freeze([
     "Lun–vie 12:00–16:30",
     "Mar–dom 12:30–18:00",
@@ -39,9 +40,34 @@
     { key: "reducedMobility", label: "Acceso para movilidad reducida" },
   ]);
 
+  // TAXONOMÍA DE DEMOSTRACIÓN: conserva las asignaciones referenciales de la
+  // maqueta, separando preferencias alimentarias de comodidades físicas.
+  const DEMO_TAXONOMY_PATTERNS = Object.freeze([
+    Object.freeze(["parking", "accessibility"]),
+    Object.freeze(["petFriendly", "vegetarian"]),
+    Object.freeze(["vegan", "vegetarian"]),
+    Object.freeze(["celiac"]),
+    Object.freeze(["parking", "petFriendly"]),
+    Object.freeze(["accessibility", "celiac"]),
+    Object.freeze(["vegetarian"]),
+  ]);
+
+  const FOOD_PREFERENCE_DEMO_PROTOTYPE = Object.freeze({
+    enabled: true,
+    source: "placeholder-visual-only",
+    options: Object.freeze([
+      { key: "vegan", label: "Vegano" },
+      { key: "vegetarian", label: "Vegetariano" },
+      { key: "celiac", label: "Celíaco" },
+    ]),
+    assignPreferences(_restaurant, index) {
+      const keys = DEMO_TAXONOMY_PATTERNS[index % DEMO_TAXONOMY_PATTERNS.length];
+      return this.options.filter((option) => keys.includes(option.key));
+    },
+  });
+
   // COMODIDADES DE DEMOSTRACIÓN: ninguna de estas asignaciones proviene del
-  // Markdown ni constituye información verificada del establecimiento. El bloque
-  // está centralizado para retirarlo o reemplazarlo antes de producción.
+  // Markdown ni constituye información verificada del establecimiento.
   const AMENITY_DEMO_PROTOTYPE = Object.freeze({
     enabled: true,
     source: "placeholder-visual-only",
@@ -49,22 +75,9 @@
       { key: "petFriendly", label: "Pet friendly" },
       { key: "parking", label: "Estacionamiento" },
       { key: "accessibility", label: "Accesibilidad" },
-      { key: "vegan", label: "Vegano" },
-      { key: "vegetarian", label: "Vegetariano" },
-      { key: "celiac", label: "Celíaco" },
-      { key: "allergyAdaptation", label: "Alergias friendly" },
-    ]),
-    patterns: Object.freeze([
-      Object.freeze(["parking", "accessibility"]),
-      Object.freeze(["petFriendly", "vegetarian"]),
-      Object.freeze(["vegan", "vegetarian", "allergyAdaptation"]),
-      Object.freeze(["celiac", "allergyAdaptation"]),
-      Object.freeze(["parking", "petFriendly"]),
-      Object.freeze(["accessibility", "celiac"]),
-      Object.freeze(["vegetarian", "allergyAdaptation"]),
     ]),
     assignAmenities(_restaurant, index) {
-      const keys = this.patterns[index % this.patterns.length];
+      const keys = DEMO_TAXONOMY_PATTERNS[index % DEMO_TAXONOMY_PATTERNS.length];
       return this.options.filter((option) => keys.includes(option.key));
     },
   });
@@ -74,6 +87,15 @@
     const displayAmenities = AMENITY_DEMO_PROTOTYPE.enabled
       ? AMENITY_DEMO_PROTOTYPE.assignAmenities(restaurant, index)
       : [];
+    const displayFoodPreferences = FOOD_PREFERENCE_DEMO_PROTOTYPE.enabled
+      ? FOOD_PREFERENCE_DEMO_PROTOTYPE.assignPreferences(restaurant, index)
+      : [];
+    const displayFoodCategories = [
+      ...new Set([
+        ...(restaurant.foodCategories ?? []),
+        ...displayFoodPreferences.map(({ label }) => label),
+      ]),
+    ];
     return {
       ...restaurant,
       displayHours: usesPlaceholderHours
@@ -89,6 +111,12 @@
         ? PRICE_PROTOTYPE.assignBand(restaurant, index)
         : restaurant.priceCategory,
       priceIsSimulated: PRICE_PROTOTYPE.enabled,
+      displayFoodCategories,
+      displayFoodPreferences,
+      foodPreferencesAreSimulated: FOOD_PREFERENCE_DEMO_PROTOTYPE.enabled,
+      foodPreferencesSource: FOOD_PREFERENCE_DEMO_PROTOTYPE.enabled
+        ? FOOD_PREFERENCE_DEMO_PROTOTYPE.source
+        : null,
       displayAmenities,
       amenitiesAreSimulated: AMENITY_DEMO_PROTOTYPE.enabled,
       amenitiesSource: AMENITY_DEMO_PROTOTYPE.enabled
@@ -113,6 +141,7 @@
     searchForm: document.querySelector("#search-form"),
     searchInput: document.querySelector("#search-input"),
     searchClear: document.querySelector("#search-clear"),
+    searchSuggestions: document.querySelector("#search-suggestions"),
     regionFilters: document.querySelector("#region-filters"),
     regionFilterToggle: document.querySelector("#region-filter-toggle"),
     regionFilterCount: document.querySelector("#region-filter-count"),
@@ -159,6 +188,8 @@
 
   const state = {
     query: "",
+    selectedSearchId: null,
+    searchActiveIndex: -1,
     region: "",
     foods: new Set(),
     prices: new Set(),
@@ -190,12 +221,24 @@
     "Campesina",
     "Pastas",
     "Opciones vegetales",
+    "Vegano",
+    "Vegetariano",
+    "Celíaco",
     "Sin clasificación culinaria",
   ];
   const priceOrder = PRICE_PROTOTYPE.enabled
     ? [...PRICE_PROTOTYPE.bands]
     : ["Económico", "Precio medio", "No informado"];
   const amenityOrder = AMENITY_DEMO_PROTOTYPE.options.map(({ label }) => label);
+  const demoFoodPreferenceLabels = new Set(
+    FOOD_PREFERENCE_DEMO_PROTOTYPE.options.map(({ label }) => label),
+  );
+  const RAPA_NUI_TERRITORY = Object.freeze({
+    value: "__rapa_nui__",
+    label: "Isla de Pascua / Rapa Nui",
+    parentRegion: "Valparaíso",
+    parentCode: "V",
+  });
   // Orden geográfico norte-sur con la nomenclatura romana tradicional de las regiones.
   // `value` conserva exactamente el dato interno para no alterar la lógica de filtrado.
   const REGION_FILTER_ORDER = Object.freeze([
@@ -231,6 +274,43 @@
       .replace(/[\u0300-\u036f]/g, "")
       .toLowerCase()
       .trim();
+  }
+
+  function isRapaNuiRestaurant(restaurant) {
+    const territorialEvidence = [
+      restaurant.region,
+      restaurant.province,
+      restaurant.commune,
+      restaurant.locality,
+      restaurant.address,
+      restaurant.venue,
+    ]
+      .map(normalize)
+      .join(" ");
+    const isRapaNuiTerritory = /rapa nui|isla de pascua|hanga roa/.test(territorialEvidence);
+    const belongsToValparaiso =
+      restaurant.region === RAPA_NUI_TERRITORY.parentRegion ||
+      /rapa nui|isla de pascua/.test(normalize(restaurant.region));
+    return isRapaNuiTerritory && belongsToValparaiso;
+  }
+
+  function matchesSelectedTerritory(restaurant) {
+    if (!state.region) return true;
+    if (state.region === RAPA_NUI_TERRITORY.value) return isRapaNuiRestaurant(restaurant);
+    return restaurant.region === state.region;
+  }
+
+  function selectedTerritoryLabel() {
+    return state.region === RAPA_NUI_TERRITORY.value
+      ? RAPA_NUI_TERRITORY.label
+      : state.region;
+  }
+
+  function includesEvery(selectedValues, availableValues) {
+    return (
+      selectedValues.size === 0 ||
+      [...selectedValues].every((selectedValue) => availableValues.includes(selectedValue))
+    );
   }
 
   function deriveVisitFeatures(restaurant) {
@@ -309,11 +389,14 @@
       Campesina: '<path class="icon-fillable" d="M12 18C6 18 5 12 5 6c6 0 12 1 12 7 0 3-2 5-5 5Z"></path><path class="icon-detail" d="M5 20c3-5 6-8 10-10"></path>',
       Pastas: '<path class="icon-fillable" d="M4 12h16a8 8 0 0 1-16 0Z"></path><path class="icon-detail" d="M8 9c0-2 1-2 1-4M12 9c0-2 1-2 1-4M16 9c0-2 1-2 1-4"></path>',
       "Opciones vegetales": '<path class="icon-fillable" d="M19 4C11 4 6 8 6 14c0 3 2 5 5 5 6 0 8-7 8-15Z"></path><path class="icon-detail" d="M5 20c2-5 5-8 10-11"></path>',
+      Vegano: '<path class="icon-fillable" d="M18.8 4.3C11 4.6 6.5 8.6 6.5 14c0 3.2 2 5.3 5.2 5.3 5.1 0 7.1-6.8 7.1-15Z"></path><path class="icon-detail" d="M5.2 20.3c2.3-5 5.7-8.3 10.3-10.7"></path>',
+      Vegetariano: '<path class="icon-fillable" d="M13 8c3-3 6-2 7-5 1 4-.5 7-4 8"></path><path class="icon-fillable" d="M11 9c4 0 6 3 6 6.5S14.6 21 11 21s-6-2-6-5.5S7 9 11 9Z"></path><path class="icon-detail" d="M12 9c0-2-1-3.5-3-4"></path>',
+      Celíaco: '<path class="icon-detail" d="M12 21V6"></path><path class="icon-detail" d="M12 10C8 10 7 7 7 5c3 0 5 1.5 5 5Zm0 4c-4 0-5-3-5-5 3 0 5 1.5 5 5Zm0 4c-4 0-5-3-5-5 3 0 5 1.5 5 5Zm0-8c4 0 5-3 5-5-3 0-5 1.5-5 5Zm0 4c4 0 5-3 5-5-3 0-5 1.5-5 5Zm0 4c4 0 5-3 5-5-3 0-5 1.5-5 5ZM4 4l16 16"></path>',
       "Sin clasificación culinaria": '<circle class="icon-fillable" cx="12" cy="12" r="7"></circle><path class="icon-detail" d="M8.5 12h7"></path>',
     };
     const iconClasses = ["food-icon"];
     if (category === "Comida chilena") iconClasses.push("chile-flag");
-    if (["Pescados", "Mariscos", "Opciones vegetales"].includes(category)) {
+    if (["Pescados", "Mariscos", "Opciones vegetales", "Vegano"].includes(category)) {
       iconClasses.push("preserve-hover-outline");
     }
     return `<svg class="${iconClasses.join(" ")}" viewBox="0 0 24 24" aria-hidden="true">${iconPaths[category] ?? iconPaths["Sin clasificación culinaria"]}</svg>`;
@@ -324,25 +407,30 @@
       "Pet friendly": '<path class="icon-fillable" d="M12 12.5c-2.6 0-5.3 2.2-5.3 4.7 0 1.8 1.4 2.8 3 2.8.8 0 1.5-.4 2.3-.4s1.5.4 2.3.4c1.6 0 3-1 3-2.8 0-2.5-2.7-4.7-5.3-4.7Z"></path><circle class="icon-detail" cx="6.4" cy="9.6" r="1.6"></circle><circle class="icon-detail" cx="10" cy="6.3" r="1.6"></circle><circle class="icon-detail" cx="14" cy="6.3" r="1.6"></circle><circle class="icon-detail" cx="17.6" cy="9.6" r="1.6"></circle>',
       Estacionamiento: '<rect class="icon-fillable" x="4" y="3" width="16" height="18" rx="2"></rect><path class="icon-detail" d="M9 17V7h4.2a3 3 0 0 1 0 6H9m0 0h4.2"></path>',
       Accesibilidad: '<circle class="icon-detail" cx="10" cy="4.5" r="1.7"></circle><path class="icon-fillable" d="M9 8h4l1 4h3"></path><path class="icon-detail" d="m10 8-1 6 4 1 2.5 4M8.5 12A5 5 0 1 0 14 18"></path>',
-      Vegano: '<path class="icon-fillable" d="M18.8 4.3C11 4.6 6.5 8.6 6.5 14c0 3.2 2 5.3 5.2 5.3 5.1 0 7.1-6.8 7.1-15Z"></path><path class="icon-detail" d="M5.2 20.3c2.3-5 5.7-8.3 10.3-10.7"></path>',
-      Vegetariano: '<path class="icon-fillable" d="M13 8c3-3 6-2 7-5 1 4-.5 7-4 8"></path><path class="icon-fillable" d="M11 9c4 0 6 3 6 6.5S14.6 21 11 21s-6-2-6-5.5S7 9 11 9Z"></path><path class="icon-detail" d="M12 9c0-2-1-3.5-3-4"></path>',
-      Celíaco: '<path class="icon-fillable" d="M12 21V6"></path><path class="icon-detail" d="M12 10C8 10 7 7 7 5c3 0 5 1.5 5 5Zm0 4c-4 0-5-3-5-5 3 0 5 1.5 5 5Zm0 4c-4 0-5-3-5-5 3 0 5 1.5 5 5Zm0-8c4 0 5-3 5-5-3 0-5 1.5-5 5Zm0 4c4 0 5-3 5-5-3 0-5 1.5-5 5Zm0 4c4 0 5-3 5-5-3 0-5 1.5-5 5ZM4 4l16 16"></path>',
-      "Alergias friendly": '<path class="icon-fillable" d="M12 3 20 6v5c0 5-3.2 8.3-8 10-4.8-1.7-8-5-8-10V6l8-3Z"></path><path class="icon-detail" d="M12 7v6m0 3h.01"></path>',
     };
     return `<svg class="food-icon amenity-icon" viewBox="0 0 24 24" aria-hidden="true">${iconPaths[label] ?? ""}</svg>`;
   }
 
-  function foodCategoryList(categories) {
+  function foodCategoryList(restaurant) {
     return `
       <ul class="food-type-list" aria-label="Tipos de comida">
-        ${categories
+        ${restaurant.displayFoodCategories
           .map(
-            (category) => `
-              <li class="food-type-item">
+            (category) => {
+              const isReferential = demoFoodPreferenceLabels.has(category);
+              return `
+              <li
+                class="food-type-item${isReferential ? " is-referential" : ""}"
+                ${isReferential ? `data-food-source="${escapeHTML(restaurant.foodPreferencesSource)}" title="${escapeHTML(category)} · dato de demostración"` : ""}
+              >
                 ${foodIcon(category)}
-                <span>${escapeHTML(category)}</span>
+                <span class="food-type-label">
+                  ${escapeHTML(category)}
+                  ${isReferential ? '<small class="food-demo-note">Referencial</small>' : ""}
+                </span>
               </li>
-            `,
+            `;
+            },
           )
           .join("")}
       </ul>
@@ -370,6 +458,120 @@
         <span class="amenity-demo-note">Referencial</span>
       </span>
     `;
+  }
+
+  function matchingSearchSuggestions(query) {
+    const normalizedQuery = normalize(query);
+    if (!normalizedQuery) return [];
+
+    return restaurants
+      .map((restaurant) => {
+        const normalizedName = normalize(restaurant.name);
+        const normalizedAlternateName = normalize(restaurant.alternateName);
+        let rank = 4;
+        if (normalizedName.startsWith(normalizedQuery)) rank = 0;
+        else if (normalizedAlternateName.startsWith(normalizedQuery)) rank = 1;
+        else if (normalizedName.includes(normalizedQuery)) rank = 2;
+        else if (normalizedAlternateName.includes(normalizedQuery)) rank = 3;
+        return rank < 4 ? { restaurant, rank } : null;
+      })
+      .filter(Boolean)
+      .sort(
+        (first, second) =>
+          first.rank - second.rank ||
+          first.restaurant.name.localeCompare(second.restaurant.name, "es", {
+            sensitivity: "base",
+          }),
+      )
+      .slice(0, SEARCH_SUGGESTION_LIMIT)
+      .map(({ restaurant }) => restaurant);
+  }
+
+  function closeSearchSuggestions() {
+    state.searchActiveIndex = -1;
+    elements.searchSuggestions.hidden = true;
+    elements.searchSuggestions.innerHTML = "";
+    elements.searchInput.setAttribute("aria-expanded", "false");
+    elements.searchInput.removeAttribute("aria-activedescendant");
+  }
+
+  function renderSearchSuggestions() {
+    const query = elements.searchInput.value.trim();
+    if (!query) {
+      closeSearchSuggestions();
+      return;
+    }
+
+    const suggestions = matchingSearchSuggestions(query);
+    state.searchActiveIndex = -1;
+    elements.searchInput.removeAttribute("aria-activedescendant");
+    elements.searchInput.setAttribute("aria-expanded", "true");
+    elements.searchSuggestions.hidden = false;
+    elements.searchSuggestions.innerHTML = suggestions.length
+      ? suggestions
+          .map(
+            (restaurant, index) => `
+              <div
+                class="search-suggestion"
+                id="search-suggestion-${index}"
+                role="option"
+                data-restaurant-id="${escapeHTML(restaurant.id)}"
+                aria-selected="false"
+              >${escapeHTML(restaurant.name)}</div>
+            `,
+          )
+          .join("")
+      : '<p class="search-suggestions-empty" role="status">Sin coincidencias por nombre.</p>';
+  }
+
+  function setSearchActiveIndex(nextIndex) {
+    const options = [...elements.searchSuggestions.querySelectorAll('[role="option"]')];
+    if (!options.length) return;
+    state.searchActiveIndex = (nextIndex + options.length) % options.length;
+    options.forEach((option, index) => {
+      option.setAttribute("aria-selected", String(index === state.searchActiveIndex));
+    });
+    const activeOption = options[state.searchActiveIndex];
+    elements.searchInput.setAttribute("aria-activedescendant", activeOption.id);
+    activeOption.scrollIntoView({ block: "nearest" });
+  }
+
+  function selectSearchSuggestion(option) {
+    const restaurant = restaurants.find(({ id }) => id === option?.dataset.restaurantId);
+    if (!restaurant) return;
+    state.selectedSearchId = restaurant.id;
+    state.query = restaurant.name;
+    elements.searchInput.value = restaurant.name;
+    applyFilters();
+    closeSearchSuggestions();
+    elements.searchInput.focus({ preventScroll: true });
+    scrollToResultsStart();
+  }
+
+  function handleSearchKeydown(event) {
+    const isOpen = elements.searchInput.getAttribute("aria-expanded") === "true";
+    if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+      event.preventDefault();
+      if (!isOpen) renderSearchSuggestions();
+      const direction = event.key === "ArrowDown" ? 1 : -1;
+      const startIndex = state.searchActiveIndex < 0 && direction < 0
+        ? elements.searchSuggestions.querySelectorAll('[role="option"]').length
+        : state.searchActiveIndex;
+      setSearchActiveIndex(startIndex + direction);
+      return;
+    }
+    if (event.key === "Enter" && isOpen && state.searchActiveIndex >= 0) {
+      event.preventDefault();
+      const activeOption = elements.searchSuggestions.querySelector(
+        `#search-suggestion-${state.searchActiveIndex}`,
+      );
+      selectSearchSuggestion(activeOption);
+      return;
+    }
+    if (event.key === "Escape" && isOpen) {
+      event.preventDefault();
+      closeSearchSuggestions();
+    }
   }
 
   function initialiseSocialLinks() {
@@ -404,12 +606,15 @@
     container.innerHTML = values
       .filter((value) => counts.has(value))
       .map(
-        (value) => `
+        (value) => {
+          const isReferentialFood = includeFoodIcon && demoFoodPreferenceLabels.has(value);
+          return `
           <button
-            class="filter-option"
+            class="filter-option${isReferentialFood ? " is-referential" : ""}"
             type="button"
             data-filter-group="${group}"
             data-filter-value="${escapeHTML(value)}"
+            ${isReferentialFood ? `data-filter-source="${FOOD_PREFERENCE_DEMO_PROTOTYPE.source}"` : ""}
             aria-pressed="false"
           >
             <span class="option-label${includeIcon ? " option-label--icon" : ""}">
@@ -418,7 +623,8 @@
             </span>
             <span class="option-count">${counts.get(value)}</span>
           </button>
-        `,
+        `;
+        },
       )
       .join("");
   }
@@ -431,7 +637,15 @@
       .filter((region) => !configuredRegionNames.has(region))
       .sort((a, b) => a.localeCompare(b, "es"))
       .map((value) => ({ code: "—", value }));
-    const regions = [...orderedRegions, ...unconfiguredRegions];
+    const rapaNuiCount = restaurants.filter(isRapaNuiRestaurant).length;
+    const regions = [
+      ...orderedRegions.flatMap((region) =>
+        region.value === RAPA_NUI_TERRITORY.parentRegion
+          ? [region, { ...RAPA_NUI_TERRITORY, isSpecial: true, count: rapaNuiCount }]
+          : [region],
+      ),
+      ...unconfiguredRegions,
+    ];
     elements.regionFilters.innerHTML = `
       <button
         class="filter-option"
@@ -445,16 +659,22 @@
       </button>
       ${regions
         .map(
-          ({ code, value }) => `
+          ({ code, value, label = value, isSpecial = false, count }) => `
             <button
-              class="filter-option"
+              class="filter-option${isSpecial ? " filter-option--territory" : ""}"
               type="button"
               data-filter-group="region"
               data-filter-value="${escapeHTML(value)}"
               aria-pressed="false"
             >
-              <span class="option-label"><span class="region-code">${escapeHTML(code)} —</span> ${escapeHTML(value)}</span>
-              <span class="option-count">${regionCounts.get(value) ?? 0}</span>
+              <span class="option-label">
+                ${
+                  isSpecial
+                    ? `<span class="territory-name">${escapeHTML(label)}</span><small class="territory-association">Territorio especial · ${escapeHTML(RAPA_NUI_TERRITORY.parentCode)} — ${escapeHTML(RAPA_NUI_TERRITORY.parentRegion)}</small>`
+                    : `<span class="region-code">${escapeHTML(code)} —</span> ${escapeHTML(label)}`
+                }
+              </span>
+              <span class="option-count">${count ?? regionCounts.get(value) ?? 0}</span>
             </button>
           `,
         )
@@ -464,7 +684,7 @@
     renderFilterOptions(
       elements.foodFilters,
       foodOrder,
-      countBy(restaurants, (item) => item.foodCategories),
+      countBy(restaurants, (item) => item.displayFoodCategories),
       "foods",
     );
     renderFilterOptions(
@@ -500,9 +720,9 @@
 
   function filterSections() {
     return [
+      [elements.priceFilterToggle, elements.priceFilters],
       [elements.regionFilterToggle, elements.regionFilters],
       [elements.foodFilterToggle, elements.foodFilters],
-      [elements.priceFilterToggle, elements.priceFilters],
       [elements.amenityFilterToggle, elements.amenityFilters],
     ];
   }
@@ -534,16 +754,16 @@
 
     state.visibleRestaurants = restaurants.filter((restaurant) => {
       const searchableName = normalize(`${restaurant.name} ${restaurant.alternateName ?? ""}`);
-      const matchesName = !normalizedQuery || searchableName.includes(normalizedQuery);
-      const matchesRegion = !state.region || restaurant.region === state.region;
-      const matchesFood =
-        !state.foods.size ||
-        restaurant.foodCategories.some((category) => state.foods.has(category));
-      const matchesPrice =
-        !state.prices.size || state.prices.has(restaurant.displayPriceCategory);
-      const matchesAmenity =
-        !state.amenities.size ||
-        restaurant.displayAmenities.some(({ label }) => state.amenities.has(label));
+      const matchesName = state.selectedSearchId
+        ? restaurant.id === state.selectedSearchId
+        : !normalizedQuery || searchableName.includes(normalizedQuery);
+      const matchesRegion = matchesSelectedTerritory(restaurant);
+      const matchesFood = includesEvery(state.foods, restaurant.displayFoodCategories);
+      const matchesPrice = includesEvery(state.prices, [restaurant.displayPriceCategory]);
+      const matchesAmenity = includesEvery(
+        state.amenities,
+        restaurant.displayAmenities.map(({ label }) => label),
+      );
 
       return matchesName && matchesRegion && matchesFood && matchesPrice && matchesAmenity;
     });
@@ -635,15 +855,17 @@
             style="--restaurant-image: url('${escapeHTML(restaurant.imagePath)}')"
           >
             <span class="restaurant-main-content">
-              <span class="restaurant-name">${escapeHTML(restaurant.name)}</span>
+              <span class="restaurant-heading">
+                <span class="restaurant-location">${escapeHTML(formatLocation(restaurant, true))}</span>
+                <span class="restaurant-name">${escapeHTML(restaurant.name)}</span>
+              </span>
               <span class="restaurant-meta">
                 <span class="restaurant-hours${hoursClass}" data-hours-source="${escapeHTML(restaurant.hoursSource ?? "unavailable")}">${escapeHTML(hours)}</span>
-                <span class="restaurant-location">${escapeHTML(formatLocation(restaurant, true))}</span>
               </span>
               ${amenityList(restaurant)}
             </span>
           </span>
-          <span class="restaurant-cuisine">${foodCategoryList(restaurant.foodCategories)}</span>
+          <span class="restaurant-cuisine">${foodCategoryList(restaurant)}</span>
           <span class="restaurant-price">
             <span>${escapeHTML(formatPrice(restaurant.displayPriceCategory))}</span>
           </span>
@@ -677,7 +899,7 @@
 
     const summary = [];
     if (isSearching) summary.push(`“${state.query}”`);
-    if (state.region) summary.push(state.region);
+    if (state.region) summary.push(selectedTerritoryLabel());
     if (state.foods.size) summary.push([...state.foods].join(", "));
     if (state.prices.size) summary.push([...state.prices].join(", "));
     if (state.amenities.size) summary.push([...state.amenities].join(", "));
@@ -749,7 +971,9 @@
 
     if (includeSearch) {
       state.query = "";
+      state.selectedSearchId = null;
       elements.searchInput.value = "";
+      closeSearchSuggestions();
     }
     applyFilters();
   }
@@ -1087,16 +1311,37 @@
   }
 
   function bindEvents() {
-    elements.searchForm.addEventListener("submit", (event) => event.preventDefault());
+    elements.searchForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      closeSearchSuggestions();
+    });
     elements.searchInput.addEventListener("input", (event) => {
+      state.selectedSearchId = null;
       state.query = event.target.value.trim();
       applyFilters();
+      renderSearchSuggestions();
     });
+    elements.searchInput.addEventListener("focus", () => {
+      if (elements.searchInput.value.trim()) renderSearchSuggestions();
+    });
+    elements.searchInput.addEventListener("keydown", handleSearchKeydown);
     elements.searchClear.addEventListener("click", () => {
       state.query = "";
+      state.selectedSearchId = null;
       elements.searchInput.value = "";
       applyFilters();
+      closeSearchSuggestions();
       elements.searchInput.focus();
+    });
+    elements.searchSuggestions.addEventListener("pointerdown", (event) => {
+      if (event.target.closest(".search-suggestion")) event.preventDefault();
+    });
+    elements.searchSuggestions.addEventListener("click", (event) => {
+      const suggestion = event.target.closest(".search-suggestion");
+      if (suggestion) selectSearchSuggestion(suggestion);
+    });
+    document.addEventListener("pointerdown", (event) => {
+      if (!elements.searchForm.contains(event.target)) closeSearchSuggestions();
     });
     elements.regionFilterToggle.addEventListener("click", () => {
       toggleFilterSection(elements.regionFilterToggle, elements.regionFilters);
@@ -1190,7 +1435,7 @@
     elements.filtersApply.addEventListener("click", () => closeFilters());
     elements.filtersBackdrop.addEventListener("click", () => closeFilters());
     document.addEventListener("keydown", (event) => {
-      if (event.key !== "Escape") return;
+      if (event.defaultPrevented || event.key !== "Escape") return;
       if (elements.dialog.open) {
         event.preventDefault();
         closeModal();

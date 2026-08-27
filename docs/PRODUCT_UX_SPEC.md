@@ -1,6 +1,6 @@
 # Especificación vigente de producto y UX/UI
 
-Última consolidación: 21 de agosto de 2026.  
+Última consolidación: 25 de agosto de 2026.
 Esta especificación deriva del hand-off y se contrasta con el repositorio auditado. Los conflictos se enlazan a [DECISIONS.md](DECISIONS.md).
 
 ## Dirección de producto
@@ -28,12 +28,15 @@ Evitar:
 
 ## Navbar
 
-- Debe ser sticky, opaco y coherente con la cuadrícula del directorio.
+- Debe ser sticky, parcialmente transparente y coherente con la cuadrícula del directorio.
+- Sobre el header, una superficie controlada de `--paper` con desenfoque ligero permite percibir la fotografía sin perder contraste; al recorrer contenido claro u oscuro debe conservar legibilidad.
 - El buscador usa `Buscar por nombre de cocinería...` y se alinea con `results-area`.
+- Al escribir, despliega hasta siete sugerencias basadas exclusivamente en el nombre principal o alternativo: matching parcial sin distinción de mayúsculas ni tildes, primero coincidencias al inicio y después coincidencias contenidas.
+- El autocomplete usa semántica combobox/listbox, se actualiza progresivamente, se cierra al vaciar, seleccionar, pulsar Escape o hacer clic fuera y permite ArrowDown, ArrowUp y Enter. Elegir una opción aplica el registro exacto y lleva al inicio de resultados; escribir sin elegir conserva el filtro parcial.
 - Instagram y WhatsApp deben ser reconocibles, visibles y de peso equivalente; SVG propios están permitidos.
 - No usar emojis ni Unicode como iconos sociales.
 - El CTA principal se ubica al extremo derecho y tiene mayor jerarquía que redes.
-- Texto implementado actual: `Agrega tu cocinería`.
+- Texto vigente: `Sé parte de la guía`; su tratamiento terracota debe sentirse invitacional y conservar hover, foco visible y active.
 - `PENDIENTE`: definir destino y flujo posterior al clic.
 - `PENDIENTE`: configurar URLs reales de Instagram y WhatsApp.
 
@@ -48,32 +51,39 @@ Evitar:
 
 Filtros vigentes:
 
+- Rango de precio.
 - Región.
 - Tipo de comida.
-- Rango de precio.
-- Comodidades, como nombre provisional para servicios, infraestructura y necesidades alimentarias.
+- Comodidades, para características físicas o de servicio del establecimiento.
 
 Comportamiento:
 
+- Rango de precio aparece abierto solo en la carga inicial; los otros grupos comienzan cerrados.
 - Solo un desplegable abierto a la vez.
 - Abrir uno cierra los demás sin perder selección.
 - Tipo, precio y comodidades permiten selección múltiple tipo toggle.
+- Las selecciones múltiples se combinan mediante AND dentro de cada grupo: el registro debe cumplir todas las opciones seleccionadas.
+- Región, tipo, precio y comodidades también se combinan mediante AND entre grupos.
 - Región permite una selección; volver a pulsarla la desmarca.
-- Reset limpia todos los filtros, cierra desplegables y vuelve al inicio del directorio.
+- Reset limpia todos los filtros, cierra desplegables sin reabrir precio y vuelve al inicio del directorio.
 - Mantener `focus-visible`, targets suficientes y adaptación mobile.
 - Las opciones internas no usan la línea lateral terracota del control principal.
-- El hover del control principal usa línea terracota sin layout shift y con separación suficiente respecto del texto.
+- El hover del control principal usa línea terracota sin layout shift y con separación suficiente respecto del texto; mientras el grupo esté abierto, conserva exactamente ese mismo tratamiento aunque no tenga hover.
 
 ### Regiones
 
 - Orden geográfico norte-sur.
 - Números romanos tradicionales como etiqueta, sin que determinen el orden.
 - `Todo Chile` como opción separada.
-- No incorporar Rapa Nui/Isla de Pascua como región o filtro independiente sin nueva instrucción.
+- `Isla de Pascua / Rapa Nui` aparece inmediatamente después de Valparaíso como territorio especial asociado a `V — Valparaíso`, sin número romano propio.
+- La opción territorial no modifica el total oficial de `16 regiones` y filtra solo registros cuya ubicación identifique Rapa Nui, Isla de Pascua o Hanga Roa.
+- El dataset actual no contiene registros asociados; seleccionar la opción muestra el estado vacío normal.
 - Tras cambiar o desmarcar región, desplazar al inicio de resultados respetando el navbar sticky.
 
 ### Tipo de comida e iconografía
 
+- Incluye `Vegano`, `Vegetariano` y `Celíaco` como opciones multiselección referenciales con la misma lógica AND, toggle, resumen y reset del resto del grupo.
+- Las tres preferencias alimentarias actuales son datos de demostración y deben mantener una marca visible; no constituyen atributos verificados.
 - Reutilizar los mismos SVG en filtros y filas.
 - Mariscos usa una concha; comida al paso usa una bolsa ancha; comida chilena usa bandera chilena.
 - Todos los iconos comparten outline, grosor y proporciones.
@@ -89,12 +99,12 @@ Conceptos previstos:
 - Pet friendly.
 - Estacionamiento.
 - Accesibilidad.
-- Opciones veganas.
-- Opciones vegetarianas.
-- Opciones para celíacos.
-- Adaptación frente a alergias alimentarias.
 
 Los datos actuales son de demostración. No deben presentarse como atributos reales.
+
+`Vegano`, `Vegetariano` y `Celíaco` no se duplican aquí: pertenecen a Tipo de comida. `Alergias friendly` o adaptación frente a alergias no forma parte de la interfaz vigente.
+
+En `restaurant-main`, las etiquetas informativas usan fondo `--paper`, sin borde ni marco, y comparten tipografía, color y tratamiento hover con la columna Tipo de comida. Conservan la marca visible `Referencial`.
 
 ## Listado y previews
 
@@ -114,9 +124,12 @@ Los datos actuales son de demostración. No deben presentarse como atributos rea
 
 - Márgenes contenidos y alineación con la cuadrícula.
 - Fotografía legible, sin oscurecimiento excesivo.
+- Capa diagonal más oscura en la esquina inferior izquierda y progresivamente más transparente hacia la esquina superior derecha.
 - Hover/foco con línea terracota a la izquierda de la imagen, más gruesa que filtros y paginación, sin layout shift.
-- Nombre, horario y ubicación legibles.
-- Horario y ubicación comparten línea en desktop cuando haya espacio.
+- Ubicación secundaria directamente encima del nombre.
+- Nombre alineado a la izquierda y con la jerarquía serif existente.
+- El bloque no centra verticalmente el nombre: ubicación, título y horario siguen su flujo natural desde la parte superior.
+- Horario debajo del bloque ubicación–nombre, sin repetir la ubicación. Ubicación, nombre, metadata, comodidades, tipo de comida, precio y demás información comparten un eje izquierdo dentro de sus áreas.
 - Ni horario ni ubicación usan sombras de texto.
 - Los datos de `restaurant-meta` se separan mediante divisores verticales cortos y discretos.
 - Comodidades aparecen bajo la metadata con el mismo lenguaje de iconos y con marca referencial mientras sean simuladas.
@@ -148,10 +161,12 @@ Los datos actuales son de demostración. No deben presentarse como atributos rea
 
 Dirección vigente:
 
+- Es el primer bloque editorial después del navbar y antes del directorio, en desktop y mobile.
 - Header editorial de ancho completo con fotografía de fondo tipo `cover`.
-- Caja de contenido superpuesta con fondo terracota.
+- La fotografía se integra directamente con la sección, sin marco perimetral visible; el outline de foco funcional se conserva.
+- Caja de contenido superpuesta con secuencia de fondo `--terracotta`, `--paper`, `--terracotta`, `--paper`; cada slide adapta simultáneamente todos sus textos, labels y enlaces para conservar contraste.
 - Cuatro slides sincronizados: imagen, texto e indicador cambian como una unidad.
-- Indicadores circulares centrados.
+- Indicadores circulares centrados e individuales, con targets de 40 × 40 px; el wrapper no muestra fondo, borde, sombra ni padding con apariencia rectangular.
 - Autoplay sin botones anterior/siguiente.
 - Pausa por hover/foco y respeto de `prefers-reduced-motion`.
 - Assets locales, alta resolución y atribución trazable.
@@ -174,9 +189,10 @@ Decisión vigente confirmada el 24 de agosto de 2026:
 - fondo `--terracotta`, reemplazando `--paper`;
 - sin línea superior;
 - contacto alineado a la izquierda;
-- contacto e información alineados horizontalmente en desktop y apilados en mobile;
+- marca, contacto e información usan tres columnas iguales y un único gap en desktop; se apilan en mobile;
 - texto y enlaces claros con contraste suficiente sobre terracota;
-- iconos sociales en `--terracotta-dark` sobre recuadros `--white`;
+- iconos sociales de WhatsApp e Instagram en `--paper`, directamente sobre el fondo del footer y sin recuadro propio;
+- la decisión de iconos del footer no modifica los iconos sociales del navbar;
 - hover en `--paper-deep` y foco visible en `--white`;
 - `footer-brand-text` con menor protagonismo;
 - reducir el vacío entre directorio y `Acerca de esta guía`.

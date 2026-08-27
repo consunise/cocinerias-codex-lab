@@ -55,7 +55,7 @@ Los dos prompts de la raíz son idénticos por hash en el estado auditado. `camb
 
 1. `index.html` carga `data.js` con `defer`.
 2. `data.js` publica los registros en `window.COCINERIAS`.
-3. `script.js` crea una vista enriquecida con precio, horario y comodidades de prototipo.
+3. `script.js` crea una vista enriquecida con precio, horario, preferencias alimentarias y comodidades de prototipo.
 4. Se inicializan filtros, eventos, render del listado y carrusel.
 5. Búsqueda, filtros y paginación operan enteramente en memoria.
 6. Las filas y el modal se construyen mediante templates HTML escapados con `escapeHTML`; las URLs pasan por `safeUrl`.
@@ -64,7 +64,7 @@ Los dos prompts de la raíz son idénticos por hash en el estado auditado. `camb
 
 `script.js` mantiene:
 
-- consulta de búsqueda;
+- consulta de búsqueda, ID exacto seleccionado desde el autocomplete e índice de sugerencia activa;
 - región seleccionada;
 - conjuntos de tipos de comida, precios y comodidades;
 - resultados visibles;
@@ -120,6 +120,8 @@ Campos derivados solo en tiempo de ejecución:
 ```text
 displayHours, hoursIsPlaceholder, hoursSource,
 displayPriceCategory, priceIsSimulated,
+displayFoodCategories, displayFoodPreferences,
+foodPreferencesAreSimulated, foodPreferencesSource,
 displayAmenities, amenitiesAreSimulated, amenitiesSource,
 visitFeatures
 ```
@@ -185,4 +187,3 @@ Es evidencia de un flujo anterior basado en una imagen directa y respaldos regio
 ## Despliegue
 
 `NO CONFIRMADO`: no hay configuración de hosting, dominio, CI ni pipeline de despliegue versionado.
-

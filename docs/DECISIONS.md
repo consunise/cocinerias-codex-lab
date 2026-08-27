@@ -1,6 +1,6 @@
 # Registro de decisiones
 
-Última consolidación: 21 de agosto de 2026.
+Última consolidación: 25 de agosto de 2026.
 
 Este archivo conserva decisiones de producto, UX/UI, datos y operación. El código demuestra implementación; no reemplaza por sí solo una decisión explícita. Una instrucción directa más reciente puede reemplazar cualquier entrada.
 
@@ -28,19 +28,23 @@ Decisión: usar el repositorio para afirmar qué está implementado; `DECISIONS.
 
 Motivo: evitar que una solicitud antigua vuelva a activarse por accidente.
 
-### DEC-004 — Filtros desplegables y selección controlada
+### DEC-004 — Orden, apertura y lógica de filtros
 
 Estado: `VIGENTE` / `IMPLEMENTADO`
 
-Decisión: permitir un solo desplegable abierto; conservar selecciones al cambiar de grupo; usar toggle para opciones; cerrar desplegables al resetear.
+Decisión: ordenar los grupos como Precio, Región, Tipo de comida y Comodidades. Precio se abre solo en la carga inicial; abrir otro grupo cierra el anterior y el reset deja todos cerrados.
 
-### DEC-005 — Regiones en orden geográfico con números romanos
+Lógica: Tipo, Precio y Comodidades conservan multiselección toggle, pero combinan todas sus opciones mediante AND. Los distintos grupos también se intersectan mediante AND; una combinación imposible conserva sus filtros y muestra el estado vacío.
+
+### DEC-005 — Regiones y territorio especial de Rapa Nui
 
 Estado: `VIGENTE` / `IMPLEMENTADO`
 
-Decisión: ordenar norte-sur, mostrar números romanos tradicionales y mantener `Todo Chile` separado. No agregar Rapa Nui como región independiente.
+Decisión: ordenar las 16 regiones de norte a sur, mostrar números romanos tradicionales y mantener `Todo Chile` separado. Incorporar `Isla de Pascua / Rapa Nui` después de Valparaíso como opción territorial especial asociada a `V — Valparaíso`, sin número romano propio ni cambio del total de 16 regiones.
 
-Reemplaza: orden alfabético y la incorporación exploratoria de Rapa Nui.
+Datos: la opción solo coincide con registros cuya ubicación identifique Rapa Nui, Isla de Pascua o Hanga Roa. Como el dataset actual no contiene ninguno, produce cero resultados sin inventar establecimientos.
+
+Reemplaza: orden alfabético, presentación de Rapa Nui como región independiente y la decisión posterior de excluirlo por completo del filtro.
 
 ### DEC-006 — Paginación de 10 registros
 
@@ -52,9 +56,11 @@ Reemplaza: listado largo o carga progresiva mediante “ver más”.
 
 ### DEC-007 — Jerarquía y comportamiento de filas
 
-Estado: `VIGENTE` / `IMPLEMENTADO PARCIAL`
+Estado: `VIGENTE` / `IMPLEMENTADO`
 
-Decisión: reducir el ancho de precio, ampliar tipo de comida, mantener precio en regular, usar una línea terracota gruesa a la izquierda de la fotografía en hover/foco y separar metadata con líneas verticales.
+Decisión: reducir el ancho de precio, ampliar tipo de comida, mantener precio en regular, usar una línea terracota gruesa a la izquierda de la fotografía en hover/foco y separar metadata con líneas verticales. En `restaurant-main`, mostrar ubicación arriba, nombre debajo y horario después, sin repetir ubicación. Todo el contenido textual e informativo de la fila —incluidos título, metadata, tipo de comida, precio y comodidades— comparte un eje izquierdo dentro de su área y conserva el flujo natural desde arriba.
+
+Reemplaza: nombre centrado e información secundaria alineada a la derecha.
 
 Pendiente relacionado: orientación de la flecha de `Ver ficha`; ver DEC-011.
 
@@ -68,9 +74,11 @@ Decisión: reutilizar SVG entre filtros y filas. Los fills de hover no deben bor
 
 Estado: `VIGENTE` / `IMPLEMENTADO`
 
-Decisión: mantener el slide introductorio y usar los otros tres para una selección Top 1, Top 2 y Top 3. Restaurante Pily ocupa Top 1. Carrusel automático, indicadores centrados, sin botones laterales y respetando reduced motion.
+Decisión: ubicar el carrusel como header editorial inmediatamente después del navbar y antes del directorio. Mantener el slide introductorio y usar los otros tres para una selección Top 1, Top 2 y Top 3. Restaurante Pily ocupa Top 1. Carrusel automático, indicadores centrados, sin botones laterales y respetando reduced motion.
 
-Reemplaza: carrusel editorial por zonas norte, centro y sur.
+Tratamiento: alternar el fondo de la caja editorial `--terracotta`, `--paper`, `--terracotta`, `--paper` en los cuatro slides y adaptar en cada slide el contraste de todo su contenido. Los indicadores conservan sus círculos y su área interactiva, pero el wrapper no tiene fondo, borde, sombra ni apariencia de píldora.
+
+Reemplaza: carrusel editorial por zonas norte, centro y sur, y su ubicación posterior al directorio.
 
 Observación: Top 2 y Top 3 actuales son Mata Rangi y Cocinería Bellavista; las fuentes están enlazadas en `index.html`. Falta metodología editorial formal.
 
@@ -80,9 +88,11 @@ Estado: `VIGENTE` / `IMPLEMENTADO`
 
 Decisión: usar `--terracotta` como fondo del footer, sin línea divisoria superior, conservando su estructura y comportamiento responsive.
 
-Contraste: texto y enlaces claros sobre terracota; iconos sociales en `--terracotta-dark` sobre recuadros `--white`; hover en `--paper-deep` y foco visible en `--white`.
+Contraste: texto y enlaces claros sobre terracota; iconos sociales de WhatsApp e Instagram en `--paper`, sin fondo ni borde propios; hover en `--paper-deep` y foco visible en `--white`. Esta regla de iconos solo aplica al footer.
 
 Confirmación: decisión aprobada explícitamente el 24 de agosto de 2026. Reemplaza la implementación con fondo `--paper` del commit `045dd1f`.
+
+Reemplaza para los iconos sociales del footer: el tratamiento anterior negro o `--terracotta-dark` sobre recuadros claros. No reemplaza ni modifica los iconos sociales del navbar.
 
 ### DEC-011 — Acción “Ver ficha” con flecha inferior
 
@@ -92,13 +102,15 @@ Decisión: texto y flecha centrados verticalmente, con flecha orientada hacia ab
 
 Discrepancia: el código apila texto y símbolo, pero usa `→`.
 
-### DEC-012 — Comodidades como filtro provisional
+### DEC-012 — Separación de preferencias alimentarias y comodidades
 
-Estado: `VIGENTE PROVISIONAL` / `IMPLEMENTADO COMO DEMO`
+Estado: `VIGENTE` / `IMPLEMENTADO COMO DEMO`
 
-Decisión: agrupar infraestructura, accesibilidad y opciones alimentarias bajo `Comodidades` mientras se valida el nombre definitivo.
+Decisión: `Vegano`, `Vegetariano` y `Celíaco` pertenecen a Tipo de comida. `Comodidades` queda reservada para características físicas o de servicio del establecimiento: `Pet friendly`, `Estacionamiento` y `Accesibilidad`. `Alergias friendly` o adaptación frente a alergias se elimina de filtros y filas.
 
-Restricción: ninguna asignación demo puede presentarse como dato real.
+Restricción: las asignaciones actuales de estas seis opciones siguen siendo de demostración, se identifican como referenciales y no pueden presentarse como datos verificados.
+
+Reemplaza: preferencias alimentarias y adaptación frente a alergias agrupadas bajo `Comodidades`.
 
 ### DEC-013 — Datos simulados explícitos y removibles
 
@@ -130,19 +142,42 @@ Decisión: no crear instrucciones anidadas por ahora. El repositorio es plano y 
 
 Revisar solo si una subcarpeta adquiere un flujo, equipo o reglas realmente diferentes.
 
+### DEC-017 — Navbar translúcido y CTA invitacional
+
+Estado: `VIGENTE` / `IMPLEMENTADO`
+
+Decisión: mantener el navbar sticky como una superficie de `--paper` parcialmente transparente con desenfoque ligero, superpuesta al header editorial para que la fotografía se perciba sutilmente detrás. Debe conservar contraste al pasar sobre fotografías y sobre contenido claro u oscuro.
+
+CTA: el texto principal es `Sé parte de la guía`, con mayor jerarquía que los iconos sociales y estados hover, focus-visible y active. El destino continúa provisional hasta resolver COMMS-001.
+
+Reemplaza: navbar completamente opaco y texto `Agrega tu cocinería`.
+
+### DEC-018 — Autocomplete del buscador limitado a nombres
+
+Estado: `VIGENTE` / `IMPLEMENTADO`
+
+Decisión: mantener la búsqueda limitada al nombre principal o alternativo de la cocinería y mostrar hasta siete sugerencias progresivas. El matching ignora mayúsculas y tildes, prioriza nombres que comienzan con la consulta y luego los que la contienen.
+
+Accesibilidad: usar patrón combobox/listbox con `aria-expanded`, opción activa y navegación por ArrowDown, ArrowUp, Enter y Escape. Seleccionar una sugerencia aplica el registro exacto, cierra el panel y desplaza al inicio de resultados; la escritura libre conserva el filtrado parcial existente.
+
 ## Decisiones reemplazadas
 
 | Decisión histórica | Estado | Reemplazada por |
 |---|---|---|
 | Mostrar `16 regiones en todo Chile` como una frase | `REEMPLAZADO` | `16 regiones` y `A lo largo y ancho de Chile` como resultados separados |
 | Ordenar regiones alfabéticamente | `REEMPLAZADO` | DEC-005 |
-| Agregar Rapa Nui como región/filtro | `REEMPLAZADO` | DEC-005 |
+| Presentar Rapa Nui como región numerada o 17.ª región | `REEMPLAZADO` | DEC-005, territorio especial asociado a Valparaíso |
+| Excluir Rapa Nui/Isla de Pascua del filtro | `REEMPLAZADO` | DEC-005, reincorporación territorial confirmada el 24 de agosto de 2026 |
 | Listado largo o carga “de 10 en 10” | `REEMPLAZADO` | DEC-006, paginación |
 | Carrusel norte/centro/sur | `REEMPLAZADO` | DEC-009, Top 3 editorial |
+| Todos los bloques editoriales del carrusel con fondo terracota | `REEMPLAZADO` | DEC-009, alternancia terracota/paper |
 | Exigir iconos Flaticon en la interfaz | `REEMPLAZADO` | SVG propios permitidos y actualmente implementados |
 | `Acerca de esta guía` como sección informativa convencional | `REEMPLAZADO` | Header editorial con fotografía de fondo y contenido superpuesto |
+| Nombre de la cocinería centrado e información secundaria a la derecha | `REEMPLAZADO` | DEC-007, eje izquierdo común |
+| Vegano, Vegetariano, Celíaco y alergias dentro de Comodidades | `REEMPLAZADO` | DEC-012, taxonomía separada y alergias eliminadas |
 | Línea inferior de `results-area` | `REEMPLAZADO` | Sin línea inferior |
 | Línea superior visible del footer | `REEMPLAZADO` | Sin línea superior |
+| Navbar completamente opaco y CTA `Agrega tu cocinería` | `REEMPLAZADO` | DEC-017 |
 
 ## Cómo registrar una nueva decisión
 

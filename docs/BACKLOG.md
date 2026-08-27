@@ -1,6 +1,6 @@
 # Backlog consolidado
 
-Última revisión: 21 de agosto de 2026.
+Última revisión: 24 de agosto de 2026.
 
 Este backlog registra pendientes, no autoriza su implementación. Las prioridades reflejan riesgo para continuidad o publicación.
 
@@ -71,7 +71,7 @@ Criterio de cierre:
 
 Estado: `PENDIENTE`
 
-Criterio de cierre: URLs reales de WhatsApp/Instagram y flujo autorizado para `Agrega tu cocinería`, con estados de error/éxito si corresponde.
+Criterio de cierre: URLs reales de WhatsApp/Instagram y flujo autorizado para `Sé parte de la guía`, con estados de error/éxito si corresponde.
 
 ### QA-001 — Ronda visual y accesible del baseline
 
