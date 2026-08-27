@@ -1,6 +1,6 @@
 # Arquitectura técnica
 
-Estado de referencia: rama `main`, commit `045dd1f`, auditado el 21 de agosto de 2026.
+Estado de referencia: rama `main`, commit `045dd1f`, auditado el 21 de agosto de 2026; actualización funcional consolidada el 26 de agosto de 2026.
 
 ## Stack comprobado
 
@@ -40,7 +40,7 @@ Los dos prompts de la raíz son idénticos por hash en el estado auditado. `camb
 
 | Archivo | Responsabilidad | Observaciones |
 |---|---|---|
-| `index.html` | Semántica, navbar, filtros, contenedores, carrusel, footer y `dialog` | Carga CSS y JS con parámetros de caché |
+| `index.html` | Semántica, navbar, filtros, contenedores, carrusel, footer y shell del `dialog` | Los slides destacados exponen ID y rank como fuente del Top 3 en la ficha; carga CSS y JS con parámetros de caché |
 | `styles.css` | Tokens, layout, estados visuales y media queries | Breakpoints comprobados: 980, 720 y 420 px |
 | `data.js` | Asignación global `window.COCINERIAS` | Generado; no editar manualmente |
 | `script.js` | Estado y render de UI | IIFE sin módulos ni dependencias |
@@ -58,7 +58,8 @@ Los dos prompts de la raíz son idénticos por hash en el estado auditado. `camb
 3. `script.js` crea una vista enriquecida con precio, horario, preferencias alimentarias y comodidades de prototipo.
 4. Se inicializan filtros, eventos, render del listado y carrusel.
 5. Búsqueda, filtros y paginación operan enteramente en memoria.
-6. Las filas y el modal se construyen mediante templates HTML escapados con `escapeHTML`; las URLs pasan por `safeUrl`.
+6. Las filas y la ficha editorial del modal se construyen mediante templates HTML escapados con `escapeHTML`; las URLs pasan por `safeUrl`.
+7. Al abrir una ficha, el modal deriva Top N desde los slides, valida coordenadas antes de construir un iframe OpenStreetMap diferido y reinicia su scroll interno.
 
 ## Modelo de estado de interfaz
 
@@ -74,6 +75,16 @@ Los dos prompts de la raíz son idénticos por hash en el estado auditado. `camb
 - slide activo y temporizador de autoplay.
 
 No existe persistencia en URL, almacenamiento local ni servidor.
+
+## Ficha, mapas e integraciones externas
+
+- El shell del `dialog`, el footer de navegación y los eventos de cierre permanecen estáticos en `index.html`; `script.js` sustituye únicamente el artículo de contenido al abrir o navegar.
+- `imageKind === "direct"` habilita presentación directa; cualquier otro valor activa la advertencia territorial. `imageLabel` se reutiliza como texto alternativo.
+- `description` alimenta la presentación y `specialties` los platos destacados sin inferencias. Los campos demo enriquecidos en runtime mantienen sus marcas.
+- El Top 3 no tiene una segunda lista en JavaScript: `editorialSelectionFor()` consulta `data-restaurant-id` y `data-editorial-rank` de los slides del carrusel.
+- `verifiedCoordinates()` exige latitud/longitud finitas y dentro de rango. Solo entonces `openStreetMapLinks()` crea el embed; el iframe usa `loading="lazy"`, `title` y atribución ODbL.
+- El dataset actual tiene 2 registros con coordenadas válidas, 3 enlaces cartográficos externos y 99 fichas sin preview posible.
+- No existe backend, API key, Place ID ni integración Google Maps Platform. La sección Reseñas en Google es un estado pendiente sin datos de usuarios; una futura integración no debe exponer claves en el repositorio estático.
 
 ## Datos
 

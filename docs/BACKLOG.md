@@ -1,6 +1,6 @@
 # Backlog consolidado
 
-Última revisión: 24 de agosto de 2026.
+Última revisión: 26 de agosto de 2026.
 
 Este backlog registra pendientes, no autoriza su implementación. Las prioridades reflejan riesgo para continuidad o publicación.
 
@@ -44,9 +44,22 @@ Criterio de cierre: verificar estado, fuentes principales, información práctic
 
 Estado: `PENDIENTE`
 
-Problema: 100 de 101 imágenes no corresponden directamente al establecimiento.
+Problema: 100 de 101 imágenes no corresponden directamente al establecimiento. La ficha ya evita atribuirlas implícitamente al local mediante la advertencia `Imagen de referencia territorial`, pero no reemplaza el asset.
 
 Criterio de cierre: reemplazar gradualmente con imágenes directas autorizadas o adoptar un tratamiento visual que impida interpretar el respaldo territorial como foto del local.
+
+### DATA-004 — Verificar coordenadas y enlaces cartográficos
+
+Estado: `PENDIENTE`
+
+Problema: solo 2 de 101 registros tienen coordenadas válidas y solo 3 conservan un enlace cartográfico externo. Las otras 99 fichas no pueden mostrar un preview sin geocodificar o inventar información.
+
+Criterio de cierre:
+
+- verificar coordenadas o URL pública contra fuente legítima por establecimiento;
+- registrar URL, fecha y procedencia por campo en la fuente canónica;
+- regenerar `data.js` mediante `normalize-data.mjs`, nunca editarlo manualmente;
+- comprobar enlace, marker y atribución antes de publicar.
 
 ## P1 — Próxima consolidación de producto
 
@@ -72,6 +85,21 @@ Criterio de cierre:
 Estado: `PENDIENTE`
 
 Criterio de cierre: URLs reales de WhatsApp/Instagram y flujo autorizado para `Sé parte de la guía`, con estados de error/éxito si corresponde.
+
+### INTEGRATION-001 — Incorporar reseñas externas autorizadas de Google
+
+Estado: `BLOQUEADO POR INTEGRACIÓN Y DATOS`
+
+Problema: el repositorio no contiene Place IDs, reseñas, backend seguro, credenciales ni una integración autorizada de Google Maps Platform. Ninguna de las 101 fichas puede mostrar reseñas verificables; copiar o scrapear Google Maps no es una alternativa válida.
+
+Dependencias:
+
+- aprobar Google Places API u otra fuente autorizada y su modelo de costos/operación;
+- resolver credenciales fuera del repositorio estático y obtención de Place IDs;
+- cumplir atribución a Google Maps, datos del autor, enlaces directos, orden y políticas vigentes;
+- definir actualización, almacenamiento permitido, privacidad y estado de error.
+
+Criterio de cierre: mostrar como máximo 2–3 reseñas legítimas por ficha, con atribución completa y enlace `Ver más reseñas en Google Maps`; conservar el estado pendiente cuando el establecimiento no tenga datos autorizados.
 
 ### QA-001 — Ronda visual y accesible del baseline
 

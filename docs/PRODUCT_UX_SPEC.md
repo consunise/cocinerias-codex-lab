@@ -1,6 +1,6 @@
 # Especificación vigente de producto y UX/UI
 
-Última consolidación: 25 de agosto de 2026.
+Última consolidación: 26 de agosto de 2026.
 Esta especificación deriva del hand-off y se contrasta con el repositorio auditado. Los conflictos se enlazan a [DECISIONS.md](DECISIONS.md).
 
 ## Dirección de producto
@@ -104,7 +104,7 @@ Los datos actuales son de demostración. No deben presentarse como atributos rea
 
 `Vegano`, `Vegetariano` y `Celíaco` no se duplican aquí: pertenecen a Tipo de comida. `Alergias friendly` o adaptación frente a alergias no forma parte de la interfaz vigente.
 
-En `restaurant-main`, las etiquetas informativas usan fondo `--paper`, sin borde ni marco, y comparten tipografía, color y tratamiento hover con la columna Tipo de comida. Conservan la marca visible `Referencial`.
+En `restaurant-main`, las etiquetas informativas usan fondo `--paper`, sin borde ni marco. Texto e iconos comparten exactamente con Tipo de comida familia, tamaño, peso, line-height, color, geometría de 24 px, stroke de 1.5 px, alineación, separación y tratamiento hover. Conservan la marca visible `Referencial`.
 
 ## Listado y previews
 
@@ -154,8 +154,17 @@ En `restaurant-main`, las etiquetas informativas usan fondo `--paper`, sin borde
 - Se abre desde la fila completa.
 - Permite cerrar y navegar anterior/siguiente dentro del conjunto filtrado.
 - Debe devolver el foco al disparador cuando se cierra.
-- Presenta datos con estado, confianza, fuente y fecha cuando existan.
-- Los datos no disponibles se muestran como no informados; los prototipos se señalan como referenciales.
+- Mantiene un único `dialog` con scroll interno; abrir una ficha o navegar a otra reinicia el scroll al comienzo.
+- La cabecera es un hero fotográfico de ancho completo con overlay, nombre, territorio y nombre alternativo cuando existe. Si `imageKind` no es `direct`, muestra `Imagen de referencia territorial`; el `alt` reutiliza `imageLabel`.
+- Las fichas Top 1, Top 2 y Top 3 muestran `Selección de la guía · Top N`, derivada de la misma configuración DOM del carrusel y no de una segunda lista de nombres.
+- Jerarquía de contenido: Sobre esta cocinería; Platos destacados; Tipo de comida; Comodidades; Información práctica; Ubicación; Reseñas en Google; Información del registro; navegación.
+- `Sobre esta cocinería` reutiliza exclusivamente `description`; si falta, muestra `No informado`.
+- `Platos destacados` reproduce únicamente `specialties`, separando entradas explícitas por coma o punto y coma; no infiere platos desde categorías amplias. Si falta, muestra `No informado`.
+- Tipo de comida y Comodidades reutilizan los SVG y el sistema visual del listado. Preferencias y comodidades demo conservan la marca `Información referencial`.
+- La ubicación usa coordenadas validadas del registro. Con coordenadas, crea al abrir la ficha un iframe OpenStreetMap `loading="lazy"`, con `title` y atribución ODbL; sin coordenadas, muestra una indisponibilidad explícita. Un enlace cartográfico ya almacenado tiene prioridad para abrir la fuente externa.
+- Reseñas en Google solo pueden mostrarse mediante una integración o fuente autorizada, con atribución y enlaces exigibles. Mientras no exista, la sección declara `PENDIENTE — requiere integración o fuente autorizada` y no incluye autores, puntuaciones ni textos ficticios.
+- Presenta estado, confianza, ID, clasificación, notas, fecha y enlaces de fuentes disponibles.
+- Los datos no disponibles se muestran como `No informado`; los prototipos se señalan como referenciales.
 
 ## Acerca de esta guía / carrusel
 
@@ -166,7 +175,7 @@ Dirección vigente:
 - La fotografía se integra directamente con la sección, sin marco perimetral visible; el outline de foco funcional se conserva.
 - Caja de contenido superpuesta con secuencia de fondo `--terracotta`, `--paper`, `--terracotta`, `--paper`; cada slide adapta simultáneamente todos sus textos, labels y enlaces para conservar contraste.
 - Cuatro slides sincronizados: imagen, texto e indicador cambian como una unidad.
-- Indicadores circulares centrados e individuales, con targets de 40 × 40 px; el wrapper no muestra fondo, borde, sombra ni padding con apariencia rectangular.
+- Indicadores circulares centrados e individuales: círculo visible de 16 × 16 px dentro de un botón transparente de 44 × 44 px. El activo se distingue por relleno y anillo, además del color; el wrapper no muestra fondo, borde, sombra ni padding con apariencia rectangular.
 - Autoplay sin botones anterior/siguiente.
 - Pausa por hover/foco y respeto de `prefers-reduced-motion`.
 - Assets locales, alta resolución y atribución trazable.

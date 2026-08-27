@@ -1082,87 +1082,281 @@
     return details.length ? details.join("<br>") : "No informado";
   }
 
-  function visitFeatureBlock(feature) {
+  function editorialSelectionFor(restaurantId) {
+    const slide = elements.aboutSlides.find(
+      (aboutSlide) => aboutSlide.dataset.restaurantId === restaurantId,
+    );
+    const rank = Number(slide?.dataset.editorialRank);
+    return Number.isInteger(rank) && rank > 0 ? rank : null;
+  }
+
+  function specialtyList(value) {
+    const specialties = String(value ?? "")
+      .split(/[;,]/)
+      .map((specialty) => specialty.trim())
+      .filter(Boolean);
+    if (!specialties.length) return '<p class="modal-empty">No informado</p>';
     return `
-      <div class="visit-feature ${feature.informed ? "is-informed" : ""}">
-        <span class="fact-label">${escapeHTML(feature.label)}</span>
-        <strong>${escapeHTML(feature.status)}</strong>
-        ${feature.detail ? `<p>${escapeHTML(feature.detail)}</p>` : ""}
-      </div>
+      <ul class="modal-specialty-list">
+        ${specialties.map((specialty) => `<li>${escapeHTML(specialty)}</li>`).join("")}
+      </ul>
     `;
+  }
+
+  function modalFoodList(restaurant) {
+    if (!restaurant.displayFoodCategories.length) {
+      return '<p class="modal-empty">No informado</p>';
+    }
+    return `
+      <ul class="modal-attribute-list" aria-label="Tipos de comida">
+        ${restaurant.displayFoodCategories
+          .map((category) => {
+            const isReferential = demoFoodPreferenceLabels.has(category);
+            return `
+              <li class="food-type-item modal-attribute-item">
+                ${foodIcon(category)}
+                <span class="food-type-label">
+                  ${escapeHTML(category)}
+                  ${isReferential ? '<small class="food-demo-note">Información referencial</small>' : ""}
+                </span>
+              </li>
+            `;
+          })
+          .join("")}
+      </ul>
+    `;
+  }
+
+  function modalAmenityList(restaurant) {
+    if (!restaurant.displayAmenities.length) {
+      return '<p class="modal-empty">No informado</p>';
+    }
+    return `
+      <ul
+        class="modal-attribute-list"
+        aria-label="Comodidades de demostración; no verificadas"
+        data-amenities-source="${escapeHTML(restaurant.amenitiesSource)}"
+      >
+        ${restaurant.displayAmenities
+          .map(
+            ({ label }) => `
+              <li class="food-type-item modal-attribute-item">
+                ${amenityIcon(label)}
+                <span class="food-type-label">
+                  ${escapeHTML(label)}
+                  <small class="food-demo-note">Información referencial</small>
+                </span>
+              </li>
+            `,
+          )
+          .join("")}
+      </ul>
+    `;
+  }
+
+  function verifiedCoordinates(restaurant) {
+    if (restaurant.latitude === null || restaurant.longitude === null) return null;
+    const latitude = Number(restaurant.latitude);
+    const longitude = Number(restaurant.longitude);
+    if (
+      !Number.isFinite(latitude) ||
+      !Number.isFinite(longitude) ||
+      latitude < -90 ||
+      latitude > 90 ||
+      longitude < -180 ||
+      longitude > 180
+    ) {
+      return null;
+    }
+    return { latitude, longitude };
+  }
+
+  function openStreetMapLinks({ latitude, longitude }) {
+    const latitudeDelta = 0.008;
+    const longitudeDelta = 0.012;
+    const embed = new URL("https://www.openstreetmap.org/export/embed.html");
+    embed.searchParams.set(
+      "bbox",
+      [
+        longitude - longitudeDelta,
+        latitude - latitudeDelta,
+        longitude + longitudeDelta,
+        latitude + latitudeDelta,
+      ].join(","),
+    );
+    embed.searchParams.set("layer", "mapnik");
+    embed.searchParams.set("marker", `${latitude},${longitude}`);
+    const external = new URL("https://www.openstreetmap.org/");
+    external.searchParams.set("mlat", String(latitude));
+    external.searchParams.set("mlon", String(longitude));
+    external.hash = `map=16/${latitude}/${longitude}`;
+    return { embed: embed.href, external: external.href };
+  }
+
+  function mapProviderLabel(url) {
+    if (!url) return "Ver en el mapa";
+    const hostname = new URL(url).hostname;
+    if (hostname.includes("google")) return "Abrir en Google Maps";
+    if (hostname.includes("waze")) return "Abrir en Waze";
+    if (hostname.includes("openstreetmap")) return "Abrir en OpenStreetMap";
+    return "Ver en el mapa";
+  }
+
+  function mapSectionContent(restaurant) {
+    const coordinates = verifiedCoordinates(restaurant);
+    const storedMapUrl = safeUrl(restaurant.googleMaps);
+    const osmLinks = coordinates ? openStreetMapLinks(coordinates) : null;
+    const externalUrl = storedMapUrl ?? osmLinks?.external ?? null;
+    const addressParts = [restaurant.address, restaurant.venue].filter(Boolean);
+    const locationText = formatLocation(restaurant);
+    const preview = osmLinks
+      ? `
+          <div class="modal-map-preview">
+            <iframe
+              src="${escapeHTML(osmLinks.embed)}"
+              title="Mapa de ubicación de ${escapeHTML(restaurant.name)}"
+              loading="lazy"
+            ></iframe>
+            <p class="modal-map-attribution">
+              Datos del mapa © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">colaboradores de OpenStreetMap</a> · ODbL
+            </p>
+          </div>
+        `
+      : `
+          <div class="modal-map-unavailable" role="note">
+            Vista previa no disponible: este registro no tiene coordenadas verificadas.
+          </div>
+        `;
+    return `
+      <div class="modal-location-summary">
+        <p><span class="fact-label">Territorio</span>${escapeHTML(locationText)}</p>
+        <p><span class="fact-label">Dirección / recinto</span>${escapeHTML(addressParts.join(" · ") || "No informado")}</p>
+      </div>
+      ${preview}
+      ${externalUrl ? `<a class="modal-external-link" href="${escapeHTML(externalUrl)}" target="_blank" rel="noopener noreferrer">${escapeHTML(mapProviderLabel(externalUrl))} ↗</a>` : '<p class="modal-empty">Enlace cartográfico no informado.</p>'}
+    `;
+  }
+
+  function googleReviewsSection() {
+    return `
+      <section class="modal-section modal-reviews" aria-labelledby="modal-reviews-title" data-reviews-source="pending-authorized-integration">
+        <h3 id="modal-reviews-title">Reseñas en Google</h3>
+        <p class="modal-section-intro">Opiniones publicadas por usuarios en Google. Cocinerías de Chile no gestiona ni modifica estas reseñas.</p>
+        <div class="modal-pending" role="note">
+          <strong>PENDIENTE</strong>
+          <span>Requiere integración o fuente autorizada de Google Maps Platform.</span>
+        </div>
+      </section>
+    `;
+  }
+
+  function additionalSourceLinks(value) {
+    const urls = String(value ?? "")
+      .split(";")
+      .map((source) => safeUrl(source.trim()))
+      .filter(Boolean);
+    return urls
+      .map(
+        (url, index) =>
+          `<a class="modal-source" href="${escapeHTML(url)}" target="_blank" rel="noopener noreferrer">Consultar fuente adicional ${index + 1} ↗</a>`,
+      )
+      .join("");
   }
 
   function buildModalContent(restaurant) {
     const primarySource = safeUrl(restaurant.primarySource);
     const website = safeUrl(restaurant.website);
-    const map = safeUrl(restaurant.googleMaps);
-    const addressParts = [restaurant.address, restaurant.venue].filter(Boolean);
     const socialDetails = [restaurant.instagram, restaurant.facebook, restaurant.otherNetworks].filter(Boolean);
     const currentPrice = restaurant.priceIsSimulated
-      ? escapeHTML(restaurant.displayPriceCategory)
+      ? `${escapeHTML(restaurant.displayPriceCategory)}<span class="placeholder-data-note">Precio referencial de maqueta</span>`
       : escapeHTML(restaurant.priceRange ?? restaurant.displayPriceCategory ?? "No informado");
     const statusClass = restaurant.status === "Activa" ? "" : "is-unconfirmed";
     const hoursContent = restaurant.displayHours
       ? `${escapeHTML(restaurant.displayHours)}${restaurant.hoursIsPlaceholder ? '<span class="placeholder-data-note">Horario referencial de maqueta</span>' : ""}`
       : "No informado";
+    const editorialRank = editorialSelectionFor(restaurant.id);
+    const isTerritorialImage = restaurant.imageKind !== "direct";
+    const imageDescription = restaurant.imageLabel ||
+      (isTerritorialImage
+        ? `Imagen territorial de ${restaurant.region}`
+        : `Fotografía de ${restaurant.name}`);
 
     return `
-      <div class="modal-topline">
-        <span class="modal-status ${statusClass}">${escapeHTML(restaurant.status)}</span>
-        <span class="modal-confidence">Confianza ${escapeHTML(restaurant.confidence?.toLowerCase() ?? "no informada")}</span>
-        <span class="modal-confidence">${escapeHTML(restaurant.id)}</span>
+      <header class="modal-hero${isTerritorialImage ? " is-territorial" : " is-direct"}">
+        <img src="${escapeHTML(restaurant.imagePath)}" alt="${escapeHTML(imageDescription)}" decoding="async">
+        <div class="modal-hero-overlay" aria-hidden="true"></div>
+        <div class="modal-hero-copy">
+          ${editorialRank ? `<p class="modal-editorial-badge">Selección de la guía · Top ${editorialRank}</p>` : ""}
+          <h2 id="modal-title">${escapeHTML(restaurant.name)}</h2>
+          <p class="modal-hero-location">${escapeHTML(formatLocation(restaurant))}</p>
+          ${restaurant.alternateName ? `<p class="modal-alternate">También registrado como ${escapeHTML(restaurant.alternateName)}</p>` : ""}
+        </div>
+        ${isTerritorialImage ? '<p class="modal-image-context">Imagen de referencia territorial</p>' : ""}
+      </header>
+
+      <div class="modal-body">
+        <section class="modal-section modal-section--intro" aria-labelledby="modal-about-title">
+          <h3 id="modal-about-title">Sobre esta cocinería</h3>
+          <p class="modal-description" id="modal-description">${escapeHTML(restaurant.description || "No informado")}</p>
+        </section>
+
+        <section class="modal-section" aria-labelledby="modal-specialties-title">
+          <h3 id="modal-specialties-title">Platos destacados</h3>
+          ${specialtyList(restaurant.specialties)}
+        </section>
+
+        <div class="modal-characteristics">
+          <section class="modal-section modal-attribute-group" aria-labelledby="modal-food-title">
+            <h3 id="modal-food-title">Tipo de comida</h3>
+            ${modalFoodList(restaurant)}
+          </section>
+          <section class="modal-section modal-attribute-group" aria-labelledby="modal-amenities-title">
+            <h3 id="modal-amenities-title">Comodidades</h3>
+            ${modalAmenityList(restaurant)}
+          </section>
+        </div>
+
+        <section class="modal-section" aria-labelledby="modal-practical-title">
+          <h3 id="modal-practical-title">Información práctica</h3>
+          <div class="modal-facts">
+            ${factBlock("Horario", hoursContent)}
+            ${factBlock("Precio", currentPrice)}
+            ${factBlock("Servicios", escapeHTML(restaurant.services ?? "No informado"))}
+            ${factBlock("Contacto", contactContent(restaurant))}
+            ${factBlock("Métodos de pago", escapeHTML(restaurant.paymentMethods ?? "No informado"))}
+            ${restaurant.accessibility ? factBlock("Accesibilidad informada", escapeHTML(restaurant.accessibility)) : ""}
+            ${website ? factBlock("Sitio web", `<a href="${escapeHTML(website)}" target="_blank" rel="noopener noreferrer">Visitar sitio ↗</a>`) : ""}
+            ${restaurant.founded ? factBlock("Año de fundación", escapeHTML(restaurant.founded)) : ""}
+            ${restaurant.owner ? factBlock("Responsable", escapeHTML(restaurant.owner)) : ""}
+            ${socialDetails.length ? factBlock("Redes", escapeHTML(socialDetails.join(" · "))) : ""}
+          </div>
+        </section>
+
+        <section class="modal-section" aria-labelledby="modal-map-title">
+          <h3 id="modal-map-title">Ubicación</h3>
+          ${mapSectionContent(restaurant)}
+        </section>
+
+        ${googleReviewsSection()}
+
+        <section class="modal-section modal-record" aria-labelledby="modal-record-title">
+          <h3 id="modal-record-title">Información del registro</h3>
+          <div class="modal-topline">
+            <span class="modal-status ${statusClass}">${escapeHTML(restaurant.status)}</span>
+            <span class="modal-confidence">Confianza ${escapeHTML(restaurant.confidence?.toLowerCase() ?? "no informada")}</span>
+            <span class="modal-confidence">${escapeHTML(restaurant.id)}</span>
+          </div>
+          <p class="modal-note">
+            <strong>${escapeHTML(restaurant.classification)}</strong><br>
+            ${escapeHTML(restaurant.notes ?? "No informado")}<br>
+            Verificado el ${escapeHTML(formatDate(restaurant.verifiedAt))}.
+          </p>
+          <div class="modal-source-list">
+            ${primarySource ? `<a class="modal-source" href="${escapeHTML(primarySource)}" target="_blank" rel="noopener noreferrer">Consultar fuente principal ↗</a>` : ""}
+            ${additionalSourceLinks(restaurant.additionalSources)}
+          </div>
+        </section>
       </div>
-
-      <h2 id="modal-title">${escapeHTML(restaurant.name)}</h2>
-      ${restaurant.alternateName ? `<p class="modal-alternate">También registrado como ${escapeHTML(restaurant.alternateName)}</p>` : ""}
-
-      <div class="modal-location">
-        <p><span class="fact-label">Ubicación</span>${escapeHTML(formatLocation(restaurant))}</p>
-        <p><span class="fact-label">Dirección / recinto</span>${escapeHTML(addressParts.join(" · ") || "No informado")}</p>
-      </div>
-
-      <p class="modal-description" id="modal-description">${escapeHTML(restaurant.description ?? "Descripción no informada.")}</p>
-
-      <section class="modal-section" aria-labelledby="modal-food-title">
-        <h3 id="modal-food-title">La cocina</h3>
-        <div class="modal-food-grid">
-          <p><span class="fact-label">Tipo de cocina</span>${escapeHTML(restaurant.cuisine ?? "No informado")}</p>
-          <p><span class="fact-label">Especialidades</span>${escapeHTML(restaurant.specialties ?? "No informado")}</p>
-        </div>
-      </section>
-
-      <section class="modal-section" aria-labelledby="modal-practical-title">
-        <h3 id="modal-practical-title">Información práctica</h3>
-        <div class="modal-facts">
-          ${factBlock("Horario", hoursContent)}
-          ${factBlock("Precio", currentPrice)}
-          ${factBlock("Servicios", escapeHTML(restaurant.services ?? "No informado"))}
-          ${factBlock("Contacto", contactContent(restaurant))}
-          ${factBlock("Métodos de pago", escapeHTML(restaurant.paymentMethods ?? "No informado"))}
-          ${website ? factBlock("Sitio web", `<a href="${escapeHTML(website)}" target="_blank" rel="noopener noreferrer">Visitar sitio ↗</a>`) : ""}
-          ${map ? factBlock("Mapa", `<a href="${escapeHTML(map)}" target="_blank" rel="noopener noreferrer">Ver ubicación ↗</a>`) : ""}
-          ${restaurant.founded ? factBlock("Año de fundación", escapeHTML(restaurant.founded)) : ""}
-          ${restaurant.owner ? factBlock("Responsable", escapeHTML(restaurant.owner)) : ""}
-          ${socialDetails.length ? factBlock("Redes", escapeHTML(socialDetails.join(" · "))) : ""}
-        </div>
-      </section>
-
-      <section class="modal-section" aria-labelledby="modal-visit-title">
-        <h3 id="modal-visit-title">Antes de ir</h3>
-        <div class="visit-features">
-          ${restaurant.visitFeatures.map(visitFeatureBlock).join("")}
-        </div>
-      </section>
-
-      <section class="modal-section" aria-labelledby="modal-record-title">
-        <h3 id="modal-record-title">Sobre este registro</h3>
-        <p class="modal-note">
-          <strong>${escapeHTML(restaurant.classification)}</strong><br>
-          ${escapeHTML(restaurant.notes ?? "Sin observaciones adicionales.")}<br>
-          Verificado el ${escapeHTML(formatDate(restaurant.verifiedAt))}.
-        </p>
-        ${primarySource ? `<a class="modal-source" href="${escapeHTML(primarySource)}" target="_blank" rel="noopener noreferrer">Consultar fuente principal ↗</a>` : ""}
-      </section>
     `;
   }
 
@@ -1195,7 +1389,7 @@
       "aria-label",
       next ? `Ver cocinería siguiente: ${next.name}` : "No hay cocinería siguiente",
     );
-    elements.dialog.querySelector(".dialog-scroll").scrollTop = 0;
+    elements.dialog.querySelector(".dialog-scroll").scrollTo({ top: 0, behavior: "auto" });
   }
 
   function openModal(id, trigger) {
@@ -1205,7 +1399,10 @@
     renderModal();
     elements.dialog.showModal();
     document.body.classList.add("modal-open");
-    requestAnimationFrame(() => elements.modalClose.focus());
+    requestAnimationFrame(() => {
+      elements.dialog.querySelector(".dialog-scroll").scrollTo({ top: 0, behavior: "auto" });
+      elements.modalClose.focus();
+    });
   }
 
   function closeModal() {

@@ -7,7 +7,7 @@ Mensaje: `correcciones version 0.9.2`
 
 Este documento describe el estado comprobado del repositorio en ese commit. No convierte automáticamente lo implementado en una decisión de producto.
 
-Actualizaciones posteriores, consolidadas al 25 de agosto de 2026: footer terracota; filtros AND y reordenados; Rapa Nui como territorio especial; header editorial antes del directorio; navbar translúcido con CTA invitacional; nueva jerarquía de filas; taxonomía alimentaria separada de comodidades; autocomplete por nombre. El resto del documento conserva el baseline auditado.
+Actualizaciones posteriores, consolidadas al 26 de agosto de 2026: footer terracota; filtros AND y reordenados; Rapa Nui como territorio especial; header editorial antes del directorio; navbar translúcido con CTA invitacional; nueva jerarquía de filas; taxonomía alimentaria separada de comodidades; autocomplete por nombre; ficha editorial sobre el `dialog` vigente. El resto del documento conserva el baseline auditado.
 
 ## Resumen técnico
 
@@ -75,8 +75,16 @@ Actualizaciones posteriores, consolidadas al 25 de agosto de 2026: footer terrac
 
 - `dialog` nativo con cierre, fondo, scroll interno y navegación circular anterior/siguiente.
 - La navegación usa el conjunto actualmente filtrado.
-- Muestra ubicación, descripción, cocina, información práctica, atributos de visita, estado del registro y fuente principal.
-- Incluye etiquetas para horarios referenciales y estado/confianza del registro.
+- Hero de ancho completo con imagen local, overlay, nombre, territorio y nombre alternativo; 100 imágenes `regional-fallback` muestran `Imagen de referencia territorial` y Mata Rangi, única imagen `direct`, no muestra esa advertencia.
+- El Top 1/2/3 de las fichas se deriva de `data-restaurant-id` y `data-editorial-rank` en los tres slides destacados del carrusel.
+- Secciones vigentes: Sobre esta cocinería, Platos destacados, Tipo de comida, Comodidades, Información práctica, Ubicación, Reseñas en Google e Información del registro.
+- Las 101 descripciones proceden del campo `description`; 53 registros con `specialties` muestran sus valores exactos y los otros 48 muestran `No informado`.
+- Preferencias alimentarias, comodidades, horarios y precios demo se identifican como información referencial dentro de la ficha.
+- Dos registros tienen coordenadas válidas (`Cocinería El Yugo` y `Cocinería Flor Marina`) y generan un preview OpenStreetMap diferido con atribución. Los 99 restantes muestran que la vista previa no está disponible.
+- Tres registros conservan enlaces cartográficos almacenados: dos a Waze y uno a OpenStreetMap; el label refleja el proveedor real aunque el campo fuente se llame `googleMaps`.
+- No existe integración autorizada de Google Places ni contenido de reseñas en el dataset. La sección de reseñas muestra el bloqueo explícito y no renderiza reseñas ficticias.
+- Estado, confianza, ID, clasificación, notas, fecha, fuente principal y fuentes adicionales quedan agrupados al final.
+- Abrir o navegar a otra ficha reinicia el scroll interno; cierre visible, Escape y devolución de foco se conservan.
 
 ### Carrusel editorial
 
@@ -92,7 +100,7 @@ Actualizaciones posteriores, consolidadas al 25 de agosto de 2026: footer terrac
 - No hay botones anterior/siguiente.
 - El carrusel no tiene marco perimetral; conserva outline solo como estado de foco accesible.
 - La caja editorial alterna `--terracotta`, `--paper`, `--terracotta`, `--paper`; imagen, texto y tema cambian en el mismo slide.
-- Los cuatro dots mantienen targets de 40 × 40 px y foco visible, sin fondo rectangular en el wrapper.
+- Los cuatro dots usan círculos visibles de 16 × 16 px dentro de targets de 44 × 44 px, con activo por relleno y anillo, foco visible y sin fondo rectangular en el wrapper.
 
 ### Footer
 
@@ -113,6 +121,8 @@ Actualizaciones posteriores, consolidadas al 25 de agosto de 2026: footer terrac
 - `script.js` deriva desde un patrón demo compartido preferencias alimentarias (`Vegano`, `Vegetariano`, `Celíaco`) y comodidades físicas (`Pet friendly`, `Estacionamiento`, `Accesibilidad`); ambas conservan fuente de placeholder y marca visible `Referencial`.
 - El manifiesto de imágenes declara 101 rutas, fuentes y hashes únicos; solo Mata Rangi usa una imagen directa del establecimiento.
 - Las 100 imágenes restantes son referencias territoriales únicas y no deben atribuirse al local mostrado.
+- Coordenadas verificables por estructura: 2 de 101; enlaces cartográficos existentes: 3 de 101.
+- No hay campos de reseñas, Place IDs, credenciales ni integración Google Maps Platform en el repositorio.
 
 ## Comprobaciones ejecutadas en esta auditoría
 
@@ -156,3 +166,5 @@ Actualización del 25 de agosto de 2026:
 - No hay flujo real para el CTA ni URLs sociales.
 - No hay pruebas automatizadas, linter ni validación HTML/CSS configurada.
 - No consta una metodología formal para el Top 3.
+- No existe integración autorizada para reseñas de Google; ninguna de las 101 fichas puede mostrarlas todavía.
+- Solo 2 de 101 registros permiten construir un preview cartográfico sin geocodificar ni inventar coordenadas.

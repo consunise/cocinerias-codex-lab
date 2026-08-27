@@ -1,6 +1,6 @@
 # Registro de decisiones
 
-Última consolidación: 25 de agosto de 2026.
+Última consolidación: 26 de agosto de 2026.
 
 Este archivo conserva decisiones de producto, UX/UI, datos y operación. El código demuestra implementación; no reemplaza por sí solo una decisión explícita. Una instrucción directa más reciente puede reemplazar cualquier entrada.
 
@@ -76,7 +76,7 @@ Estado: `VIGENTE` / `IMPLEMENTADO`
 
 Decisión: ubicar el carrusel como header editorial inmediatamente después del navbar y antes del directorio. Mantener el slide introductorio y usar los otros tres para una selección Top 1, Top 2 y Top 3. Restaurante Pily ocupa Top 1. Carrusel automático, indicadores centrados, sin botones laterales y respetando reduced motion.
 
-Tratamiento: alternar el fondo de la caja editorial `--terracotta`, `--paper`, `--terracotta`, `--paper` en los cuatro slides y adaptar en cada slide el contraste de todo su contenido. Los indicadores conservan sus círculos y su área interactiva, pero el wrapper no tiene fondo, borde, sombra ni apariencia de píldora.
+Tratamiento: alternar el fondo de la caja editorial `--terracotta`, `--paper`, `--terracotta`, `--paper` en los cuatro slides y adaptar en cada slide el contraste de todo su contenido. Los indicadores usan un círculo visible de 16 × 16 px dentro de un target transparente de 44 × 44 px; el activo combina relleno y anillo, y el wrapper no tiene fondo, borde, sombra ni apariencia de píldora.
 
 Reemplaza: carrusel editorial por zonas norte, centro y sur, y su ubicación posterior al directorio.
 
@@ -118,7 +118,7 @@ Estado: `VIGENTE` / `IMPLEMENTADO PARCIAL`
 
 Decisión: precios, horarios y comodidades de maqueta deben centralizarse, marcarse como referenciales y poder desactivarse o reemplazarse antes de producción.
 
-Pendiente: la marca de precio simulado no es visible en la fila/modal con el mismo nivel de claridad que horarios y comodidades.
+Pendiente: la ficha ya marca el precio como `Precio referencial de maqueta`; la fila todavía no lo identifica con el mismo nivel de claridad que horarios y comodidades.
 
 ### DEC-014 — Assets locales y trazables
 
@@ -159,6 +159,18 @@ Estado: `VIGENTE` / `IMPLEMENTADO`
 Decisión: mantener la búsqueda limitada al nombre principal o alternativo de la cocinería y mostrar hasta siete sugerencias progresivas. El matching ignora mayúsculas y tildes, prioriza nombres que comienzan con la consulta y luego los que la contienen.
 
 Accesibilidad: usar patrón combobox/listbox con `aria-expanded`, opción activa y navegación por ArrowDown, ArrowUp, Enter y Escape. Seleccionar una sugerencia aplica el registro exacto, cierra el panel y desplaza al inicio de resultados; la escritura libre conserva el filtrado parcial existente.
+
+### DEC-019 — Ficha editorial sobre el `dialog` existente
+
+Estado: `VIGENTE` / `IMPLEMENTADO CON DATOS PARCIALES`
+
+Decisión: evolucionar el modal nativo actual, sin crear páginas ni perder cierre, Escape, foco devuelto o navegación sobre el conjunto filtrado. La ficha se organiza como hero fotográfico, presentación, platos, Tipo de comida, Comodidades, información práctica, ubicación, reseñas externas, trazabilidad y navegación.
+
+Trazabilidad: una imagen cuyo `imageKind` no sea `direct` se identifica visiblemente como referencia territorial. Descripciones y platos proceden solo de `description` y `specialties`; los prototipos conservan marcas referenciales. La insignia Top N se deriva de los atributos de los slides vigentes del carrusel, no de una segunda lista manual.
+
+Mapas: solo se genera preview OpenStreetMap, diferido y atribuido, cuando el registro contiene coordenadas válidas. Sin coordenadas se muestra una indisponibilidad explícita; si existe un enlace cartográfico almacenado se conserva como salida externa.
+
+Reseñas: no copiar, inventar ni scrapear Google Maps. Hasta disponer de Google Maps Platform u otra fuente autorizada con sus atribuciones, la sección se mantiene como pendiente visible y sin contenido de usuarios.
 
 ## Decisiones reemplazadas
 

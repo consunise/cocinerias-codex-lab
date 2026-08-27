@@ -1,6 +1,6 @@
 # Índice de fuentes y evidencia
 
-Última actualización: 21 de agosto de 2026.
+Última actualización: 26 de agosto de 2026.
 
 ## Fuentes internas auditadas
 
@@ -72,6 +72,22 @@ Consulta: 21 de agosto de 2026.
 - [Review GitHub pull requests with Codex](https://developers.openai.com/codex/third-party/github)
 - Verificado: reglas de revisión globales en el `AGENTS.md` raíz y reglas anidadas solo cuando una parte del árbol necesita criterios específicos.
 
+## Mapas y reseñas externas
+
+Consulta: 26 de agosto de 2026.
+
+### Google Maps Platform
+
+- [Place Details (New)](https://developers.google.com/maps/documentation/places/web-service/place-details)
+- Verificado: la obtención de reseñas exige un Place ID, una API key y el field mask correspondiente; el campo de reseñas pertenece al nivel Enterprise + Atmosphere.
+- [Policies and attributions for Places API](https://developers.google.com/maps/documentation/places/web-service/policies)
+- Verificado: el contenido de reseñas exige atribución de autor y Google Maps, enlaces devueltos por la API cuando existan y cumplimiento de las reglas de presentación y orden. Estas fuentes respaldan el bloqueo de `INTEGRATION-001`; no se incorporó contenido de Google.
+
+### OpenStreetMap
+
+- [OpenStreetMap copyright and attribution guidelines](https://www.openstreetmap.org/copyright/attribution-guide)
+- Verificado: el preview debe acreditar a los colaboradores de OpenStreetMap y enlazar la información de copyright/licencia ODbL. Se usa únicamente con coordenadas ya presentes en el dataset.
+
 ## Criterio de uso
 
 - Estado implementado: repositorio en un commit identificado.
@@ -83,5 +99,6 @@ Consulta: 21 de agosto de 2026.
 
 - No se accedió al archivo fuente privado `directorio_cocinerias_chile.md`.
 - No se verificaron nuevamente en la web los 101 establecimientos ni todas sus fuentes; se auditó la estructura y procedencia declarada del dataset.
+- No se consultaron ni copiaron reseñas de establecimientos; la revisión web se limitó a los requisitos oficiales de integración y atribución.
 - No se realizó una inspección visual interactiva completa de todos los viewports del sitio.
 - No se modificó ni publicó el repositorio remoto.
