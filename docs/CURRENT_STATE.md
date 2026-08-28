@@ -76,6 +76,8 @@ Actualizaciones posteriores, consolidadas al 27 de agosto de 2026: footer terrac
 
 Prueba visual no consolidada (27 de agosto de 2026): a partir de 1180 px, Comodidades se separa del interior fotográfico y ocupa una quinta columna propia alineada con `list-header`. La retícula provisional usa `minmax(300px, 1.8fr) minmax(150px, 0.82fr) minmax(152px, 0.66fr) minmax(90px, 0.34fr) 96px`; a 1179 px o menos, Comodidades vuelve a una fila de ancho completo bajo Tipo de comida. Esta prueba no reemplaza todavía la alternativa anterior en `DECISIONS.md` ni constituye una aprobación permanente.
 
+EXPERIMENTO / POR VALIDAR (28 de agosto de 2026): sobre la prueba anterior, `restaurant-main` centra verticalmente su contenido y Tipo, Comodidades y Precio centran sus grupos en ambos ejes. Entre 1179 y 521 px, esas tres áreas permanecen horizontales junto a Detalle en una segunda fila; a 520 px o menos se recupera el apilamiento. La corrección no experimental de esta ronda añade el selector ausente `.amenity-item:hover`, por lo que texto e icono reaccionan igual que Tipo de comida también fuera del hover general de la fila. Estas variantes no reemplazan DEC-007.
+
 ### Modal
 
 - `dialog` nativo con cierre, fondo, scroll interno y navegación circular anterior/siguiente.
@@ -103,6 +105,7 @@ Prueba visual no consolidada (27 de agosto de 2026): a partir de 1180 px, Comodi
 - Top 1: Restaurante Pily.
 - Top 2: Mata Rangi.
 - Top 3: Cocinería Bellavista.
+- La variante experimental de siete slides solicitada el 28 de agosto no se activó: el historial solo permite recuperar, sin superponer el Top 3, la introducción y dos imágenes editoriales adicionales (Atacama y La Araucanía). El cuarto slide histórico era Mata Rangi y duplicaría el Top 2; los tres assets `zona-*` carecen de atribución individual suficiente en el repositorio. El carrusel vigente permanece en cuatro slides y DEC-009/DEC-020 no cambian.
 - Cada destacado incluye ubicación, descripción, platos, tres etiquetas y enlace de referencia.
 - Top 1/2/3 usan tres variantes numéricas de una misma insignia SVG editorial propia, con número visible, `currentColor` y geometría común; la ficha reutiliza la misma función y la configuración DOM del carrusel.
 - Autoplay cada 6 segundos, indicadores clickeables, teclado y pausa por hover/foco.

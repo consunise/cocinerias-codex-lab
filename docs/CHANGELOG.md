@@ -4,6 +4,15 @@ Este archivo registra cambios implementados relevantes. No contiene solicitudes 
 
 ## Sin publicar
 
+### 2026-08-28 — Corrección de hover y variante UX/UI experimental
+
+- Corregido: Comodidades incorpora `.amenity-item:hover` a los selectores compartidos de color, fill y stroke; el wrapper completo activa el mismo tratamiento de Tipo de comida sin cambio geométrico.
+- EXPERIMENTO / POR VALIDAR: `restaurant-main` centra verticalmente su copia; Tipo, Comodidades y Precio centran sus grupos y headings correspondientes.
+- EXPERIMENTO / POR VALIDAR: entre 1179 y 521 px, Tipo, Comodidades, Precio y Detalle comparten una segunda fila; a 520 px o menos vuelve el apilamiento. El padding horizontal experimental es 8 px en las tres columnas informativas.
+- BLOQUEADO / NO IMPLEMENTADO: el carrusel continúa con cuatro slides. El contenido histórico único y atribuido no alcanza para cuatro slides previos al Top 3 sin duplicar Mata Rangi; los assets `zona-*` no tienen atribución individual suficiente para activarlos.
+- No se modifican `DECISIONS.md`, `PRODUCT_UX_SPEC.md`, datos, imágenes, JavaScript, filtros, modal, navbar ni footer. Las variantes pueden revertirse retirando los bloques CSS identificados como experimento.
+- Validación ejecutada: sintaxis de `data.js`, `script.js` y scripts `.mjs`; `git diff --check`; hover de dos filas y ficha; nombre largo; centrado medido; filtros, autocomplete, paginación, sticky, modal, teclado del carrusel y autoplay; revisión en 1280, 1100, 980, 900, 820, 768, 720, 521, 520, 420, 375 y 320 px sin overflow ni mensajes de consola.
+
 ### 2026-08-27 — Prueba visual: columna independiente de Comodidades
 
 - Implementado como prueba reversible: en desktop desde 1180 px, `restaurant-amenities` ocupa una columna propia entre Tipo de comida y Precio; `list-header` usa la misma retícula de cinco columnas.
