@@ -105,9 +105,9 @@ Los datos actuales son de demostración. No deben presentarse como atributos rea
 
 `Vegano`, `Vegetariano` y `Celíaco` no se duplican aquí: pertenecen a Tipo de comida. `Alergias friendly` o adaptación frente a alergias no forma parte de la interfaz vigente.
 
-En `restaurant-main`, las etiquetas informativas usan fondo `--paper`, sin borde ni marco. Texto e iconos comparten exactamente con Tipo de comida familia, tamaño, peso, line-height, color, geometría de 24 px, stroke de 1.5 px, alineación, separación y tratamiento hover. El contenedor es informativo y compacto: `padding-block: 0.08rem`, `padding-inline: 0.25rem`, sin `min-height` y con `gap: 0.45rem`. Conservan la marca visible `Referencial`.
+En `restaurant-main`, las etiquetas informativas no usan fondo, borde, outline, caja ni padding propio. Texto e iconos comparten con Tipo de comida familia, tamaño, peso, line-height, geometría de 24 px, stroke de 1.5 px, alineación y tratamiento hover; sobre la fotografía adoptan conjuntamente el color claro contextual que asegura contraste. Un único `gap: 0.25rem` separa icono y texto. Conservan la marca visible `Referencial` y no se comportan como botones.
 
-Cuando una fila no tiene comodidades, `No informado` ocupa el ancho del área y se centra horizontalmente. Las filas con comodidades conservan su alineación normal a la izquierda.
+Cuando una fila no tiene comodidades, el área conserva su lugar en la retícula y `No informado` comienza en el mismo eje izquierdo que las etiquetas presentes, sin caja ni fondo.
 
 ## Listado y previews
 
@@ -126,6 +126,7 @@ Cuando una fila no tiene comodidades, `No informado` ocupa el ancho del área y 
 ### `restaurant-main`
 
 - Márgenes contenidos y alineación con la cuadrícula.
+- `padding-block` simétrico en todas las filas: el espacio superior e inferior no depende de que existan comodidades ni de la longitud del nombre.
 - Fotografía legible, sin oscurecimiento excesivo.
 - Capa diagonal más oscura en la esquina inferior izquierda y progresivamente más transparente hacia la esquina superior derecha.
 - Hover/foco con línea terracota a la izquierda de la imagen, más gruesa que filtros y paginación, sin layout shift.
@@ -185,6 +186,7 @@ Dirección vigente:
 - Autoplay sin botones anterior/siguiente.
 - Pausa por hover/foco y respeto de `prefers-reduced-motion`.
 - Assets locales, alta resolución y atribución trazable.
+- Las imágenes activas deben conservar nitidez a ancho completo: no se admiten thumbnails ni ampliación artificial. La selección vigente usa archivos de 2880 px de ancho, optimizados sin upscaling, con fuente, autor, licencia, dimensiones y fecha documentados.
 
 Contenido:
 
@@ -193,9 +195,11 @@ Contenido:
 3. Top 2: selección editorial documentada.
 4. Top 3: selección editorial documentada.
 
-Cada destacado debe incluir insignia editorial, nombre, ubicación, descripción breve, platos documentados, tres labels editoriales y fuente. Las etiquetas no son premios ni certificaciones.
+Cada puesto debe incluir una insignia SVG de la familia editorial común, con número visible además del color, nombre, ubicación, descripción breve, platos documentados, tres labels editoriales y fuente. Las insignias y etiquetas no son premios ni certificaciones.
 
 El estado actual selecciona Mata Rangi y Cocinería Bellavista como Top 2 y Top 3. Cualquier cambio exige investigación actual y actualización de fuentes.
+
+Inmediatamente después del header se presenta una selección secundaria compacta de tres `Destacados de la guía` por atributos documentados. No prolonga el carrusel ni crea puestos Top 4–6. Cada caso muestra nombre, ubicación, atributo, descripción factual, motivo editorial, fuente y acceso al registro del directorio. El estado vigente selecciona Na Que Ver Cocinería Chilena por cocina chilena de mercado, Restaurant Tradiciones Cocinería Morelia por productos de huerta y Cocinería Puelpún por trayectoria histórica.
 
 ## Footer
 

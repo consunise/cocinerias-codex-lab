@@ -7,7 +7,7 @@ Mensaje: `correcciones version 0.9.2`
 
 Este documento describe el estado comprobado del repositorio en ese commit. No convierte automáticamente lo implementado en una decisión de producto.
 
-Actualizaciones posteriores, consolidadas al 27 de agosto de 2026: footer terracota; filtros AND y reordenados; Rapa Nui como territorio especial; header editorial antes del directorio; navbar contextual con CTA invitacional; nueva jerarquía de filas; taxonomía alimentaria separada de comodidades; autocomplete por nombre; ficha editorial sobre el `dialog` vigente. El resto del documento conserva el baseline auditado.
+Actualizaciones posteriores, consolidadas al 27 de agosto de 2026: footer terracota; filtros AND y reordenados; Rapa Nui como territorio especial; header editorial antes del directorio; navbar contextual con CTA invitacional; nueva jerarquía de filas; taxonomía alimentaria separada de comodidades; autocomplete por nombre; ficha editorial sobre el `dialog` vigente; fotografías de header a 2880 px; insignias SVG Top 1/2/3; y una selección secundaria de tres destacados por atributo. El resto del documento conserva el baseline auditado.
 
 ## Resumen técnico
 
@@ -69,8 +69,9 @@ Actualizaciones posteriores, consolidadas al 27 de agosto de 2026: footer terrac
 - Divisores verticales en `restaurant-meta`.
 - Tipos de comida con SVG y tratamientos hover.
 - Rango de precio con peso regular.
-- Comodidades referenciales bajo la metadata, con fondo `--paper`, sin borde y con tipografía, color, iconos de 24 px, stroke de 1.5 px y hover equivalentes a Tipo de comida. Usan `padding: 0.08rem 0.25rem`, `gap: 0.45rem` y no fuerzan altura mínima.
-- En las cuatro filas de la primera página sin comodidades, el estado `No informado` ocupa el ancho del área y queda centrado; las etiquetas presentes conservan alineación izquierda.
+- Comodidades referenciales bajo la metadata, sin fondo, borde, outline, caja ni padding propio. Tipografía, iconos de 24 px, stroke de 1.5 px y hover comparten el sistema de Tipo de comida; el color claro contextual mantiene contraste sobre la fotografía y el único `gap` icono–texto es de `0.25rem`.
+- El área de comodidades conserva su lugar con o sin ítems. En las filas vacías, `No informado` ocupa el ancho disponible y queda alineado a la izquierda, sin caja.
+- `restaurant-main` usa `padding-block` simétrico: 24 px en el viewport desktop comprobado y 16 px en 320 px.
 - Acción `Ver ficha` apilada verticalmente, pero el símbolo actual es `→`, no flecha hacia abajo.
 
 ### Modal
@@ -101,12 +102,21 @@ Actualizaciones posteriores, consolidadas al 27 de agosto de 2026: footer terrac
 - Top 2: Mata Rangi.
 - Top 3: Cocinería Bellavista.
 - Cada destacado incluye ubicación, descripción, platos, tres etiquetas y enlace de referencia.
+- Top 1/2/3 usan tres variantes numéricas de una misma insignia SVG editorial propia, con número visible, `currentColor` y geometría común; la ficha reutiliza la misma función y la configuración DOM del carrusel.
 - Autoplay cada 6 segundos, indicadores clickeables, teclado y pausa por hover/foco.
 - Autoplay desactivado con `prefers-reduced-motion` o pestaña no visible.
 - No hay botones anterior/siguiente.
 - El carrusel no tiene marco perimetral; conserva outline solo como estado de foco accesible.
 - La caja editorial alterna `--terracotta`, `--paper`, `--terracotta`, `--paper`; imagen, texto y tema cambian en el mismo slide.
 - Los cuatro dots usan círculos visibles de 16 × 16 px dentro de targets de 44 × 44 px, con activo por relleno y anillo, foco visible y sin fondo rectangular en el wrapper.
+- Los cuatro assets activos miden 2880 px de ancho y fueron reducidos desde originales mayores sin upscaling: empanada de Guanaqueros, costanera de Puerto Saavedra, panorama de Arica y panorama de Valparaíso. Las tres imágenes asociadas al Top 3 se rotulan como territoriales, no como fotografías de los locales.
+
+### Destacados de la guía
+
+- Sección editorial secundaria inmediatamente después del header, sin alterar los cuatro slides ni crear puestos Top 4–6.
+- Tres casos sin superposición con el Top 3: Na Que Ver Cocinería Chilena (`Cocina chilena de mercado`), Restaurant Tradiciones Cocinería Morelia (`Productos de huerta`) y Cocinería Puelpún (`Trayectoria histórica`).
+- Cada entrada incluye ubicación, descripción factual, razón editorial, fuente externa y CTA que aplica la búsqueda exacta en el directorio.
+- Las fichas correspondientes muestran `Destacado de la guía · [atributo]`, claramente separado de `Selección de la guía · Top N`.
 
 ### Footer
 
@@ -125,7 +135,7 @@ Actualizaciones posteriores, consolidadas al 27 de agosto de 2026: footer terrac
 - `script.js` sustituye visualmente todos los precios mediante tres bandas simuladas.
 - `script.js` inventa horarios para los 74 registros sin horario y los identifica como referenciales.
 - `script.js` deriva desde un patrón demo compartido preferencias alimentarias (`Vegano`, `Vegetariano`, `Celíaco`) y comodidades físicas (`Pet friendly`, `Estacionamiento`, `Accesibilidad`); ambas conservan fuente de placeholder y marca visible `Referencial`.
-- El manifiesto de imágenes declara 101 rutas, fuentes y hashes únicos; solo Mata Rangi usa una imagen directa del establecimiento.
+- El manifiesto de imágenes del directorio declara 101 rutas, fuentes y hashes únicos; solo Mata Rangi usa una imagen directa del establecimiento. El carrusel usa otros cuatro assets locales con atribución independiente.
 - Las 100 imágenes restantes son referencias territoriales únicas y no deben atribuirse al local mostrado.
 - Coordenadas verificables por estructura: 2 de 101; enlaces cartográficos existentes: 3 de 101.
 - No hay campos de reseñas, Place IDs, credenciales ni integración Google Maps Platform en el repositorio.
@@ -161,6 +171,8 @@ Actualización del 27 de agosto de 2026:
 - Comprobadas filas con y sin comodidades: tipografía, color, icono de 24 px, stroke de 1.5 px y `gap` coinciden con Tipo de comida; el estado vacío obtuvo desviación horizontal medida de 0 px.
 - Comprobadas fichas Top 1, Top 2 y Top 3; imagen territorial y directa; platos presentes y ausentes; mapa diferido con coordenadas y estado sin mapa; horarios, comodidades y precios referenciales; contacto, reviews pendientes, navegación filtrada, reinicio de scroll, Escape, foco visible y devolución de foco.
 - El dataset tiene 101 descripciones, por lo que el fallback de descripción ausente quedó revisado en código pero no pudo ejercitarse con un registro real. La activación de una fila mediante Enter/Espacio queda pendiente de una revisión manual fuera del controlador de navegador; el control continúa siendo un `button` nativo habilitado.
+- La continuación de la ronda comprobó en runtime `gap: 4px`, fondo transparente, borde `none`, padding `0`, estado vacío alineado a la izquierda y `padding-block` simétrico de 24 px en desktop y 16 px en 320 px. Los cuatro slides cargaron imágenes naturales de 2880 px; los sellos 1/2/3 se inyectaron en el header, el Top 1 se verificó en su ficha y el CTA de Puelpún aplicó búsqueda exacta y mostró su atributo no ordinal.
+- En el controlador con scrollbar vertical no superpuesto, un viewport nominal de 320 px deja 305 px de área útil mientras `body { min-width: 320px; }` conserva 320 px y expone 15 px de desplazamiento horizontal. Ningún bloque nuevo excede esos 320 px; el comportamiento procede del mínimo global existente y queda por resolver o aceptar en QA.
 
 ## Discrepancias relevantes
 
@@ -171,7 +183,8 @@ Actualización del 27 de agosto de 2026:
 | Iconos sociales | SVG propios permitidos; iconos visibles | PNG de Flaticon permanecen, pero la interfaz usa SVG inline | Documentación/asset histórico parcialmente obsoleto |
 | Atribución Flaticon | `ATTRIBUTION.md` afirma que la atribución es visible en footer | No existe atribución Flaticon visible y los PNG no se usan | `POR VALIDAR` |
 | Datos | Producción debe usar información verificable | Precio, horarios, preferencias alimentarias y comodidades tienen prototipos activos | `PENDIENTE` antes de producción |
-| Assets `zona-*` | Carrusel Top 3 vigente | Tres imágenes `zona-*` quedan sin uso y están documentadas como históricas | Mantenibles, pero revisar si deben conservarse |
+| Assets históricos del carrusel | Carrusel vigente con cuatro fotografías de 2880 px | `empanadas-de-pino.jpg` y tres imágenes `zona-*` quedan sin uso y están documentadas como históricas | Mantenibles, pero revisar si deben conservarse |
+| Viewport nominal de 320 px con scrollbar clásico | No debe existir overflow horizontal | `body { min-width: 320px; }` produce 15 px de scroll cuando la barra vertical reduce el área útil a 305 px | `POR VALIDAR`; no fue introducido por esta ronda |
 
 ## Vacíos comprobados
 
@@ -179,6 +192,6 @@ Actualización del 27 de agosto de 2026:
 - No existe despliegue o hosting documentado.
 - No hay flujo real para el CTA ni URLs sociales.
 - No hay pruebas automatizadas, linter ni validación HTML/CSS configurada.
-- No consta una metodología formal para el Top 3.
+- No consta todavía una metodología formal completa para mantener y reevaluar el Top 3 y los destacados por atributo, aunque los seis casos vigentes tienen fuentes y criterio documentados.
 - No existe integración autorizada para reseñas de Google; ninguna de las 101 fichas puede mostrarlas todavía.
 - Solo 2 de 101 registros permiten construir un preview cartográfico sin geocodificar ni inventar coordenadas.

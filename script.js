@@ -185,6 +185,8 @@
     aboutSlides: [...document.querySelectorAll(".about-slide")],
     aboutCarouselIndicators: document.querySelector("#about-carousel-indicators"),
     aboutCarouselStatus: document.querySelector("#about-carousel-status"),
+    editorialHighlights: document.querySelector(".editorial-highlights"),
+    editorialHighlightItems: [...document.querySelectorAll("[data-editorial-highlight]")],
   };
 
   const state = {
@@ -1196,7 +1198,32 @@
       (aboutSlide) => aboutSlide.dataset.restaurantId === restaurantId,
     );
     const rank = Number(slide?.dataset.editorialRank);
-    return Number.isInteger(rank) && rank > 0 ? rank : null;
+    return Number.isInteger(rank) && rank >= 1 && rank <= 3 ? rank : null;
+  }
+
+  function editorialHighlightFor(restaurantId) {
+    const item = elements.editorialHighlightItems.find(
+      (highlight) => highlight.dataset.restaurantId === restaurantId,
+    );
+    const attribute = item?.dataset.highlightAttribute?.trim();
+    return attribute || null;
+  }
+
+  function editorialRankIcon(rank) {
+    if (![1, 2, 3].includes(Number(rank))) return "";
+    return `
+      <svg class="editorial-rank-icon" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+        <path class="editorial-rank-icon-frame" d="M7 3.5h18L28.5 7v18L25 28.5H7L3.5 25V7Z"></path>
+        <path class="editorial-rank-icon-rule" d="M8.5 9h15M8.5 23h15"></path>
+        <text x="16" y="19" text-anchor="middle">${Number(rank)}</text>
+      </svg>
+    `;
+  }
+
+  function renderEditorialRankIcons() {
+    document.querySelectorAll("[data-editorial-rank-icon]").forEach((container) => {
+      container.innerHTML = editorialRankIcon(container.dataset.editorialRankIcon);
+    });
   }
 
   function specialtyList(value) {
@@ -1382,6 +1409,7 @@
       ? `${escapeHTML(restaurant.displayHours)}${restaurant.hoursIsPlaceholder ? '<span class="placeholder-data-note">Horario referencial de maqueta</span>' : ""}`
       : "No informado";
     const editorialRank = editorialSelectionFor(restaurant.id);
+    const editorialHighlight = editorialHighlightFor(restaurant.id);
     const isTerritorialImage = restaurant.imageKind !== "direct";
     const imageDescription = restaurant.imageLabel ||
       (isTerritorialImage
@@ -1394,7 +1422,8 @@
         <img src="${escapeHTML(restaurant.imagePath)}" alt="${escapeHTML(imageDescription)}" decoding="async">
         <div class="modal-hero-overlay" aria-hidden="true"></div>
         <div class="modal-hero-copy">
-          ${editorialRank ? `<p class="modal-editorial-badge">Selección de la guía · Top ${editorialRank}</p>` : ""}
+          ${editorialRank ? `<p class="modal-editorial-badge">${editorialRankIcon(editorialRank)}<span>Selección de la guía · Top ${editorialRank}</span></p>` : ""}
+          ${!editorialRank && editorialHighlight ? `<p class="modal-editorial-badge modal-editorial-badge--attribute">Destacado de la guía · ${escapeHTML(editorialHighlight)}</p>` : ""}
           <p class="modal-hero-location">${escapeHTML(formatLocation(restaurant, true))}</p>
           <h2 id="modal-title">${escapeHTML(restaurant.name)}</h2>
           ${restaurant.alternateName ? `<p class="modal-alternate">También registrado como ${escapeHTML(restaurant.alternateName)}</p>` : ""}
@@ -1683,6 +1712,19 @@
       const button = event.target.closest("[data-restaurant-id]");
       if (button) openModal(button.dataset.restaurantId, button);
     });
+    elements.editorialHighlights?.addEventListener("click", (event) => {
+      const button = event.target.closest("[data-highlight-restaurant-id]");
+      if (!button) return;
+      const restaurant = restaurants.find(({ id }) => id === button.dataset.highlightRestaurantId);
+      if (!restaurant) return;
+      resetFilterControls({ includeSearch: true });
+      state.selectedSearchId = restaurant.id;
+      state.query = restaurant.name;
+      elements.searchInput.value = restaurant.name;
+      applyFilters();
+      closeSearchSuggestions();
+      scrollToResultsStart();
+    });
     elements.pagination.addEventListener("click", (event) => {
       const pageButton = event.target.closest("[data-page]");
       if (pageButton) {
@@ -1768,6 +1810,7 @@
 
   function initialise() {
     initialiseSocialLinks();
+    renderEditorialRankIcons();
     updateStickyOffsets();
     initialiseNavbarSurfaceObserver();
     if (!restaurants.length) {

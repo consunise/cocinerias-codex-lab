@@ -4,6 +4,15 @@ Este archivo registra cambios implementados relevantes. No contiene solicitudes 
 
 ## Sin publicar
 
+### 2026-08-27 — Amenities editoriales, fotografía HD y destacados por atributo
+
+- Implementado: `restaurant-main` usa `padding-block` simétrico; Comodidades elimina fondo, borde y padding de chip, reduce el `gap` icono–texto a `0.25rem` y conserva `No informado` alineado a la izquierda sin deformar la retícula. Este ajuste reemplaza el centrado y la caja clara registrados en la entrada anterior del mismo día.
+- Implementado: los cuatro slides del header usan JPEG locales de 2880 px de ancho, optimizados desde originales mayores sin upscaling y con atribución de autor, licencia, resolución y fecha de consulta.
+- Implementado: Top 1/2/3 comparte una familia de insignias SVG editoriales numeradas, reutilizada por el carrusel y las fichas sin presentarla como certificación externa.
+- Implementado: sección secundaria `Destacados de la guía` con Na Que Ver Cocinería Chilena, Restaurant Tradiciones Cocinería Morelia y Cocinería Puelpún, cada una asociada a un atributo documentado, fuente y acceso al directorio; no amplía el ranking Top 3.
+- Archivos: `index.html`, `styles.css`, `script.js`, cuatro assets del header, su atribución y documentación canónica asociada. `data.js` y dependencias no fueron modificados.
+- Decisiones relacionadas: DEC-007, DEC-009, DEC-014 y DEC-020.
+
 ### 2026-08-27 — Navbar contextual y ficha práctica editorial
 
 - Implementado: navbar y buscador translúcidos únicamente sobre `about-lead`; un `IntersectionObserver` aplica `var(--paper)` opaco y elimina el blur después del header, con restauración al volver arriba.

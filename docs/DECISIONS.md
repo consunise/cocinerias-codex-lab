@@ -58,7 +58,9 @@ Reemplaza: listado largo o carga progresiva mediante “ver más”.
 
 Estado: `VIGENTE` / `IMPLEMENTADO`
 
-Decisión: reducir el ancho de precio, ampliar tipo de comida, mantener precio en regular, usar una línea terracota gruesa a la izquierda de la fotografía en hover/foco y separar metadata con líneas verticales. En `restaurant-main`, mostrar ubicación arriba, nombre debajo y horario después, sin repetir ubicación. Todo el contenido textual e informativo de la fila —incluidos título, metadata, tipo de comida, precio y comodidades— comparte un eje izquierdo dentro de su área y conserva el flujo natural desde arriba.
+Decisión: reducir el ancho de precio, ampliar tipo de comida, mantener precio en regular, usar una línea terracota gruesa a la izquierda de la fotografía en hover/foco y separar metadata con líneas verticales. En `restaurant-main`, mostrar ubicación arriba, nombre debajo y horario después, sin repetir ubicación. Todo el contenido textual e informativo de la fila —incluidos título, metadata, tipo de comida, precio y comodidades— comparte un eje izquierdo dentro de su área y conserva el flujo natural desde arriba. La fila usa `padding-block` simétrico; el área de comodidades mantiene su posición aun sin ítems y muestra `No informado` a la izquierda.
+
+Tratamiento de comodidades: son categorías informativas sin fondo, borde, outline, píldora ni padding propio. Comparten geometría, tipografía y hover con Tipo de comida; un único `gap: 0.25rem` une icono y texto. Reemplaza el fondo `--paper` y el centrado del estado vacío aprobados en iteraciones anteriores.
 
 Reemplaza: nombre centrado e información secundaria alineada a la derecha.
 
@@ -74,9 +76,11 @@ Decisión: reutilizar SVG entre filtros y filas. Los fills de hover no deben bor
 
 Estado: `VIGENTE` / `IMPLEMENTADO`
 
-Decisión: ubicar el carrusel como header editorial inmediatamente después del navbar y antes del directorio. Mantener el slide introductorio y usar los otros tres para una selección Top 1, Top 2 y Top 3. Restaurante Pily ocupa Top 1. Carrusel automático, indicadores centrados, sin botones laterales y respetando reduced motion.
+Decisión: ubicar el carrusel como header editorial inmediatamente después del navbar y antes del directorio. Mantener el slide introductorio y usar los otros tres para una selección Top 1, Top 2 y Top 3. Restaurante Pily ocupa Top 1. Carrusel automático, indicadores centrados, sin botones laterales y respetando reduced motion. Cada puesto utiliza una variante numérica de una misma insignia SVG editorial propia; el número distingue el puesto sin depender del color y la fuente Top 3 se reutiliza en las fichas.
 
 Tratamiento: alternar el fondo de la caja editorial `--terracotta`, `--paper`, `--terracotta`, `--paper` en los cuatro slides y adaptar en cada slide el contraste de todo su contenido. Los indicadores usan un círculo visible de 16 × 16 px dentro de un target transparente de 44 × 44 px; el activo combina relleno y anillo, y el wrapper no tiene fondo, borde, sombra ni apariencia de píldora.
+
+Calidad de imagen: los cuatro slides activos usan assets locales optimizados de 2880 px de ancho, obtenidos desde originales mayores y sin ampliación artificial. Cuando la fotografía es territorial, el caption y el `alt` no la atribuyen al establecimiento.
 
 Reemplaza: carrusel editorial por zonas norte, centro y sur, y su ubicación posterior al directorio.
 
@@ -124,7 +128,7 @@ Pendiente: la ficha ya marca el precio como `Precio referencial de maqueta`; la 
 
 Estado: `VIGENTE` / `IMPLEMENTADO`
 
-Decisión: servir imágenes localmente, registrar fuente/licencia y distinguir fotografía directa de referencia territorial.
+Decisión: servir imágenes localmente, registrar fuente/licencia, dimensiones y fecha de consulta, y distinguir fotografía directa de referencia territorial. Para el header a ancho completo se descartan thumbnails y assets insuficientes; se optimiza para web sin upscaling ni pérdida visible de nitidez.
 
 ### DEC-015 — Documentación canónica en el repositorio
 
@@ -173,6 +177,16 @@ Mapas: solo se genera preview OpenStreetMap, diferido y atribuido, cuando el reg
 Reseñas: no copiar, inventar ni scrapear Google Maps. Hasta disponer de Google Maps Platform u otra fuente autorizada con sus atribuciones, la sección se mantiene como pendiente visible y sin contenido de usuarios.
 
 Datos faltantes y privacidad: una descripción ausente solo puede sustituirse por una frase factual derivada de campos existentes o `No informado`. No se infieren platos ni menús. El campo `owner` no se publica sin procedencia específica, pertinencia para el directorio y una razón pública documentada; los datos actuales no satisfacen ese criterio de forma estructurada.
+
+### DEC-020 — Top 3 general y destacados por atributo
+
+Estado: `VIGENTE` / `IMPLEMENTADO`
+
+Decisión: conservar el header en cuatro slides —introducción y Top 1/2/3— y presentar inmediatamente después una sección editorial secundaria con exactamente tres establecimientos destacados por una cualidad concreta. Esta segunda selección no extiende el ranking, no usa puestos Top 4–6 y no representa premios ni certificaciones.
+
+Selección vigente: Na Que Ver Cocinería Chilena (`Cocina chilena de mercado`), Restaurant Tradiciones Cocinería Morelia (`Productos de huerta`) y Cocinería Puelpún (`Trayectoria histórica`). No se superponen con el Top 3 y amplían la diversidad territorial. Cada entrada debe registrar hecho, inferencia editorial, fuente y fecha de consulta; sus CTA reutilizan el directorio y su ficha muestra una insignia textual distinta de las insignias numéricas.
+
+Motivo de ubicación: añadir tres slides habría diluido el ritmo y la jerarquía del carrusel principal. La retícula secundaria mantiene relación inmediata con el header sin reconstruirlo ni convertir la página en un sistema genérico de cards.
 
 ## Decisiones reemplazadas
 

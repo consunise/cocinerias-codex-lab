@@ -850,7 +850,8 @@ select:focus-visible {
   min-width: 0;
   min-height: 184px;
   align-items: flex-start;
-  padding: clamp(1rem, 1.8vw, 1.5rem);
+  padding-block: clamp(1rem, 1.8vw, 1.5rem);
+  padding-inline: clamp(1rem, 1.8vw, 1.5rem);
   background-color: var(--terracotta-dark);
   color: var(--white);
   isolation: isolate;
@@ -968,7 +969,7 @@ select:focus-visible {
 .restaurant-amenities {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.25rem;
+  gap: 0.4rem 0.75rem;
   align-items: center;
   justify-content: flex-start;
   margin-top: 0.55rem;
@@ -977,8 +978,8 @@ select:focus-visible {
 .restaurant-amenities.is-empty {
   display: flex;
   width: 100%;
-  justify-content: center;
-  margin-top: 0.45rem;
+  justify-content: flex-start;
+  margin-top: 0.55rem;
 }
 
 .amenity-empty {
@@ -986,14 +987,14 @@ select:focus-visible {
   color: rgba(255, 253, 248, 0.76);
   font-size: 0.74rem;
   line-height: 1.35;
-  text-align: center;
+  text-align: left;
 }
 
 .food-type-item,
 .amenity-item {
   display: grid;
   grid-template-columns: 24px minmax(0, 1fr);
-  gap: 0.45rem;
+  gap: 0.25rem;
   align-items: center;
   width: fit-content;
   max-width: 100%;
@@ -1006,10 +1007,14 @@ select:focus-visible {
 }
 
 .amenity-item {
-  padding: 0.08rem 0.25rem;
+  padding: 0;
   border: 0;
-  background: var(--paper);
-  text-shadow: none;
+  background: transparent;
+}
+
+.restaurant-main .amenity-item,
+.restaurant-main .amenity-icon {
+  color: var(--paper);
 }
 
 .amenity-icon {
@@ -1537,10 +1542,42 @@ select:focus-visible {
 }
 
 .about-copy--featured .about-rank {
+  display: inline-flex;
+  gap: 0.45rem;
+  align-items: center;
   width: fit-content;
   margin: 0 0 0.65rem;
   padding-bottom: 0.28rem;
   border-bottom: 1px solid rgba(255, 253, 248, 0.72);
+}
+
+.about-rank-icon {
+  display: inline-flex;
+  flex: 0 0 auto;
+}
+
+.editorial-rank-icon {
+  display: block;
+  width: 1.75rem;
+  height: 1.75rem;
+  overflow: visible;
+}
+
+.editorial-rank-icon-frame,
+.editorial-rank-icon-rule {
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: square;
+  stroke-linejoin: miter;
+  stroke-width: 1.35;
+}
+
+.editorial-rank-icon text {
+  fill: currentColor;
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0;
 }
 
 .about-copy--featured h2 {
@@ -1683,6 +1720,127 @@ select:focus-visible {
   color: var(--white);
   background: currentColor;
   box-shadow: 0 0 0 2px rgba(15, 13, 10, 0.58), 0 1px 6px rgba(15, 13, 10, 0.72);
+}
+
+.editorial-highlights {
+  border-bottom: 1px solid var(--ink);
+  background: var(--white);
+}
+
+.editorial-highlights-inner {
+  max-width: var(--max-width);
+  margin-inline: auto;
+  padding: clamp(2.25rem, 4.5vw, 4rem) var(--side-pad);
+}
+
+.editorial-highlights-heading {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.7fr) minmax(0, 1.3fr);
+  gap: 0.35rem var(--content-gap);
+  align-items: end;
+  margin-bottom: clamp(1.5rem, 3vw, 2.25rem);
+}
+
+.editorial-highlights-heading .eyebrow,
+.editorial-highlights-heading h2 {
+  grid-column: 1;
+}
+
+.editorial-highlights-heading h2 {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: clamp(2rem, 3.8vw, 3.35rem);
+  font-weight: 400;
+  letter-spacing: -0.045em;
+  line-height: 0.96;
+}
+
+.editorial-highlights-heading > p:last-child {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  max-width: 38rem;
+  margin: 0;
+  color: var(--ink-soft);
+  line-height: 1.6;
+}
+
+.editorial-highlights-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+}
+
+.editorial-highlight {
+  min-width: 0;
+  padding: clamp(1.25rem, 2.5vw, 2rem);
+}
+
+.editorial-highlight + .editorial-highlight {
+  border-left: 1px solid var(--line-dark);
+}
+
+.editorial-highlight-label,
+.editorial-highlight-location {
+  margin: 0;
+  color: var(--terracotta-dark);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.editorial-highlight h3 {
+  margin: 0.75rem 0 0.4rem;
+  font-family: var(--serif);
+  font-size: clamp(1.45rem, 2.2vw, 2rem);
+  font-weight: 400;
+  letter-spacing: -0.035em;
+  line-height: 1.05;
+}
+
+.editorial-highlight > p:not(.editorial-highlight-label, .editorial-highlight-location) {
+  margin: 1rem 0 0;
+  color: var(--ink-soft);
+  font-size: 0.86rem;
+  line-height: 1.55;
+}
+
+.editorial-highlight-reason strong {
+  color: var(--ink);
+}
+
+.editorial-highlight-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem 1rem;
+  align-items: center;
+  margin-top: 1.25rem;
+}
+
+.editorial-highlight-actions button,
+.editorial-highlight-actions a {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  color: var(--terracotta-dark);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-underline-offset: 0.22rem;
+}
+
+.editorial-highlight-actions button {
+  padding: 0;
+  border: 0;
+  border-bottom: 1px solid currentColor;
+  background: transparent;
+  cursor: pointer;
+}
+
+.editorial-highlight-actions button:hover,
+.editorial-highlight-actions a:hover {
+  color: var(--ink);
 }
 
 .about-copy {
@@ -2001,6 +2159,9 @@ select:focus-visible {
 }
 
 .modal-editorial-badge {
+  display: inline-flex;
+  gap: 0.45rem;
+  align-items: center;
   width: fit-content;
   margin: 0 0 0.8rem;
   padding: 0.38rem 0.55rem;
@@ -2011,6 +2172,15 @@ select:focus-visible {
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
+}
+
+.modal-editorial-badge .editorial-rank-icon {
+  width: 1.45rem;
+  height: 1.45rem;
+}
+
+.modal-editorial-badge--attribute {
+  border-color: var(--paper);
 }
 
 .modal-image-context {
@@ -2474,6 +2644,10 @@ select:focus-visible {
     width: min(52vw, 520px);
   }
 
+  .editorial-highlights-heading {
+    grid-template-columns: minmax(180px, 0.75fr) minmax(0, 1.25fr);
+  }
+
   .footer-inner {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
@@ -2703,7 +2877,8 @@ select:focus-visible {
 
   .restaurant-main {
     min-height: 190px;
-    padding: 1rem;
+    padding-block: 1rem;
+    padding-inline: 1rem;
   }
 
   .restaurant-name {
@@ -2746,6 +2921,23 @@ select:focus-visible {
 
   .food-type-list {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .editorial-highlights-heading {
+    display: block;
+  }
+
+  .editorial-highlights-heading > p:last-child {
+    margin-top: 1rem;
+  }
+
+  .editorial-highlights-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .editorial-highlight + .editorial-highlight {
+    border-top: 1px solid var(--line-dark);
+    border-left: 0;
   }
 
   .about-data {

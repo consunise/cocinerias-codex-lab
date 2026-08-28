@@ -69,15 +69,17 @@ Estado: `APROBADO PERO NO IMPLEMENTADO`
 
 Criterio de cierre: flecha hacia abajo, centrada bajo el texto, con hover/foco y área clickeable preservados.
 
-### CONTENT-001 — Formalizar criterios del Top 3
+### CONTENT-001 — Formalizar criterios y mantenimiento de selecciones editoriales
 
 Estado: `PENDIENTE`
 
 Criterio de cierre:
 
 - definir que es selección editorial y no ranking objetivo;
-- registrar criterios y fecha;
+- distinguir formalmente Top 3 general de destacados por atributo;
+- registrar criterios, evidencia mínima, caducidad y fecha de reevaluación;
 - verificar Restaurante Pily, Mata Rangi y Cocinería Bellavista;
+- reevaluar Na Que Ver Cocinería Chilena, Restaurant Tradiciones Cocinería Morelia y Cocinería Puelpún contra sus atributos documentados;
 - respaldar platos, descripciones y labels sin claims absolutos.
 
 ### COMMS-001 — Definir enlaces sociales y CTA
@@ -121,7 +123,7 @@ Criterio de cierre: definir finalidad pública y base editorial, registrar fuent
 
 Estado: `PENDIENTE`
 
-Criterio de cierre: revisar desktop, 980, 720, 420 y 320 px; teclado, foco, contraste, modal, filtros, paginación, carrusel, consola, overflow y reduced motion.
+Criterio de cierre: revisar desktop, 980, 720, 420 y 320 px; teclado, foco, contraste, modal, filtros, paginación, carrusel, consola, overflow y reduced motion. Resolver o aceptar explícitamente el overflow de 15 px que produce `body { min-width: 320px; }` cuando una scrollbar vertical clásica reduce el área útil de un viewport nominal de 320 px a 305 px.
 
 ### DOC-001 — Incorporar esta configuración al repositorio y al Project
 
@@ -143,11 +145,11 @@ Estado: `POR VALIDAR`
 
 Los PNG de Flaticon no se usan en la interfaz actual y su archivo afirma que existe atribución visible en el footer. Decidir si se retiran o vuelven a utilizar; cumplir la licencia aplicable.
 
-### ASSET-003 — Decidir destino de imágenes `zona-*`
+### ASSET-003 — Decidir destino de imágenes históricas del carrusel
 
 Estado: `PENDIENTE`
 
-Los tres archivos siguen versionados y atribuidos, pero no forman parte del carrusel activo.
+`empanadas-de-pino.jpg` y los tres archivos `zona-*` siguen versionados y atribuidos, pero no forman parte del carrusel activo desde la incorporación de los cuatro assets de 2880 px.
 
 ### TECH-001 — Evaluar validación automatizada mínima
 
