@@ -872,10 +872,10 @@
               <span class="restaurant-meta">
                 <span class="restaurant-hours${hoursClass}" data-hours-source="${escapeHTML(restaurant.hoursSource ?? "unavailable")}">${escapeHTML(hours)}</span>
               </span>
-              ${amenityList(restaurant)}
             </span>
           </span>
           <span class="restaurant-cuisine">${foodCategoryList(restaurant)}</span>
+          ${amenityList(restaurant)}
           <span class="restaurant-price">
             <span>${escapeHTML(formatPrice(restaurant.displayPriceCategory))}</span>
           </span>

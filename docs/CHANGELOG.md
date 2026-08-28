@@ -4,6 +4,14 @@ Este archivo registra cambios implementados relevantes. No contiene solicitudes 
 
 ## Sin publicar
 
+### 2026-08-27 — Prueba visual: columna independiente de Comodidades
+
+- Implementado como prueba reversible: en desktop desde 1180 px, `restaurant-amenities` ocupa una columna propia entre Tipo de comida y Precio; `list-header` usa la misma retícula de cinco columnas.
+- Implementado: a 1179 px o menos, el encabezado de columnas se oculta y Comodidades se apila a ancho completo sin alterar Tipo, Precio ni la acción; `No informado` permanece alineado a la izquierda.
+- Distribución provisional: `minmax(300px, 1.8fr) minmax(150px, 0.82fr) minmax(152px, 0.66fr) minmax(90px, 0.34fr) 96px`. No se registra como decisión en `DECISIONS.md` hasta completar la revisión visual solicitada.
+- Archivos: `index.html`, `styles.css`, `script.js`, `docs/CURRENT_STATE.md` y `docs/CHANGELOG.md`. No se modificaron datos, filtros, imágenes, ficha, paginación, navbar, carrusel ni footer.
+- Validación ejecutada: sintaxis válida de `data.js`, `script.js` y todos los scripts `.mjs`; `git diff --check`; servidor estático; consola sin mensajes; mediciones y revisión visual en 1440, 1200, 1180, 1179, 980, 720, 420 y 320 px sin overflow horizontal. Hover medido sin desplazamiento de layout, foco visible y `list-header` sticky conservados.
+
 ### 2026-08-27 — Amenities editoriales, fotografía HD y destacados por atributo
 
 - Implementado: `restaurant-main` usa `padding-block` simétrico; Comodidades elimina fondo, borde y padding de chip, reduce el `gap` icono–texto a `0.25rem` y conserva `No informado` alineado a la izquierda sin deformar la retícula. Este ajuste reemplaza el centrado y la caja clara registrados en la entrada anterior del mismo día.

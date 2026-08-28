@@ -74,6 +74,8 @@ Actualizaciones posteriores, consolidadas al 27 de agosto de 2026: footer terrac
 - `restaurant-main` usa `padding-block` simétrico: 24 px en el viewport desktop comprobado y 16 px en 320 px.
 - Acción `Ver ficha` apilada verticalmente, pero el símbolo actual es `→`, no flecha hacia abajo.
 
+Prueba visual no consolidada (27 de agosto de 2026): a partir de 1180 px, Comodidades se separa del interior fotográfico y ocupa una quinta columna propia alineada con `list-header`. La retícula provisional usa `minmax(300px, 1.8fr) minmax(150px, 0.82fr) minmax(152px, 0.66fr) minmax(90px, 0.34fr) 96px`; a 1179 px o menos, Comodidades vuelve a una fila de ancho completo bajo Tipo de comida. Esta prueba no reemplaza todavía la alternativa anterior en `DECISIONS.md` ni constituye una aprobación permanente.
+
 ### Modal
 
 - `dialog` nativo con cierre, fondo, scroll interno y navegación circular anterior/siguiente.
