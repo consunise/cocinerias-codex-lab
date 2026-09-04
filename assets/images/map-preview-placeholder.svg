@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 900" role="img" aria-labelledby="title desc">
+  <title id="title">Vista previa de mapa de demostración</title>
+  <desc id="desc">Composición cartográfica abstracta sin ubicación ni coordenadas reales.</desc>
+  <rect width="720" height="900" fill="#f4efe5"/>
+  <g fill="none" stroke="#c9beae" stroke-width="18">
+    <path d="M-40 154 170 246l128-70 171 58 291-132"/>
+    <path d="M-30 650 128 558l184 46 142-92 306 84"/>
+    <path d="M90-30l76 182-32 208 92 178-42 392"/>
+    <path d="M540-40 464 168l62 204-104 170 76 398"/>
+  </g>
+  <g fill="none" stroke="#8c8377" stroke-width="5">
+    <path d="M-20 398 156 330l134 42 168-70 282 54"/>
+    <path d="M-10 770 164 690l166 52 168-82 250 62"/>
+    <path d="M300-20 250 154l72 176-54 206 90 384"/>
+    <path d="M650-20 600 210l42 198-78 222 92 300"/>
+  </g>
+  <g fill="#e9dfcf" stroke="#a7442c" stroke-width="4">
+    <circle cx="360" cy="430" r="54"/>
+    <path d="M360 530c-52-72-78-118-78-160a78 78 0 1 1 156 0c0 42-26 88-78 160Z"/>
+    <circle cx="360" cy="370" r="23" fill="#a7442c" stroke="none"/>
+  </g>
+  <g fill="#75301f" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" text-anchor="middle">
+    <text x="360" y="790" font-size="25" font-weight="700" letter-spacing="4">MAPA PLACEHOLDER</text>
+    <text x="360" y="830" font-size="18">Demostración visual · sin coordenadas reales</text>
+  </g>
+</svg>

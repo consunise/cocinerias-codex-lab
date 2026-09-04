@@ -74,23 +74,22 @@ Actualizaciones posteriores, consolidadas al 27 de agosto de 2026: footer terrac
 - `restaurant-main` usa `padding-block` simétrico: 24 px en el viewport desktop comprobado y 16 px en 320 px.
 - Acción `Ver ficha` apilada verticalmente, pero el símbolo actual es `→`, no flecha hacia abajo.
 
-Prueba visual no consolidada (27 de agosto de 2026): a partir de 1180 px, Comodidades se separa del interior fotográfico y ocupa una quinta columna propia alineada con `list-header`. La retícula provisional usa `minmax(300px, 1.8fr) minmax(150px, 0.82fr) minmax(152px, 0.66fr) minmax(90px, 0.34fr) 96px`; a 1179 px o menos, Comodidades vuelve a una fila de ancho completo bajo Tipo de comida. Esta prueba no reemplaza todavía la alternativa anterior en `DECISIONS.md` ni constituye una aprobación permanente.
+EXPERIMENTO / POR VALIDAR (29 de agosto de 2026): desde 1180 px, Comodidades ocupa una columna independiente y la retícula provisional usa `minmax(300px, 1.8fr) minmax(150px, 0.74fr) minmax(150px, 0.74fr) minmax(90px, 0.34fr) 96px`; Tipo de comida y Comodidades tienen el mismo ancho real. Entre 1179 y 521 px, Tipo, Comodidades, Precio y Detalle comparten la segunda fila. A 520 px o menos, la foto ocupa todo el ancho; Tipo, Comodidades y Precio permanecen en tres columnas y `Ver ficha` pasa a una fila propia. A 340 px o menos, donde las etiquetas largas dejan de caber, Tipo y Comodidades conservan dos columnas, Precio pasa a una fila propia y la acción queda debajo. Esta variante no reemplaza DEC-007.
 
-EXPERIMENTO / POR VALIDAR (28 de agosto de 2026): sobre la prueba anterior, `restaurant-main` centra verticalmente su contenido y Tipo, Comodidades y Precio centran sus grupos en ambos ejes. Entre 1179 y 521 px, esas tres áreas permanecen horizontales junto a Detalle en una segunda fila; a 520 px o menos se recupera el apilamiento. La corrección no experimental de esta ronda añade el selector ausente `.amenity-item:hover`, por lo que texto e icono reaccionan igual que Tipo de comida también fuera del hover general de la fila. Estas variantes no reemplazan DEC-007.
+Tipo de comida y Comodidades centran su grupo de ancho intrínseco, pero cada fila reserva un slot iconográfico de 24 px, un `gap` de `0.25rem` y un eje izquierdo común para iconos y textos. `No informado` permanece alineado a la izquierda. La corrección de hover elimina el selector de puntero aplicado a toda `.restaurant-button`: solo la unidad `.food-type-item` o `.amenity-item` bajo el cursor cambia texto e icono; `focus-visible` de la fila conserva su realce accesible. El filtro de precio se presenta `Alto`, `Moderado`, `Económico`. Tras aplicar búsqueda y filtros AND, el conjunto se ordena Top 1/2/3, Destacadas y resto antes de paginar; las seis prioridades se derivan de la configuración editorial DOM vigente, no de listas nuevas.
 
 ### Modal
 
 - `dialog` nativo con cierre, fondo, scroll interno y navegación circular anterior/siguiente.
-- La navegación usa el conjunto actualmente filtrado.
+- Desde el listado, la navegación usa el conjunto actualmente filtrado. Si una ficha se abre desde un slide y su cocinería no pertenece a ese conjunto, el modal usa temporalmente `[cocinería abierta + resultados filtrados]` sin alterar los filtros; con cero resultados queda una ficha única y navegación deshabilitada.
 - Hero de ancho completo con imagen local y overlay. La copia sigue el orden insignia Top N, cuando corresponde; localidad y región; nombre; nombre alternativo. Las 100 imágenes `regional-fallback` muestran `Imagen de referencia territorial` y Mata Rangi, única imagen `direct`, no muestra esa advertencia.
 - El Top 1/2/3 de las fichas se deriva de `data-restaurant-id` y `data-editorial-rank` en los tres slides destacados del carrusel.
-- Inmediatamente bajo el hero, una retícula editorial reúne Sobre esta cocinería, Platos destacados y Tipo de comida.
-- La información práctica usa dos columnas en desktop: Ubicación y mapa a la izquierda; Horario, Comodidades y Rango de precio a la derecha. A 720 px o menos se apila con Ubicación primero.
+- EXPERIMENTO / POR VALIDAR: inmediatamente bajo el hero, la columna principal izquierda muestra un párrafo sans serif explícitamente rotulado `Contenido demo · no verificado`, Platos destacados desde `specialties`, Rango de precio referencial, Tipo de comida, Dirección · Localidad combinadas y después Información práctica con Horario y Comodidades.
+- EXPERIMENTO / POR VALIDAR: la columna derecha contiene únicamente `assets/images/map-preview-placeholder.svg`, rotulado `Vista previa del mapa — demostración`; no usa coordenadas, proveedor cartográfico ni API. A 720 px o menos se apila después del contenido principal.
 - Después aparecen Reseñas en Google, Información y contacto y Sobre los datos. Menú se omite porque ninguno de los 101 registros contiene un campo estructurado de menú, carta, URL o PDF.
-- Las 101 descripciones proceden del campo `description`; 53 registros con `specialties` muestran sus valores exactos y los otros 48 muestran `No informado`.
+- El helper estable para descripciones factuales se conserva en el código para reversibilidad, pero la variante visible usa deliberadamente el mismo párrafo demo en las 101 fichas. Los 53 registros con `specialties` muestran sus valores exactos y los otros 48 muestran `No informado`.
 - Preferencias alimentarias, comodidades, horarios y precios demo se identifican como información referencial dentro de la ficha.
-- Dos registros tienen coordenadas válidas (`Cocinería El Yugo` y `Cocinería Flor Marina`) y generan un preview OpenStreetMap diferido con atribución. Los 99 restantes muestran que la vista previa no está disponible.
-- Tres registros conservan enlaces cartográficos almacenados: dos a Waze y uno a OpenStreetMap; el label refleja el proveedor real aunque el campo fuente se llame `googleMaps`.
+- Dos registros siguen teniendo coordenadas válidas y tres conservan enlaces cartográficos almacenados. La lógica OpenStreetMap anterior permanece localizada y sin borrar para facilitar la reversión, pero no se invoca mientras está activa la prueba del mapa simulado.
 - No existe integración autorizada de Google Places ni contenido de reseñas en el dataset. La sección de reseñas muestra el bloqueo explícito y no renderiza reseñas ficticias.
 - Información y contacto renderiza solo campos existentes y URLs válidas: teléfono, WhatsApp, email, Instagram, Facebook y web; servicios, pagos, año de fundación y otras redes se agrupan solo cuando existen.
 - Aunque 10 registros tienen `owner`, la ficha no publica responsables: el esquema no expresa de forma estructurada pertinencia pública ni trazabilidad específica suficiente para justificar su exposición.
@@ -100,27 +99,28 @@ EXPERIMENTO / POR VALIDAR (28 de agosto de 2026): sobre la prueba anterior, `res
 ### Carrusel editorial
 
 - Primer bloque editorial inmediatamente después del navbar y antes del directorio.
-- Cuatro slides de fondo a pantalla completa dentro de `Acerca de esta guía`.
+- EXPERIMENTO / POR VALIDAR: siete slides de fondo a pantalla completa dentro de `Acerca de esta guía`.
 - Slide 1: contenido introductorio con empanadas de pino.
 - Top 1: Restaurante Pily.
 - Top 2: Mata Rangi.
 - Top 3: Cocinería Bellavista.
-- La variante experimental de siete slides solicitada el 28 de agosto no se activó: el historial solo permite recuperar, sin superponer el Top 3, la introducción y dos imágenes editoriales adicionales (Atacama y La Araucanía). El cuarto slide histórico era Mata Rangi y duplicaría el Top 2; los tres assets `zona-*` carecen de atribución individual suficiente en el repositorio. El carrusel vigente permanece en cuatro slides y DEC-009/DEC-020 no cambian.
-- Cada destacado incluye ubicación, descripción, platos, tres etiquetas y enlace de referencia.
+- Slides 5–7: Na Que Ver Cocinería Chilena (`Cocina chilena de mercado`), Restaurant Tradiciones Cocinería Morelia (`Productos de huerta`) y Cocinería Puelpún (`Trayectoria histórica`), rotuladas `Destacada` sin numeración Top. Se generan en runtime desde la misma fuente DOM de Destacadas usada por fichas y orden editorial.
+- Los Top 1/2/3 conservan platos y etiquetas editoriales. Los slides 5–7 reutilizan nombre, ubicación, descripción, atributo y primer enlace de fuente de la configuración de Destacadas, sin duplicar esa sección visual.
 - Top 1/2/3 usan tres variantes numéricas de una misma insignia SVG editorial propia, con número visible, `currentColor` y geometría común; la ficha reutiliza la misma función y la configuración DOM del carrusel.
 - Autoplay cada 6 segundos, indicadores clickeables, teclado y pausa por hover/foco.
+- Los seis slides de cocinerías se vinculan por `data-restaurant-id` a la ficha existente. La superficie editorial abre el `dialog` y un control compacto `Ver ficha` permite Enter, Espacio, foco visible y devolución de foco; el slide introductorio y los dots no abren fichas.
 - Autoplay desactivado con `prefers-reduced-motion` o pestaña no visible.
 - No hay botones anterior/siguiente.
 - El carrusel no tiene marco perimetral; conserva outline solo como estado de foco accesible.
-- La caja editorial alterna `--terracotta`, `--paper`, `--terracotta`, `--paper`; imagen, texto y tema cambian en el mismo slide.
-- Los cuatro dots usan círculos visibles de 16 × 16 px dentro de targets de 44 × 44 px, con activo por relleno y anillo, foco visible y sin fondo rectangular en el wrapper.
-- Los cuatro assets activos miden 2880 px de ancho y fueron reducidos desde originales mayores sin upscaling: empanada de Guanaqueros, costanera de Puerto Saavedra, panorama de Arica y panorama de Valparaíso. Las tres imágenes asociadas al Top 3 se rotulan como territoriales, no como fotografías de los locales.
+- La caja editorial mantiene la alternancia terracota/paper en la secuencia de siete slides; imagen, texto y tema cambian en la misma unidad.
+- Los siete dots usan círculos visibles de 16 × 16 px dentro de targets de 44 × 44 px, con activo por relleno y anillo, foco visible y sin fondo rectangular en el wrapper.
+- Los primeros cuatro assets activos miden 2880 px de ancho. Los tres slides experimentales reutilizan las imágenes territoriales documentadas de cada registro, de 960 px de ancho; no se ampliaron ni sustituyeron. Su suficiencia visual a alta densidad continúa `POR VALIDAR`.
 
 ### Destacados de la guía
 
-- Sección editorial secundaria inmediatamente después del header, sin alterar los cuatro slides ni crear puestos Top 4–6.
+- La sección visual secundaria queda oculta durante el experimento para evitar duplicación; su DOM actúa como fuente única de los slides 5–7, insignias de ficha y orden posterior al Top 3.
 - Tres casos sin superposición con el Top 3: Na Que Ver Cocinería Chilena (`Cocina chilena de mercado`), Restaurant Tradiciones Cocinería Morelia (`Productos de huerta`) y Cocinería Puelpún (`Trayectoria histórica`).
-- Cada entrada incluye ubicación, descripción factual, razón editorial, fuente externa y CTA que aplica la búsqueda exacta en el directorio.
+- La configuración conserva ubicación, descripción factual, razón editorial y fuentes externas; los slides reutilizan nombre, ubicación, descripción, atributo y primer enlace de fuente.
 - Las fichas correspondientes muestran `Destacado de la guía · [atributo]`, claramente separado de `Selección de la guía · Top N`.
 
 ### Footer
@@ -177,7 +177,14 @@ Actualización del 27 de agosto de 2026:
 - Comprobadas fichas Top 1, Top 2 y Top 3; imagen territorial y directa; platos presentes y ausentes; mapa diferido con coordenadas y estado sin mapa; horarios, comodidades y precios referenciales; contacto, reviews pendientes, navegación filtrada, reinicio de scroll, Escape, foco visible y devolución de foco.
 - El dataset tiene 101 descripciones, por lo que el fallback de descripción ausente quedó revisado en código pero no pudo ejercitarse con un registro real. La activación de una fila mediante Enter/Espacio queda pendiente de una revisión manual fuera del controlador de navegador; el control continúa siendo un `button` nativo habilitado.
 - La continuación de la ronda comprobó en runtime `gap: 4px`, fondo transparente, borde `none`, padding `0`, estado vacío alineado a la izquierda y `padding-block` simétrico de 24 px en desktop y 16 px en 320 px. Los cuatro slides cargaron imágenes naturales de 2880 px; los sellos 1/2/3 se inyectaron en el header, el Top 1 se verificó en su ficha y el CTA de Puelpún aplicó búsqueda exacta y mostró su atributo no ordinal.
-- En el controlador con scrollbar vertical no superpuesto, un viewport nominal de 320 px deja 305 px de área útil mientras `body { min-width: 320px; }` conserva 320 px y expone 15 px de desplazamiento horizontal. Ningún bloque nuevo excede esos 320 px; el comportamiento procede del mínimo global existente y queda por resolver o aceptar en QA.
+
+Actualización del 29 de agosto de 2026:
+
+- Verificados los seis slides de cocinerías por ID: clic en la superficie y control compacto, Enter, Espacio, cierre y devolución de foco. El slide introductorio y los siete dots no abren fichas.
+- Comprobada la apertura de Restaurante Pily con filtro Atacama activo: el filtro permaneció intacto, la ficha abrió como `1 de 6` y Siguiente navegó al primer resultado de Atacama.
+- Hover comprobado sobre wrapper, icono y texto de Pet friendly, Estacionamiento y Accesibilidad, en varias filas y después de paginar; color e icono cambian sin alterar ancho ni alto.
+- Revisión responsive medida en 1280, 980, 720, 430, 390, 375, 360 y 320 px. No hubo overflow horizontal; 430–360 px conservaron las tres columnas informativas y 320 px activó la excepción de dos columnas + Precio.
+- El mínimo global cambió a `min-width: min(320px, 100%)`: elimina los 15 px de overflow cuando una scrollbar clásica reduce un viewport nominal de 320 px a 305 px útiles.
 
 ## Discrepancias relevantes
 
@@ -189,7 +196,6 @@ Actualización del 27 de agosto de 2026:
 | Atribución Flaticon | `ATTRIBUTION.md` afirma que la atribución es visible en footer | No existe atribución Flaticon visible y los PNG no se usan | `POR VALIDAR` |
 | Datos | Producción debe usar información verificable | Precio, horarios, preferencias alimentarias y comodidades tienen prototipos activos | `PENDIENTE` antes de producción |
 | Assets históricos del carrusel | Carrusel vigente con cuatro fotografías de 2880 px | `empanadas-de-pino.jpg` y tres imágenes `zona-*` quedan sin uso y están documentadas como históricas | Mantenibles, pero revisar si deben conservarse |
-| Viewport nominal de 320 px con scrollbar clásico | No debe existir overflow horizontal | `body { min-width: 320px; }` produce 15 px de scroll cuando la barra vertical reduce el área útil a 305 px | `POR VALIDAR`; no fue introducido por esta ronda |
 
 ## Vacíos comprobados
 

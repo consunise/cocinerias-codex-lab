@@ -4,6 +4,27 @@ Este archivo registra cambios implementados relevantes. No contiene solicitudes 
 
 ## Sin publicar
 
+### 2026-08-29 — Slides interactivos y variante mobile de listado
+
+- Implementado: los seis slides que representan cocinerías abren el `dialog` existente mediante su `data-restaurant-id`; el slide introductorio no es interactivo y los dots continúan limitados a cambiar de contenido.
+- Implementado: control compacto `Ver ficha` por slide con Enter, Espacio, `focus-visible` y devolución de foco. La superficie editorial también abre la misma ficha; los enlaces de fuente conservan su acción propia.
+- Implementado: si el slide apunta a una cocinería excluida por filtros, el modal incorpora temporalmente ese registro delante del conjunto filtrado sin limpiar ni modificar selecciones.
+- Corregido: el hover de Comodidades se aplica por `.amenity-item`, no por el ancestro `.restaurant-button`; wrapper, texto e icono comparten transición, fill y stroke de Tipo de comida sin layout shift.
+- PRUEBA UX/UI — POR VALIDAR: en 520 px o menos, foto a ancho completo, Tipo/Comodidades/Precio en una fila y `Ver ficha` debajo; a 340 px o menos, Tipo y Comodidades permanecen lado a lado, Precio ocupa una fila y la acción queda al final.
+- PRUEBA UX/UI — POR VALIDAR: `results-toolbar` conserva una línea a 430 px y permite wrap controlado en anchos menores. Tipo y Comodidades mantienen grupos centrados con iconos y textos en ejes izquierdos comunes.
+- Corregido: `body` usa `min-width: min(320px, 100%)`, eliminando el overflow de 15 px observado con scrollbar vertical clásica a 320 px nominales.
+- No se modifican `DECISIONS.md` ni `PRODUCT_UX_SPEC.md`; la composición responsive, el carrusel de siete slides y la ficha experimental continúan `POR VALIDAR`.
+
+### 2026-08-28 — Prueba UX/UI editorial de siete slides y ficha redistribuida
+
+- Corregido: el hover de puntero ya no se aplica globalmente a todos los iconos por `.restaurant-button:hover`; cada `.food-type-item` y `.amenity-item` activa de forma independiente el mismo color, fill, stroke y transición sobre icono, texto o wrapper, sin layout shift. El realce global se conserva para `focus-visible` de la fila.
+- EXPERIMENTO / POR VALIDAR: Tipo de comida y Comodidades usan el mismo ancho de retícula y centran el grupo completo manteniendo un eje izquierdo común dentro de cada grupo.
+- EXPERIMENTO / POR VALIDAR: carrusel de siete slides —introducción, Top 1/2/3 y tres Destacadas existentes— generado desde la fuente editorial DOM vigente, sin presentar Destacadas como Top 4–6 ni duplicar su sección visual.
+- EXPERIMENTO / POR VALIDAR: el resultado se ordena después de filtrar y antes de paginar como Top 1/2/3, Destacadas y resto; el dropdown de precio cambia solo su presentación a Alto, Moderado, Económico.
+- EXPERIMENTO / POR VALIDAR: la ficha mantiene el `dialog` y prueba contenido principal a la izquierda, mapa SVG simulado como único contenido derecho, descripción sans serif identificada como demo, Platos destacados debajo del párrafo, Precio reubicado y Dirección · Localidad unificadas antes de Información práctica.
+- Limitación conocida: las tres Destacadas reutilizan sus assets territoriales documentados de 960 px; no se inventaron ni reescalaron imágenes para la prueba y su suficiencia a alta densidad queda por validar.
+- No se modifican `DECISIONS.md`, `PRODUCT_UX_SPEC.md`, `BACKLOG.md`, `data.js` ni las fuentes de establecimientos; todos los cambios de layout/editoriales de esta entrada continúan `POR VALIDAR`.
+
 ### 2026-08-28 — Corrección de hover y variante UX/UI experimental
 
 - Corregido: Comodidades incorpora `.amenity-item:hover` a los selectores compartidos de color, fill y stroke; el wrapper completo activa el mismo tratamiento de Tipo de comida sin cambio geométrico.

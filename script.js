@@ -13,6 +13,10 @@
   const PAGE_SIZE = 10;
   const CAROUSEL_AUTOPLAY_DELAY = 6000;
   const SEARCH_SUGGESTION_LIMIT = 7;
+  // EXPERIMENTO / POR VALIDAR: texto deliberadamente genérico para evaluar
+  // la composición editorial sin atribuir hechos nuevos al establecimiento.
+  const DEMO_DESCRIPTION_PLACEHOLDER =
+    "Texto de demostración para evaluar cómo se verá una descripción editorial de la cocinería. En esta zona se podrá explicar brevemente su propuesta, el tipo de cocina y la información útil antes de una visita.";
   const HOURS_PLACEHOLDER_VALUES = Object.freeze([
     "Lun–vie 12:00–16:30",
     "Mar–dom 12:30–18:00",
@@ -182,6 +186,7 @@
     modalPrevName: document.querySelector("#modal-prev-name"),
     modalNextName: document.querySelector("#modal-next-name"),
     aboutCarousel: document.querySelector("#about-carousel"),
+    aboutCarouselTrack: document.querySelector("#about-carousel-track"),
     aboutSlides: [...document.querySelectorAll(".about-slide")],
     aboutCarouselIndicators: document.querySelector("#about-carousel-indicators"),
     aboutCarouselStatus: document.querySelector("#about-carousel-status"),
@@ -198,6 +203,7 @@
     prices: new Set(),
     amenities: new Set(),
     visibleRestaurants: [...restaurants],
+    modalRestaurants: [],
     modalId: null,
     lastFocused: null,
     filtersOpen: false,
@@ -231,8 +237,8 @@
     "Sin clasificación culinaria",
   ];
   const priceOrder = PRICE_PROTOTYPE.enabled
-    ? [...PRICE_PROTOTYPE.bands]
-    : ["Económico", "Precio medio", "No informado"];
+    ? [...PRICE_PROTOTYPE.bands].reverse()
+    : ["Precio medio", "Económico", "No informado"];
   const amenityOrder = AMENITY_DEMO_PROTOTYPE.options.map(({ label }) => label);
   const demoFoodPreferenceLabels = new Set(
     FOOD_PREFERENCE_DEMO_PROTOTYPE.options.map(({ label }) => label),
@@ -455,17 +461,19 @@
         data-amenities-source="${escapeHTML(restaurant.amenitiesSource)}"
         aria-label="Comodidades referenciales de maqueta; no verificadas"
       >
-        ${restaurant.displayAmenities
-          .map(
-            ({ label }) => `
-              <span class="amenity-item" title="${escapeHTML(label)} · dato de demostración">
-                ${amenityIcon(label)}
-                <span>${escapeHTML(label)}</span>
-              </span>
-            `,
-          )
-          .join("")}
-        <span class="amenity-demo-note">Referencial</span>
+        <span class="restaurant-amenities-list">
+          ${restaurant.displayAmenities
+            .map(
+              ({ label }) => `
+                <span class="amenity-item" title="${escapeHTML(label)} · dato de demostración">
+                  ${amenityIcon(label)}
+                  <span>${escapeHTML(label)}</span>
+                </span>
+              `,
+            )
+            .join("")}
+          <span class="amenity-demo-note">Referencial</span>
+        </span>
       </span>
     `;
   }
@@ -758,25 +766,45 @@
     return Boolean(state.query || getActiveFilterCount());
   }
 
+  // EXPERIMENTO / POR VALIDAR: prioridad editorial aplicada después de filtrar
+  // y antes de paginar. El orden del resto conserva la estabilidad del dataset.
+  function editorialOrderFor(restaurantId) {
+    const topRank = editorialSelectionFor(restaurantId);
+    if (topRank) return topRank - 1;
+    const featuredIndex = elements.editorialHighlightItems.findIndex(
+      (item) => item.dataset.restaurantId === restaurantId,
+    );
+    return featuredIndex >= 0 ? 3 + featuredIndex : Number.POSITIVE_INFINITY;
+  }
+
+  function compareEditorialOrder(first, second) {
+    const firstOrder = editorialOrderFor(first.id);
+    const secondOrder = editorialOrderFor(second.id);
+    if (firstOrder === secondOrder) return 0;
+    return firstOrder - secondOrder;
+  }
+
   function applyFilters({ resetPagination = true } = {}) {
     if (resetPagination) state.currentPage = 1;
     const normalizedQuery = normalize(state.query);
 
-    state.visibleRestaurants = restaurants.filter((restaurant) => {
-      const searchableName = normalize(`${restaurant.name} ${restaurant.alternateName ?? ""}`);
-      const matchesName = state.selectedSearchId
-        ? restaurant.id === state.selectedSearchId
-        : !normalizedQuery || searchableName.includes(normalizedQuery);
-      const matchesRegion = matchesSelectedTerritory(restaurant);
-      const matchesFood = includesEvery(state.foods, restaurant.displayFoodCategories);
-      const matchesPrice = includesEvery(state.prices, [restaurant.displayPriceCategory]);
-      const matchesAmenity = includesEvery(
-        state.amenities,
-        restaurant.displayAmenities.map(({ label }) => label),
-      );
+    state.visibleRestaurants = restaurants
+      .filter((restaurant) => {
+        const searchableName = normalize(`${restaurant.name} ${restaurant.alternateName ?? ""}`);
+        const matchesName = state.selectedSearchId
+          ? restaurant.id === state.selectedSearchId
+          : !normalizedQuery || searchableName.includes(normalizedQuery);
+        const matchesRegion = matchesSelectedTerritory(restaurant);
+        const matchesFood = includesEvery(state.foods, restaurant.displayFoodCategories);
+        const matchesPrice = includesEvery(state.prices, [restaurant.displayPriceCategory]);
+        const matchesAmenity = includesEvery(
+          state.amenities,
+          restaurant.displayAmenities.map(({ label }) => label),
+        );
 
-      return matchesName && matchesRegion && matchesFood && matchesPrice && matchesAmenity;
-    });
+        return matchesName && matchesRegion && matchesFood && matchesPrice && matchesAmenity;
+      })
+      .sort(compareEditorialOrder);
 
     renderDirectory();
   }
@@ -1226,6 +1254,93 @@
     });
   }
 
+  function experimentalFeaturedSlide(item, featuredIndex) {
+    const restaurant = restaurants.find(({ id }) => id === item.dataset.restaurantId);
+    if (!restaurant) return "";
+    const attribute = item.dataset.highlightAttribute?.trim() || "Selección editorial";
+    const location = item.querySelector(".editorial-highlight-location")?.textContent.trim() ||
+      formatLocation(restaurant, true);
+    const description = item.querySelector(
+      ".editorial-highlight > p:not(.editorial-highlight-label):not(.editorial-highlight-location):not(.editorial-highlight-reason)",
+    )?.textContent.trim() || restaurant.description || "No informado";
+    const sourceUrl = safeUrl(item.querySelector(".editorial-highlight-actions a")?.href);
+    const theme = featuredIndex % 2 === 0 ? "terracotta" : "paper";
+    const isTerritorial = restaurant.imageKind !== "direct";
+    const caption = isTerritorial
+      ? `${location} · imagen territorial`
+      : location;
+
+    return `
+      <figure
+        class="about-slide about-slide--${theme}"
+        aria-hidden="true"
+        data-copy-theme="${theme}"
+        data-restaurant-id="${escapeHTML(restaurant.id)}"
+        data-editorial-featured="true"
+      >
+        <img src="${escapeHTML(restaurant.imagePath)}" alt="${escapeHTML(restaurant.imageLabel || `Imagen de ${location}`)}" />
+        <figcaption class="about-slide-caption">
+          <span>${escapeHTML(caption)}</span>
+          <small>${isTerritorial ? "Referencia territorial documentada" : "Fotografía directa documentada"}</small>
+        </figcaption>
+        <div class="about-slide-content about-slide-content--featured">
+          <div class="about-copy about-copy--featured">
+            <p class="eyebrow about-rank"><span>Destacada · ${escapeHTML(attribute)}</span></p>
+            <h2>${escapeHTML(restaurant.name)}</h2>
+            <p class="about-feature-location">${escapeHTML(location)}</p>
+            <p>${escapeHTML(description)}</p>
+            ${sourceUrl ? `<a class="about-feature-source" href="${escapeHTML(sourceUrl)}" target="_blank" rel="noopener noreferrer">Consultar fuente ↗</a>` : ""}
+          </div>
+        </div>
+      </figure>
+    `;
+  }
+
+  function renderCarouselIndicators() {
+    const total = elements.aboutSlides.length;
+    elements.aboutCarouselIndicators.innerHTML = elements.aboutSlides
+      .map(
+        (_slide, index) => `
+          <button
+            type="button"
+            data-carousel-index="${index}"
+            aria-label="Ver contenido ${index + 1} de ${total}"
+            ${index === 0 ? 'aria-current="true"' : ""}
+          ></button>
+        `,
+      )
+      .join("");
+    elements.aboutCarouselStatus.textContent = total ? `Contenido 1 de ${total}` : "";
+  }
+
+  function initialiseExperimentalCarousel() {
+    // EXPERIMENTO / POR VALIDAR: las Destacadas se crean desde la misma fuente
+    // DOM que alimenta sus insignias de ficha y el orden editorial del listado.
+    const featuredSlides = elements.editorialHighlightItems
+      .map(experimentalFeaturedSlide)
+      .filter(Boolean)
+      .join("");
+    if (featuredSlides) elements.aboutCarouselTrack.insertAdjacentHTML("beforeend", featuredSlides);
+    elements.aboutSlides = [...elements.aboutCarouselTrack.querySelectorAll(".about-slide")];
+    renderCarouselIndicators();
+  }
+
+  function initialiseRestaurantSlides() {
+    elements.aboutSlides.forEach((slide) => {
+      const restaurantId = slide.dataset.restaurantId;
+      if (!restaurantId) return;
+      const restaurant = restaurants.find(({ id }) => id === restaurantId);
+      if (!restaurant) return;
+      slide.classList.add("is-restaurant-slide");
+      const insertionPoint =
+        slide.querySelector(".about-feature-location") || slide.querySelector(".about-slide-content h2");
+      insertionPoint?.insertAdjacentHTML(
+        "afterend",
+        `<button class="about-slide-open" type="button" aria-label="Abrir ficha de ${escapeHTML(restaurant.name)}">Ver ficha →</button>`,
+      );
+    });
+  }
+
   function specialtyList(value) {
     const specialties = String(value ?? "")
       .split(/[;,]/)
@@ -1373,6 +1488,33 @@
     `;
   }
 
+  function combinedAddressLocation(restaurant) {
+    const parts = [
+      restaurant.address,
+      restaurant.venue,
+      restaurant.locality,
+      restaurant.commune,
+      restaurant.region,
+    ]
+      .map((part) => String(part ?? "").trim())
+      .filter(Boolean)
+      .filter((part, index, list) => list.indexOf(part) === index);
+    return parts.join(" · ") || "No informado";
+  }
+
+  function mapPreviewPlaceholder() {
+    return `
+      <figure class="modal-map-placeholder" data-map-preview-placeholder="true">
+        <img
+          src="assets/images/map-preview-placeholder.svg"
+          alt="Vista previa de mapa simulada, sin ubicación ni coordenadas reales"
+          decoding="async"
+        >
+        <figcaption>Vista previa del mapa — demostración</figcaption>
+      </figure>
+    `;
+  }
+
   function googleReviewsSection() {
     return `
       <section class="modal-section modal-reviews" aria-labelledby="modal-reviews-title" data-reviews-source="pending-authorized-integration">
@@ -1432,40 +1574,56 @@
       </header>
 
       <div class="modal-body">
-        <div class="modal-section modal-section--intro modal-editorial-intro">
-          <section class="modal-intro-copy" aria-labelledby="modal-about-title">
-            <h3 id="modal-about-title">Sobre esta cocinería</h3>
-            <p class="modal-description" id="modal-description">${escapeHTML(introductionText(restaurant))}</p>
-          </section>
-          <div class="modal-intro-details">
-            <section class="modal-intro-block" aria-labelledby="modal-specialties-title">
+        <!-- EXPERIMENTO / POR VALIDAR: contenido principal a la izquierda y mapa simulado como único elemento a la derecha. -->
+        <div class="modal-section modal-section--intro modal-experimental-layout">
+          <div class="modal-experimental-content">
+            <section class="modal-experimental-block" aria-labelledby="modal-about-title">
+              <h3 id="modal-about-title">Sobre esta cocinería</h3>
+              <p class="modal-placeholder-label">Contenido demo · no verificado</p>
+              <p
+                class="modal-description modal-description--placeholder"
+                id="modal-description"
+                data-content-status="placeholder"
+              >${escapeHTML(DEMO_DESCRIPTION_PLACEHOLDER)}</p>
+            </section>
+
+            <section class="modal-experimental-block" aria-labelledby="modal-specialties-title">
               <h3 id="modal-specialties-title">Platos destacados</h3>
               ${specialtyList(restaurant.specialties)}
             </section>
-            <section class="modal-intro-block" aria-labelledby="modal-food-title">
+
+            <section class="modal-experimental-block" aria-labelledby="modal-price-title">
+              <h3 id="modal-price-title">Rango de precio</h3>
+              <p class="modal-experimental-value">${currentPrice}</p>
+            </section>
+
+            <section class="modal-experimental-block" aria-labelledby="modal-food-title">
               <h3 id="modal-food-title">Tipo de comida</h3>
               ${modalFoodList(restaurant)}
             </section>
-          </div>
-        </div>
 
-        <div class="modal-section modal-practical-grid">
-          <section class="modal-practical-panel modal-location-panel" aria-labelledby="modal-map-title">
+            <section class="modal-experimental-block modal-combined-location" aria-labelledby="modal-location-title">
+              <h3 id="modal-location-title">Dirección · Localidad</h3>
+              <p>${escapeHTML(combinedAddressLocation(restaurant))}</p>
+            </section>
+
+            <section class="modal-experimental-block" aria-labelledby="modal-practical-title">
+              <h3 id="modal-practical-title">Información práctica</h3>
+              <div class="modal-practical-stack">
+                ${practicalItem("Horario", `<p>${hoursContent}</p>`)}
+                ${practicalItem(
+                  "Comodidades",
+                  `${modalAmenityList(restaurant)}${restaurant.accessibility ? `<p class="modal-field-note"><strong>Accesibilidad informada:</strong> ${escapeHTML(restaurant.accessibility)}</p>` : ""}`,
+                  "modal-practical-amenities",
+                )}
+              </div>
+            </section>
+          </div>
+
+          <aside class="modal-experimental-map" aria-labelledby="modal-map-title">
             <h3 id="modal-map-title">Ubicación</h3>
-            ${mapSectionContent(restaurant)}
-          </section>
-          <section class="modal-practical-panel" aria-labelledby="modal-practical-title">
-            <h3 id="modal-practical-title">Información práctica</h3>
-            <div class="modal-practical-stack">
-              ${practicalItem("Horario", `<p>${hoursContent}</p>`)}
-              ${practicalItem(
-                "Comodidades",
-                `${modalAmenityList(restaurant)}${restaurant.accessibility ? `<p class="modal-field-note"><strong>Accesibilidad informada:</strong> ${escapeHTML(restaurant.accessibility)}</p>` : ""}`,
-                "modal-practical-amenities",
-              )}
-              ${practicalItem("Rango de precio", `<p>${currentPrice}</p>`)}
-            </div>
-          </section>
+            ${mapPreviewPlaceholder()}
+          </aside>
         </div>
 
         ${googleReviewsSection()}
@@ -1514,13 +1672,14 @@
   }
 
   function renderModal() {
-    const index = state.visibleRestaurants.findIndex((item) => item.id === state.modalId);
+    const modalRestaurants = state.modalRestaurants;
+    const index = modalRestaurants.findIndex((item) => item.id === state.modalId);
     if (index < 0) return;
 
-    const restaurant = state.visibleRestaurants[index];
-    const total = state.visibleRestaurants.length;
-    const previous = state.visibleRestaurants[(index - 1 + total) % total];
-    const next = state.visibleRestaurants[(index + 1) % total];
+    const restaurant = modalRestaurants[index];
+    const total = modalRestaurants.length;
+    const previous = modalRestaurants[(index - 1 + total) % total];
+    const next = modalRestaurants[(index + 1) % total];
 
     elements.modalContent.innerHTML = buildModalContent(restaurant);
     elements.modalPosition.textContent = `Ficha ${index + 1} de ${total}`;
@@ -1539,8 +1698,14 @@
     elements.dialog.querySelector(".dialog-scroll").scrollTo({ top: 0, behavior: "auto" });
   }
 
-  function openModal(id, trigger) {
-    if (!state.visibleRestaurants.some((item) => item.id === id)) return;
+  function openModal(id, trigger, { allowOutsideFilters = false } = {}) {
+    const restaurant = restaurants.find((item) => item.id === id);
+    if (!restaurant) return;
+    const isVisible = state.visibleRestaurants.some((item) => item.id === id);
+    if (!isVisible && !allowOutsideFilters) return;
+    state.modalRestaurants = isVisible
+      ? [...state.visibleRestaurants]
+      : [restaurant, ...state.visibleRestaurants];
     state.modalId = id;
     state.lastFocused = trigger ?? document.activeElement;
     renderModal();
@@ -1559,6 +1724,7 @@
   function finaliseModalClose() {
     document.body.classList.remove("modal-open");
     state.modalId = null;
+    state.modalRestaurants = [];
     if (state.lastFocused && document.contains(state.lastFocused)) {
       state.lastFocused.focus();
     }
@@ -1566,11 +1732,11 @@
   }
 
   function navigateModal(direction) {
-    const total = state.visibleRestaurants.length;
+    const total = state.modalRestaurants.length;
     if (total < 2) return;
-    const currentIndex = state.visibleRestaurants.findIndex((item) => item.id === state.modalId);
+    const currentIndex = state.modalRestaurants.findIndex((item) => item.id === state.modalId);
     const nextIndex = (currentIndex + direction + total) % total;
-    state.modalId = state.visibleRestaurants[nextIndex].id;
+    state.modalId = state.modalRestaurants[nextIndex].id;
     renderModal();
     elements.modalClose.focus();
   }
@@ -1583,6 +1749,8 @@
       const isActive = slideIndex === state.carouselIndex;
       slide.classList.toggle("is-active", isActive);
       slide.setAttribute("aria-hidden", String(!isActive));
+      const openButton = slide.querySelector(".about-slide-open");
+      if (openButton) openButton.tabIndex = isActive ? 0 : -1;
     });
     elements.aboutCarouselIndicators.querySelectorAll("[data-carousel-index]").forEach((indicator) => {
       const isActive = Number(indicator.dataset.carouselIndex) === state.carouselIndex;
@@ -1737,7 +1905,16 @@
 
     elements.aboutCarouselIndicators.addEventListener("click", (event) => {
       const indicator = event.target.closest("[data-carousel-index]");
-      if (indicator) selectCarouselSlideManually(Number(indicator.dataset.carouselIndex));
+      if (!indicator) return;
+      event.stopPropagation();
+      selectCarouselSlideManually(Number(indicator.dataset.carouselIndex));
+    });
+    elements.aboutCarouselTrack.addEventListener("click", (event) => {
+      const slide = event.target.closest(".about-slide.is-active[data-restaurant-id]");
+      if (!slide) return;
+      const openButton = slide.querySelector(".about-slide-open");
+      if (event.target.closest("a, button") && !event.target.closest(".about-slide-open")) return;
+      openModal(slide.dataset.restaurantId, openButton, { allowOutsideFilters: true });
     });
     elements.aboutCarousel.addEventListener("mouseenter", stopCarouselAutoplay);
     elements.aboutCarousel.addEventListener("mouseleave", scheduleCarouselAutoplay);
@@ -1747,13 +1924,28 @@
     });
     elements.aboutCarousel.addEventListener("keydown", (event) => {
       if (event.altKey || event.ctrlKey || event.metaKey) return;
+      const openButton = event.target.closest(".about-slide-open");
+      if (openButton && (event.key === "Enter" || event.key === " ")) {
+        event.preventDefault();
+        const slide = openButton.closest(".about-slide.is-active[data-restaurant-id]");
+        if (slide) {
+          openModal(slide.dataset.restaurantId, openButton, { allowOutsideFilters: true });
+        }
+        return;
+      }
       if (event.key === "ArrowLeft") {
         event.preventDefault();
         navigateCarouselManually(-1);
+        if (openButton) {
+          elements.aboutSlides[state.carouselIndex].querySelector(".about-slide-open")?.focus();
+        }
       }
       if (event.key === "ArrowRight") {
         event.preventDefault();
         navigateCarouselManually(1);
+        if (openButton) {
+          elements.aboutSlides[state.carouselIndex].querySelector(".about-slide-open")?.focus();
+        }
       }
     });
     document.addEventListener("visibilitychange", () => {
@@ -1810,6 +2002,8 @@
 
   function initialise() {
     initialiseSocialLinks();
+    initialiseExperimentalCarousel();
+    initialiseRestaurantSlides();
     renderEditorialRankIcons();
     updateStickyOffsets();
     initialiseNavbarSurfaceObserver();

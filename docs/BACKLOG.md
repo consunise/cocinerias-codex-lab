@@ -123,7 +123,7 @@ Criterio de cierre: definir finalidad pública y base editorial, registrar fuent
 
 Estado: `PENDIENTE`
 
-Criterio de cierre: revisar desktop, 980, 720, 420 y 320 px; teclado, foco, contraste, modal, filtros, paginación, carrusel, consola, overflow y reduced motion. Resolver o aceptar explícitamente el overflow de 15 px que produce `body { min-width: 320px; }` cuando una scrollbar vertical clásica reduce el área útil de un viewport nominal de 320 px a 305 px.
+Criterio de cierre: revisar desktop, 980, 720, 420 y 320 px; teclado, foco, contraste, modal, filtros, paginación, carrusel, consola, overflow y reduced motion. El overflow de 15 px causado por el mínimo global en un viewport nominal de 320 px quedó corregido el 29.08.2026; la ronda integral independiente continúa pendiente.
 
 ### DOC-001 — Incorporar esta configuración al repositorio y al Project
 

@@ -9,9 +9,9 @@
     />
     <meta name="theme-color" content="#f4efe5" />
     <title>Cocinerías de Chile — Directorio</title>
-    <link rel="stylesheet" href="styles.css?v=20260828-4" />
+    <link rel="stylesheet" href="styles.css?v=20260829-7" />
     <script src="data.js" defer></script>
-    <script src="script.js?v=20260827-3" defer></script>
+    <script src="script.js?v=20260829-5" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#directorio">Saltar al directorio</a>
@@ -88,7 +88,7 @@
               id="about-carousel"
               role="region"
               aria-roledescription="carrusel"
-              aria-label="Recorrido por territorios y cocinas de Chile"
+              aria-label="Selecciones editoriales de Cocinerías de Chile"
               tabindex="0"
             >
               <div class="about-carousel-track" id="about-carousel-track">
@@ -195,20 +195,16 @@
                 </figure>
               </div>
               <div class="about-carousel-controls" aria-label="Posición del carrusel">
-                <div class="about-carousel-indicators" id="about-carousel-indicators" aria-label="Elegir fotografía">
-                  <button type="button" data-carousel-index="0" aria-label="Ver contenido 1 de 4" aria-current="true"></button>
-                  <button type="button" data-carousel-index="1" aria-label="Ver contenido 2 de 4"></button>
-                  <button type="button" data-carousel-index="2" aria-label="Ver contenido 3 de 4"></button>
-                  <button type="button" data-carousel-index="3" aria-label="Ver contenido 4 de 4"></button>
-                </div>
+                <div class="about-carousel-indicators" id="about-carousel-indicators" aria-label="Elegir contenido"></div>
               </div>
-              <p class="sr-only" id="about-carousel-status" aria-live="polite">Contenido 1 de 4</p>
+              <p class="sr-only" id="about-carousel-status" aria-live="polite"></p>
             </div>
           </div>
         </div>
       </header>
 
-      <section class="editorial-highlights" aria-labelledby="editorial-highlights-title">
+      <!-- EXPERIMENTO / POR VALIDAR: esta fuente editorial alimenta los slides 5–7 y no se duplica visualmente. -->
+      <section class="editorial-highlights" aria-labelledby="editorial-highlights-title" data-editorial-source hidden>
         <div class="editorial-highlights-inner">
           <header class="editorial-highlights-heading">
             <p class="eyebrow">Destacados de la guía</p>
