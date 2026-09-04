@@ -1,6 +1,6 @@
 # Especificación vigente de producto y UX/UI
 
-Última consolidación: 27 de agosto de 2026.
+Última consolidación: 4 de septiembre de 2026.
 Esta especificación deriva del hand-off y se contrasta con el repositorio auditado. Los conflictos se enlazan a [DECISIONS.md](DECISIONS.md).
 
 ## Dirección de producto
@@ -107,7 +107,7 @@ Los datos actuales son de demostración. No deben presentarse como atributos rea
 
 En `restaurant-main`, las etiquetas informativas no usan fondo, borde, outline, caja ni padding propio. Texto e iconos comparten con Tipo de comida familia, tamaño, peso, line-height, geometría de 24 px, stroke de 1.5 px, alineación y tratamiento hover; sobre la fotografía adoptan conjuntamente el color claro contextual que asegura contraste. Un único `gap: 0.25rem` separa icono y texto. Conservan la marca visible `Referencial` y no se comportan como botones.
 
-Cuando una fila no tiene comodidades, el área conserva su lugar en la retícula y `No informado` comienza en el mismo eje izquierdo que las etiquetas presentes, sin caja ni fondo.
+Cuando una fila no tiene comodidades, el área conserva su lugar en la retícula y `No informado` se alinea al borde derecho de su columna, sin caja ni fondo.
 
 ## Listado y previews
 
@@ -120,8 +120,9 @@ Cuando una fila no tiene comodidades, el área conserva su lugar en la retícula
 ### Columnas
 
 - Precio relativamente angosto.
-- Tipo de comida recibe el espacio liberado.
+- Tipo de comida y Comodidades reciben espacio suficiente mediante anchos no idénticos; Comodidades puede ser ligeramente más amplia para evitar comprimir sus etiquetas.
 - `Rango de precio` y sus valores usan peso regular, equivalente al resto.
+- En desktop y tablet, los encabezados y grupos internos de Tipo de comida, Comodidades y Precio se alinean hacia el borde derecho de sus respectivas columnas.
 
 ### `restaurant-main`
 
@@ -133,7 +134,7 @@ Cuando una fila no tiene comodidades, el área conserva su lugar en la retícula
 - Ubicación secundaria directamente encima del nombre.
 - Nombre alineado a la izquierda y con la jerarquía serif existente.
 - El bloque no centra verticalmente el nombre: ubicación, título y horario siguen su flujo natural desde la parte superior.
-- Horario debajo del bloque ubicación–nombre, sin repetir la ubicación. Ubicación, nombre, metadata, comodidades, tipo de comida, precio y demás información comparten un eje izquierdo dentro de sus áreas.
+- Horario debajo del bloque ubicación–nombre, sin repetir la ubicación. Ubicación, nombre y metadata conservan un eje izquierdo dentro de la fotografía; Tipo de comida, Comodidades y Precio forman un sistema separado con alineación derecha consistente.
 - Ni horario ni ubicación usan sombras de texto.
 - Los datos de `restaurant-meta` se separan mediante divisores verticales cortos y discretos.
 - Comodidades aparecen bajo la metadata con el mismo lenguaje de iconos y con marca referencial mientras sean simuladas.
@@ -201,9 +202,11 @@ El estado actual selecciona Mata Rangi y Cocinería Bellavista como Top 2 y Top 
 
 Inmediatamente después del header se presenta una selección secundaria compacta de tres `Destacados de la guía` por atributos documentados. No prolonga el carrusel ni crea puestos Top 4–6. Cada caso muestra nombre, ubicación, atributo, descripción factual, motivo editorial, fuente y acceso al registro del directorio. El estado vigente selecciona Na Que Ver Cocinería Chilena por cocina chilena de mercado, Restaurant Tradiciones Cocinería Morelia por productos de huerta y Cocinería Puelpún por trayectoria histórica.
 
+En las filas del directorio, únicamente esas tres Destacadas incorporan un sol lineal pequeño junto al nombre. Se genera desde la fuente editorial existente, no desde una lista adicional; el SVG usa `currentColor`, queda subordinado al título y el `aria-label` del botón incluye el estado `destacada de la guía`.
+
 ## Footer
 
-Decisión vigente confirmada el 24 de agosto de 2026:
+Decisión vigente, confirmada nuevamente el 4 de septiembre de 2026:
 
 - fondo `--terracotta`, reemplazando `--paper`;
 - sin línea superior;
@@ -215,6 +218,8 @@ Decisión vigente confirmada el 24 de agosto de 2026:
 - hover en `--paper-deep` y foco visible en `--white`;
 - `footer-brand-text` con menor protagonismo;
 - reducir el vacío entre directorio y `Acerca de esta guía`.
+
+El fondo anterior `--paper` queda como antecedente reemplazado y no constituye una variante vigente.
 
 ## Contenido, datos e imágenes
 

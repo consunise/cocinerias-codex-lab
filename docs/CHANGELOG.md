@@ -4,6 +4,21 @@ Este archivo registra cambios implementados relevantes. No contiene solicitudes 
 
 ## Sin publicar
 
+### 2026-09-04 — Indicador editorial y equilibrio de filas
+
+- Implementado: las tres Destacadas muestran un sol lineal pequeño junto al nombre del directorio, derivado de `[data-editorial-highlight]`; el SVG es visual y el nombre accesible del botón comunica su estado sin crear una lista paralela.
+- Corregido: Comodidades deja visible el hover y foco transicional de la fila, conservando el tratamiento por ítem compartido con Tipo de comida para texto, fill y stroke.
+- Ajustado: Tipo de comida, Comodidades y Precio se alinean a la derecha y usan anchos no idénticos; Comodidades recibe mayor proporción y los breakpoints móviles conservan su estructura sin compresión subpíxel.
+- Actualizado: cachebusters de `styles.css` y `script.js` para cargar los cambios de esta ronda.
+- Archivos: `index.html`, `styles.css`, `script.js` y documentación canónica asociada. No se modifican datos, carrusel, modal, mapa, cantidad de slides ni la flecha de `Ver ficha`.
+
+### 2026-09-04 — Revalidación del footer terracota
+
+- Consolidado: el footer usa el token existente `--terracotta`, declara explícitamente la ausencia de borde superior y conserva estructura, contenido y responsive.
+- Ajustado: los iconos sociales acompañan el estado hover de sus enlaces con `--paper-deep`; texto, iconos y foco visible mantienen contraste sobre terracota.
+- Documentado: `--paper` queda registrado como implementación reemplazada por DEC-010 y no permanece un conflicto ni pendiente de footer.
+- Archivos: `styles.css` y documentación canónica asociada. `index.html`, JavaScript, datos y otras secciones no fueron modificados.
+
 ### 2026-08-29 — Slides interactivos y variante mobile de listado
 
 - Implementado: los seis slides que representan cocinerías abren el `dialog` existente mediante su `data-restaurant-id`; el slide introductorio no es interactivo y los dots continúan limitados a cambiar de contenido.

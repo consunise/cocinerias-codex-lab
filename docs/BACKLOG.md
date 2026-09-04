@@ -1,8 +1,10 @@
 # Backlog consolidado
 
-Última revisión: 27 de agosto de 2026.
+Última revisión: 4 de septiembre de 2026.
 
 Este backlog registra pendientes, no autoriza su implementación. Las prioridades reflejan riesgo para continuidad o publicación.
+
+El conflicto histórico del fondo del footer está resuelto por DEC-010: `--paper` fue reemplazado por `--terracotta` sin línea superior, por lo que no se mantiene un pendiente de footer.
 
 ## P0 — Antes de considerar producción
 

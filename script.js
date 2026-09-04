@@ -877,6 +877,10 @@
       : restaurant.displayHours
         ? ""
         : " is-uninformed";
+    const editorialHighlight = editorialHighlightFor(restaurant.id);
+    const accessibleName = editorialHighlight
+      ? `Abrir ficha de ${restaurant.name}, destacada de la guía`
+      : `Abrir ficha de ${restaurant.name}`;
 
     return `
       <article class="restaurant-row">
@@ -884,7 +888,7 @@
           class="restaurant-button"
           type="button"
           data-restaurant-id="${escapeHTML(restaurant.id)}"
-          aria-label="Abrir ficha de ${escapeHTML(restaurant.name)}"
+          aria-label="${escapeHTML(accessibleName)}"
         >
           <span
             class="restaurant-main"
@@ -895,7 +899,9 @@
             <span class="restaurant-main-content">
               <span class="restaurant-heading">
                 <span class="restaurant-location">${escapeHTML(formatLocation(restaurant, true))}</span>
-                <span class="restaurant-name">${escapeHTML(restaurant.name)}</span>
+                <span class="restaurant-name${editorialHighlight ? " is-highlighted" : ""}">
+                  ${editorialHighlight ? `${editorialHighlightIcon()}<span class="restaurant-name-text">${escapeHTML(restaurant.name)}</span>` : escapeHTML(restaurant.name)}
+                </span>
               </span>
               <span class="restaurant-meta">
                 <span class="restaurant-hours${hoursClass}" data-hours-source="${escapeHTML(restaurant.hoursSource ?? "unavailable")}">${escapeHTML(hours)}</span>
@@ -1235,6 +1241,17 @@
     );
     const attribute = item?.dataset.highlightAttribute?.trim();
     return attribute || null;
+  }
+
+  function editorialHighlightIcon() {
+    return `
+      <span class="restaurant-highlight-icon" aria-hidden="true" title="Destacada de la guía">
+        <svg viewBox="0 0 24 24" focusable="false">
+          <circle cx="12" cy="12" r="3.25"></circle>
+          <path d="M12 2.25v3M12 18.75v3M2.25 12h3M18.75 12h3M5.1 5.1l2.15 2.15M16.75 16.75l2.15 2.15M18.9 5.1l-2.15 2.15M7.25 16.75 5.1 18.9"></path>
+        </svg>
+      </span>
+    `;
   }
 
   function editorialRankIcon(rank) {

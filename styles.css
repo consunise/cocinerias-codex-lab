@@ -716,8 +716,8 @@ select:focus-visible {
 
 .results-area {
   min-width: 0;
-  /* EXPERIMENTO / POR VALIDAR: Tipo y Comodidades comparten el mismo ancho real. */
-  --restaurant-columns: minmax(300px, 1.8fr) minmax(150px, 0.74fr) minmax(150px, 0.74fr) minmax(90px, 0.34fr) 96px;
+  /* Distribución editorial: más aire para Tipo y Comodidades sin desplazar la acción. */
+  --restaurant-columns: minmax(250px, 1.55fr) minmax(160px, 0.9fr) minmax(170px, 0.95fr) minmax(90px, 0.45fr) 96px;
 }
 
 .results-toolbar {
@@ -815,12 +815,11 @@ select:focus-visible {
   padding-inline: clamp(0.75rem, 1.3vw, 1.1rem);
 }
 
-/* EXPERIMENTO UX/UI — POR VALIDAR: centrar los encabezados de las columnas informativas. */
 .list-header > span:nth-child(2),
 .list-header > span:nth-child(3),
 .list-header > span:nth-child(4) {
-  justify-content: center;
-  text-align: center;
+  justify-content: flex-end;
+  text-align: right;
 }
 
 .restaurant-row {
@@ -843,7 +842,8 @@ select:focus-visible {
   transition: background-color 140ms ease, color 140ms ease;
 }
 
-.restaurant-button:hover {
+.restaurant-button:hover,
+.restaurant-button:focus-visible {
   background: rgba(233, 223, 207, 0.55);
 }
 
@@ -935,6 +935,35 @@ select:focus-visible {
   text-align: left;
 }
 
+.restaurant-name.is-highlighted {
+  display: flex;
+  gap: 0.4rem;
+  align-items: flex-start;
+}
+
+.restaurant-name-text {
+  min-width: 0;
+}
+
+.restaurant-highlight-icon {
+  display: inline-flex;
+  width: 0.72em;
+  height: 0.72em;
+  flex: 0 0 0.72em;
+  margin-top: 0.08em;
+  color: var(--paper-deep);
+}
+
+.restaurant-highlight-icon svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-width: 1.5;
+}
+
 .restaurant-meta {
   display: flex;
   flex-wrap: wrap;
@@ -996,37 +1025,38 @@ select:focus-visible {
   min-width: 0;
   align-content: center;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
   margin: 0;
-  padding: 1.2rem 0.75rem;
+  padding: 1.2rem clamp(0.75rem, 1.4vw, 1.25rem);
   border-left: 1px solid var(--line);
-  background: var(--paper);
-  text-align: left;
+  background: transparent;
+  text-align: right;
 }
 
 .restaurant-button > .restaurant-amenities.is-empty {
   align-items: center;
-  justify-content: flex-start;
+  justify-content: flex-end;
   margin: 0;
 }
 
 .restaurant-button > .restaurant-amenities .amenity-empty {
   color: var(--ink-soft);
-  text-align: left;
+  text-align: right;
 }
 
 .restaurant-button > .restaurant-amenities .amenity-demo-note {
   color: var(--terracotta-dark);
-  text-align: left;
+  text-align: right;
 }
 
 .restaurant-amenities-list {
   display: grid;
   gap: 0.55rem;
-  justify-items: start;
+  justify-items: end;
   width: fit-content;
   max-width: 100%;
-  text-align: left;
+  margin-left: auto;
+  text-align: right;
 }
 
 .amenity-empty {
@@ -1113,39 +1143,46 @@ select:focus-visible {
   display: flex;
   min-width: 0;
   align-items: center;
-  justify-content: center;
-  padding: 1.2rem clamp(1rem, 2vw, 1.75rem);
+  justify-content: flex-end;
+  padding: 1.2rem clamp(0.75rem, 1.4vw, 1.25rem);
   border-left: 1px solid var(--line);
   color: var(--ink-soft);
   font-size: 0.85rem;
   line-height: 1.4;
-  text-align: center;
+  text-align: right;
 }
 
 .restaurant-price {
-  align-items: center;
+  align-items: flex-end;
   align-content: center;
   flex-direction: column;
   justify-content: center;
   color: var(--ink);
   font-weight: 400;
-  padding-inline: clamp(0.75rem, 1.3vw, 1.1rem);
+  padding-inline: clamp(0.75rem, 1.2vw, 1rem);
 }
 
 .food-type-list {
   display: grid;
   gap: 0.55rem;
-  justify-items: start;
+  justify-items: end;
   width: fit-content;
   max-width: 100%;
   margin: 0;
+  margin-left: auto;
   padding: 0;
   list-style: none;
+  text-align: right;
 }
 
 .food-type-label {
   min-width: 0;
-  text-align: left;
+  text-align: right;
+}
+
+.restaurant-cuisine .food-type-item,
+.restaurant-button > .restaurant-amenities .amenity-item {
+  text-align: right;
 }
 
 .food-demo-note {
@@ -1951,7 +1988,8 @@ select:focus-visible {
 }
 
 .site-footer {
-  background-color: var(--terracotta);
+  border-top: 0;
+  background: var(--terracotta);
   color: var(--white);
 }
 
@@ -2046,6 +2084,7 @@ select:focus-visible {
   line-height: 1.5;
   text-decoration-thickness: 1px;
   text-underline-offset: 0.28rem;
+  transition: color 140ms ease;
 }
 
 .footer-information > a:hover,
@@ -2094,6 +2133,11 @@ select:focus-visible {
   width: 26px;
   height: 26px;
   color: var(--paper);
+  transition: color 140ms ease;
+}
+
+.footer-contact > a:hover .social-icon {
+  color: var(--paper-deep);
 }
 
 .footer-contact > a > span:last-child {
@@ -2797,7 +2841,7 @@ select:focus-visible {
 
   .restaurant-button {
     /* EXPERIMENTO UX/UI — POR VALIDAR: Tipo | Comodidades | Precio | Detalle en una fila. */
-    grid-template-columns: minmax(130px, 1fr) minmax(130px, 1fr) minmax(72px, 0.55fr) 96px;
+    grid-template-columns: minmax(130px, 1.02fr) minmax(140px, 1.12fr) minmax(76px, 0.62fr) 96px;
     min-height: 0;
   }
 
@@ -3049,7 +3093,7 @@ select:focus-visible {
   }
 
   .restaurant-button {
-    grid-template-columns: minmax(130px, 1fr) minmax(130px, 1fr) minmax(72px, 0.55fr) 86px;
+    grid-template-columns: minmax(130px, 1.02fr) minmax(140px, 1.12fr) minmax(76px, 0.62fr) 86px;
     gap: 0;
     min-height: 0;
     padding: 0;
@@ -3287,19 +3331,19 @@ select:focus-visible {
   }
 
   .restaurant-button {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(66px, 0.72fr);
+    grid-template-columns: minmax(0, 1.04fr) minmax(0, 1.1fr) minmax(72px, 0.62fr);
   }
 
   .restaurant-cuisine {
     grid-column: 1;
     grid-row: 2;
-    padding: 0.85rem 0.35rem;
+    padding: 0.85rem 0.2rem;
   }
 
   .restaurant-button > .restaurant-amenities {
     grid-column: 2;
     grid-row: 2;
-    padding: 0.85rem 0.35rem;
+    padding: 0.85rem 0.2rem;
   }
 
   .restaurant-price {

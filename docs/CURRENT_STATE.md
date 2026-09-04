@@ -7,7 +7,7 @@ Mensaje: `correcciones version 0.9.2`
 
 Este documento describe el estado comprobado del repositorio en ese commit. No convierte automáticamente lo implementado en una decisión de producto.
 
-Actualizaciones posteriores, consolidadas al 27 de agosto de 2026: footer terracota; filtros AND y reordenados; Rapa Nui como territorio especial; header editorial antes del directorio; navbar contextual con CTA invitacional; nueva jerarquía de filas; taxonomía alimentaria separada de comodidades; autocomplete por nombre; ficha editorial sobre el `dialog` vigente; fotografías de header a 2880 px; insignias SVG Top 1/2/3; y una selección secundaria de tres destacados por atributo. El resto del documento conserva el baseline auditado.
+Actualizaciones posteriores, consolidadas al 4 de septiembre de 2026: footer terracota; filtros AND y reordenados; Rapa Nui como territorio especial; header editorial antes del directorio; navbar contextual con CTA invitacional; nueva jerarquía de filas; taxonomía alimentaria separada de comodidades; autocomplete por nombre; ficha editorial sobre el `dialog` vigente; fotografías de header a 2880 px; insignias SVG Top 1/2/3; y una selección secundaria de tres destacados por atributo. El resto del documento conserva el baseline auditado.
 
 ## Resumen técnico
 
@@ -65,18 +65,19 @@ Actualizaciones posteriores, consolidadas al 27 de agosto de 2026: footer terrac
 
 - Fotografía como fondo de `restaurant-main`, con gradiente diagonal más oscuro abajo a la izquierda y más transparente arriba a la derecha.
 - Hover/foco con realce de fotografía y línea terracota izquierda de 4 px sin layout shift.
-- Ubicación sobre el nombre; horario debajo sin ubicación repetida. Ubicación, nombre, metadata, comodidades, tipo de comida y precio se alinean a la izquierda dentro de sus áreas, y el bloque fluye desde arriba sin centrar verticalmente el título.
+- Ubicación sobre el nombre; horario debajo sin ubicación repetida. La copia sobre la fotografía se alinea a la izquierda; Tipo de comida, Comodidades y Precio alinean sus grupos al borde derecho de sus columnas.
+- Las tres Destacadas definidas por `[data-editorial-highlight]` muestran un sol lineal pequeño antes del nombre. El SVG usa `currentColor`, no altera la selección editorial y el `aria-label` del botón comunica `destacada de la guía`.
 - Divisores verticales en `restaurant-meta`.
 - Tipos de comida con SVG y tratamientos hover.
 - Rango de precio con peso regular.
 - Comodidades referenciales bajo la metadata, sin fondo, borde, outline, caja ni padding propio. Tipografía, iconos de 24 px, stroke de 1.5 px y hover comparten el sistema de Tipo de comida; el color claro contextual mantiene contraste sobre la fotografía y el único `gap` icono–texto es de `0.25rem`.
-- El área de comodidades conserva su lugar con o sin ítems. En las filas vacías, `No informado` ocupa el ancho disponible y queda alineado a la izquierda, sin caja.
+- El área de comodidades conserva su lugar con o sin ítems. En las filas vacías, `No informado` ocupa el ancho disponible y queda alineado a la derecha, sin caja.
 - `restaurant-main` usa `padding-block` simétrico: 24 px en el viewport desktop comprobado y 16 px en 320 px.
 - Acción `Ver ficha` apilada verticalmente, pero el símbolo actual es `→`, no flecha hacia abajo.
 
-EXPERIMENTO / POR VALIDAR (29 de agosto de 2026): desde 1180 px, Comodidades ocupa una columna independiente y la retícula provisional usa `minmax(300px, 1.8fr) minmax(150px, 0.74fr) minmax(150px, 0.74fr) minmax(90px, 0.34fr) 96px`; Tipo de comida y Comodidades tienen el mismo ancho real. Entre 1179 y 521 px, Tipo, Comodidades, Precio y Detalle comparten la segunda fila. A 520 px o menos, la foto ocupa todo el ancho; Tipo, Comodidades y Precio permanecen en tres columnas y `Ver ficha` pasa a una fila propia. A 340 px o menos, donde las etiquetas largas dejan de caber, Tipo y Comodidades conservan dos columnas, Precio pasa a una fila propia y la acción queda debajo. Esta variante no reemplaza DEC-007.
+EXPERIMENTO / POR VALIDAR (29 de agosto de 2026), ajustado el 4 de septiembre: desde 1180 px, Comodidades ocupa una columna independiente y la retícula usa `minmax(250px, 1.55fr) minmax(160px, 0.9fr) minmax(170px, 0.95fr) minmax(90px, 0.45fr) 96px`; Tipo de comida y Comodidades ya no fuerzan anchos idénticos. Entre 1179 y 521 px, Tipo, Comodidades, Precio y Detalle comparten la segunda fila con mayor proporción para Comodidades. A 520 px o menos, la foto ocupa todo el ancho; Tipo, Comodidades y Precio permanecen en tres columnas y `Ver ficha` pasa a una fila propia. A 340 px o menos, donde las etiquetas largas dejan de caber, Tipo y Comodidades conservan dos columnas, Precio pasa a una fila propia y la acción queda debajo. Esta variante responsive no reemplaza el resto de DEC-007.
 
-Tipo de comida y Comodidades centran su grupo de ancho intrínseco, pero cada fila reserva un slot iconográfico de 24 px, un `gap` de `0.25rem` y un eje izquierdo común para iconos y textos. `No informado` permanece alineado a la izquierda. La corrección de hover elimina el selector de puntero aplicado a toda `.restaurant-button`: solo la unidad `.food-type-item` o `.amenity-item` bajo el cursor cambia texto e icono; `focus-visible` de la fila conserva su realce accesible. El filtro de precio se presenta `Alto`, `Moderado`, `Económico`. Tras aplicar búsqueda y filtros AND, el conjunto se ordena Top 1/2/3, Destacadas y resto antes de paginar; las seis prioridades se derivan de la configuración editorial DOM vigente, no de listas nuevas.
+Tipo de comida, Comodidades y Precio alinean sus grupos al borde derecho. Cada fila de Tipo o Comodidades reserva un slot iconográfico de 24 px y un `gap` de `0.25rem`; `No informado` sigue la misma alineación derecha. Comodidades ya no cubre con `--paper` el hover/foco compartido de la fila. Solo la unidad `.food-type-item` o `.amenity-item` bajo el cursor cambia texto e icono; `focus-visible` de la fila activa el realce accesible común. El filtro de precio se presenta `Alto`, `Moderado`, `Económico`. Tras aplicar búsqueda y filtros AND, el conjunto se ordena Top 1/2/3, Destacadas y resto antes de paginar; las seis prioridades se derivan de la configuración editorial DOM vigente, no de listas nuevas.
 
 ### Modal
 
@@ -127,8 +128,9 @@ Tipo de comida y Comodidades centran su grupo de ancho intrínseco, pero cada fi
 
 - Fondo `--terracotta`, texto claro y sin línea superior.
 - Tres columnas iguales de marca, contacto e información con un único gap en desktop; se apilan en mobile.
-- Iconos sociales inline SVG en `--paper`, sin fondo propio y con enlaces todavía provisionales.
+- Iconos sociales inline SVG en `--paper`, sin fondo propio y con enlaces todavía provisionales; en hover adoptan `--paper-deep` junto con el texto y el foco visible conserva outline `--white`.
 - La fecha visible dice `Datos verificados el 12.08.2026`.
+- Estado revalidado el 04.09.2026: no existe override a `--paper`, línea divisoria superior ni pendiente funcional abierto para el fondo del footer.
 
 ## Estado de datos y assets
 
@@ -185,6 +187,12 @@ Actualización del 29 de agosto de 2026:
 - Hover comprobado sobre wrapper, icono y texto de Pet friendly, Estacionamiento y Accesibilidad, en varias filas y después de paginar; color e icono cambian sin alterar ancho ni alto.
 - Revisión responsive medida en 1280, 980, 720, 430, 390, 375, 360 y 320 px. No hubo overflow horizontal; 430–360 px conservaron las tres columnas informativas y 320 px activó la excepción de dos columnas + Precio.
 - El mínimo global cambió a `min-width: min(320px, 100%)`: elimina los 15 px de overflow cuando una scrollbar clásica reduce un viewport nominal de 320 px a 305 px útiles.
+
+Actualización del 4 de septiembre de 2026:
+
+- Verificados los tres soles exclusivamente en `CL-RM-001`, `CL-LL-010` y `CL-MG-001`, derivados de la fuente editorial DOM vigente; sus botones anuncian el estado de Destacada y los nombres largos conservan wrap natural.
+- Comprobados hover y `focus-visible` de la fila: Comodidades comparte el fondo transicional con Tipo y Precio, mientras sus ítems mantienen el cambio coordinado de texto, fill y stroke.
+- Revisada la retícula en 1440, 1180, 1179, 980, 768, 720, 520, 390 y 320 px. No hubo overflow horizontal ni superposición; a 390 px `Comida chilena` y `Estacionamiento` permanecieron en una línea y a 320 px se conservó la variante de dos columnas más Precio.
 
 ## Discrepancias relevantes
 

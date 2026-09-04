@@ -1,6 +1,6 @@
 # Registro de decisiones
 
-Última consolidación: 26 de agosto de 2026.
+Última consolidación: 4 de septiembre de 2026.
 
 Este archivo conserva decisiones de producto, UX/UI, datos y operación. El código demuestra implementación; no reemplaza por sí solo una decisión explícita. Una instrucción directa más reciente puede reemplazar cualquier entrada.
 
@@ -58,9 +58,9 @@ Reemplaza: listado largo o carga progresiva mediante “ver más”.
 
 Estado: `VIGENTE` / `IMPLEMENTADO`
 
-Decisión: reducir el ancho de precio, ampliar tipo de comida, mantener precio en regular, usar una línea terracota gruesa a la izquierda de la fotografía en hover/foco y separar metadata con líneas verticales. En `restaurant-main`, mostrar ubicación arriba, nombre debajo y horario después, sin repetir ubicación. Todo el contenido textual e informativo de la fila —incluidos título, metadata, tipo de comida, precio y comodidades— comparte un eje izquierdo dentro de su área y conserva el flujo natural desde arriba. La fila usa `padding-block` simétrico; el área de comodidades mantiene su posición aun sin ítems y muestra `No informado` a la izquierda.
+Decisión: reducir el ancho de precio, dar espacio suficiente y no idéntico a Tipo de comida y Comodidades, mantener precio en regular, usar una línea terracota gruesa a la izquierda de la fotografía en hover/foco y separar metadata con líneas verticales. En `restaurant-main`, mostrar ubicación arriba, nombre debajo y horario después, sin repetir ubicación; esa copia conserva su eje izquierdo y el flujo natural desde arriba. `restaurant-cuisine`, `restaurant-amenities` y `restaurant-price` alinean sus grupos hacia el borde derecho de cada columna para formar un sistema común y reducir compresión innecesaria. La fila usa `padding-block` simétrico; el área de comodidades mantiene su posición aun sin ítems y muestra `No informado` alineado a la derecha.
 
-Tratamiento de comodidades: son categorías informativas sin fondo, borde, outline, píldora ni padding propio. Comparten geometría, tipografía y hover con Tipo de comida; un único `gap: 0.25rem` une icono y texto. Reemplaza el fondo `--paper` y el centrado del estado vacío aprobados en iteraciones anteriores.
+Tratamiento de comodidades: son categorías informativas sin fondo, borde, outline, píldora ni padding propio. Comparten geometría, tipografía y hover con Tipo de comida; un único `gap: 0.25rem` une icono y texto. El bloque deja visible el hover/foco del botón contenedor, igual que Tipo y Precio. Reemplaza el fondo `--paper`, el centrado y el eje izquierdo del estado vacío aprobados en iteraciones anteriores.
 
 Reemplaza: nombre centrado e información secundaria alineada a la derecha.
 
@@ -88,13 +88,13 @@ Observación: Top 2 y Top 3 actuales son Mata Rangi y Cocinería Bellavista; las
 
 ### DEC-010 — Fondo del footer
 
-Estado: `VIGENTE` / `IMPLEMENTADO`
+Estado: `VIGENTE` / `IMPLEMENTADO Y REVALIDADO EL 04.09.2026`
 
 Decisión: usar `--terracotta` como fondo del footer, sin línea divisoria superior, conservando su estructura y comportamiento responsive.
 
 Contraste: texto y enlaces claros sobre terracota; iconos sociales de WhatsApp e Instagram en `--paper`, sin fondo ni borde propios; hover en `--paper-deep` y foco visible en `--white`. Esta regla de iconos solo aplica al footer.
 
-Confirmación: decisión aprobada explícitamente el 24 de agosto de 2026. Reemplaza la implementación con fondo `--paper` del commit `045dd1f`.
+Confirmación: decisión aprobada explícitamente el 24 de agosto de 2026 y confirmada nuevamente el 4 de septiembre de 2026. Reemplaza la implementación con fondo `--paper` del commit `045dd1f`.
 
 Reemplaza para los iconos sociales del footer: el tratamiento anterior negro o `--terracotta-dark` sobre recuadros claros. No reemplaza ni modifica los iconos sociales del navbar.
 
@@ -186,6 +186,8 @@ Decisión: conservar el header en cuatro slides —introducción y Top 1/2/3— 
 
 Selección vigente: Na Que Ver Cocinería Chilena (`Cocina chilena de mercado`), Restaurant Tradiciones Cocinería Morelia (`Productos de huerta`) y Cocinería Puelpún (`Trayectoria histórica`). No se superponen con el Top 3 y amplían la diversidad territorial. Cada entrada debe registrar hecho, inferencia editorial, fuente y fecha de consulta; sus CTA reutilizan el directorio y su ficha muestra una insignia textual distinta de las insignias numéricas.
 
+Indicador en el directorio: las tres Destacadas muestran un sol lineal pequeño junto al nombre. El indicador se deriva de la misma fuente DOM `data-editorial-highlight`, no crea una lista paralela ni se aplica al Top 3; el SVG es visual y el nombre accesible del botón comunica `destacada de la guía`.
+
 Motivo de ubicación: añadir tres slides habría diluido el ritmo y la jerarquía del carrusel principal. La retícula secundaria mantiene relación inmediata con el header sin reconstruirlo ni convertir la página en un sistema genérico de cards.
 
 ## Decisiones reemplazadas
@@ -201,9 +203,11 @@ Motivo de ubicación: añadir tres slides habría diluido el ritmo y la jerarqu�
 | Todos los bloques editoriales del carrusel con fondo terracota | `REEMPLAZADO` | DEC-009, alternancia terracota/paper |
 | Exigir iconos Flaticon en la interfaz | `REEMPLAZADO` | SVG propios permitidos y actualmente implementados |
 | `Acerca de esta guía` como sección informativa convencional | `REEMPLAZADO` | Header editorial con fotografía de fondo y contenido superpuesto |
-| Nombre de la cocinería centrado e información secundaria a la derecha | `REEMPLAZADO` | DEC-007, eje izquierdo común |
+| Nombre de la cocinería centrado y metadata de la fotografía alineada a la derecha | `REEMPLAZADO` | DEC-007, copia de la fotografía con eje izquierdo |
+| Tipo de comida, Comodidades y Precio centrados o con eje izquierdo común | `REEMPLAZADO` | DEC-007, alineación derecha y anchos no idénticos |
 | Vegano, Vegetariano, Celíaco y alergias dentro de Comodidades | `REEMPLAZADO` | DEC-012, taxonomía separada y alergias eliminadas |
 | Línea inferior de `results-area` | `REEMPLAZADO` | Sin línea inferior |
+| Fondo `--paper` en el footer | `REEMPLAZADO` | DEC-010, fondo `--terracotta` sin línea superior |
 | Línea superior visible del footer | `REEMPLAZADO` | Sin línea superior |
 | Navbar completamente opaco durante todo el recorrido y CTA `Agrega tu cocinería` | `REEMPLAZADO` | DEC-017, superficie contextual |
 
