@@ -58,9 +58,9 @@ Reemplaza: listado largo o carga progresiva mediante “ver más”.
 
 Estado: `VIGENTE` / `IMPLEMENTADO`
 
-Decisión: reducir el ancho de precio, dar espacio suficiente y no idéntico a Tipo de comida y Comodidades, mantener precio en regular, usar una línea terracota gruesa a la izquierda de la fotografía en hover/foco y separar metadata con líneas verticales. En `restaurant-main`, mostrar ubicación arriba, nombre debajo y horario después, sin repetir ubicación; esa copia conserva su eje izquierdo y el flujo natural desde arriba. `restaurant-cuisine`, `restaurant-amenities` y `restaurant-price` alinean sus grupos hacia el borde derecho de cada columna para formar un sistema común y reducir compresión innecesaria. La fila usa `padding-block` simétrico; el área de comodidades mantiene su posición aun sin ítems y muestra `No informado` alineado a la derecha.
+Decisión: reducir el ancho de precio, dar espacio suficiente y no idéntico a Tipo de comida y Comodidades, mantener precio en regular, usar una línea terracota gruesa a la izquierda de la fotografía en hover/foco y separar metadata con líneas verticales. En `restaurant-main`, mostrar ubicación arriba, nombre debajo y horario después, sin repetir ubicación; esa copia conserva su eje izquierdo y el flujo natural desde arriba. `restaurant-cuisine`, `restaurant-amenities` y `restaurant-price` alinean sus grupos hacia el borde izquierdo de cada columna para formar un sistema común y evitar una curva visual según la longitud del contenido. La fila usa `padding-block` simétrico; el área de comodidades mantiene su posición aun sin ítems y muestra `No informado` alineado a la izquierda. Tipo de comida y Comodidades muestran como máximo sus tres primeros elementos en la fila, sin modificar los arreglos fuente ni añadir un contador oculto.
 
-Tratamiento de comodidades: son categorías informativas sin fondo, borde, outline, píldora ni padding propio. Comparten geometría, tipografía y hover con Tipo de comida; un único `gap: 0.25rem` une icono y texto. El bloque deja visible el hover/foco del botón contenedor, igual que Tipo y Precio. Reemplaza el fondo `--paper`, el centrado y el eje izquierdo del estado vacío aprobados en iteraciones anteriores.
+Tratamiento de comodidades: son categorías informativas sin fondo, borde, outline, píldora ni padding propio. Comparten geometría, tipografía y hover con Tipo de comida; un único `gap: 0.25rem` une icono y texto. El bloque deja visible el hover/foco del botón contenedor, igual que Tipo y Precio. Reemplaza el fondo `--paper`, el centrado y el eje derecho aprobados en iteraciones anteriores.
 
 Reemplaza: nombre centrado e información secundaria alineada a la derecha.
 
@@ -70,7 +70,7 @@ Pendiente relacionado: orientación de la flecha de `Ver ficha`; ver DEC-011.
 
 Estado: `VIGENTE` / `IMPLEMENTADO`
 
-Decisión: reutilizar SVG entre filtros y filas. Los fills de hover no deben borrar outlines ni detalles; la bandera conserva divisiones y estrella, con relleno solo en la zona inferior.
+Decisión: reutilizar SVG entre filtros y filas. Los fills de hover no deben borrar outlines ni detalles; la bandera conserva divisiones y estrella, con relleno solo en la zona inferior. Las filas Top 1/2/3 reutilizan `editorialRankIcon()` junto al nombre y mantienen el número en el nombre accesible del botón, sin listas de ranking paralelas.
 
 ### DEC-009 — Carrusel editorial de cuatro slides
 
@@ -168,7 +168,7 @@ Accesibilidad: usar patrón combobox/listbox con `aria-expanded`, opción activa
 
 Estado: `VIGENTE` / `IMPLEMENTADO CON DATOS PARCIALES`
 
-Decisión: evolucionar el modal nativo actual, sin crear páginas ni perder cierre, Escape, foco devuelto o navegación sobre el conjunto filtrado. El hero conserva el orden insignia editorial, cuando corresponde; localidad y región; nombre. Debajo se organizan una introducción editorial con descripción, platos y Tipo de comida; una retícula práctica con Ubicación a la izquierda y Horario, Comodidades y Precio a la derecha; Menú solo si hay un dato respaldado; Reseñas externas; Información y contacto; Sobre los datos; y navegación.
+Decisión: evolucionar el modal nativo actual, sin crear páginas ni perder cierre, Escape, foco devuelto o navegación sobre el conjunto filtrado. El hero conserva el orden insignia editorial, cuando corresponde; localidad y región; nombre. Su título usa una escala contenida de `clamp(2.35rem, 4.8vw, 4.35rem)`, con ajustes en mobile, para conservar jerarquía sin dominar nombres largos. Debajo se organizan una introducción editorial con descripción, platos y Tipo de comida; una retícula práctica con Ubicación, Horario, Comodidades y un grupo común de Capacidad, Eventos y Catering; Menú solo si hay un dato respaldado; Reseñas externas; Información y contacto; Sobre los datos; y navegación.
 
 Trazabilidad: una imagen cuyo `imageKind` no sea `direct` se identifica visiblemente como referencia territorial. La presentación prioriza `description` y solo admite un fallback factual desde ubicación y cocina; los platos proceden exclusivamente de `specialties`. Los prototipos conservan marcas referenciales. La insignia Top N se deriva de los atributos de los slides vigentes del carrusel, no de una segunda lista manual.
 
@@ -176,7 +176,7 @@ Mapas: solo se genera preview OpenStreetMap, diferido y atribuido, cuando el reg
 
 Reseñas: no copiar, inventar ni scrapear Google Maps. Hasta disponer de Google Maps Platform u otra fuente autorizada con sus atribuciones, la sección se mantiene como pendiente visible y sin contenido de usuarios.
 
-Datos faltantes y privacidad: una descripción ausente solo puede sustituirse por una frase factual derivada de campos existentes o `No informado`. No se infieren platos ni menús. El campo `owner` no se publica sin procedencia específica, pertinencia para el directorio y una razón pública documentada; los datos actuales no satisfacen ese criterio de forma estructurada.
+Datos faltantes y privacidad: una descripción ausente solo puede sustituirse por una frase factual derivada de campos existentes o `No informado`. No se infieren platos, menús, capacidad ni servicios. Capacidad, Eventos y Catering distinguen `Sí`, `No` y `No confirmado / sin datos`; mientras no existan campos propios, solo las menciones inequívocas de `services` pueden producir `Sí` y una marca de incertidumbre conserva el estado no confirmado. El campo `owner` no se publica sin procedencia específica, pertinencia para el directorio y una razón pública documentada; los datos actuales no satisfacen ese criterio de forma estructurada.
 
 ### DEC-020 — Top 3 general y destacados por atributo
 
@@ -186,9 +186,15 @@ Decisión: conservar el header en cuatro slides —introducción y Top 1/2/3— 
 
 Selección vigente: Na Que Ver Cocinería Chilena (`Cocina chilena de mercado`), Restaurant Tradiciones Cocinería Morelia (`Productos de huerta`) y Cocinería Puelpún (`Trayectoria histórica`). No se superponen con el Top 3 y amplían la diversidad territorial. Cada entrada debe registrar hecho, inferencia editorial, fuente y fecha de consulta; sus CTA reutilizan el directorio y su ficha muestra una insignia textual distinta de las insignias numéricas.
 
-Indicador en el directorio: las tres Destacadas muestran un sol lineal pequeño junto al nombre. El indicador se deriva de la misma fuente DOM `data-editorial-highlight`, no crea una lista paralela ni se aplica al Top 3; el SVG es visual y el nombre accesible del botón comunica `destacada de la guía`.
+Indicador: las tres Destacadas muestran un sol lineal pequeño junto al nombre en el directorio y en sus slides experimentales del header. El indicador se deriva de la misma fuente DOM `data-editorial-highlight`, no crea una lista paralela ni se aplica al Top 3; el SVG es decorativo donde el texto ya comunica `Destacada`, y el nombre accesible de la fila anuncia `destacada de la guía`.
 
 Motivo de ubicación: añadir tres slides habría diluido el ritmo y la jerarquía del carrusel principal. La retícula secundaria mantiene relación inmediata con el header sin reconstruirlo ni convertir la página en un sistema genérico de cards.
+
+### DEC-021 — Normalización no destructiva de nombres presentados
+
+Estado: `VIGENTE` / `IMPLEMENTADO`
+
+Decisión: conservar `name` y `alternateName` canónicos para identidad, búsqueda, IDs, referencias y pipeline, y derivar en runtime `displayName` y `displayAlternateName`. La transformación elimina únicamente tokens completos equivalentes a `Restaurante` o `Restaurant`, sin distinguir mayúsculas y limpiando espacios y conjunciones residuales. Se aplica a slides, autocomplete, listado, ficha, navegación y nombres accesibles; no modifica descripciones, categorías, fuentes ni `data.js`.
 
 ## Decisiones reemplazadas
 
@@ -204,7 +210,8 @@ Motivo de ubicación: añadir tres slides habría diluido el ritmo y la jerarqu�
 | Exigir iconos Flaticon en la interfaz | `REEMPLAZADO` | SVG propios permitidos y actualmente implementados |
 | `Acerca de esta guía` como sección informativa convencional | `REEMPLAZADO` | Header editorial con fotografía de fondo y contenido superpuesto |
 | Nombre de la cocinería centrado y metadata de la fotografía alineada a la derecha | `REEMPLAZADO` | DEC-007, copia de la fotografía con eje izquierdo |
-| Tipo de comida, Comodidades y Precio centrados o con eje izquierdo común | `REEMPLAZADO` | DEC-007, alineación derecha y anchos no idénticos |
+| Tipo de comida, Comodidades y Precio centrados | `REEMPLAZADO` | DEC-007, anchos no idénticos y eje común por columna |
+| Tipo de comida, Comodidades y Precio alineados al borde derecho | `REEMPLAZADO` | DEC-007, alineación izquierda vigente desde el 04.09.2026 |
 | Vegano, Vegetariano, Celíaco y alergias dentro de Comodidades | `REEMPLAZADO` | DEC-012, taxonomía separada y alergias eliminadas |
 | Línea inferior de `results-area` | `REEMPLAZADO` | Sin línea inferior |
 | Fondo `--paper` en el footer | `REEMPLAZADO` | DEC-010, fondo `--terracotta` sin línea superior |

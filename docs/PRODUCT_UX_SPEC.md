@@ -107,7 +107,7 @@ Los datos actuales son de demostración. No deben presentarse como atributos rea
 
 En `restaurant-main`, las etiquetas informativas no usan fondo, borde, outline, caja ni padding propio. Texto e iconos comparten con Tipo de comida familia, tamaño, peso, line-height, geometría de 24 px, stroke de 1.5 px, alineación y tratamiento hover; sobre la fotografía adoptan conjuntamente el color claro contextual que asegura contraste. Un único `gap: 0.25rem` separa icono y texto. Conservan la marca visible `Referencial` y no se comportan como botones.
 
-Cuando una fila no tiene comodidades, el área conserva su lugar en la retícula y `No informado` se alinea al borde derecho de su columna, sin caja ni fondo.
+Cuando una fila no tiene comodidades, el área conserva su lugar en la retícula y `No informado` se alinea al borde izquierdo de su columna, sin caja ni fondo.
 
 ## Listado y previews
 
@@ -122,7 +122,8 @@ Cuando una fila no tiene comodidades, el área conserva su lugar en la retícula
 - Precio relativamente angosto.
 - Tipo de comida y Comodidades reciben espacio suficiente mediante anchos no idénticos; Comodidades puede ser ligeramente más amplia para evitar comprimir sus etiquetas.
 - `Rango de precio` y sus valores usan peso regular, equivalente al resto.
-- En desktop y tablet, los encabezados y grupos internos de Tipo de comida, Comodidades y Precio se alinean hacia el borde derecho de sus respectivas columnas.
+- En desktop y tablet, los encabezados y grupos internos de Tipo de comida, Comodidades y Precio se alinean hacia el borde izquierdo de sus respectivas columnas.
+- Tipo de comida y Comodidades muestran como máximo tres elementos por fila. El límite es de presentación: no recorta datos ni añade `+N`, tooltip o expansión.
 
 ### `restaurant-main`
 
@@ -134,7 +135,8 @@ Cuando una fila no tiene comodidades, el área conserva su lugar en la retícula
 - Ubicación secundaria directamente encima del nombre.
 - Nombre alineado a la izquierda y con la jerarquía serif existente.
 - El bloque no centra verticalmente el nombre: ubicación, título y horario siguen su flujo natural desde la parte superior.
-- Horario debajo del bloque ubicación–nombre, sin repetir la ubicación. Ubicación, nombre y metadata conservan un eje izquierdo dentro de la fotografía; Tipo de comida, Comodidades y Precio forman un sistema separado con alineación derecha consistente.
+- Horario debajo del bloque ubicación–nombre, sin repetir la ubicación. Ubicación, nombre y metadata conservan un eje izquierdo dentro de la fotografía; Tipo de comida, Comodidades y Precio forman un sistema separado con alineación izquierda consistente dentro de cada columna.
+- Los registros Top 1/2/3 muestran junto al nombre la misma `editorial-rank-icon` numérica del carrusel y la ficha. El SVG es decorativo y el nombre accesible de la fila comunica el puesto.
 - Ni horario ni ubicación usan sombras de texto.
 - Los datos de `restaurant-meta` se separan mediante divisores verticales cortos y discretos.
 - Comodidades aparecen bajo la metadata con el mismo lenguaje de iconos y con marca referencial mientras sean simuladas.
@@ -160,10 +162,10 @@ Cuando una fila no tiene comodidades, el área conserva su lugar en la retícula
 - Permite cerrar y navegar anterior/siguiente dentro del conjunto filtrado.
 - Debe devolver el foco al disparador cuando se cierra.
 - Mantiene un único `dialog` con scroll interno; abrir una ficha o navegar a otra reinicia el scroll al comienzo.
-- La cabecera es un hero fotográfico de ancho completo con overlay. Su orden es insignia Top N, cuando corresponde; ciudad o localidad con región; nombre protagonista; nombre alternativo, cuando existe. Si `imageKind` no es `direct`, muestra `Imagen de referencia territorial`; el `alt` reutiliza `imageLabel`.
+- La cabecera es un hero fotográfico de ancho completo con overlay. Su orden es insignia Top N, cuando corresponde; ciudad o localidad con región; nombre protagonista; nombre alternativo, cuando existe. El nombre mantiene la jerarquía principal con `clamp(2.35rem, 4.8vw, 4.35rem)` y escalas móviles más contenidas para evitar una ocupación excesiva con títulos largos. Si `imageKind` no es `direct`, muestra `Imagen de referencia territorial`; el `alt` reutiliza `imageLabel`.
 - Las fichas Top 1, Top 2 y Top 3 muestran `Selección de la guía · Top N`, derivada de la misma configuración DOM del carrusel y no de una segunda lista de nombres.
 - Debajo del hero, un bloque editorial compacto reúne `Sobre esta cocinería`, `Platos destacados` y `Tipo de comida`.
-- La sección práctica usa dos columnas en desktop: `Ubicación` a la izquierda y, a la derecha, `Horario`, `Comodidades` y `Rango de precio`, en ese orden. En 720 px o menos se apila con el mapa primero.
+- La sección práctica integra Horario, Comodidades y un grupo común de Capacidad, Eventos y Catering. Estos tres últimos distinguen `Sí`, `No` y `No confirmado / sin datos`; nunca convierten ausencia en `No`. En 720 px o menos el layout principal se apila y, a 520 px o menos, los tres datos del grupo se apilan internamente.
 - Después se presenta `Menú` solo cuando exista un dato estructurado y respaldado; no se infiere desde `specialties`, `cuisine` o `description`. A continuación aparecen Reseñas en Google, Información y contacto, Sobre los datos y navegación.
 - `Sobre esta cocinería` reutiliza `description`. Si falta, puede construir una frase factual únicamente con ubicación y tipo de comida disponibles; si tampoco bastan, muestra `No informado`.
 - `Platos destacados` reproduce únicamente `specialties`, separando entradas explícitas por coma o punto y coma; no infiere platos desde categorías amplias. Si falta, muestra `No informado`.
@@ -202,7 +204,7 @@ El estado actual selecciona Mata Rangi y Cocinería Bellavista como Top 2 y Top 
 
 Inmediatamente después del header se presenta una selección secundaria compacta de tres `Destacados de la guía` por atributos documentados. No prolonga el carrusel ni crea puestos Top 4–6. Cada caso muestra nombre, ubicación, atributo, descripción factual, motivo editorial, fuente y acceso al registro del directorio. El estado vigente selecciona Na Que Ver Cocinería Chilena por cocina chilena de mercado, Restaurant Tradiciones Cocinería Morelia por productos de huerta y Cocinería Puelpún por trayectoria histórica.
 
-En las filas del directorio, únicamente esas tres Destacadas incorporan un sol lineal pequeño junto al nombre. Se genera desde la fuente editorial existente, no desde una lista adicional; el SVG usa `currentColor`, queda subordinado al título y el `aria-label` del botón incluye el estado `destacada de la guía`.
+En las filas del directorio y en los slides experimentales que representan esas tres Destacadas, únicamente esos registros incorporan un sol lineal pequeño junto al nombre. Se genera desde la fuente editorial existente, no desde una lista adicional; el SVG usa `currentColor` y queda subordinado al título. En slides es decorativo porque `Destacada` ya aparece en texto; en la fila, el `aria-label` incluye `destacada de la guía`.
 
 ## Footer
 
@@ -223,6 +225,7 @@ El fondo anterior `--paper` queda como antecedente reemplazado y no constituye u
 
 ## Contenido, datos e imágenes
 
+- Los nombres canónicos permanecen intactos. Para presentación se eliminan únicamente descriptores genéricos completos equivalentes a `Restaurante` o `Restaurant`, de forma case-insensitive y sin afectar búsqueda, IDs, enlaces, descripciones ni categorías.
 - No inventar horarios, platos, servicios, ubicaciones, rankings ni atributos para publicación.
 - Si un prototipo requiere datos simulados, usar marcas estructuradas (`isPlaceholder`, `isEstimated`, `source: "placeholder"` o equivalente) y una indicación visible adecuada.
 - Para datos reales, priorizar fuente del establecimiento, organismo público, red oficial, directorio/mapa, medio y guía especializada, en ese orden general.

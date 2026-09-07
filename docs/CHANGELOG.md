@@ -4,6 +4,15 @@ Este archivo registra cambios implementados relevantes. No contiene solicitudes 
 
 ## Sin publicar
 
+### 2026-09-04 — Nombres, señales editoriales y datos prácticos
+
+- Implementado: los tres slides experimentales de Destacadas reutilizan el sol lineal junto al nombre; las filas Top 1/2/3 reutilizan `editorialRankIcon()` sin duplicar el ranking y anuncian el puesto en su nombre accesible.
+- Ajustado: Tipo de comida, Comodidades y Precio alinean su contenido a la izquierda; las dos primeras columnas muestran como máximo tres elementos sin recortar los datos fuente.
+- Implementado: `displayName` y `displayAlternateName` eliminan de forma no destructiva descriptores completos Restaurante/Restaurant en slides, autocomplete, listado, ficha y navegación; búsqueda, IDs, enlaces y dataset conservan los nombres canónicos.
+- Implementado: la ficha agrupa Capacidad, Eventos y Catering con estados `Sí`, `No` y `No confirmado / sin datos`. Sin campos propios, solo se reconocen menciones inequívocas de `services`; Capacidad permanece no confirmada para los 101 registros.
+- Ajustado: el título de la ficha reduce su escala base de `clamp(2.65rem, 6vw, 5.2rem)` a `clamp(2.35rem, 4.8vw, 4.35rem)`, con límites móviles más contenidos.
+- Actualizado: cachebusters de CSS y JavaScript. No se modifica `data.js`, la fuente canónica, el número de slides, el mapa, la flecha de `Ver ficha` ni los demás experimentos.
+
 ### 2026-09-04 — Indicador editorial y equilibrio de filas
 
 - Implementado: las tres Destacadas muestran un sol lineal pequeño junto al nombre del directorio, derivado de `[data-editorial-highlight]`; el SVG es visual y el nombre accesible del botón comunica su estado sin crear una lista paralela.

@@ -55,7 +55,7 @@ Los dos prompts de la raíz son idénticos por hash en el estado auditado. `camb
 
 1. `index.html` carga `data.js` con `defer`.
 2. `data.js` publica los registros en `window.COCINERIAS`.
-3. `script.js` crea una vista enriquecida con precio, horario, preferencias alimentarias y comodidades de prototipo.
+3. `script.js` crea una vista enriquecida con nombres de presentación, precio, horario, preferencias alimentarias y comodidades de prototipo, además de estados prácticos conservadores para capacidad, eventos y catering.
 4. Se inicializan filtros, eventos, render del listado y carrusel.
 5. Búsqueda, filtros y paginación operan enteramente en memoria.
 6. Las filas y la ficha editorial del modal se construyen mediante templates HTML escapados con `escapeHTML`; las URLs pasan por `safeUrl`.
@@ -87,7 +87,7 @@ No existe persistencia en URL, almacenamiento local ni servidor.
 - `verifiedCoordinates()` exige latitud/longitud finitas y dentro de rango. Solo entonces `openStreetMapLinks()` crea el embed; el iframe usa `loading="lazy"`, `title` y atribución ODbL.
 - El dataset actual tiene 2 registros con coordenadas válidas, 3 enlaces cartográficos externos y 99 fichas sin preview posible.
 - No existe campo estructurado de menú, carta o PDF en los 101 registros; la sección se omite en lugar de inferirla desde descripción, cocina o especialidades.
-- `contactSectionContent()` renderiza teléfono, WhatsApp, email y URLs sanitizadas de Instagram, Facebook y web; `usefulInformationContent()` limita el bloque auxiliar a servicios, pagos, fundación y otras redes existentes. `owner` no se renderiza porque el esquema no codifica una decisión de pertinencia pública ni procedencia por campo.
+- `contactSectionContent()` renderiza teléfono, WhatsApp, email y URLs sanitizadas de Instagram, Facebook y web; `usefulInformationContent()` limita el bloque auxiliar a servicios, pagos, fundación y otras redes existentes. `derivePracticalServices()` prepara Capacidad, Eventos y Catering sin modificar `data.js`: prioriza futuros campos estructurados y, mientras no existan, solo reconoce menciones inequívocas en `services`; cualquier ausencia o marca de incertidumbre produce `No confirmado / sin datos`. `owner` no se renderiza porque el esquema no codifica una decisión de pertinencia pública ni procedencia por campo.
 - No existe backend, API key, Place ID ni integración Google Maps Platform. La sección Reseñas en Google es un estado pendiente sin datos de usuarios; una futura integración no debe exponer claves en el repositorio estático.
 
 ## Datos
@@ -129,6 +129,8 @@ Campos derivados en `data.js`:
 ```text
 foodCategories, priceCategory, imagePath, imageKind, imageLabel
 ```
+
+No existen campos fuente ni derivados para `capacity`, `events` o `catering`. La vista runtime añade `displayName`, `displayAlternateName` y `practicalServices`; los dos primeros no alteran el matching canónico y el último es una adaptación transitoria de presentación hasta ampliar la fuente y el normalizador.
 
 Campos derivados solo en tiempo de ejecución:
 

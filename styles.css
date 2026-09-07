@@ -818,8 +818,8 @@ select:focus-visible {
 .list-header > span:nth-child(2),
 .list-header > span:nth-child(3),
 .list-header > span:nth-child(4) {
-  justify-content: flex-end;
-  text-align: right;
+  justify-content: flex-start;
+  text-align: left;
 }
 
 .restaurant-row {
@@ -935,26 +935,23 @@ select:focus-visible {
   text-align: left;
 }
 
-.restaurant-name.is-highlighted {
-  display: flex;
-  gap: 0.4rem;
-  align-items: flex-start;
+.restaurant-name-text {
+  display: inline;
 }
 
-.restaurant-name-text {
-  min-width: 0;
+.editorial-highlight-icon,
+.restaurant-highlight-icon {
+  display: inline-flex;
+  vertical-align: -0.04em;
 }
 
 .restaurant-highlight-icon {
-  display: inline-flex;
   width: 0.72em;
   height: 0.72em;
-  flex: 0 0 0.72em;
-  margin-top: 0.08em;
   color: var(--paper-deep);
 }
 
-.restaurant-highlight-icon svg {
+.editorial-highlight-icon svg {
   display: block;
   width: 100%;
   height: 100%;
@@ -962,6 +959,20 @@ select:focus-visible {
   stroke: currentColor;
   stroke-linecap: round;
   stroke-width: 1.5;
+}
+
+.restaurant-rank-mark {
+  display: inline-flex;
+  width: 0.8em;
+  height: 0.8em;
+  color: var(--paper-deep);
+  line-height: 0;
+  vertical-align: -0.12em;
+}
+
+.restaurant-rank-mark .editorial-rank-icon {
+  width: 100%;
+  height: 100%;
 }
 
 .restaurant-meta {
@@ -1025,38 +1036,38 @@ select:focus-visible {
   min-width: 0;
   align-content: center;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: flex-start;
   margin: 0;
   padding: 1.2rem clamp(0.75rem, 1.4vw, 1.25rem);
   border-left: 1px solid var(--line);
   background: transparent;
-  text-align: right;
+  text-align: left;
 }
 
 .restaurant-button > .restaurant-amenities.is-empty {
   align-items: center;
-  justify-content: flex-end;
+  justify-content: flex-start;
   margin: 0;
 }
 
 .restaurant-button > .restaurant-amenities .amenity-empty {
   color: var(--ink-soft);
-  text-align: right;
+  text-align: left;
 }
 
 .restaurant-button > .restaurant-amenities .amenity-demo-note {
   color: var(--terracotta-dark);
-  text-align: right;
+  text-align: left;
 }
 
 .restaurant-amenities-list {
   display: grid;
   gap: 0.55rem;
-  justify-items: end;
+  justify-items: start;
   width: fit-content;
   max-width: 100%;
-  margin-left: auto;
-  text-align: right;
+  margin: 0 auto 0 0;
+  text-align: left;
 }
 
 .amenity-empty {
@@ -1143,17 +1154,17 @@ select:focus-visible {
   display: flex;
   min-width: 0;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: flex-start;
   padding: 1.2rem clamp(0.75rem, 1.4vw, 1.25rem);
   border-left: 1px solid var(--line);
   color: var(--ink-soft);
   font-size: 0.85rem;
   line-height: 1.4;
-  text-align: right;
+  text-align: left;
 }
 
 .restaurant-price {
-  align-items: flex-end;
+  align-items: flex-start;
   align-content: center;
   flex-direction: column;
   justify-content: center;
@@ -1165,24 +1176,23 @@ select:focus-visible {
 .food-type-list {
   display: grid;
   gap: 0.55rem;
-  justify-items: end;
+  justify-items: start;
   width: fit-content;
   max-width: 100%;
-  margin: 0;
-  margin-left: auto;
+  margin: 0 auto 0 0;
   padding: 0;
   list-style: none;
-  text-align: right;
+  text-align: left;
 }
 
 .food-type-label {
   min-width: 0;
-  text-align: right;
+  text-align: left;
 }
 
 .restaurant-cuisine .food-type-item,
 .restaurant-button > .restaurant-amenities .amenity-item {
-  text-align: right;
+  text-align: left;
 }
 
 .food-demo-note {
@@ -1699,6 +1709,13 @@ select:focus-visible {
 
 .about-copy--featured h2 {
   margin-bottom: 0.65rem;
+}
+
+.about-highlight-icon {
+  width: 0.44em;
+  height: 0.44em;
+  color: currentColor;
+  vertical-align: 0.04em;
 }
 
 .about-feature-location {
@@ -2259,7 +2276,7 @@ select:focus-visible {
   max-width: 760px;
   margin: 0;
   font-family: var(--serif);
-  font-size: clamp(2.65rem, 6vw, 5.2rem);
+  font-size: clamp(2.35rem, 4.8vw, 4.35rem);
   font-weight: 400;
   letter-spacing: -0.055em;
   line-height: 0.92;
@@ -2572,6 +2589,43 @@ select:focus-visible {
   display: flex;
   flex-wrap: wrap;
   gap: 0.3rem;
+}
+
+.modal-service-facts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  list-style: none;
+}
+
+.modal-service-facts li {
+  min-width: 0;
+  padding: 0.8rem 0.75rem;
+}
+
+.modal-service-facts li + li {
+  border-left: 1px solid var(--line);
+}
+
+.modal-service-facts .fact-label {
+  margin-bottom: 0.25rem;
+}
+
+.modal-service-value {
+  display: block;
+  font-family: var(--serif);
+  font-size: 1rem;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+}
+
+.modal-service-facts [data-service-status="unknown"] .modal-service-value {
+  color: var(--ink-soft);
+  font-family: var(--sans);
+  font-size: 0.78rem;
 }
 
 .modal-field-note {
@@ -3248,7 +3302,7 @@ select:focus-visible {
   }
 
   .modal-hero h2 {
-    font-size: clamp(2.25rem, 11vw, 3.8rem);
+    font-size: clamp(2rem, 5.2vw, 2.35rem);
   }
 
   .modal-image-context {
@@ -3361,6 +3415,15 @@ select:focus-visible {
     border-top: 1px solid var(--line);
     border-left: 0;
   }
+
+  .modal-service-facts {
+    grid-template-columns: 1fr;
+  }
+
+  .modal-service-facts li + li {
+    border-top: 1px solid var(--line);
+    border-left: 0;
+  }
 }
 
 @media (max-width: 420px) {
@@ -3408,7 +3471,7 @@ select:focus-visible {
   }
 
   .modal-hero h2 {
-    font-size: clamp(2.1rem, 12vw, 3rem);
+    font-size: clamp(1.9rem, 8vw, 2rem);
   }
 
   .modal-hero-location {

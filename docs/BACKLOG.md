@@ -113,6 +113,14 @@ Problema: ninguno de los 101 registros contiene un campo estructurado de menú, 
 
 Criterio de cierre: definir campos y procedencia por establecimiento en la fuente canónica; incorporar solo contenido o enlaces verificables; regenerar `data.js` mediante el normalizador y mostrar la sección únicamente cuando el registro tenga información respaldada.
 
+### DATA-006 — Estructurar capacidad, eventos y catering
+
+Estado: `PENDIENTE DE DATOS`
+
+Problema: ninguno de los 101 registros contiene campos propios de capacidad, eventos o catering. El campo libre `services` conserva una mención inequívoca de Eventos, una de banquetería y una de banquetería expresamente no confirmada; no permite afirmar estados para los demás establecimientos. La ficha muestra una estructura transitoria con `Sí`, `No` y `No confirmado / sin datos`, sin convertir ausencia en `No`.
+
+Criterio de cierre: añadir campos estructurados y procedencia por atributo a la fuente canónica; distinguir afirmación positiva, negativa explícita y ausencia; verificar capacidad y servicios establecimiento por establecimiento; actualizar fecha de consulta; regenerar `data.js` mediante `scripts/normalize-data.mjs` y retirar la derivación transitoria desde `services` cuando los nuevos campos estén disponibles.
+
 ### PRIVACY-001 — Definir criterio para publicar responsables
 
 Estado: `PENDIENTE DE DECISIÓN Y TRAZABILIDAD`

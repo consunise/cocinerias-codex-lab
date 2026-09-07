@@ -11,6 +11,7 @@
     assignBand: (_restaurant, index) => ["Económico", "Moderado", "Alto"][index % 3],
   });
   const PAGE_SIZE = 10;
+  const DISPLAY_CATEGORY_LIMIT = 3;
   const CAROUSEL_AUTOPLAY_DELAY = 6000;
   const SEARCH_SUGGESTION_LIMIT = 7;
   // EXPERIMENTO / POR VALIDAR: texto deliberadamente genérico para evaluar
@@ -127,6 +128,9 @@
         ? AMENITY_DEMO_PROTOTYPE.source
         : null,
       visitFeatures: deriveVisitFeatures(restaurant),
+      displayName: displayRestaurantName(restaurant.name),
+      displayAlternateName: displayRestaurantName(restaurant.alternateName),
+      practicalServices: derivePracticalServices(restaurant),
     };
   });
 
@@ -286,6 +290,20 @@
       .trim();
   }
 
+  function displayRestaurantName(value) {
+    const originalName = String(value ?? "").trim().replace(/\s+/g, " ");
+    if (!originalName) return "";
+    const restaurantDescriptor = "(?:restaurantes?|restaurants?|restor(?:a|á)n(?:te?s?|ts?)?)";
+    const displayName = originalName
+      .replace(new RegExp(`^${restaurantDescriptor}\\s+(?:y\\s+)?`, "iu"), "")
+      .replace(new RegExp(`\\s+y\\s+${restaurantDescriptor}(?=\\s|$)`, "giu"), " ")
+      .replace(new RegExp(`(?:^|\\s+)${restaurantDescriptor}(?=\\s|$)`, "giu"), " ")
+      .replace(/\s+/g, " ")
+      .replace(/^[·|,;:/-]+\s*|\s*[·|,;:/-]+$/g, "")
+      .trim();
+    return displayName || originalName;
+  }
+
   function isRapaNuiRestaurant(restaurant) {
     const territorialEvidence = [
       restaurant.region,
@@ -357,6 +375,47 @@
     });
   }
 
+  function availabilityFromValue(value) {
+    if (typeof value === "boolean") {
+      return { state: value ? "yes" : "no", label: value ? "Sí" : "No" };
+    }
+    const evidence = normalize(value);
+    if (!evidence || /no confirmad|sin confirmar|sin datos|no informad|desconocid/.test(evidence)) {
+      return null;
+    }
+    if (/^(?:no|sin)\b|no ofrece|no acepta/.test(evidence)) {
+      return { state: "no", label: "No" };
+    }
+    return { state: "yes", label: "Sí" };
+  }
+
+  function availabilityFromServices(services, pattern) {
+    const matchingClause = String(services ?? "")
+      .split(/[;,]/)
+      .map((clause) => clause.trim())
+      .find((clause) => pattern.test(normalize(clause)));
+    return matchingClause ? availabilityFromValue(matchingClause) : null;
+  }
+
+  function derivePracticalServices(restaurant) {
+    const capacityValue = String(restaurant.capacity ?? "").trim();
+    const capacityIsKnown = Boolean(capacityValue) &&
+      !/no confirmad|sin confirmar|sin datos|no informad|desconocid/.test(normalize(capacityValue));
+    const events = availabilityFromValue(restaurant.events) ||
+      availabilityFromServices(restaurant.services, /\beventos?\b/);
+    const catering = availabilityFromValue(restaurant.catering) ||
+      availabilityFromServices(restaurant.services, /\b(?:catering|banqueteria)\b/);
+    const unavailable = { state: "unknown", label: "No confirmado / sin datos" };
+
+    return {
+      capacity: capacityIsKnown
+        ? { state: "known", label: capacityValue }
+        : { ...unavailable },
+      events: events ?? { ...unavailable },
+      catering: catering ?? { ...unavailable },
+    };
+  }
+
   function safeUrl(value) {
     if (!value) return null;
     try {
@@ -425,6 +484,7 @@
     return `
       <ul class="food-type-list" aria-label="Tipos de comida">
         ${restaurant.displayFoodCategories
+          .slice(0, DISPLAY_CATEGORY_LIMIT)
           .map(
             (category) => {
               const isReferential = demoFoodPreferenceLabels.has(category);
@@ -463,6 +523,7 @@
       >
         <span class="restaurant-amenities-list">
           ${restaurant.displayAmenities
+            .slice(0, DISPLAY_CATEGORY_LIMIT)
             .map(
               ({ label }) => `
                 <span class="amenity-item" title="${escapeHTML(label)} · dato de demostración">
@@ -535,7 +596,7 @@
                 role="option"
                 data-restaurant-id="${escapeHTML(restaurant.id)}"
                 aria-selected="false"
-              >${escapeHTML(restaurant.name)}</div>
+              >${escapeHTML(restaurant.displayName)}</div>
             `,
           )
           .join("")
@@ -558,8 +619,8 @@
     const restaurant = restaurants.find(({ id }) => id === option?.dataset.restaurantId);
     if (!restaurant) return;
     state.selectedSearchId = restaurant.id;
-    state.query = restaurant.name;
-    elements.searchInput.value = restaurant.name;
+    state.query = restaurant.displayName;
+    elements.searchInput.value = restaurant.displayName;
     applyFilters();
     closeSearchSuggestions();
     elements.searchInput.focus({ preventScroll: true });
@@ -878,9 +939,13 @@
         ? ""
         : " is-uninformed";
     const editorialHighlight = editorialHighlightFor(restaurant.id);
-    const accessibleName = editorialHighlight
-      ? `Abrir ficha de ${restaurant.name}, destacada de la guía`
-      : `Abrir ficha de ${restaurant.name}`;
+    const editorialRank = editorialSelectionFor(restaurant.id);
+    const editorialDescription = editorialRank
+      ? `, selección editorial Top ${editorialRank}`
+      : editorialHighlight
+        ? ", destacada de la guía"
+        : "";
+    const accessibleName = `Abrir ficha de ${restaurant.displayName}${editorialDescription}`;
 
     return `
       <article class="restaurant-row">
@@ -899,8 +964,8 @@
             <span class="restaurant-main-content">
               <span class="restaurant-heading">
                 <span class="restaurant-location">${escapeHTML(formatLocation(restaurant, true))}</span>
-                <span class="restaurant-name${editorialHighlight ? " is-highlighted" : ""}">
-                  ${editorialHighlight ? `${editorialHighlightIcon()}<span class="restaurant-name-text">${escapeHTML(restaurant.name)}</span>` : escapeHTML(restaurant.name)}
+                <span class="restaurant-name${editorialHighlight ? " is-highlighted" : ""}${editorialRank ? " has-editorial-rank" : ""}">
+                  ${editorialHighlight ? `${editorialHighlightIcon("restaurant-highlight-icon")}&nbsp;` : ""}<span class="restaurant-name-text">${escapeHTML(restaurant.displayName)}</span>${editorialRank ? `&nbsp;<span class="restaurant-rank-mark">${editorialRankIcon(editorialRank)}</span>` : ""}
                 </span>
               </span>
               <span class="restaurant-meta">
@@ -1123,6 +1188,28 @@
     `;
   }
 
+  function practicalServicesContent(restaurant) {
+    const facts = [
+      ["Capacidad", restaurant.practicalServices.capacity],
+      ["Eventos", restaurant.practicalServices.events],
+      ["Catering", restaurant.practicalServices.catering],
+    ];
+    return `
+      <ul class="modal-service-facts" aria-label="Capacidad y servicios del establecimiento">
+        ${facts
+          .map(
+            ([label, fact]) => `
+              <li data-service-status="${escapeHTML(fact.state)}">
+                <span class="fact-label">${escapeHTML(label)}</span>
+                <span class="modal-service-value">${escapeHTML(fact.label)}</span>
+              </li>
+            `,
+          )
+          .join("")}
+      </ul>
+    `;
+  }
+
   function contactItem(label, content) {
     return `
       <li>
@@ -1243,9 +1330,9 @@
     return attribute || null;
   }
 
-  function editorialHighlightIcon() {
+  function editorialHighlightIcon(contextClass = "") {
     return `
-      <span class="restaurant-highlight-icon" aria-hidden="true" title="Destacada de la guía">
+      <span class="editorial-highlight-icon${contextClass ? ` ${contextClass}` : ""}" aria-hidden="true" title="Destacada de la guía">
         <svg viewBox="0 0 24 24" focusable="false">
           <circle cx="12" cy="12" r="3.25"></circle>
           <path d="M12 2.25v3M12 18.75v3M2.25 12h3M18.75 12h3M5.1 5.1l2.15 2.15M16.75 16.75l2.15 2.15M18.9 5.1l-2.15 2.15M7.25 16.75 5.1 18.9"></path>
@@ -1286,6 +1373,7 @@
     const caption = isTerritorial
       ? `${location} · imagen territorial`
       : location;
+    const displayName = restaurant.displayName;
 
     return `
       <figure
@@ -1303,7 +1391,7 @@
         <div class="about-slide-content about-slide-content--featured">
           <div class="about-copy about-copy--featured">
             <p class="eyebrow about-rank"><span>Destacada · ${escapeHTML(attribute)}</span></p>
-            <h2>${escapeHTML(restaurant.name)}</h2>
+            <h2 class="about-feature-title">${escapeHTML(displayName)}&nbsp;${editorialHighlightIcon("about-highlight-icon")}</h2>
             <p class="about-feature-location">${escapeHTML(location)}</p>
             <p>${escapeHTML(description)}</p>
             ${sourceUrl ? `<a class="about-feature-source" href="${escapeHTML(sourceUrl)}" target="_blank" rel="noopener noreferrer">Consultar fuente ↗</a>` : ""}
@@ -1349,11 +1437,13 @@
       const restaurant = restaurants.find(({ id }) => id === restaurantId);
       if (!restaurant) return;
       slide.classList.add("is-restaurant-slide");
+      const title = slide.querySelector(".about-slide-content h2");
+      if (title && !slide.dataset.editorialFeatured) title.textContent = restaurant.displayName;
       const insertionPoint =
-        slide.querySelector(".about-feature-location") || slide.querySelector(".about-slide-content h2");
+        slide.querySelector(".about-feature-location") || title;
       insertionPoint?.insertAdjacentHTML(
         "afterend",
-        `<button class="about-slide-open" type="button" aria-label="Abrir ficha de ${escapeHTML(restaurant.name)}">Ver ficha →</button>`,
+        `<button class="about-slide-open" type="button" aria-label="Abrir ficha de ${escapeHTML(restaurant.displayName)}">Ver ficha →</button>`,
       );
     });
   }
@@ -1482,7 +1572,7 @@
           <div class="modal-map-preview">
             <iframe
               src="${escapeHTML(osmLinks.embed)}"
-              title="Mapa de ubicación de ${escapeHTML(restaurant.name)}"
+              title="Mapa de ubicación de ${escapeHTML(restaurant.displayName)}"
               loading="lazy"
             ></iframe>
             <p class="modal-map-attribution">
@@ -1573,8 +1663,12 @@
     const imageDescription = restaurant.imageLabel ||
       (isTerritorialImage
         ? `Imagen territorial de ${restaurant.region}`
-        : `Fotografía de ${restaurant.name}`);
+        : `Fotografía de ${restaurant.displayName}`);
     const usefulInformation = usefulInformationContent(restaurant);
+    const alternateName = restaurant.displayAlternateName &&
+      normalize(restaurant.displayAlternateName) !== normalize(restaurant.displayName)
+      ? restaurant.displayAlternateName
+      : "";
 
     return `
       <header class="modal-hero${isTerritorialImage ? " is-territorial" : " is-direct"}">
@@ -1584,8 +1678,8 @@
           ${editorialRank ? `<p class="modal-editorial-badge">${editorialRankIcon(editorialRank)}<span>Selección de la guía · Top ${editorialRank}</span></p>` : ""}
           ${!editorialRank && editorialHighlight ? `<p class="modal-editorial-badge modal-editorial-badge--attribute">Destacado de la guía · ${escapeHTML(editorialHighlight)}</p>` : ""}
           <p class="modal-hero-location">${escapeHTML(formatLocation(restaurant, true))}</p>
-          <h2 id="modal-title">${escapeHTML(restaurant.name)}</h2>
-          ${restaurant.alternateName ? `<p class="modal-alternate">También registrado como ${escapeHTML(restaurant.alternateName)}</p>` : ""}
+          <h2 id="modal-title">${escapeHTML(restaurant.displayName)}</h2>
+          ${alternateName ? `<p class="modal-alternate">También registrado como ${escapeHTML(alternateName)}</p>` : ""}
         </div>
         ${isTerritorialImage ? '<p class="modal-image-context">Imagen de referencia territorial</p>' : ""}
       </header>
@@ -1632,6 +1726,11 @@
                   "Comodidades",
                   `${modalAmenityList(restaurant)}${restaurant.accessibility ? `<p class="modal-field-note"><strong>Accesibilidad informada:</strong> ${escapeHTML(restaurant.accessibility)}</p>` : ""}`,
                   "modal-practical-amenities",
+                )}
+                ${practicalItem(
+                  "Capacidad y servicios",
+                  practicalServicesContent(restaurant),
+                  "modal-practical-services",
                 )}
               </div>
             </section>
@@ -1700,17 +1799,17 @@
 
     elements.modalContent.innerHTML = buildModalContent(restaurant);
     elements.modalPosition.textContent = `Ficha ${index + 1} de ${total}`;
-    elements.modalPrevName.textContent = previous?.name ?? "";
-    elements.modalNextName.textContent = next?.name ?? "";
+    elements.modalPrevName.textContent = previous?.displayName ?? "";
+    elements.modalNextName.textContent = next?.displayName ?? "";
     elements.modalPrev.disabled = total < 2;
     elements.modalNext.disabled = total < 2;
     elements.modalPrev.setAttribute(
       "aria-label",
-      previous ? `Ver cocinería anterior: ${previous.name}` : "No hay cocinería anterior",
+      previous ? `Ver cocinería anterior: ${previous.displayName}` : "No hay cocinería anterior",
     );
     elements.modalNext.setAttribute(
       "aria-label",
-      next ? `Ver cocinería siguiente: ${next.name}` : "No hay cocinería siguiente",
+      next ? `Ver cocinería siguiente: ${next.displayName}` : "No hay cocinería siguiente",
     );
     elements.dialog.querySelector(".dialog-scroll").scrollTo({ top: 0, behavior: "auto" });
   }
@@ -1904,8 +2003,8 @@
       if (!restaurant) return;
       resetFilterControls({ includeSearch: true });
       state.selectedSearchId = restaurant.id;
-      state.query = restaurant.name;
-      elements.searchInput.value = restaurant.name;
+      state.query = restaurant.displayName;
+      elements.searchInput.value = restaurant.displayName;
       applyFilters();
       closeSearchSuggestions();
       scrollToResultsStart();
