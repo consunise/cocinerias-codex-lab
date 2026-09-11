@@ -55,9 +55,9 @@ Los dos prompts de la raíz son idénticos por hash en el estado auditado. `camb
 
 1. `index.html` carga `data.js` con `defer`.
 2. `data.js` publica los registros en `window.COCINERIAS`.
-3. `script.js` crea una vista enriquecida con nombres de presentación, precio, horario, preferencias alimentarias y comodidades de prototipo, además de estados prácticos conservadores para capacidad, eventos y catering.
+3. `script.js` crea una vista enriquecida con nombres de presentación, precio, horario, preferencias alimentarias y comodidades de prototipo, estados prácticos conservadores para capacidad, eventos y catering, y un `searchText` normalizado por registro.
 4. Se inicializan filtros, eventos, render del listado y carrusel.
-5. Búsqueda, filtros y paginación operan enteramente en memoria.
+5. Búsqueda, filtros y paginación operan enteramente en memoria. `applyFilters()` intersecta la consulta contra `searchText` con los cuatro grupos vigentes; una selección del autocomplete mantiene la vía exacta por ID.
 6. Las filas y la ficha editorial del modal se construyen mediante templates HTML escapados con `escapeHTML`; las URLs pasan por `safeUrl`.
 7. Al abrir una ficha, el modal deriva Top N desde los slides, valida coordenadas antes de construir un iframe OpenStreetMap diferido y reinicia su scroll interno.
 8. Un `IntersectionObserver` observa `about-lead` y alterna `is-past-about` en el navbar cuando el borde inferior del header supera la altura sticky; el resize recalcula el límite y recrea el observer.
@@ -130,7 +130,7 @@ Campos derivados en `data.js`:
 foodCategories, priceCategory, imagePath, imageKind, imageLabel
 ```
 
-No existen campos fuente ni derivados para `capacity`, `events` o `catering`. La vista runtime añade `displayName`, `displayAlternateName` y `practicalServices`; los dos primeros no alteran el matching canónico y el último es una adaptación transitoria de presentación hasta ampliar la fuente y el normalizador.
+No existen campos fuente ni derivados para `capacity`, `events` o `catering`. La vista runtime añade `displayName`, `displayAlternateName`, `practicalServices` y `searchText`: los nombres canónicos permanecen disponibles e indexados junto a sus variantes presentadas; `practicalServices` sigue siendo una adaptación transitoria hasta ampliar la fuente y el normalizador. `displayNameHTML()` aplica el espacio no separable de las dos últimas palabras después de escapar HTML, únicamente al render.
 
 Campos derivados solo en tiempo de ejecución:
 
@@ -140,8 +140,11 @@ displayPriceCategory, priceIsSimulated,
 displayFoodCategories, displayFoodPreferences,
 foodPreferencesAreSimulated, foodPreferencesSource,
 displayAmenities, amenitiesAreSimulated, amenitiesSource,
-visitFeatures
+visitFeatures, practicalServices, displayName, displayAlternateName,
+searchText
 ```
+
+`searchText` normaliza case, diacríticos y espacios a partir de identidad, ubicación, `cuisine`, `specialties`, `description`, `services`, categorías culinarias, comodidades de presentación y precio fuente/presentado. No añade taxonomías ni valores: los precios y comodidades demo permanecen identificados como prototipo en sus campos de origen.
 
 ## Tokens y responsive
 

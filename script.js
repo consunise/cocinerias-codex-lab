@@ -101,7 +101,9 @@
         ...displayFoodPreferences.map(({ label }) => label),
       ]),
     ];
-    return {
+    const displayName = displayRestaurantName(restaurant.name);
+    const displayAlternateName = displayRestaurantName(restaurant.alternateName);
+    const enrichedRestaurant = {
       ...restaurant,
       displayHours: usesPlaceholderHours
         ? HOURS_PLACEHOLDER_PROTOTYPE.assignHours(restaurant, index)
@@ -128,9 +130,13 @@
         ? AMENITY_DEMO_PROTOTYPE.source
         : null,
       visitFeatures: deriveVisitFeatures(restaurant),
-      displayName: displayRestaurantName(restaurant.name),
-      displayAlternateName: displayRestaurantName(restaurant.alternateName),
+      displayName,
+      displayAlternateName,
       practicalServices: derivePracticalServices(restaurant),
+    };
+    return {
+      ...enrichedRestaurant,
+      searchText: buildRestaurantSearchText(enrichedRestaurant),
     };
   });
 
@@ -287,6 +293,7 @@
       .normalize("NFD")
       .replace(/[\u0300-\u036f]/g, "")
       .toLowerCase()
+      .replace(/\s+/g, " ")
       .trim();
   }
 
@@ -302,6 +309,46 @@
       .replace(/^[·|,;:/-]+\s*|\s*[·|,;:/-]+$/g, "")
       .trim();
     return displayName || originalName;
+  }
+
+  function keepLastNameWordsTogether(value) {
+    const words = String(value ?? "").trim().split(/\s+/).filter(Boolean);
+    if (words.length < 2) return words.join("");
+    return [...words.slice(0, -2), words.slice(-2).join("\u00a0")].join(" ");
+  }
+
+  function displayNameHTML(value) {
+    return escapeHTML(keepLastNameWordsTogether(value));
+  }
+
+  function buildRestaurantSearchText(restaurant) {
+    const amenityLabels = (restaurant.displayAmenities ?? []).map(({ label }) => label);
+    return normalize(
+      [
+        restaurant.name,
+        restaurant.displayName,
+        restaurant.alternateName,
+        restaurant.displayAlternateName,
+        restaurant.region,
+        restaurant.province,
+        restaurant.commune,
+        restaurant.locality,
+        restaurant.address,
+        restaurant.venue,
+        restaurant.cuisine,
+        restaurant.specialties,
+        restaurant.description,
+        restaurant.services,
+        ...(restaurant.foodCategories ?? []),
+        ...(restaurant.displayFoodCategories ?? []),
+        ...amenityLabels,
+        restaurant.priceRange,
+        restaurant.priceCategory,
+        restaurant.displayPriceCategory,
+      ]
+        .filter(Boolean)
+        .join(" "),
+    );
   }
 
   function isRapaNuiRestaurant(restaurant) {
@@ -547,12 +594,13 @@
       .map((restaurant) => {
         const normalizedName = normalize(restaurant.name);
         const normalizedAlternateName = normalize(restaurant.alternateName);
-        let rank = 4;
+        let rank = 5;
         if (normalizedName.startsWith(normalizedQuery)) rank = 0;
         else if (normalizedAlternateName.startsWith(normalizedQuery)) rank = 1;
         else if (normalizedName.includes(normalizedQuery)) rank = 2;
         else if (normalizedAlternateName.includes(normalizedQuery)) rank = 3;
-        return rank < 4 ? { restaurant, rank } : null;
+        else if (restaurant.searchText.includes(normalizedQuery)) rank = 4;
+        return rank < 5 ? { restaurant, rank } : null;
       })
       .filter(Boolean)
       .sort(
@@ -596,11 +644,11 @@
                 role="option"
                 data-restaurant-id="${escapeHTML(restaurant.id)}"
                 aria-selected="false"
-              >${escapeHTML(restaurant.displayName)}</div>
+              >${displayNameHTML(restaurant.displayName)}</div>
             `,
           )
           .join("")
-      : '<p class="search-suggestions-empty" role="status">Sin coincidencias por nombre.</p>';
+      : '<p class="search-suggestions-empty" role="status">Sin coincidencias.</p>';
   }
 
   function setSearchActiveIndex(nextIndex) {
@@ -851,10 +899,9 @@
 
     state.visibleRestaurants = restaurants
       .filter((restaurant) => {
-        const searchableName = normalize(`${restaurant.name} ${restaurant.alternateName ?? ""}`);
-        const matchesName = state.selectedSearchId
+        const matchesSearch = state.selectedSearchId
           ? restaurant.id === state.selectedSearchId
-          : !normalizedQuery || searchableName.includes(normalizedQuery);
+          : !normalizedQuery || restaurant.searchText.includes(normalizedQuery);
         const matchesRegion = matchesSelectedTerritory(restaurant);
         const matchesFood = includesEvery(state.foods, restaurant.displayFoodCategories);
         const matchesPrice = includesEvery(state.prices, [restaurant.displayPriceCategory]);
@@ -863,7 +910,7 @@
           restaurant.displayAmenities.map(({ label }) => label),
         );
 
-        return matchesName && matchesRegion && matchesFood && matchesPrice && matchesAmenity;
+        return matchesSearch && matchesRegion && matchesFood && matchesPrice && matchesAmenity;
       })
       .sort(compareEditorialOrder);
 
@@ -965,7 +1012,7 @@
               <span class="restaurant-heading">
                 <span class="restaurant-location">${escapeHTML(formatLocation(restaurant, true))}</span>
                 <span class="restaurant-name${editorialHighlight ? " is-highlighted" : ""}${editorialRank ? " has-editorial-rank" : ""}">
-                  ${editorialHighlight ? `${editorialHighlightIcon("restaurant-highlight-icon")}&nbsp;` : ""}<span class="restaurant-name-text">${escapeHTML(restaurant.displayName)}</span>${editorialRank ? `&nbsp;<span class="restaurant-rank-mark">${editorialRankIcon(editorialRank)}</span>` : ""}
+                  ${editorialHighlight ? `${editorialHighlightIcon("restaurant-highlight-icon")}&nbsp;` : ""}<span class="restaurant-name-text">${displayNameHTML(restaurant.displayName)}</span>${editorialRank ? `&nbsp;<span class="restaurant-rank-mark">${editorialRankIcon(editorialRank)}</span>` : ""}
                 </span>
               </span>
               <span class="restaurant-meta">
@@ -1391,7 +1438,7 @@
         <div class="about-slide-content about-slide-content--featured">
           <div class="about-copy about-copy--featured">
             <p class="eyebrow about-rank"><span>Destacada · ${escapeHTML(attribute)}</span></p>
-            <h2 class="about-feature-title">${escapeHTML(displayName)}&nbsp;${editorialHighlightIcon("about-highlight-icon")}</h2>
+            <h2 class="about-feature-title">${displayNameHTML(displayName)}&nbsp;${editorialHighlightIcon("about-highlight-icon")}</h2>
             <p class="about-feature-location">${escapeHTML(location)}</p>
             <p>${escapeHTML(description)}</p>
             ${sourceUrl ? `<a class="about-feature-source" href="${escapeHTML(sourceUrl)}" target="_blank" rel="noopener noreferrer">Consultar fuente ↗</a>` : ""}
@@ -1438,7 +1485,7 @@
       if (!restaurant) return;
       slide.classList.add("is-restaurant-slide");
       const title = slide.querySelector(".about-slide-content h2");
-      if (title && !slide.dataset.editorialFeatured) title.textContent = restaurant.displayName;
+      if (title && !slide.dataset.editorialFeatured) title.innerHTML = displayNameHTML(restaurant.displayName);
       const insertionPoint =
         slide.querySelector(".about-feature-location") || title;
       insertionPoint?.insertAdjacentHTML(
@@ -1678,8 +1725,8 @@
           ${editorialRank ? `<p class="modal-editorial-badge">${editorialRankIcon(editorialRank)}<span>Selección de la guía · Top ${editorialRank}</span></p>` : ""}
           ${!editorialRank && editorialHighlight ? `<p class="modal-editorial-badge modal-editorial-badge--attribute">Destacado de la guía · ${escapeHTML(editorialHighlight)}</p>` : ""}
           <p class="modal-hero-location">${escapeHTML(formatLocation(restaurant, true))}</p>
-          <h2 id="modal-title">${escapeHTML(restaurant.displayName)}</h2>
-          ${alternateName ? `<p class="modal-alternate">También registrado como ${escapeHTML(alternateName)}</p>` : ""}
+          <h2 id="modal-title">${displayNameHTML(restaurant.displayName)}</h2>
+          ${alternateName ? `<p class="modal-alternate">También registrado como ${displayNameHTML(alternateName)}</p>` : ""}
         </div>
         ${isTerritorialImage ? '<p class="modal-image-context">Imagen de referencia territorial</p>' : ""}
       </header>

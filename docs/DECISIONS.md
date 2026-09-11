@@ -1,6 +1,6 @@
 # Registro de decisiones
 
-Última consolidación: 4 de septiembre de 2026.
+Última consolidación: 10 de septiembre de 2026.
 
 Este archivo conserva decisiones de producto, UX/UI, datos y operación. El código demuestra implementación; no reemplaza por sí solo una decisión explícita. Una instrucción directa más reciente puede reemplazar cualquier entrada.
 
@@ -58,7 +58,7 @@ Reemplaza: listado largo o carga progresiva mediante “ver más”.
 
 Estado: `VIGENTE` / `IMPLEMENTADO`
 
-Decisión: reducir el ancho de precio, dar espacio suficiente y no idéntico a Tipo de comida y Comodidades, mantener precio en regular, usar una línea terracota gruesa a la izquierda de la fotografía en hover/foco y separar metadata con líneas verticales. En `restaurant-main`, mostrar ubicación arriba, nombre debajo y horario después, sin repetir ubicación; esa copia conserva su eje izquierdo y el flujo natural desde arriba. `restaurant-cuisine`, `restaurant-amenities` y `restaurant-price` alinean sus grupos hacia el borde izquierdo de cada columna para formar un sistema común y evitar una curva visual según la longitud del contenido. La fila usa `padding-block` simétrico; el área de comodidades mantiene su posición aun sin ítems y muestra `No informado` alineado a la izquierda. Tipo de comida y Comodidades muestran como máximo sus tres primeros elementos en la fila, sin modificar los arreglos fuente ni añadir un contador oculto.
+Decisión: reducir el ancho de precio y acción para que Tipo de comida y Comodidades absorban el espacio útil, sin forzar anchos idénticos; mantener precio en regular, usar una línea terracota gruesa a la izquierda de la fotografía en hover/foco y separar metadata con líneas verticales. Desde 1180 px, la retícula usa `minmax(250px, 1.45fr) minmax(170px, 1fr) minmax(180px, 1.08fr) 88px 84px`: Comodidades conserva una proporción ligeramente mayor que Tipo, Precio permanece compacto y Detalle ocupa solo lo necesario para su acción breve. Entre 1179 y 521 px, la segunda fila fija Precio en 82 px y Detalle en 84 px, cediendo el resto a Tipo y Comodidades; a 520 px o menos la acción conserva su fila propia y Precio mantiene el mismo mínimo de 82 px para no recortar `Económico`. En `restaurant-main`, mostrar ubicación arriba, nombre debajo y horario después, sin repetir ubicación; esa copia conserva su eje izquierdo y el flujo natural desde arriba. `restaurant-cuisine`, `restaurant-amenities` y `restaurant-price` alinean sus grupos hacia el borde izquierdo de cada columna para formar un sistema común y evitar una curva visual según la longitud del contenido. La fila usa `padding-block` simétrico; el área de comodidades mantiene su posición aun sin ítems y muestra `No informado` alineado a la izquierda. Tipo de comida y Comodidades muestran como máximo sus tres primeros elementos en la fila, sin modificar los arreglos fuente ni añadir un contador oculto.
 
 Tratamiento de comodidades: son categorías informativas sin fondo, borde, outline, píldora ni padding propio. Comparten geometría, tipografía y hover con Tipo de comida; un único `gap: 0.25rem` une icono y texto. El bloque deja visible el hover/foco del botón contenedor, igual que Tipo y Precio. Reemplaza el fondo `--paper`, el centrado y el eje derecho aprobados en iteraciones anteriores.
 
@@ -76,9 +76,9 @@ Decisión: reutilizar SVG entre filtros y filas. Los fills de hover no deben bor
 
 Estado: `VIGENTE` / `IMPLEMENTADO`
 
-Decisión: ubicar el carrusel como header editorial inmediatamente después del navbar y antes del directorio. Mantener el slide introductorio y usar los otros tres para una selección Top 1, Top 2 y Top 3. Restaurante Pily ocupa Top 1. Carrusel automático, indicadores centrados, sin botones laterales y respetando reduced motion. Cada puesto utiliza una variante numérica de una misma insignia SVG editorial propia; el número distingue el puesto sin depender del color y la fuente Top 3 se reutiliza en las fichas.
+Decisión: ubicar el carrusel como header editorial inmediatamente después del navbar y antes del directorio. Mantener el slide introductorio y usar los otros tres para una selección Top 1, Top 2 y Top 3. Restaurante Pily ocupa Top 1. Carrusel automático y circular en ambos sentidos, con total derivado del DOM, indicadores centrados, sin botones laterales y respetando reduced motion; avanzar desde el último vuelve al primero y retroceder desde el primero vuelve al último sin clones. Cada puesto utiliza una variante numérica de una misma insignia SVG editorial propia; el número distingue el puesto sin depender del color y la fuente Top 3 se reutiliza en las fichas.
 
-Tratamiento: alternar el fondo de la caja editorial `--terracotta`, `--paper`, `--terracotta`, `--paper` en los cuatro slides y adaptar en cada slide el contraste de todo su contenido. Los indicadores usan un círculo visible de 16 × 16 px dentro de un target transparente de 44 × 44 px; el activo combina relleno y anillo, y el wrapper no tiene fondo, borde, sombra ni apariencia de píldora.
+Tratamiento: alternar el fondo de la caja editorial `--terracotta`, `--paper`, `--terracotta`, `--paper` en los cuatro slides y adaptar en cada slide el contraste de todo su contenido. La insignia Top se ancla al borde izquierdo interno de la caja. En hover o `focus-within`, la caja usa una sombra exterior editorial sin introducir bordes ni cambiar su geometría; el control enfocado conserva además su outline accesible. Los indicadores usan un círculo visible de 16 × 16 px dentro de un target transparente de 44 × 44 px; el activo combina relleno y anillo, y el wrapper no tiene fondo, borde, sombra ni apariencia de píldora.
 
 Calidad de imagen: los cuatro slides activos usan assets locales optimizados de 2880 px de ancho, obtenidos desde originales mayores y sin ampliación artificial. Cuando la fotografía es territorial, el caption y el `alt` no la atribuyen al establecimiento.
 
@@ -156,13 +156,17 @@ CTA: el texto principal es `Sé parte de la guía`, con mayor jerarquía que los
 
 Reemplaza: navbar completamente opaco y texto `Agrega tu cocinería`.
 
-### DEC-018 — Autocomplete del buscador limitado a nombres
+### DEC-018 — Búsqueda integrada por identidad, ubicación y atributos
 
 Estado: `VIGENTE` / `IMPLEMENTADO`
 
-Decisión: mantener la búsqueda limitada al nombre principal o alternativo de la cocinería y mostrar hasta siete sugerencias progresivas. El matching ignora mayúsculas y tildes, prioriza nombres que comienzan con la consulta y luego los que la contienen.
+Decisión: construir para cada cocinería un único índice runtime que reúna nombre canónico y presentado, nombre alternativo, región, provincia, comuna, localidad, dirección, recinto, cocina, especialidades, descripción, servicios, categorías culinarias, comodidades visibles y rango de precio real o presentado. La consulta ignora mayúsculas, tildes, espacios repetidos y espacios exteriores. La escritura libre intersecta este índice con Región, Tipo, Comodidades y Precio mediante la lógica AND vigente, sin limpiar filtros ni paginación.
+
+Autocomplete: conservar el mismo combobox con hasta siete sugerencias. Prioriza nombres principales o alternativos que comienzan con la consulta, después coincidencias contenidas y finalmente coincidencias del resto del índice. Elegir una sugerencia continúa seleccionando el registro exacto.
 
 Accesibilidad: usar patrón combobox/listbox con `aria-expanded`, opción activa y navegación por ArrowDown, ArrowUp, Enter y Escape. Seleccionar una sugerencia aplica el registro exacto, cierra el panel y desplaza al inicio de resultados; la escritura libre conserva el filtrado parcial existente.
+
+Reemplaza: búsqueda y sugerencias limitadas exclusivamente a `name` y `alternateName`.
 
 ### DEC-019 — Ficha editorial sobre el `dialog` existente
 
@@ -194,7 +198,7 @@ Motivo de ubicación: añadir tres slides habría diluido el ritmo y la jerarqu�
 
 Estado: `VIGENTE` / `IMPLEMENTADO`
 
-Decisión: conservar `name` y `alternateName` canónicos para identidad, búsqueda, IDs, referencias y pipeline, y derivar en runtime `displayName` y `displayAlternateName`. La transformación elimina únicamente tokens completos equivalentes a `Restaurante` o `Restaurant`, sin distinguir mayúsculas y limpiando espacios y conjunciones residuales. Se aplica a slides, autocomplete, listado, ficha, navegación y nombres accesibles; no modifica descripciones, categorías, fuentes ni `data.js`.
+Decisión: conservar `name` y `alternateName` canónicos para identidad, búsqueda, IDs, referencias y pipeline, y derivar en runtime `displayName` y `displayAlternateName`. La transformación elimina únicamente tokens completos equivalentes a `Restaurante` o `Restaurant`, sin distinguir mayúsculas y limpiando espacios y conjunciones residuales. Se aplica a slides, autocomplete, listado, ficha, navegación y nombres accesibles; no modifica descripciones, categorías, fuentes ni `data.js`. En la salida HTML, las dos últimas palabras del nombre se unen con un espacio no separable para impedir una única palabra huérfana en la última línea; el valor canónico y el valor de búsqueda permanecen sin esa marca de presentación.
 
 ## Decisiones reemplazadas
 
@@ -217,6 +221,8 @@ Decisión: conservar `name` y `alternateName` canónicos para identidad, búsque
 | Fondo `--paper` en el footer | `REEMPLAZADO` | DEC-010, fondo `--terracotta` sin línea superior |
 | Línea superior visible del footer | `REEMPLAZADO` | Sin línea superior |
 | Navbar completamente opaco durante todo el recorrido y CTA `Agrega tu cocinería` | `REEMPLAZADO` | DEC-017, superficie contextual |
+| Búsqueda y autocomplete limitados exclusivamente a nombres | `REEMPLAZADO` | DEC-018, índice integrado de identidad, ubicación y atributos |
+| Borde simulado con sombra interior `currentColor` como hover de cajas editoriales | `REEMPLAZADO` | DEC-009, sombra exterior sin cambio geométrico |
 
 ## Cómo registrar una nueva decisión
 

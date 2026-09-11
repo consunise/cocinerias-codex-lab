@@ -7,7 +7,7 @@ Mensaje: `correcciones version 0.9.2`
 
 Este documento describe el estado comprobado del repositorio en ese commit. No convierte automáticamente lo implementado en una decisión de producto.
 
-Actualizaciones posteriores, consolidadas al 4 de septiembre de 2026: footer terracota; filtros AND y reordenados; Rapa Nui como territorio especial; header editorial antes del directorio; navbar contextual con CTA invitacional; nueva jerarquía de filas; taxonomía alimentaria separada de comodidades; autocomplete por nombre; ficha editorial sobre el `dialog` vigente; fotografías de header a 2880 px; insignias SVG Top 1/2/3; selección secundaria de tres destacados por atributo; nombres de presentación sin el descriptor genérico Restaurante/Restaurant; y estructura conservadora para Capacidad, Eventos y Catering. El resto del documento conserva el baseline auditado.
+Actualizaciones posteriores, consolidadas al 10 de septiembre de 2026: footer terracota; filtros AND y reordenados; Rapa Nui como territorio especial; header editorial antes del directorio; navbar contextual con CTA invitacional; nueva jerarquía y distribución de filas; taxonomía alimentaria separada de comodidades; búsqueda integrada por nombre, ubicación y atributos; ficha editorial sobre el `dialog` vigente; fotografías de header a 2880 px; insignias SVG Top 1/2/3; selección secundaria de tres destacados por atributo; nombres de presentación sin el descriptor genérico Restaurante/Restaurant y sin palabra huérfana final; y estructura conservadora para Capacidad, Eventos y Catering. El resto del documento conserva el baseline auditado.
 
 ## Resumen técnico
 
@@ -59,7 +59,7 @@ Actualizaciones posteriores, consolidadas al 4 de septiembre de 2026: footer ter
 - El resumen activo aparece debajo de la metadata.
 - `list-header` sticky en desktop; oculta su borde superior cuando queda pegado al navbar.
 - Paginación de 10 registros con Anterior, Siguiente y páginas numeradas.
-- El estado vacío y el buscador funcionan sobre el dataset en memoria; seleccionar una sugerencia filtra por ID exacto y la escritura libre mantiene coincidencia parcial.
+- El estado vacío y el buscador funcionan sobre el dataset enriquecido en memoria. La escritura libre consulta nombre canónico/presentado, nombre alternativo, ubicación, cocina, especialidades, descripción, servicios, categorías, comodidades y precio; seleccionar una sugerencia continúa filtrando por ID exacto. Consulta y filtros se intersectan sin limpiarse mutuamente.
 
 ### Preview de cocinería
 
@@ -74,10 +74,11 @@ Actualizaciones posteriores, consolidadas al 4 de septiembre de 2026: footer ter
 - Comodidades referenciales bajo la metadata, sin fondo, borde, outline, caja ni padding propio. Tipografía, iconos de 24 px, stroke de 1.5 px y hover comparten el sistema de Tipo de comida; el color claro contextual mantiene contraste sobre la fotografía y el único `gap` icono–texto es de `0.25rem`.
 - El área de comodidades conserva su lugar con o sin ítems. En las filas vacías, `No informado` ocupa el ancho disponible y queda alineado a la izquierda, sin caja.
 - Tipo de comida y Comodidades limitan su render de fila a los primeros tres elementos; los datos runtime y el dataset conservan todos sus valores.
+- Las dos últimas palabras del nombre se mantienen juntas solo en la salida HTML; búsqueda, IDs y valores canónicos no reciben espacios no separables.
 - `restaurant-main` usa `padding-block` simétrico: 24 px en el viewport desktop comprobado y 16 px en 320 px.
 - Acción `Ver ficha` apilada verticalmente, pero el símbolo actual es `→`, no flecha hacia abajo.
 
-EXPERIMENTO / POR VALIDAR (29 de agosto de 2026), ajustado el 4 de septiembre: desde 1180 px, Comodidades ocupa una columna independiente y la retícula usa `minmax(250px, 1.55fr) minmax(160px, 0.9fr) minmax(170px, 0.95fr) minmax(90px, 0.45fr) 96px`; Tipo de comida y Comodidades ya no fuerzan anchos idénticos. Entre 1179 y 521 px, Tipo, Comodidades, Precio y Detalle comparten la segunda fila con mayor proporción para Comodidades. A 520 px o menos, la foto ocupa todo el ancho; Tipo, Comodidades y Precio permanecen en tres columnas y `Ver ficha` pasa a una fila propia. A 340 px o menos, donde las etiquetas largas dejan de caber, Tipo y Comodidades conservan dos columnas, Precio pasa a una fila propia y la acción queda debajo. Esta variante responsive no reemplaza el resto de DEC-007.
+EXPERIMENTO / POR VALIDAR (29 de agosto de 2026), ajustado el 10 de septiembre: desde 1180 px, Comodidades ocupa una columna independiente y la retícula usa `minmax(250px, 1.45fr) minmax(170px, 1fr) minmax(180px, 1.08fr) 88px 84px`; Tipo de comida y Comodidades absorben el espacio retirado de Precio y Detalle sin forzar anchos idénticos. Entre 1179 y 521 px, Tipo y Comodidades comparten el espacio flexible de la segunda fila, con Precio en 82 px y Detalle en 84 px. A 520 px o menos, la foto ocupa todo el ancho; Tipo, Comodidades y Precio permanecen en tres columnas —Precio con mínimo de 82 px— y `Ver ficha` pasa a una fila propia. A 340 px o menos, donde las etiquetas largas dejan de caber, Tipo y Comodidades conservan dos columnas, Precio pasa a una fila propia y la acción queda debajo. Esta variante responsive no reemplaza el resto de DEC-007.
 
 Tipo de comida, Comodidades y Precio alinean sus grupos al borde izquierdo. Cada fila de Tipo o Comodidades reserva un slot iconográfico de 24 px y un `gap` de `0.25rem`; `No informado` sigue la misma alineación izquierda. Comodidades ya no cubre con `--paper` el hover/foco compartido de la fila. Solo la unidad `.food-type-item` o `.amenity-item` bajo el cursor cambia texto e icono; `focus-visible` de la fila activa el realce accesible común. El filtro de precio se presenta `Alto`, `Moderado`, `Económico`. Tras aplicar búsqueda y filtros AND, el conjunto se ordena Top 1/2/3, Destacadas y resto antes de paginar; las seis prioridades se derivan de la configuración editorial DOM vigente, no de listas nuevas.
 
@@ -111,12 +112,13 @@ Tipo de comida, Comodidades y Precio alinean sus grupos al borde izquierdo. Cada
 - Top 3: Cocinería Bellavista.
 - Slides 5–7: Na Que Ver Cocinería Chilena (`Cocina chilena de mercado`), Tradiciones Cocinería Morelia (`Productos de huerta`) y Cocinería Puelpún (`Trayectoria histórica`), rotuladas `Destacada` sin numeración Top. Se generan en runtime desde la misma fuente DOM de Destacadas usada por fichas y orden editorial; un sol lineal decorativo junto al nombre refuerza esa identificación sin crear otra selección.
 - Los Top 1/2/3 conservan platos y etiquetas editoriales. Los slides 5–7 reutilizan nombre, ubicación, descripción, atributo y primer enlace de fuente de la configuración de Destacadas, sin duplicar esa sección visual.
-- Top 1/2/3 usan tres variantes numéricas de una misma insignia SVG editorial propia, con número visible, `currentColor` y geometría común; la ficha reutiliza la misma función y la configuración DOM del carrusel.
-- Autoplay cada 6 segundos, indicadores clickeables, teclado y pausa por hover/foco.
+- Top 1/2/3 usan tres variantes numéricas de una misma insignia SVG editorial propia, con número visible, `currentColor` y geometría común; la insignia queda anclada al borde izquierdo interno de la caja y la ficha reutiliza la misma función y la configuración DOM del carrusel.
+- Autoplay cada 6 segundos, navegación circular mediante módulo en ambos sentidos, indicadores clickeables, teclado y pausa por hover/foco. No usa clones ni fija una cantidad concreta en la navegación.
 - Los seis slides de cocinerías se vinculan por `data-restaurant-id` a la ficha existente. La superficie editorial abre el `dialog` y un control compacto `Ver ficha` permite Enter, Espacio, foco visible y devolución de foco; el slide introductorio y los dots no abren fichas.
 - Autoplay desactivado con `prefers-reduced-motion` o pestaña no visible.
 - No hay botones anterior/siguiente.
 - El carrusel no tiene marco perimetral; conserva outline solo como estado de foco accesible.
+- Las cajas Top y Destacadas usan una sombra exterior sutil en hover o `focus-within`; no añaden borde blanco/negro, no cambian grosor y no producen layout shift. El botón enfocado conserva un outline de 3 px.
 - La caja editorial mantiene la alternancia terracota/paper en la secuencia de siete slides; imagen, texto y tema cambian en la misma unidad.
 - Los siete dots usan círculos visibles de 16 × 16 px dentro de targets de 44 × 44 px, con activo por relleno y anillo, foco visible y sin fondo rectangular en el wrapper.
 - Los primeros cuatro assets activos miden 2880 px de ancho. Los tres slides experimentales reutilizan las imágenes territoriales documentadas de cada registro, de 960 px de ancho; no se ampliaron ni sustituyeron. Su suficiencia visual a alta densidad continúa `POR VALIDAR`.
@@ -202,6 +204,14 @@ Actualización del 4 de septiembre de 2026:
 - Se comprobó la normalización de presentación en seis coincidencias por nombre o nombre alternativo: `Ckunza Tilar`, `Cafetería Nicolás`, `Pily`, `Cocinería Millacaman`, `Tradiciones Cocinería Morelia` y `Mata Rangi`. Los campos canónicos siguen intactos para matching e identidad.
 - `La Favorita` conserva cinco categorías en la fuente y muestra tres en la fila. La taxonomía demo actual no produce más de dos comodidades, aunque el mismo límite de tres está aplicado al render.
 - Las fichas verificadas cubrieron estados sin datos, Eventos `Sí`, Catering `Sí` y banquetería no confirmada. La revisión visual se realizó en 1440 × 1000, 768 × 1024, 390 × 844 y 320 × 700 px, sin overflow horizontal de página o diálogo.
+
+Actualización del 10 de septiembre de 2026:
+
+- Revisada la retícula en 1440, 1180, 1100, 768, 520, 390 y 320 px. Tipo y Comodidades ganan ancho útil; Precio y Detalle permanecen compactos, sin overflow de fila o página. La taxonomía demo vigente produce uno o dos amenities por registro, no tres, por lo que el tercer caso solo queda cubierto estructuralmente por el límite de render existente.
+- Las insignias Top 1/2/3 se comprobaron alineadas al borde izquierdo interno de su caja en desktop, tablet y mobile. Top y Destacadas conservan borde computado de 0 px al activar hover, reciben la misma sombra exterior y mantienen dimensiones idénticas antes/después; `focus-visible` conserva outline de 3 px.
+- El carrusel completó dos ciclos manuales y dos ciclos automáticos completos sobre sus siete slides, incluyendo ambos límites, indicadores, títulos e imágenes sincronizados. La pausa por hover conservó el índice y la salida del hover reanudó el autoplay. La rama `prefers-reduced-motion` se revisó en código; esta ronda no dispuso de emulación runtime del media feature.
+- Comprobado un nombre de ocho palabras en 1180, 768, 390 y 320 px: la última línea conservó `Dorador Alcota` como unidad y no apareció una palabra huérfana; nombres de los slides reutilizan la misma transformación de salida.
+- Consultas comprobadas: `comida chilena`, `mariscos`, `porotos`, `Estacionamiento`, `economico`, `Pily`, `Puerto Saavedra`, `MARISCOS`, `cocineria` y una variante con espacios repetidos. También se verificó `mariscos` combinado progresivamente con Arica y Parinacota, Pescados, Estacionamiento y Económico; contador, resumen, estado vacío, reset y paginación conservaron estado y lógica AND.
 
 ## Discrepancias relevantes
 

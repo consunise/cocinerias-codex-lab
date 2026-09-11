@@ -4,6 +4,16 @@ Este archivo registra cambios implementados relevantes. No contiene solicitudes 
 
 ## Sin publicar
 
+### 2026-09-10 — Distribución del home, interacción editorial y búsqueda ampliada
+
+- Ajustado: la retícula del listado cede ancho de Precio y Detalle a Tipo de comida y Comodidades; mantiene alineación izquierda, límite visual de tres elementos y variantes responsive sin overflow.
+- Ajustado: las insignias Top se anclan al borde izquierdo interno de la caja. Top 1/2/3 y Destacadas sustituyen el borde simulado de hover por una sombra exterior común, sin cambio geométrico y conservando `focus-visible`.
+- Consolidado: el carrusel ya utilizaba índices modulares; se documenta y valida como circular en ambos sentidos, sin clones y con autoplay, pausa, indicadores, contenido e imagen sincronizados durante más de dos ciclos.
+- Implementado: las dos últimas palabras de cada nombre presentado se unen solo en la salida HTML para evitar una palabra huérfana final, sin modificar nombres canónicos, IDs, filtros ni `data.js`.
+- Implementado: la búsqueda usa un índice runtime único de identidad, ubicación, cocina, especialidades, descripción, servicios, categorías, comodidades y precio. Normaliza mayúsculas, tildes y espacios repetidos; el autocomplete existente prioriza nombres y admite después coincidencias por atributos.
+- Validado: búsquedas gastronómicas, comodidad, precio, nombre y ubicación; combinaciones AND con Región, Tipo, Comodidades y Precio; contador, resumen, estado vacío, reset y paginación; responsive en 1440, 1180, 1100, 768, 520, 390 y 320 px. No se modifican datos, taxonomía, contenido práctico o comportamiento del modal, footer, selección editorial ni cantidad de resultados por página; el título del modal reutiliza únicamente el tratamiento anti-huérfanas común.
+- Actualizado: cachebusters de CSS y JavaScript a `20260910-1`.
+
 ### 2026-09-04 — Nombres, señales editoriales y datos prácticos
 
 - Implementado: los tres slides experimentales de Destacadas reutilizan el sol lineal junto al nombre; las filas Top 1/2/3 reutilizan `editorialRankIcon()` sin duplicar el ranking y anuncian el puesto en su nombre accesible.

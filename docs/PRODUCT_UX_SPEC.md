@@ -31,9 +31,11 @@ Evitar:
 - Debe ser sticky y coherente con la cuadrícula del directorio.
 - Mientras se superpone a `about-lead`, una superficie controlada de `--paper` parcialmente transparente y con desenfoque ligero permite percibir la fotografía sin perder contraste.
 - Cuando el navbar supera completamente `about-lead`, tanto su superficie como el buscador pasan a `var(--paper)` opaco, sin desenfoque. El cambio usa una transición breve y debe revertirse al volver al header.
-- El buscador usa `Buscar por nombre de cocinería...` y se alinea con `results-area`.
-- Al escribir, despliega hasta siete sugerencias basadas exclusivamente en el nombre principal o alternativo: matching parcial sin distinción de mayúsculas ni tildes, primero coincidencias al inicio y después coincidencias contenidas.
+- El buscador usa `Nombre, lugar, comida...` y se alinea con `results-area`; su nombre accesible explicita nombre, ubicación, comida, comodidades y precio.
+- La escritura libre busca sobre un índice común de nombre canónico/presentado, nombre alternativo, región, provincia, comuna, localidad, dirección, recinto, cocina, especialidades, descripción, servicios, categorías culinarias, comodidades visibles y precio real o presentado. El matching ignora mayúsculas, tildes, espacios exteriores y secuencias repetidas de espacios.
+- Al escribir, el combobox existente despliega hasta siete sugerencias: primero nombres principales o alternativos que comienzan con la consulta, después coincidencias contenidas y finalmente coincidencias del resto del índice. No se añade otro control de búsqueda.
 - El autocomplete usa semántica combobox/listbox, se actualiza progresivamente, se cierra al vaciar, seleccionar, pulsar Escape o hacer clic fuera y permite ArrowDown, ArrowUp y Enter. Elegir una opción aplica el registro exacto y lleva al inicio de resultados; escribir sin elegir conserva el filtro parcial.
+- La consulta se intersecta con Región, Tipo de comida, Comodidades y Precio mediante la lógica AND vigente. Buscar no limpia filtros y filtrar no limpia la consulta; contador, resumen, paginación, estado vacío y reset conservan su comportamiento.
 - Instagram y WhatsApp deben ser reconocibles, visibles y de peso equivalente; SVG propios están permitidos.
 - No usar emojis ni Unicode como iconos sociales.
 - El CTA principal se ubica al extremo derecho y tiene mayor jerarquía que redes.
@@ -119,8 +121,8 @@ Cuando una fila no tiene comodidades, el área conserva su lugar en la retícula
 
 ### Columnas
 
-- Precio relativamente angosto.
-- Tipo de comida y Comodidades reciben espacio suficiente mediante anchos no idénticos; Comodidades puede ser ligeramente más amplia para evitar comprimir sus etiquetas.
+- Precio y Detalle permanecen compactos; Detalle no reserva más ancho que el necesario para su acción breve.
+- Tipo de comida y Comodidades absorben el espacio liberado mediante anchos no idénticos; Comodidades puede ser ligeramente más amplia para evitar comprimir sus etiquetas. Desde 1180 px, las cinco columnas usan `minmax(250px, 1.45fr) minmax(170px, 1fr) minmax(180px, 1.08fr) 88px 84px`.
 - `Rango de precio` y sus valores usan peso regular, equivalente al resto.
 - En desktop y tablet, los encabezados y grupos internos de Tipo de comida, Comodidades y Precio se alinean hacia el borde izquierdo de sus respectivas columnas.
 - Tipo de comida y Comodidades muestran como máximo tres elementos por fila. El límite es de presentación: no recorta datos ni añade `+N`, tooltip o expansión.
@@ -134,6 +136,7 @@ Cuando una fila no tiene comodidades, el área conserva su lugar en la retícula
 - Hover/foco con línea terracota a la izquierda de la imagen, más gruesa que filtros y paginación, sin layout shift.
 - Ubicación secundaria directamente encima del nombre.
 - Nombre alineado a la izquierda y con la jerarquía serif existente.
+- Las dos últimas palabras del nombre se mantienen juntas en la salida HTML para evitar una palabra huérfana en la última línea; no se alteran el nombre canónico, la búsqueda ni los datos.
 - El bloque no centra verticalmente el nombre: ubicación, título y horario siguen su flujo natural desde la parte superior.
 - Horario debajo del bloque ubicación–nombre, sin repetir la ubicación. Ubicación, nombre y metadata conservan un eje izquierdo dentro de la fotografía; Tipo de comida, Comodidades y Precio forman un sistema separado con alineación izquierda consistente dentro de cada columna.
 - Los registros Top 1/2/3 muestran junto al nombre la misma `editorial-rank-icon` numérica del carrusel y la ficha. El SVG es decorativo y el nombre accesible de la fila comunica el puesto.
@@ -186,8 +189,9 @@ Dirección vigente:
 - Caja de contenido superpuesta con secuencia de fondo `--terracotta`, `--paper`, `--terracotta`, `--paper`; cada slide adapta simultáneamente todos sus textos, labels y enlaces para conservar contraste.
 - Cuatro slides sincronizados: imagen, texto e indicador cambian como una unidad.
 - Indicadores circulares centrados e individuales: círculo visible de 16 × 16 px dentro de un botón transparente de 44 × 44 px. El activo se distingue por relleno y anillo, además del color; el wrapper no muestra fondo, borde, sombra ni padding con apariencia rectangular.
-- Autoplay sin botones anterior/siguiente.
+- Autoplay sin botones anterior/siguiente y navegación circular en ambos sentidos, usando el total real de slides: último → primero y primero → último sin clones.
 - Pausa por hover/foco y respeto de `prefers-reduced-motion`.
+- La insignia Top queda anclada al borde izquierdo interno de la caja editorial. Top 1/2/3 y Destacadas usan el mismo feedback de sombra exterior sutil en hover o `focus-within`, sin borde nuevo, cambio de grosor ni layout shift; el control enfocado conserva su outline visible.
 - Assets locales, alta resolución y atribución trazable.
 - Las imágenes activas deben conservar nitidez a ancho completo: no se admiten thumbnails ni ampliación artificial. La selección vigente usa archivos de 2880 px de ancho, optimizados sin upscaling, con fuente, autor, licencia, dimensiones y fecha documentados.
 
