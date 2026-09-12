@@ -2406,7 +2406,7 @@ select:focus-visible {
 }
 
 .modal-body {
-  padding: 0 clamp(2rem, 5vw, 4rem) clamp(2rem, 5vw, 4rem);
+  padding: 0 clamp(2rem, 5vw, 4rem);
 }
 
 .modal-section {
@@ -2488,24 +2488,16 @@ select:focus-visible {
   align-items: start;
 }
 
-/* EXPERIMENTO UX/UI — POR VALIDAR: ficha con contenido principal y mapa simulado lateral. */
-.modal-experimental-layout {
+.modal-gastronomy-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
-  gap: clamp(1.5rem, 4vw, 3rem);
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr) minmax(0, 0.8fr);
+  gap: clamp(1.25rem, 3vw, 2rem);
   align-items: start;
 }
 
-.modal-experimental-content,
-.modal-experimental-block,
-.modal-experimental-map {
+.modal-gastronomy-grid > section,
+.modal-practical-grid > section {
   min-width: 0;
-}
-
-.modal-experimental-block + .modal-experimental-block {
-  margin-top: 1.5rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid var(--line);
 }
 
 .modal-placeholder-label {
@@ -2528,9 +2520,13 @@ select:focus-visible {
   line-height: 1.7;
 }
 
-.modal-experimental-value,
+.modal-price-value,
 .modal-combined-location p {
   margin: 0;
+}
+
+.modal-price-value {
+  font-weight: 400;
 }
 
 .modal-combined-location p {
@@ -2539,12 +2535,20 @@ select:focus-visible {
   line-height: 1.55;
 }
 
-.modal-experimental-map {
-  padding-left: clamp(1.5rem, 4vw, 3rem);
-  border-left: 1px solid var(--line);
+.modal-combined-location {
+  grid-area: address;
+}
+
+.modal-location-panel {
+  grid-area: map;
+  display: flex;
+  flex-direction: column;
 }
 
 .modal-map-placeholder {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
   margin: 0;
   border: 1px solid var(--line-dark);
   background: var(--paper);
@@ -2552,8 +2556,10 @@ select:focus-visible {
 
 .modal-map-placeholder img {
   display: block;
+  flex: 1;
   width: 100%;
-  aspect-ratio: 4 / 5;
+  min-height: 20rem;
+  height: 0;
   object-fit: cover;
 }
 
@@ -2605,18 +2611,17 @@ select:focus-visible {
 
 .modal-practical-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(260px, 0.85fr);
-  gap: clamp(1.5rem, 4vw, 3rem);
-  align-items: start;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+  grid-template-areas: "map address" "map practical";
+  grid-template-rows: auto 1fr;
+  gap: 1.5rem;
 }
 
 .modal-practical-panel {
+  grid-area: practical;
   min-width: 0;
-}
-
-.modal-practical-panel + .modal-practical-panel {
-  padding-left: clamp(1.5rem, 4vw, 3rem);
-  border-left: 1px solid var(--line);
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line);
 }
 
 .modal-practical-stack,
@@ -2639,7 +2644,8 @@ select:focus-visible {
 }
 
 .modal-practical-item h4,
-.modal-info-grid h4 {
+.modal-info-grid h4,
+.modal-record h4 {
   margin: 0 0 0.75rem;
   color: var(--ink-soft);
   font-size: 0.65rem;
@@ -2652,7 +2658,7 @@ select:focus-visible {
 .modal-practical-amenities .modal-amenity-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.3rem;
+  gap: 0.75rem 1rem;
 }
 
 .modal-service-facts {
@@ -2822,6 +2828,12 @@ select:focus-visible {
   color: var(--terracotta-dark);
   overflow-wrap: anywhere;
   text-underline-offset: 0.25rem;
+}
+
+.modal-record {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line);
 }
 
 .modal-topline {
@@ -3031,6 +3043,19 @@ select:focus-visible {
   .directory-layout {
     grid-template-columns: 180px minmax(0, 1fr);
     gap: 2.25rem;
+  }
+
+  .modal-practical-grid {
+    grid-template-columns: 1fr;
+    grid-template-areas: "address" "map" "practical";
+    grid-template-rows: auto;
+  }
+
+  .modal-map-placeholder img {
+    flex: none;
+    min-height: 0;
+    height: auto;
+    aspect-ratio: 16 / 10;
   }
 
 }
@@ -3376,29 +3401,21 @@ select:focus-visible {
   }
 
   .modal-body {
-    padding: 0 1.25rem 3rem;
+    padding: 0 1.25rem;
   }
 
   .modal-editorial-intro,
-  .modal-experimental-layout,
-  .modal-practical-grid,
+  .modal-gastronomy-grid,
   .modal-info-grid {
     grid-template-columns: 1fr;
   }
 
-  .modal-experimental-map {
+  .modal-gastronomy-grid > section + section {
     padding-top: 1.5rem;
-    padding-left: 0;
     border-top: 1px solid var(--line);
-    border-left: 0;
-  }
-
-  .modal-map-placeholder img {
-    aspect-ratio: 16 / 10;
   }
 
   .modal-intro-details,
-  .modal-practical-panel + .modal-practical-panel,
   .modal-info-grid > div + div {
     padding-top: 1.5rem;
     padding-left: 0;

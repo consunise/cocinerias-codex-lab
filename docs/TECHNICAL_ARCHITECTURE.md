@@ -59,7 +59,7 @@ Los dos prompts de la raíz son idénticos por hash en el estado auditado. `camb
 4. Se inicializan filtros, eventos, render del listado y carrusel.
 5. Búsqueda, filtros y paginación operan enteramente en memoria. `applyFilters()` intersecta la consulta contra `searchText` con los cuatro grupos vigentes; una selección del autocomplete mantiene la vía exacta por ID.
 6. Las filas y la ficha editorial del modal se construyen mediante templates HTML escapados con `escapeHTML`; las URLs pasan por `safeUrl`.
-7. Al abrir una ficha, el modal deriva Top N desde los slides, valida coordenadas antes de construir un iframe OpenStreetMap diferido y reinicia su scroll interno.
+7. Al abrir una ficha, el modal deriva Top N desde los slides, reutiliza el mapa placeholder local identificado como demostración y reinicia su scroll interno. La lógica OpenStreetMap anterior no está activa.
 8. Un `IntersectionObserver` observa `about-lead` y alterna `is-past-about` en el navbar cuando el borde inferior del header supera la altura sticky; el resize recalcula el límite y recrea el observer.
 
 ## Modelo de estado de interfaz
@@ -80,14 +80,16 @@ No existe persistencia en URL, almacenamiento local ni servidor.
 ## Ficha, mapas e integraciones externas
 
 - El shell del `dialog`, el footer de navegación y los eventos de cierre permanecen estáticos en `index.html`; `script.js` sustituye únicamente el artículo de contenido al abrir o navegar.
+- `buildModalContent()` organiza hero, introducción, `.modal-gastronomy-grid`, `.modal-practical-grid`, reseñas y contacto. La retícula central usa áreas `map / address / practical` para situar mapa a la izquierda y dirección/práctica a la derecha sin duplicar DOM; hasta 980 px sigue el orden DOM dirección → mapa → práctica. Sobre los datos queda dentro del bloque de contacto.
 - `imageKind === "direct"` habilita presentación directa; cualquier otro valor activa la advertencia territorial. `imageLabel` se reutiliza como texto alternativo.
-- `description` alimenta la presentación y `specialties` los platos destacados sin inferencias. Los campos demo enriquecidos en runtime mantienen sus marcas.
-- Si `description` falta, `introductionText()` solo usa ubicación y categorías existentes para una frase factual, o devuelve `No informado`. El dataset vigente contiene descripción en los 101 registros.
+- La presentación actual conserva `DEMO_DESCRIPTION_PLACEHOLDER` con advertencia visible; `specialties` alimenta los platos sin inferencias. Los campos demo enriquecidos en runtime mantienen sus marcas.
+- `introductionText()` y las descripciones fuente permanecen intactos, pero no se invocan en la variante demo visible. El dataset vigente contiene descripción en los 101 registros.
 - El Top 3 no tiene una segunda lista en JavaScript: `editorialSelectionFor()` consulta `data-restaurant-id` y `data-editorial-rank` de los slides del carrusel.
-- `verifiedCoordinates()` exige latitud/longitud finitas y dentro de rango. Solo entonces `openStreetMapLinks()` crea el embed; el iframe usa `loading="lazy"`, `title` y atribución ODbL.
+- `verifiedCoordinates()` y `openStreetMapLinks()` conservan validación de coordenadas, embed diferido y atribución ODbL de la implementación anterior, actualmente inactiva. `mapPreviewPlaceholder()` renderiza el SVG local con aviso y `alt` explícitos, sin proveedor ni coordenadas reales.
 - El dataset actual tiene 2 registros con coordenadas válidas, 3 enlaces cartográficos externos y 99 fichas sin preview posible.
 - No existe campo estructurado de menú, carta o PDF en los 101 registros; la sección se omite en lugar de inferirla desde descripción, cocina o especialidades.
 - `contactSectionContent()` renderiza teléfono, WhatsApp, email y URLs sanitizadas de Instagram, Facebook y web; `usefulInformationContent()` limita el bloque auxiliar a servicios, pagos, fundación y otras redes existentes. `derivePracticalServices()` prepara Capacidad, Eventos y Catering sin modificar `data.js`: prioriza futuros campos estructurados y, mientras no existan, solo reconoce menciones inequívocas en `services`; cualquier ausencia o marca de incertidumbre produce `No confirmado / sin datos`. `owner` no se renderiza porque el esquema no codifica una decisión de pertinencia pública ni procedencia por campo.
+- Para evitar duplicación visual, `usefulInformationContent()` omite solo cláusulas simples de Eventos, Catering o banquetería cuando el mismo servicio ya figura como `Sí` en los datos prácticos. No modifica `services` ni descarta las cláusulas calificadas o no confirmadas.
 - No existe backend, API key, Place ID ni integración Google Maps Platform. La sección Reseñas en Google es un estado pendiente sin datos de usuarios; una futura integración no debe exponer claves en el repositorio estático.
 
 ## Datos

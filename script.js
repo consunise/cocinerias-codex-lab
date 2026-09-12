@@ -1352,7 +1352,19 @@
 
   function usefulInformationContent(restaurant) {
     const items = [];
-    if (restaurant.services) items.push(contactItem("Servicios", escapeHTML(restaurant.services)));
+    // Omit only standalone services already communicated in the practical facts.
+    // Preserve qualifications and unconfirmed clauses from the source verbatim.
+    const visitServices = String(restaurant.services ?? "")
+      .split(/[;,]/)
+      .map((service) => service.trim())
+      .filter((service) => {
+        const label = normalize(service);
+        if (/^eventos?$/.test(label) && restaurant.practicalServices.events.state === "yes") return false;
+        if (/^(?:catering|banqueteria)$/.test(label) && restaurant.practicalServices.catering.state === "yes") return false;
+        return Boolean(service);
+      })
+      .join(", ");
+    if (visitServices) items.push(contactItem("Servicios", escapeHTML(visitServices)));
     if (restaurant.paymentMethods) {
       items.push(contactItem("Métodos de pago", escapeHTML(restaurant.paymentMethods)));
     }
@@ -1751,61 +1763,56 @@
       </header>
 
       <div class="modal-body">
-        <!-- EXPERIMENTO / POR VALIDAR: contenido principal a la izquierda y mapa simulado como único elemento a la derecha. -->
-        <div class="modal-section modal-section--intro modal-experimental-layout">
-          <div class="modal-experimental-content">
-            <section class="modal-experimental-block" aria-labelledby="modal-about-title">
-              <h3 id="modal-about-title">Sobre esta cocinería</h3>
-              <p class="modal-placeholder-label">Contenido demo · no verificado</p>
-              <p
-                class="modal-description modal-description--placeholder"
-                id="modal-description"
-                data-content-status="placeholder"
-              >${escapeHTML(DEMO_DESCRIPTION_PLACEHOLDER)}</p>
-            </section>
+        <section class="modal-section modal-section--intro" aria-labelledby="modal-about-title">
+          <h3 id="modal-about-title">Sobre esta cocinería</h3>
+          <p class="modal-placeholder-label">Contenido demo · no verificado</p>
+          <p
+            class="modal-description modal-description--placeholder"
+            id="modal-description"
+            data-content-status="placeholder"
+          >${escapeHTML(DEMO_DESCRIPTION_PLACEHOLDER)}</p>
+        </section>
 
-            <section class="modal-experimental-block" aria-labelledby="modal-specialties-title">
-              <h3 id="modal-specialties-title">Platos destacados</h3>
-              ${specialtyList(restaurant.specialties)}
-            </section>
+        <div class="modal-section modal-gastronomy-grid">
+          <section aria-labelledby="modal-specialties-title">
+            <h3 id="modal-specialties-title">Platos destacados</h3>
+            ${specialtyList(restaurant.specialties)}
+          </section>
+          <section aria-labelledby="modal-food-title">
+            <h3 id="modal-food-title">Tipo de comida</h3>
+            ${modalFoodList(restaurant)}
+          </section>
+          <section aria-labelledby="modal-price-title">
+            <h3 id="modal-price-title">Rango de precio</h3>
+            <p class="modal-price-value">${currentPrice}</p>
+          </section>
+        </div>
 
-            <section class="modal-experimental-block" aria-labelledby="modal-price-title">
-              <h3 id="modal-price-title">Rango de precio</h3>
-              <p class="modal-experimental-value">${currentPrice}</p>
-            </section>
-
-            <section class="modal-experimental-block" aria-labelledby="modal-food-title">
-              <h3 id="modal-food-title">Tipo de comida</h3>
-              ${modalFoodList(restaurant)}
-            </section>
-
-            <section class="modal-experimental-block modal-combined-location" aria-labelledby="modal-location-title">
-              <h3 id="modal-location-title">Dirección · Localidad</h3>
-              <p>${escapeHTML(combinedAddressLocation(restaurant))}</p>
-            </section>
-
-            <section class="modal-experimental-block" aria-labelledby="modal-practical-title">
-              <h3 id="modal-practical-title">Información práctica</h3>
-              <div class="modal-practical-stack">
-                ${practicalItem("Horario", `<p>${hoursContent}</p>`)}
-                ${practicalItem(
-                  "Comodidades",
-                  `${modalAmenityList(restaurant)}${restaurant.accessibility ? `<p class="modal-field-note"><strong>Accesibilidad informada:</strong> ${escapeHTML(restaurant.accessibility)}</p>` : ""}`,
-                  "modal-practical-amenities",
-                )}
-                ${practicalItem(
-                  "Capacidad y servicios",
-                  practicalServicesContent(restaurant),
-                  "modal-practical-services",
-                )}
-              </div>
-            </section>
-          </div>
-
-          <aside class="modal-experimental-map" aria-labelledby="modal-map-title">
+        <div class="modal-section modal-practical-grid">
+          <section class="modal-combined-location" aria-labelledby="modal-location-title">
+            <h3 id="modal-location-title">Dirección · Localidad</h3>
+            <p>${escapeHTML(combinedAddressLocation(restaurant))}</p>
+          </section>
+          <section class="modal-location-panel" aria-labelledby="modal-map-title">
             <h3 id="modal-map-title">Ubicación</h3>
             ${mapPreviewPlaceholder()}
-          </aside>
+          </section>
+          <section class="modal-practical-panel" aria-labelledby="modal-practical-title">
+            <h3 id="modal-practical-title">Información práctica</h3>
+            <div class="modal-practical-stack">
+              ${practicalItem("Horario", `<p>${hoursContent}</p>`)}
+              ${practicalItem(
+                "Comodidades",
+                `${modalAmenityList(restaurant)}${restaurant.accessibility ? `<p class="modal-field-note"><strong>Accesibilidad informada:</strong> ${escapeHTML(restaurant.accessibility)}</p>` : ""}`,
+                "modal-practical-amenities",
+              )}
+              ${practicalItem(
+                "Capacidad y servicios",
+                practicalServicesContent(restaurant),
+                "modal-practical-services",
+              )}
+            </div>
+          </section>
         </div>
 
         ${googleReviewsSection()}
@@ -1824,24 +1831,23 @@
               </div>
             ` : ""}
           </div>
-        </section>
-
-        <section class="modal-section modal-record" aria-labelledby="modal-record-title">
-          <h3 id="modal-record-title">Sobre los datos</h3>
-          <div class="modal-topline">
-            <span class="modal-status ${statusClass}">${escapeHTML(restaurant.status)}</span>
-            <span class="modal-confidence">Confianza ${escapeHTML(restaurant.confidence?.toLowerCase() ?? "no informada")}</span>
-            <span class="modal-confidence">${escapeHTML(restaurant.id)}</span>
-          </div>
-          <p class="modal-note">
-            <strong>${escapeHTML(restaurant.classification)}</strong><br>
-            ${escapeHTML(restaurant.notes ?? "No informado")}<br>
-            Verificado el ${escapeHTML(formatDate(restaurant.verifiedAt))}.
-          </p>
-          <div class="modal-source-list">
-            ${primarySource ? `<a class="modal-source" href="${escapeHTML(primarySource)}" target="_blank" rel="noopener noreferrer">Consultar fuente principal ↗</a>` : ""}
-            ${additionalSourceLinks(restaurant.additionalSources)}
-          </div>
+          <section class="modal-record" aria-labelledby="modal-record-title">
+            <h4 id="modal-record-title">Sobre los datos</h4>
+            <div class="modal-topline">
+              <span class="modal-status ${statusClass}">${escapeHTML(restaurant.status)}</span>
+              <span class="modal-confidence">Confianza ${escapeHTML(restaurant.confidence?.toLowerCase() ?? "no informada")}</span>
+              <span class="modal-confidence">${escapeHTML(restaurant.id)}</span>
+            </div>
+            <p class="modal-note">
+              <strong>${escapeHTML(restaurant.classification)}</strong><br>
+              ${escapeHTML(restaurant.notes ?? "No informado")}<br>
+              Verificado el ${escapeHTML(formatDate(restaurant.verifiedAt))}.
+            </p>
+            <div class="modal-source-list">
+              ${primarySource ? `<a class="modal-source" href="${escapeHTML(primarySource)}" target="_blank" rel="noopener noreferrer">Consultar fuente principal ↗</a>` : ""}
+              ${additionalSourceLinks(restaurant.additionalSources)}
+            </div>
+          </section>
         </section>
       </div>
     `;

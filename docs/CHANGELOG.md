@@ -4,6 +4,15 @@ Este archivo registra cambios implementados relevantes. No contiene solicitudes 
 
 ## Sin publicar
 
+### 2026-09-12 — Arquitectura de la ficha según referencia visual
+
+- Reorganizado el renderizador existente: Sobre esta cocinería a ancho completo; franja Platos / Tipo de comida / Precio; mapa a la izquierda y dirección/información práctica a la derecha; reseñas; contacto diferenciado al final. Sobre los datos y sus fuentes quedan dentro de contacto.
+- Preservados el `dialog`, hero, título y anti-huérfanas, selección editorial, advertencias de imagen/contenido/demo, mapa simulado, estados prácticos y reseñas pendientes. No se copian datos de la captura ni se modifica `data.js`.
+- Evitada la repetición de menciones simples de Eventos/banquetería ya mostradas como `Sí`; se conserva íntegro el dato fuente y cualquier cláusula con incertidumbre.
+- Adaptado el centro a lectura vertical hasta 980 px, resumen/contacto hasta 720 px y servicios hasta 520 px. Retiradas las clases experimentales del layout sustituido, sin refactorización global.
+- Validado visualmente en desktop, tablet y mobile, con mediciones entre 320 y 1440 px sin overflow. Probadas fichas Top 1/2/3, Destacadas, normales y con datos ausentes; navegación filtrada circular, teclado, cierre, retorno de foco y scroll. Consola sin errores/advertencias; comprobaciones de sintaxis y `git diff --check` aprobadas.
+- Actualizada DEC-019: la distribución anterior queda reemplazada; no se reactivan integraciones de mapas ni reseñas. Cachebusters CSS/JS: `20260912-1`. Home, footer, filtros, carrusel, taxonomías y paginación no se modifican.
+
 ### 2026-09-10 — Header reactivo y control siguiente
 
 - Implementado: una búsqueda textual normalizada oculta por completo el header editorial, detiene su autoplay y mantiene navbar, filtros y directorio; al vaciar o resetear la consulta el header reaparece y el timer se reanuda. Los filtros aislados no cambian su visibilidad.
