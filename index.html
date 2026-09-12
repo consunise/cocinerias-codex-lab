@@ -9,9 +9,9 @@
     />
     <meta name="theme-color" content="#f4efe5" />
     <title>Cocinerías de Chile — Directorio</title>
-    <link rel="stylesheet" href="styles.css?v=20260910-1" />
+    <link rel="stylesheet" href="styles.css?v=20260910-2" />
     <script src="data.js" defer></script>
-    <script src="script.js?v=20260910-1" defer></script>
+    <script src="script.js?v=20260910-2" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#directorio">Saltar al directorio</a>
@@ -194,8 +194,19 @@
                   </div>
                 </figure>
               </div>
-              <div class="about-carousel-controls" aria-label="Posición del carrusel">
+              <div class="about-carousel-controls" aria-label="Controles del carrusel">
                 <div class="about-carousel-indicators" id="about-carousel-indicators" aria-label="Elegir contenido"></div>
+                <button
+                  class="about-carousel-next"
+                  id="about-carousel-next"
+                  type="button"
+                  aria-label="Siguiente slide"
+                  aria-controls="about-carousel-track"
+                >
+                  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path d="M5 12h13M13 7l5 5-5 5"></path>
+                  </svg>
+                </button>
               </div>
               <p class="sr-only" id="about-carousel-status" aria-live="polite"></p>
             </div>

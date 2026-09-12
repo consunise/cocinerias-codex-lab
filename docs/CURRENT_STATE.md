@@ -67,7 +67,7 @@ Actualizaciones posteriores, consolidadas al 10 de septiembre de 2026: footer te
 - Hover/foco con realce de fotografía y línea terracota izquierda de 4 px sin layout shift.
 - Ubicación sobre el nombre; horario debajo sin ubicación repetida. La copia sobre la fotografía se alinea a la izquierda; Tipo de comida, Comodidades y Precio alinean sus grupos al borde izquierdo de sus columnas.
 - Las tres Destacadas definidas por `[data-editorial-highlight]` muestran un sol lineal pequeño antes del nombre. El SVG usa `currentColor`, no altera la selección editorial y el `aria-label` del botón comunica `destacada de la guía`.
-- Top 1/2/3 reutiliza `editorialRankIcon()` al lado del nombre. El número visible conserva el significado ordinal y el `aria-label` de la fila anuncia el puesto.
+- Top 1/2/3 reutiliza `editorialRankIcon()` antes del nombre y comparte con Destacadas el wrapper inicial `.restaurant-name-mark`. El número visible conserva el significado ordinal y el `aria-label` de la fila anuncia el puesto.
 - Divisores verticales en `restaurant-meta`.
 - Tipos de comida con SVG y tratamientos hover.
 - Rango de precio con peso regular.
@@ -78,7 +78,7 @@ Actualizaciones posteriores, consolidadas al 10 de septiembre de 2026: footer te
 - `restaurant-main` usa `padding-block` simétrico: 24 px en el viewport desktop comprobado y 16 px en 320 px.
 - Acción `Ver ficha` apilada verticalmente, pero el símbolo actual es `→`, no flecha hacia abajo.
 
-EXPERIMENTO / POR VALIDAR (29 de agosto de 2026), ajustado el 10 de septiembre: desde 1180 px, Comodidades ocupa una columna independiente y la retícula usa `minmax(250px, 1.45fr) minmax(170px, 1fr) minmax(180px, 1.08fr) 88px 84px`; Tipo de comida y Comodidades absorben el espacio retirado de Precio y Detalle sin forzar anchos idénticos. Entre 1179 y 521 px, Tipo y Comodidades comparten el espacio flexible de la segunda fila, con Precio en 82 px y Detalle en 84 px. A 520 px o menos, la foto ocupa todo el ancho; Tipo, Comodidades y Precio permanecen en tres columnas —Precio con mínimo de 82 px— y `Ver ficha` pasa a una fila propia. A 340 px o menos, donde las etiquetas largas dejan de caber, Tipo y Comodidades conservan dos columnas, Precio pasa a una fila propia y la acción queda debajo. Esta variante responsive no reemplaza el resto de DEC-007.
+EXPERIMENTO / POR VALIDAR (29 de agosto de 2026), ajustado el 10 de septiembre: desde 1180 px, Comodidades ocupa una columna independiente y la retícula usa `minmax(250px, 1.45fr) minmax(160px, 1fr) minmax(170px, 1.05fr) minmax(92px, 0.58fr) minmax(88px, 0.54fr)`; Tipo, Comodidades, Precio y Detalle distribuyen el espacio libre de acuerdo con su contenido sin forzar anchos idénticos. Entre 1179 y 521 px, la segunda fila usa `minmax(135px, 1fr) minmax(145px, 1.05fr) minmax(78px, 0.62fr) minmax(76px, 0.58fr)`. A 520 px o menos, la foto ocupa todo el ancho; Tipo, Comodidades y Precio permanecen en tres columnas —Precio con mínimo de 82 px— y `Ver ficha` pasa a una fila propia. A 340 px o menos, donde las etiquetas largas dejan de caber, Tipo y Comodidades conservan dos columnas, Precio pasa a una fila propia y la acción queda debajo. Esta variante responsive no reemplaza el resto de DEC-007.
 
 Tipo de comida, Comodidades y Precio alinean sus grupos al borde izquierdo. Cada fila de Tipo o Comodidades reserva un slot iconográfico de 24 px y un `gap` de `0.25rem`; `No informado` sigue la misma alineación izquierda. Comodidades ya no cubre con `--paper` el hover/foco compartido de la fila. Solo la unidad `.food-type-item` o `.amenity-item` bajo el cursor cambia texto e icono; `focus-visible` de la fila activa el realce accesible común. El filtro de precio se presenta `Alto`, `Moderado`, `Económico`. Tras aplicar búsqueda y filtros AND, el conjunto se ordena Top 1/2/3, Destacadas y resto antes de paginar; las seis prioridades se derivan de la configuración editorial DOM vigente, no de listas nuevas.
 
@@ -110,18 +110,20 @@ Tipo de comida, Comodidades y Precio alinean sus grupos al borde izquierdo. Cada
 - Top 1: Restaurante Pily.
 - Top 2: Mata Rangi.
 - Top 3: Cocinería Bellavista.
-- Slides 5–7: Na Que Ver Cocinería Chilena (`Cocina chilena de mercado`), Tradiciones Cocinería Morelia (`Productos de huerta`) y Cocinería Puelpún (`Trayectoria histórica`), rotuladas `Destacada` sin numeración Top. Se generan en runtime desde la misma fuente DOM de Destacadas usada por fichas y orden editorial; un sol lineal decorativo junto al nombre refuerza esa identificación sin crear otra selección.
+- Slides 5–7: Na Que Ver Cocinería Chilena (`Cocina chilena de mercado`), Tradiciones Cocinería Morelia (`Productos de huerta`) y Cocinería Puelpún (`Trayectoria histórica`), rotuladas `Destacada` sin numeración Top. Se generan en runtime desde la misma fuente DOM de Destacadas usada por fichas y orden editorial; un sol lineal decorativo ocupa el mismo primer slot estructural de `.about-rank` que las insignias Top, sin crear otra selección.
 - Los Top 1/2/3 conservan platos y etiquetas editoriales. Los slides 5–7 reutilizan nombre, ubicación, descripción, atributo y primer enlace de fuente de la configuración de Destacadas, sin duplicar esa sección visual.
 - Top 1/2/3 usan tres variantes numéricas de una misma insignia SVG editorial propia, con número visible, `currentColor` y geometría común; la insignia queda anclada al borde izquierdo interno de la caja y la ficha reutiliza la misma función y la configuración DOM del carrusel.
-- Autoplay cada 6 segundos, navegación circular mediante módulo en ambos sentidos, indicadores clickeables, teclado y pausa por hover/foco. No usa clones ni fija una cantidad concreta en la navegación.
+- Autoplay cada 6 segundos, navegación circular mediante módulo en ambos sentidos, indicadores clickeables, teclado y pausa por hover/foco. Una flecha SVG `Siguiente slide` de 44 × 44 px comparte el mismo índice y avanza también del último al primero. No usa clones ni fija una cantidad concreta en la navegación.
 - Los seis slides de cocinerías se vinculan por `data-restaurant-id` a la ficha existente. La superficie editorial abre el `dialog` y un control compacto `Ver ficha` permite Enter, Espacio, foco visible y devolución de foco; el slide introductorio y los dots no abren fichas.
 - Autoplay desactivado con `prefers-reduced-motion` o pestaña no visible.
-- No hay botones anterior/siguiente.
+- No hay botón Anterior; el botón Siguiente sustituye la especificación histórica sin controles laterales.
 - El carrusel no tiene marco perimetral; conserva outline solo como estado de foco accesible.
 - Las cajas Top y Destacadas usan una sombra exterior sutil en hover o `focus-within`; no añaden borde blanco/negro, no cambian grosor y no producen layout shift. El botón enfocado conserva un outline de 3 px.
 - La caja editorial mantiene la alternancia terracota/paper en la secuencia de siete slides; imagen, texto y tema cambian en la misma unidad.
 - Los siete dots usan círculos visibles de 16 × 16 px dentro de targets de 44 × 44 px, con activo por relleno y anillo, foco visible y sin fondo rectangular en el wrapper.
 - Los primeros cuatro assets activos miden 2880 px de ancho. Los tres slides experimentales reutilizan las imágenes territoriales documentadas de cada registro, de 960 px de ancho; no se ampliaron ni sustituyeron. Su suficiencia visual a alta densidad continúa `POR VALIDAR`.
+
+Mientras el buscador contiene texto normalizado, `.about-data` queda `hidden`, deja de ocupar espacio o recibir foco y detiene el autoplay; al vaciar la consulta reaparece y reanuda el timer. Los filtros por sí solos no ocultan el carrusel y el navbar adopta su superficie opaca mientras el header no está presente.
 
 ### Destacados de la guía
 

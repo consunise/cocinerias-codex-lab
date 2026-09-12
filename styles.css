@@ -716,8 +716,8 @@ select:focus-visible {
 
 .results-area {
   min-width: 0;
-  /* Distribución editorial: Tipo y Comodidades absorben el espacio liberado por Precio y Detalle. */
-  --restaurant-columns: minmax(250px, 1.45fr) minmax(170px, 1fr) minmax(180px, 1.08fr) 88px 84px;
+  /* Distribución editorial: cuatro áreas secundarias proporcionales a su contenido real. */
+  --restaurant-columns: minmax(250px, 1.45fr) minmax(160px, 1fr) minmax(170px, 1.05fr) minmax(92px, 0.58fr) minmax(88px, 0.54fr);
 }
 
 .results-toolbar {
@@ -926,7 +926,9 @@ select:focus-visible {
 }
 
 .restaurant-name {
-  display: block;
+  display: flex;
+  gap: 0.35rem;
+  align-items: flex-start;
   font-family: var(--serif);
   font-size: clamp(1.3rem, 2vw, 1.75rem);
   font-weight: 400;
@@ -937,7 +939,8 @@ select:focus-visible {
 }
 
 .restaurant-name-text {
-  display: inline;
+  display: block;
+  min-width: 0;
 }
 
 .editorial-highlight-icon,
@@ -950,6 +953,11 @@ select:focus-visible {
   width: 0.72em;
   height: 0.72em;
   color: var(--paper-deep);
+}
+
+.restaurant-name-mark {
+  flex: 0 0 auto;
+  margin-top: 0.08em;
 }
 
 .editorial-highlight-icon svg {
@@ -968,7 +976,6 @@ select:focus-visible {
   height: 0.8em;
   color: var(--paper-deep);
   line-height: 0;
-  vertical-align: -0.12em;
 }
 
 .restaurant-rank-mark .editorial-rank-icon {
@@ -1507,6 +1514,10 @@ select:focus-visible {
   overflow: hidden;
 }
 
+.about-data[hidden] {
+  display: none;
+}
+
 .about-grid {
   position: absolute;
   inset: 0;
@@ -1679,6 +1690,10 @@ select:focus-visible {
 
 .about-rank-icon {
   display: inline-flex;
+  width: 1.75rem;
+  height: 1.75rem;
+  align-items: center;
+  justify-content: center;
   flex: 0 0 auto;
 }
 
@@ -1710,11 +1725,10 @@ select:focus-visible {
   margin-bottom: 0.65rem;
 }
 
-.about-highlight-icon {
-  width: 0.44em;
-  height: 0.44em;
+.about-rank-highlight-icon {
+  width: 1.05rem;
+  height: 1.05rem;
   color: currentColor;
-  vertical-align: 0.04em;
 }
 
 .about-feature-location {
@@ -1808,11 +1822,61 @@ select:focus-visible {
   z-index: 4;
   bottom: clamp(0.8rem, 1.8vw, 1.4rem);
   left: 50%;
-  display: flex;
+  display: grid;
+  grid-template-columns: 44px auto 44px;
   align-items: center;
   padding: 0;
   background: transparent;
   transform: translateX(-50%);
+}
+
+.about-carousel-controls::before {
+  width: 44px;
+  height: 44px;
+  content: "";
+}
+
+.about-carousel-next {
+  display: grid;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--white);
+  cursor: pointer;
+}
+
+.about-carousel-next svg {
+  width: 24px;
+  height: 24px;
+  fill: none;
+  filter: drop-shadow(0 1px 4px rgba(15, 13, 10, 0.72));
+  stroke: currentColor;
+  stroke-linecap: square;
+  stroke-linejoin: miter;
+  stroke-width: 1.7;
+  transition: color 140ms ease, filter 140ms ease, transform 140ms ease;
+}
+
+.about-carousel-next:hover {
+  color: var(--paper-deep);
+}
+
+.about-carousel-next:hover svg {
+  filter: drop-shadow(0 2px 6px rgba(15, 13, 10, 0.82));
+  transform: translateX(2px);
+}
+
+.about-carousel-next:focus-visible {
+  outline-color: var(--white);
+  outline-offset: -3px;
+  box-shadow: inset 0 0 0 2px rgba(15, 13, 10, 0.58);
+}
+
+.about-carousel-next[hidden] {
+  display: none;
 }
 
 .about-carousel-indicators button {
@@ -2895,7 +2959,7 @@ select:focus-visible {
 
   .restaurant-button {
     /* EXPERIMENTO UX/UI — POR VALIDAR: Tipo | Comodidades | Precio | Detalle en una fila. */
-    grid-template-columns: minmax(145px, 1.05fr) minmax(155px, 1.12fr) 82px 84px;
+    grid-template-columns: minmax(135px, 1fr) minmax(145px, 1.05fr) minmax(78px, 0.62fr) minmax(76px, 0.58fr);
     min-height: 0;
   }
 
@@ -3147,7 +3211,7 @@ select:focus-visible {
   }
 
   .restaurant-button {
-    grid-template-columns: minmax(145px, 1.05fr) minmax(155px, 1.12fr) 82px 84px;
+    grid-template-columns: minmax(135px, 1fr) minmax(145px, 1.05fr) minmax(78px, 0.62fr) minmax(76px, 0.58fr);
     gap: 0;
     min-height: 0;
     padding: 0;
@@ -3438,6 +3502,25 @@ select:focus-visible {
   .about-data {
     height: 840px;
     min-height: 840px;
+  }
+
+  .about-carousel-controls {
+    grid-template-columns: minmax(0, 1fr) 44px;
+    width: calc(100% - 1rem);
+  }
+
+  .about-carousel-controls::before {
+    display: none;
+  }
+
+  .about-carousel-indicators {
+    min-width: 0;
+  }
+
+  .about-carousel-indicators button {
+    width: auto;
+    min-width: 0;
+    flex: 1 1 44px;
   }
 
   .results-toolbar {

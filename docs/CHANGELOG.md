@@ -4,6 +4,15 @@ Este archivo registra cambios implementados relevantes. No contiene solicitudes 
 
 ## Sin publicar
 
+### 2026-09-10 — Header reactivo y control siguiente
+
+- Implementado: una búsqueda textual normalizada oculta por completo el header editorial, detiene su autoplay y mantiene navbar, filtros y directorio; al vaciar o resetear la consulta el header reaparece y el timer se reanuda. Los filtros aislados no cambian su visibilidad.
+- Ajustado: Tipo de comida, Comodidades, Precio y Detalle usan proporciones flexibles según contenido en desktop y tablet, conservando la estructura mobile existente, la alineación izquierda y los límites de tres elementos.
+- Unificado: Top y Destacada comparten el primer slot de `.about-rank` en los slides; en las filas, tanto `editorial-rank-icon` como el sol se sitúan antes del nombre mediante `.restaurant-name-mark` y conservan el tratamiento anti-huérfanas.
+- Implementado: botón SVG `Siguiente slide` con target de 44 × 44 px, clic, Enter, Espacio y `focus-visible`; reutiliza el índice circular, indicadores y timer existentes y sustituye la especificación histórica sin botones anterior/siguiente.
+- Validado: secuencia búsqueda/filtros/restauración, estado vacío, pausa del carrusel oculto, ciclo automático completo, vuelta manual último → primero, hover sin borde, teclado y responsive en 1440, 1180, 1100, 768, 520, 390 y 320 px sin overflow horizontal.
+- Actualizado: cachebusters de CSS y JavaScript a `20260910-2`. No se modificaron datos, contenido editorial, selección Top/Destacadas, modal, footer, filtros, paginación ni taxonomías.
+
 ### 2026-09-10 — Distribución del home, interacción editorial y búsqueda ampliada
 
 - Ajustado: la retícula del listado cede ancho de Precio y Detalle a Tipo de comida y Comodidades; mantiene alineación izquierda, límite visual de tres elementos y variantes responsive sin overflow.

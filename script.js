@@ -199,6 +199,7 @@
     aboutCarouselTrack: document.querySelector("#about-carousel-track"),
     aboutSlides: [...document.querySelectorAll(".about-slide")],
     aboutCarouselIndicators: document.querySelector("#about-carousel-indicators"),
+    aboutCarouselNext: document.querySelector("#about-carousel-next"),
     aboutCarouselStatus: document.querySelector("#about-carousel-status"),
     editorialHighlights: document.querySelector(".editorial-highlights"),
     editorialHighlightItems: [...document.querySelectorAll("[data-editorial-highlight]")],
@@ -893,9 +894,25 @@
     return firstOrder - secondOrder;
   }
 
+  function updateEditorialHeaderVisibility(normalizedQuery) {
+    const shouldHide = Boolean(normalizedQuery);
+    if (elements.aboutData.hidden === shouldHide) return;
+
+    elements.aboutData.hidden = shouldHide;
+    if (shouldHide) stopCarouselAutoplay();
+    else scheduleCarouselAutoplay();
+
+    window.requestAnimationFrame(() => {
+      updateNavbarSurfaceState();
+      initialiseNavbarSurfaceObserver();
+      requestListHeaderStickyUpdate();
+    });
+  }
+
   function applyFilters({ resetPagination = true } = {}) {
     if (resetPagination) state.currentPage = 1;
     const normalizedQuery = normalize(state.query);
+    updateEditorialHeaderVisibility(normalizedQuery);
 
     state.visibleRestaurants = restaurants
       .filter((restaurant) => {
@@ -1012,7 +1029,7 @@
               <span class="restaurant-heading">
                 <span class="restaurant-location">${escapeHTML(formatLocation(restaurant, true))}</span>
                 <span class="restaurant-name${editorialHighlight ? " is-highlighted" : ""}${editorialRank ? " has-editorial-rank" : ""}">
-                  ${editorialHighlight ? `${editorialHighlightIcon("restaurant-highlight-icon")}&nbsp;` : ""}<span class="restaurant-name-text">${displayNameHTML(restaurant.displayName)}</span>${editorialRank ? `&nbsp;<span class="restaurant-rank-mark">${editorialRankIcon(editorialRank)}</span>` : ""}
+                  ${editorialHighlight ? editorialHighlightIcon("restaurant-name-mark restaurant-highlight-icon") : ""}${editorialRank ? `<span class="restaurant-name-mark restaurant-rank-mark">${editorialRankIcon(editorialRank)}</span>` : ""}<span class="restaurant-name-text">${displayNameHTML(restaurant.displayName)}</span>
                 </span>
               </span>
               <span class="restaurant-meta">
@@ -1038,7 +1055,7 @@
     const visibleCount = state.visibleRestaurants.length;
     const activeFilterCount = getActiveFilterCount();
     const isFiltered = activeFilterCount > 0;
-    const isSearching = Boolean(state.query);
+    const isSearching = Boolean(normalize(state.query));
     const totalPages = visibleCount ? Math.ceil(visibleCount / PAGE_SIZE) : 0;
     state.currentPage = totalPages ? Math.min(state.currentPage, totalPages) : 1;
     const pageStart = (state.currentPage - 1) * PAGE_SIZE;
@@ -1437,8 +1454,8 @@
         </figcaption>
         <div class="about-slide-content about-slide-content--featured">
           <div class="about-copy about-copy--featured">
-            <p class="eyebrow about-rank"><span>Destacada · ${escapeHTML(attribute)}</span></p>
-            <h2 class="about-feature-title">${displayNameHTML(displayName)}&nbsp;${editorialHighlightIcon("about-highlight-icon")}</h2>
+            <p class="eyebrow about-rank"><span class="about-rank-icon" aria-hidden="true">${editorialHighlightIcon("about-rank-highlight-icon")}</span><span>Destacada · ${escapeHTML(attribute)}</span></p>
+            <h2 class="about-feature-title">${displayNameHTML(displayName)}</h2>
             <p class="about-feature-location">${escapeHTML(location)}</p>
             <p>${escapeHTML(description)}</p>
             ${sourceUrl ? `<a class="about-feature-source" href="${escapeHTML(sourceUrl)}" target="_blank" rel="noopener noreferrer">Consultar fuente ↗</a>` : ""}
@@ -1462,6 +1479,8 @@
         `,
       )
       .join("");
+    elements.aboutCarouselNext.hidden = total < 2;
+    elements.aboutCarouselNext.disabled = total < 2;
     elements.aboutCarouselStatus.textContent = total ? `Contenido 1 de ${total}` : "";
   }
 
@@ -1938,6 +1957,7 @@
   function canAutoplayCarousel() {
     return (
       elements.aboutSlides.length > 1 &&
+      !elements.aboutData.hidden &&
       !reducedMotionQuery.matches &&
       document.visibilityState === "visible" &&
       !elements.aboutCarousel.matches(":hover") &&
@@ -2072,6 +2092,10 @@
       event.stopPropagation();
       selectCarouselSlideManually(Number(indicator.dataset.carouselIndex));
     });
+    elements.aboutCarouselNext.addEventListener("click", (event) => {
+      event.stopPropagation();
+      navigateCarouselManually(1);
+    });
     elements.aboutCarouselTrack.addEventListener("click", (event) => {
       const slide = event.target.closest(".about-slide.is-active[data-restaurant-id]");
       if (!slide) return;
@@ -2087,6 +2111,12 @@
     });
     elements.aboutCarousel.addEventListener("keydown", (event) => {
       if (event.altKey || event.ctrlKey || event.metaKey) return;
+      const nextButton = event.target.closest(".about-carousel-next");
+      if (nextButton && (event.key === "Enter" || event.key === " ")) {
+        event.preventDefault();
+        navigateCarouselManually(1);
+        return;
+      }
       const openButton = event.target.closest(".about-slide-open");
       if (openButton && (event.key === "Enter" || event.key === " ")) {
         event.preventDefault();
