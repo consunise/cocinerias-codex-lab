@@ -1,6 +1,6 @@
 # Backlog consolidado
 
-Última revisión: 4 de septiembre de 2026.
+Última revisión: 12 de septiembre de 2026 (recuperación de la ficha).
 
 Este backlog registra pendientes, no autoriza su implementación. Las prioridades reflejan riesgo para continuidad o publicación.
 
@@ -117,7 +117,7 @@ Criterio de cierre: definir campos y procedencia por establecimiento en la fuent
 
 Estado: `PENDIENTE DE DATOS`
 
-Problema: ninguno de los 101 registros contiene campos propios de capacidad, eventos o catering. El campo libre `services` conserva una mención inequívoca de Eventos, una de banquetería y una de banquetería expresamente no confirmada; no permite afirmar estados para los demás establecimientos. La ficha muestra una estructura transitoria con `Sí`, `No` y `No confirmado / sin datos`, sin convertir ausencia en `No`.
+Problema: ninguno de los 101 registros contiene campos propios de capacidad, eventos o catering. El campo libre `services` conserva una mención inequívoca de Eventos, una de banquetería y una de banquetería expresamente no confirmada; no permite afirmar estados para los demás establecimientos. La recuperación del 12.09.2026 completó la distinción visual entre `Sí`, `No`, `No confirmado` y `Sin datos`, sin convertir ausencia en `No`. Este cierre de presentación no resuelve la falta de datos estructurados.
 
 Criterio de cierre: añadir campos estructurados y procedencia por atributo a la fuente canónica; distinguir afirmación positiva, negativa explícita y ausencia; verificar capacidad y servicios establecimiento por establecimiento; actualizar fecha de consulta; regenerar `data.js` mediante `scripts/normalize-data.mjs` y retirar la derivación transitoria desde `services` cuando los nuevos campos estén disponibles.
 

@@ -1,6 +1,6 @@
 # Especificación vigente de producto y UX/UI
 
-Última consolidación: 4 de septiembre de 2026.
+Última consolidación: 4 de septiembre de 2026. Ficha revisada el 12 de septiembre de 2026.
 Esta especificación deriva del hand-off y se contrasta con el repositorio auditado. Los conflictos se enlazan a [DECISIONS.md](DECISIONS.md).
 
 ## Dirección de producto
@@ -170,7 +170,7 @@ Cuando una fila no tiene comodidades, el área conserva su lugar en la retícula
 - Las fichas Top 1, Top 2 y Top 3 muestran `Selección de la guía · Top N`, derivada de la misma configuración DOM del carrusel y no de una segunda lista de nombres.
 - `Sobre esta cocinería` ocupa todo el ancho bajo el hero, con advertencia antes de la descripción y anchura de lectura contenida. Se conserva el párrafo actual `Contenido demo · no verificado`; esta reorganización no lo convierte en una descripción real ni elimina su advertencia.
 - El resumen gastronómico reúne `Platos destacados`, `Tipo de comida` y `Rango de precio`, en ese orden y en tres columnas de proporciones no idénticas en desktop/tablet. El precio mantiene peso normal y su nota referencial. Hasta 720 px se apilan verticalmente.
-- El bloque central usa mapa a la izquierda y Dirección · Localidad sobre Información práctica a la derecha. La sección práctica agrupa Horario, Comodidades y Capacidad y servicios. Hasta 980 px se apila en el orden dirección, mapa e información práctica; hasta 520 px también se apilan Capacidad, Eventos y Catering. Estos tres datos distinguen `Sí`, `No` y `No confirmado / sin datos`, sin convertir ausencia en `No`.
+- El bloque central usa mapa a la izquierda y Dirección · Localidad sobre Información práctica a la derecha. La sección práctica agrupa Horario, Comodidades y Capacidad y servicios. Hasta 980 px se apila en el orden dirección, mapa e información práctica; hasta 520 px también se apilan Capacidad, Eventos y Catering. Los servicios distinguen `Sí`, `No`, `No confirmado` y `Sin datos`: una negativa requiere evidencia explícita, una mención incierta permanece sin confirmar y la ausencia se muestra como `Sin datos`. Capacidad muestra su valor disponible o el estado de ausencia/incertidumbre correspondiente. No se usa una etiqueta conjunta para estos dos últimos estados.
 - Menú continúa omitido por ausencia de datos estructurados; no se infiere desde `specialties`, `cuisine` o `description` ni se añade contenido para llenar el layout.
 - `Platos destacados` reproduce únicamente `specialties`, separando entradas explícitas por coma o punto y coma; no infiere platos desde categorías amplias. Si falta, muestra `No informado`.
 - Tipo de comida y Comodidades reutilizan los SVG y el sistema visual del listado. Preferencias y comodidades demo conservan la marca `Información referencial`.

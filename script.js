@@ -428,13 +428,18 @@
       return { state: value ? "yes" : "no", label: value ? "Sí" : "No" };
     }
     const evidence = normalize(value);
-    if (!evidence || /no confirmad|sin confirmar|sin datos|no informad|desconocid/.test(evidence)) {
+    if (!evidence || /sin datos|no informad/.test(evidence)) {
       return null;
+    }
+    if (/no confirmad|sin confirmar|por confirmar|pendiente|desconocid/.test(evidence)) {
+      return { state: "unknown", label: "No confirmado" };
     }
     if (/^(?:no|sin)\b|no ofrece|no acepta/.test(evidence)) {
       return { state: "no", label: "No" };
     }
-    return { state: "yes", label: "Sí" };
+    return /^(?:si|ofrece|acepta|disponible|eventos?|catering|banqueteria)\b/.test(evidence)
+      ? { state: "yes", label: "Sí" }
+      : { state: "unknown", label: "No confirmado" };
   }
 
   function availabilityFromServices(services, pattern) {
@@ -447,18 +452,21 @@
 
   function derivePracticalServices(restaurant) {
     const capacityValue = String(restaurant.capacity ?? "").trim();
-    const capacityIsKnown = Boolean(capacityValue) &&
-      !/no confirmad|sin confirmar|sin datos|no informad|desconocid/.test(normalize(capacityValue));
+    const capacityEvidence = normalize(capacityValue);
+    const capacityIsMissing = !capacityEvidence || /sin datos|no informad/.test(capacityEvidence);
+    const capacityIsUnconfirmed = /no confirmad|sin confirmar|por confirmar|pendiente|desconocid/.test(capacityEvidence);
     const events = availabilityFromValue(restaurant.events) ||
       availabilityFromServices(restaurant.services, /\beventos?\b/);
     const catering = availabilityFromValue(restaurant.catering) ||
       availabilityFromServices(restaurant.services, /\b(?:catering|banqueteria)\b/);
-    const unavailable = { state: "unknown", label: "No confirmado / sin datos" };
+    const unavailable = { state: "missing", label: "Sin datos" };
 
     return {
-      capacity: capacityIsKnown
-        ? { state: "known", label: capacityValue }
-        : { ...unavailable },
+      capacity: capacityIsMissing
+        ? { ...unavailable }
+        : capacityIsUnconfirmed
+          ? { state: "unknown", label: "No confirmado" }
+          : { state: "known", label: capacityValue },
       events: events ?? { ...unavailable },
       catering: catering ?? { ...unavailable },
     };

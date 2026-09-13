@@ -1,6 +1,6 @@
 # Registro de decisiones
 
-Última consolidación: 10 de septiembre de 2026.
+Última consolidación: 10 de septiembre de 2026. DEC-019 revisada el 12 de septiembre de 2026.
 
 Este archivo conserva decisiones de producto, UX/UI, datos y operación. El código demuestra implementación; no reemplaza por sí solo una decisión explícita. Una instrucción directa más reciente puede reemplazar cualquier entrada.
 
@@ -186,7 +186,7 @@ Mapas: se conserva el placeholder simulado, identificado como demostración y si
 
 Reseñas: no copiar, inventar ni scrapear Google Maps. Hasta disponer de Google Maps Platform u otra fuente autorizada con sus atribuciones, la sección se mantiene como pendiente visible y sin contenido de usuarios.
 
-Datos faltantes y privacidad: una descripción ausente solo puede sustituirse por una frase factual derivada de campos existentes o `No informado`. No se infieren platos, menús, capacidad ni servicios. Capacidad, Eventos y Catering distinguen `Sí`, `No` y `No confirmado / sin datos`; mientras no existan campos propios, solo las menciones inequívocas de `services` pueden producir `Sí` y una marca de incertidumbre conserva el estado no confirmado. El campo `owner` no se publica sin procedencia específica, pertinencia para el directorio y una razón pública documentada; los datos actuales no satisfacen ese criterio de forma estructurada.
+Datos faltantes y privacidad: una descripción ausente solo puede sustituirse por una frase factual derivada de campos existentes o `No informado`. No se infieren platos, menús, capacidad ni servicios. La instrucción de recuperación del 12.09.2026 exige distinguir `Sí`, `No`, `No confirmado` y `Sin datos`, y reemplaza la etiqueta conjunta `No confirmado / sin datos`. Capacidad conserva su valor cuando existe, o su estado de ausencia/incertidumbre. Mientras no existan campos propios de servicios, solo las menciones inequívocas de `services` pueden producir `Sí`; una negativa exige evidencia explícita y una marca de incertidumbre conserva `No confirmado`. La incertidumbre de un campo estructurado tiene prioridad sobre el texto libre. El campo `owner` no se publica sin procedencia específica, pertinencia para el directorio y una razón pública documentada; los datos actuales no satisfacen ese criterio de forma estructurada.
 
 ### DEC-020 — Top 3 general y destacados por atributo
 
