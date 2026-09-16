@@ -1,6 +1,6 @@
 # Backlog consolidado
 
-Última revisión: 12 de septiembre de 2026 (recuperación de la ficha).
+Última revisión: 13 de septiembre de 2026 (cierre de recuperación de la ficha).
 
 Este backlog registra pendientes, no autoriza su implementación. Las prioridades reflejan riesgo para continuidad o publicación.
 
@@ -71,6 +71,14 @@ Estado: `APROBADO PERO NO IMPLEMENTADO`
 
 Criterio de cierre: flecha hacia abajo, centrada bajo el texto, con hover/foco y área clickeable preservados.
 
+### UX-003 — Overflow del navbar en el límite de tablet
+
+Estado: `PENDIENTE`
+
+Problema: a 721 px, `header-actions` y el CTA alcanzan 732.43 px y producen 11 px de overflow horizontal de página. Reproducido durante la recuperación del modal tanto en el estado actual como en una copia del commit inicial `911e9c5`; no es una regresión de la ficha. El diálogo y su contenido no presentan overflow.
+
+Criterio de cierre: corregir la transición responsive del navbar en una ronda propia y comprobar los anchos vecinos a 720 px, preservando sus controles y foco. No modificar el modal para ocultar este problema externo.
+
 ### CONTENT-001 — Formalizar criterios y mantenimiento de selecciones editoriales
 
 Estado: `PENDIENTE`
@@ -134,6 +142,8 @@ Criterio de cierre: definir finalidad pública y base editorial, registrar fuent
 Estado: `PENDIENTE`
 
 Criterio de cierre: revisar desktop, 980, 720, 420 y 320 px; teclado, foco, contraste, modal, filtros, paginación, carrusel, consola, overflow y reduced motion. El overflow de 15 px causado por el mínimo global en un viewport nominal de 320 px quedó corregido el 29.08.2026; la ronda integral independiente continúa pendiente.
+
+La recuperación específica del modal quedó validada el 13.09.2026; su evidencia y límites están en `CURRENT_STATE.md`. No cierra esta revisión integral de la página ni UX-003, ni equivale a emulación de reduced motion en navegador.
 
 ### DOC-001 — Incorporar esta configuración al repositorio y al Project
 

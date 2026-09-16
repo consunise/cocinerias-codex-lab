@@ -4,6 +4,14 @@ Este archivo registra cambios implementados relevantes. No contiene solicitudes 
 
 ## Sin publicar
 
+### 2026-09-13 — Cierre de recuperación del modal
+
+- Reconstruido el estado de las dos rondas: reorganización en `911e9c5` y correcciones de recuperación en `d71d622`. Esta continuación comienza con el árbol limpio y completa únicamente el cierre documental.
+- Registrados los cambios ya implementados en `d71d622`: distinción entre `Sí`, `No`, `No confirmado` y `Sin datos`; conservación de incertidumbre estructurada; retirada de `.modal-editorial-intro` y `.modal-intro-*` sin uso; cachebusters CSS/JS `20260912-2`. No se vuelven a modificar ni versionar esos archivos en esta continuación.
+- Revalidado el navegador local en desktop 1440 × 1000, tablet 768 × 1024 y mobile 390 × 844: hero, grids, imagen territorial/directa, nombre largo, estados faltantes, scroll interno hasta el final, bloqueo del fondo, apertura/cierre, foco y navegación circular dentro de cuatro resultados filtrados. Referencia original recuperada e inspeccionada. Consola capturada sin errores ni advertencias.
+- Completados estado actual, backlog y este registro; especificación, DEC-019 y arquitectura ya describen la implementación vigente. Se conserva QA-001 y se registra UX-003: overflow preexistente del navbar a 721 px, reproducido también en el commit inicial y ajeno a la ficha.
+- Reejecutadas las comprobaciones de sintaxis disponibles y `git diff --check`. Reduced motion conserva reglas inspeccionadas y guard comprobado con simulación Node; no se declara emulación de navegador. Sin cambios de datos, assets, dependencias ni diseño posterior.
+
 ### 2026-09-12 — Arquitectura de la ficha según referencia visual
 
 - Reorganizado el renderizador existente: Sobre esta cocinería a ancho completo; franja Platos / Tipo de comida / Precio; mapa a la izquierda y dirección/información práctica a la derecha; reseñas; contacto diferenciado al final. Sobre los datos y sus fuentes quedan dentro de contacto.
